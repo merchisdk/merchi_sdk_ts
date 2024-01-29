@@ -7,7 +7,7 @@
   "author": "Daniel Collins <mail@dcollins.info>, James Campton <james@merchi.co>, Cheng Yu <chengyu0316@gmail.com>",
   "license": "GPL-3.0",
   "scripts": {
-    "build": "babel src --out-dir dist --extensions '.ts,.tsx'",
+    "build": "tsc",
     "test": "jest --coverage"
   },
   "devDependencies": {
