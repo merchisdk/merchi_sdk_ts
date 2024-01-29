@@ -1,0 +1,16 @@
+# Source files
+src/
+
+# Configuration files
+tsconfig.json
+
+# Dependency lock files and node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# types
+types/
+
+*.ts
+*.tsx
