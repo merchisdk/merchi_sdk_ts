@@ -1,21 +1,21 @@
 {
   "name": "merchi_sdk_ts",
-  "version": "0.0.1",
-  "main": "src/index.js",
+  "version": "0.0.1-a",
+  "main": "dist/merchi.js",
   "type": "module",
   "repository": "git@github.com:merchisdk/merchi_sdk_ts.git",
-  "author": "Daniel Collins <mail@dcollins.info>, James Campton <james@merchi.co>, Cheng Yu <s3341458@gmail.com>",
+  "author": "Daniel Collins <mail@dcollins.info>, James Campton <james@merchi.co>, Cheng Yu <chengyu0316@gmail.com>",
   "license": "GPL-3.0",
   "scripts": {
-    "build": "webpack",
+    "build": "babel src --out-dir dist --extensions '.ts,.tsx'",
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.0",
-    "@babel/core": "^7.23.0",
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.23.9",
     "@babel/plugin-transform-react-jsx": "^7.22.15",
     "@babel/plugin-transform-runtime": "^7.23.3",
-    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@types/jest": "^28.0.0",
