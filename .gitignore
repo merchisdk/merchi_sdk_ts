@@ -3,6 +3,7 @@
 
 # output compiled js
 /lib
+/dist
 
 # misc
 .DS_Store
