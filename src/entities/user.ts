@@ -267,8 +267,8 @@ export class User extends Entity {
   @User.property({ arrayType: 'Domain' })
   public accessibleDomainsAsClient?: Domain[];
 
-  public publicCreate = this.createFactory(
-    {resourceName: 'public_user_create'});
+  // public publicCreate = this.createFactory(
+  //   {resourceName: 'public_user_create'});
 
   public roleInDomain = (domain: Domain): Role => {
     if (this.enrolledDomains === undefined) {

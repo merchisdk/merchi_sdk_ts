@@ -1,9 +1,5 @@
-# dependencies
-/node_modules
-
-# output compiled js
-/lib
-/dist
+dist
+node_modules
 
 # misc
 .DS_Store
