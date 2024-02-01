@@ -1,4 +1,3 @@
-import { Company } from './company';
 import { Entity } from '../entity';
 import { Item } from './item';
 import { Job } from './job';
@@ -28,7 +27,7 @@ export class CountryTax extends Entity {
   public shipments?: Shipment[];
 
   @CountryTax.property({type: 'Company'})
-  public company?: Company;
+  public company?: 'Company';
 
   @CountryTax.property({arrayType: 'Job'})
   public jobs?: Job[];
