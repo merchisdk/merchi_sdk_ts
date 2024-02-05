@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { Theme } from './theme';
-import { MenuItem } from './menu_item';
+import { Entity } from '../entity.js';
+import { Theme } from './theme.js';
+import { MenuItem } from './menu_item.js';
 
 export class Menu extends Entity {
   protected static resourceName = 'menus';

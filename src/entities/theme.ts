@@ -1,12 +1,12 @@
-import { Component } from './component';
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { InternalTag } from './internal_tag';
-import { User } from './user';
-import { Menu } from './menu';
-import { Page } from './page';
-import { ThemeStatus } from '../constants/theme_status';
+import { Component } from './component.js';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { InternalTag } from './internal_tag.js';
+import { User } from './user.js';
+import { Menu } from './menu.js';
+import { Page } from './page.js';
+import { ThemeStatus } from '../constants/theme_status.js';
 
 export class Theme extends Entity {
   protected static resourceName = 'themes';

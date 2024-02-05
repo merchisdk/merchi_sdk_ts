@@ -1,7 +1,7 @@
-import { Entity } from '../entity';
-import { CountryTax } from './country_tax';
-import { User } from './user';
-import { Company } from './company';
+import { Entity } from '../entity.js';
+import { CountryTax } from './country_tax.js';
+import { User } from './user.js';
+import { Company } from './company.js';
 
 export class SubscriptionPlan extends Entity {
   protected static resourceName = 'subscription_plans';

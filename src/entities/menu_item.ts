@@ -1,5 +1,5 @@
-import { Entity } from '../entity';
-import { Menu } from './menu';
+import { Entity } from '../entity.js';
+import { Menu } from './menu.js';
 
 export class MenuItem extends Entity {
   protected static resourceName = 'menu_items';

@@ -1,8 +1,8 @@
-import { CartItem } from './cart_item';
-import { Entity } from '../entity';
-import { Job } from './job';
-import { Variation } from './variation';
-import { MatchingInventory } from './matching_inventory';
+import { CartItem } from './cart_item.js';
+import { Entity } from '../entity.js';
+import { Job } from './job.js';
+import { Variation } from './variation.js';
+import { MatchingInventory } from './matching_inventory.js';
 
 export class VariationsGroup extends Entity {
   protected static resourceName = 'variations_groups';

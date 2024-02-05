@@ -1,6 +1,6 @@
-import { CountryTax } from './country_tax';
-import { Entity } from '../entity';
-import { Quote } from './quote';
+import { CountryTax } from './country_tax.js';
+import { Entity } from '../entity.js';
+import { Quote } from './quote.js';
 
 interface CalculateOptions {
   strictEmbed?: boolean;

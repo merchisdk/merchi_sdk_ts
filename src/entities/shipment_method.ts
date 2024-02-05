@@ -1,10 +1,10 @@
-import { ShipmentService } from '../constants/shipment_services';
-import { Entity } from '../entity';
-import { Address } from './address';
-import { Company } from './company';
-import { CountryTax } from './country_tax';
-import { Product } from './product';
-import { ShipmentMethodVariation } from './shipment_method_variation';
+import { ShipmentService } from '../constants/shipment_services.js';
+import { Entity } from '../entity.js';
+import { Address } from './address.js';
+import { Company } from './company.js';
+import { CountryTax } from './country_tax.js';
+import { Product } from './product.js';
+import { ShipmentMethodVariation } from './shipment_method_variation.js';
 
 export class ShipmentMethod extends Entity {
   protected static resourceName = 'shipment_methods';

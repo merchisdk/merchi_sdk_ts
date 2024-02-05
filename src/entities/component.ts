@@ -1,8 +1,8 @@
-import { ComponentTag } from './component_tag';
-import { ComponentVersion } from './component_version';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { User } from './user';
+import { ComponentTag } from './component_tag.js';
+import { ComponentVersion } from './component_version.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { User } from './user.js';
 
 export class Component extends Entity {
   protected static resourceName = 'components';

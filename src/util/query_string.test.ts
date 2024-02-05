@@ -1,4 +1,4 @@
-import { getQueryStringValue } from './query_string';
+import { getQueryStringValue } from './query_string.js';
 
 test('lol', () => {
   expect(getQueryStringValue('a')).toBe(undefined);

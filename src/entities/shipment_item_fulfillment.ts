@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { Assignment } from './assignment';
-import { Job } from './job';
+import { Entity } from '../entity.js';
+import { Assignment } from './assignment.js';
+import { Job } from './job.js';
 
 export class ShipmentItemFulfillment extends Entity {
   protected static resourceName = 'shipment_item_fulfillments';

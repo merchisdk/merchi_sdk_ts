@@ -1,9 +1,9 @@
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { Product } from './product';
-import { Shipment } from './shipment';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { Product } from './product.js';
+import { Shipment } from './shipment.js';
 
 export class DomainTag extends Entity {
   protected static resourceName = 'domain_tags';

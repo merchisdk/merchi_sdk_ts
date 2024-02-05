@@ -1,17 +1,17 @@
-import { Address } from './address';
-import { Assignment } from './assignment';
-import { Company } from './company';
-import { CountryTax } from './country_tax';
-import { DomainTag } from './domain_tag';
-import { Entity } from '../entity';
-import { InternalTag } from './internal_tag';
-import { Invoice } from './invoice';
-import { Quote } from './quote';
-import { Job } from './job';
-import { MerchiFile } from './file';
-import { User } from './user';
-import { ShipmentItem } from './shipment_item';
-import { ShipmentMethod } from './shipment_method';
+import { Address } from './address.js';
+import { Assignment } from './assignment.js';
+import { Company } from './company.js';
+import { CountryTax } from './country_tax.js';
+import { DomainTag } from './domain_tag.js';
+import { Entity } from '../entity.js';
+import { InternalTag } from './internal_tag.js';
+import { Invoice } from './invoice.js';
+import { Quote } from './quote.js';
+import { Job } from './job.js';
+import { MerchiFile } from './file.js';
+import { User } from './user.js';
+import { ShipmentItem } from './shipment_item.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 interface CalculateOptions {
   strictEmbed?: boolean;

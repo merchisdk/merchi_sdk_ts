@@ -1,9 +1,9 @@
-import { DiscountGroup } from './discount_group';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { InventoryUnitVariation } from './inventory_unit_variation';
-import { Variation } from './variation';
-import { VariationField } from './variation_field';
+import { DiscountGroup } from './discount_group.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { InventoryUnitVariation } from './inventory_unit_variation.js';
+import { Variation } from './variation.js';
+import { VariationField } from './variation_field.js';
 
 export class VariationFieldsOption extends Entity {
   protected static resourceName = 'variation_fields_options';

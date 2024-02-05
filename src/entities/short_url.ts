@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { Notification } from './notification';
-import { User } from './user';
+import { Entity } from '../entity.js';
+import { Notification } from './notification.js';
+import { User } from './user.js';
 
 export class ShortUrl extends Entity {
   protected static resourceName = 'short_urls';

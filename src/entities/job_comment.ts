@@ -1,8 +1,8 @@
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Job } from './job';
-import { Notification } from './notification';
-import { User } from './user';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Job } from './job.js';
+import { Notification } from './notification.js';
+import { User } from './user.js';
 
 export class JobComment extends Entity {
   protected static resourceName = 'job_comments';

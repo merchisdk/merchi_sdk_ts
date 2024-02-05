@@ -1,10 +1,10 @@
 import { cloneDeepWith } from 'lodash';
-import { DiscountGroup } from './discount_group';
-import { Entity } from '../entity';
-import { Product } from './product';
-import { Variation } from './variation';
-import { VariationFieldsOption } from './variation_fields_option';
-import { FieldType } from '../constants/field_types';
+import { DiscountGroup } from './discount_group.js';
+import { Entity } from '../entity.js';
+import { Product } from './product.js';
+import { Variation } from './variation.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
+import { FieldType } from '../constants/field_types.js';
 
 export class VariationField extends Entity {
   protected static resourceName = 'variation_fields';

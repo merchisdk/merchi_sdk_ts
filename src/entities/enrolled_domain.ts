@@ -1,8 +1,8 @@
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { User } from './user';
-import { Role } from '../constants/roles';
-import { DomainType } from '../constants/domain_types';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { User } from './user.js';
+import { Role } from '../constants/roles.js';
+import { DomainType } from '../constants/domain_types.js';
 
 export class EnrolledDomain extends Entity {
   protected static resourceName = 'enrolled_domains';

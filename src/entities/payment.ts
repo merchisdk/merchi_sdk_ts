@@ -1,8 +1,8 @@
-import { Entity } from '../entity';
-import { Invoice } from './invoice';
-import { User } from './user';
-import { AutomaticPaymentRelationship } from './automatic_payment_relationship';
-import { RequestOptions } from '../request';
+import { Entity } from '../entity.js';
+import { Invoice } from './invoice.js';
+import { User } from './user.js';
+import { AutomaticPaymentRelationship } from './automatic_payment_relationship.js';
+import { RequestOptions } from '../request.js';
 
 export class Payment extends Entity {
   protected static resourceName = 'payments';

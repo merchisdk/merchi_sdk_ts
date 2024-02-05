@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { Inventory } from './inventory';
-import { VariationFieldsOption } from './variation_fields_option';
+import { Entity } from '../entity.js';
+import { Inventory } from './inventory.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
 
 export class InventoryUnitVariation extends Entity {
   protected static resourceName = 'inventory_unit_variations';

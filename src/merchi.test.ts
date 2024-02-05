@@ -1,5 +1,5 @@
-import { setup, mockFetch } from './test_util';
-import { Merchi } from './merchi';
+import { setup, mockFetch } from './test_util.js';
+import { Merchi } from './merchi.js';
 
 setup();
 

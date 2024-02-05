@@ -1,7 +1,7 @@
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Job } from './job';
-import { Product } from './product';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Job } from './job.js';
+import { Product } from './product.js';
 
 export class DraftTemplate extends Entity {
   protected static resourceName = 'draft_templates';

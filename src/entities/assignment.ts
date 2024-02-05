@@ -1,13 +1,13 @@
-import { Entity } from '../entity';
-import { Quote } from './quote';
-import { MerchiFile } from './file';
-import { Job } from './job';
-import { Notification } from './notification';
-import { ProductionComment } from './production_comment';
-import { Shipment } from './shipment';
-import { SupplyDomain } from './supply_domain';
-import { User } from './user';
-import { RequestOptions } from '../request';
+import { Entity } from '../entity.js';
+import { Quote } from './quote.js';
+import { MerchiFile } from './file.js';
+import { Job } from './job.js';
+import { Notification } from './notification.js';
+import { ProductionComment } from './production_comment.js';
+import { Shipment } from './shipment.js';
+import { SupplyDomain } from './supply_domain.js';
+import { User } from './user.js';
+import { RequestOptions } from '../request.js';
 
 interface GenerateInvoiceProps {
   addToInvoice? : number;

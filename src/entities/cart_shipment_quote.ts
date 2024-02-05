@@ -1,6 +1,6 @@
-import { ShipmentMethod } from './shipment_method';
-import { Entity } from '../entity';
-import { ShipmentService } from '../constants/shipment_services';
+import { ShipmentMethod } from './shipment_method.js';
+import { Entity } from '../entity.js';
+import { ShipmentService } from '../constants/shipment_services.js';
 
 export class CartShipmentQuote extends Entity {
   protected static resourceName = 'cart_shipment_quotes';

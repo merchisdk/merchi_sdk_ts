@@ -1,5 +1,5 @@
-import { Component } from './component';
-import { Entity } from '../entity';
+import { Component } from './component.js';
+import { Entity } from '../entity.js';
 
 export class ComponentTag extends Entity {
   protected static resourceName = 'component_tags';

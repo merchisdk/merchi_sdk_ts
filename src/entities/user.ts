@@ -1,39 +1,39 @@
-import { Address } from './address';
-import { Assignment } from './assignment';
-import { Cart } from './cart';
-import { Category } from './category';
-import { CompanyInvitation } from './company_invitation';
-import { DomainInvitation } from './domain_invitation';
-import { Draft } from './draft';
-import { DraftComment } from './draft_comment';
-import { EmailAddress } from './email_address';
-import { EnrolledDomain } from './enrolled_domain';
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { JobComment } from './job_comment';
-import { Notification } from './notification';
-import { Payment } from './payment';
-import { PhoneNumber } from './phone_number';
-import { Product } from './product';
-import { ProductionComment } from './production_comment';
-import { Session } from './session';
-import { Shipment } from './shipment';
-import { SystemRole } from './system_role';
-import { Theme } from './theme';
-import { UserCompany } from './user_company';
-import { Company } from './company';
+import { Address } from './address.js';
+import { Assignment } from './assignment.js';
+import { Cart } from './cart.js';
+import { Category } from './category.js';
+import { CompanyInvitation } from './company_invitation.js';
+import { DomainInvitation } from './domain_invitation.js';
+import { Draft } from './draft.js';
+import { DraftComment } from './draft_comment.js';
+import { EmailAddress } from './email_address.js';
+import { EnrolledDomain } from './enrolled_domain.js';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { JobComment } from './job_comment.js';
+import { Notification } from './notification.js';
+import { Payment } from './payment.js';
+import { PhoneNumber } from './phone_number.js';
+import { Product } from './product.js';
+import { ProductionComment } from './production_comment.js';
+import { Session } from './session.js';
+import { Shipment } from './shipment.js';
+import { SystemRole } from './system_role.js';
+import { Theme } from './theme.js';
+import { UserCompany } from './user_company.js';
+import { Company } from './company.js';
 import { Role,
   DOMAIN_MANAGERS,
   MANAGEMENT_TEAM,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
-} from '../constants/roles';
-import { InternalTag } from './internal_tag';
-import { UserType } from '../constants/user_types';
-import { SystemRoles as SR } from '../constants/system_roles';
+} from '../constants/roles.js';
+import { InternalTag } from './internal_tag.js';
+import { UserType } from '../constants/user_types.js';
+import { SystemRoles as SR } from '../constants/system_roles.js';
 
 import { some } from 'lodash';
 

@@ -1,4 +1,4 @@
-import { generateUUID } from './uuid';
+import { generateUUID } from './uuid.js';
 
 test('can generate UUID', () => {
   const realRandom = global.Math.random;

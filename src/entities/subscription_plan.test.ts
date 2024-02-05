@@ -1,4 +1,4 @@
-import { Merchi } from '../merchi';
+import { Merchi } from '../merchi.js';
 
 test('can make SubscriptionPlan', () => {
   const merchi = new Merchi();

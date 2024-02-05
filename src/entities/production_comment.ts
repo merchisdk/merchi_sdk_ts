@@ -1,8 +1,8 @@
-import { Assignment } from './assignment';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Notification } from './notification';
-import { User } from './user';
+import { Assignment } from './assignment.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Notification } from './notification.js';
+import { User } from './user.js';
 
 export class ProductionComment extends Entity {
   protected static resourceName = 'production_comments';

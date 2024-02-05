@@ -1,5 +1,5 @@
-import { Entity } from '../entity';
-import { Company } from './company';
+import { Entity } from '../entity.js';
+import { Company } from './company.js';
 
 export class PaymentDevice extends Entity {
   protected static resourceName = 'payment_devices';

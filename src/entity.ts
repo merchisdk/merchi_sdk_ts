@@ -1,19 +1,19 @@
 import 'reflect-metadata';
 // eslint-disable-next-line no-unused-vars
-import { RequestOptions } from './request';
+import { RequestOptions } from './request.js';
 // eslint-disable-next-line no-unused-vars
-import { Merchi } from './merchi';
+import { Merchi } from './merchi.js';
 // eslint-disable-next-line no-unused-vars
-import { NotificationType } from './constants/notification_types';
+import { NotificationType } from './constants/notification_types.js';
 // eslint-disable-next-line no-unused-vars
-import { NotificationSection } from './constants/notification_sections';
+import { NotificationSection } from './constants/notification_sections.js';
 // eslint-disable-next-line no-unused-vars
-import { Role } from './constants/roles';
+import { Role } from './constants/roles.js';
 // eslint-disable-next-line no-unused-vars
-import { DomainType } from './constants/domain_types';
+import { DomainType } from './constants/domain_types.js';
 // eslint-disable-next-line no-unused-vars
-import { ProductType } from './constants/product_types';
-import { generateUUID } from './uuid';
+import { ProductType } from './constants/product_types.js';
+import { generateUUID } from './uuid.js';
 
 function toUnixTimestamp(date: Date) {
   return parseInt(String(date.getTime() / 1000)).toFixed(0);

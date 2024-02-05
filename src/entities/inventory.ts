@@ -1,10 +1,10 @@
-import { Address } from './address';
-import { Entity } from '../entity';
-import { InventoryUnitVariation } from './inventory_unit_variation';
-import { Job } from './job';
-import { Product } from './product';
-import { VariationsGroup } from './variations_group';
-import { VariationFieldsOption } from './variation_fields_option';
+import { Address } from './address.js';
+import { Entity } from '../entity.js';
+import { InventoryUnitVariation } from './inventory_unit_variation.js';
+import { Job } from './job.js';
+import { Product } from './product.js';
+import { VariationsGroup } from './variations_group.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
 import { some } from 'lodash';
 
 export class Inventory extends Entity {

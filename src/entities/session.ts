@@ -1,6 +1,6 @@
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { User } from './user';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { User } from './user.js';
 
 export class Session extends Entity {
   protected static resourceName = 'sessions';

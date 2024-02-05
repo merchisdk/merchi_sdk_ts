@@ -1,8 +1,8 @@
-import { Company } from './company';
-import { Entity } from '../entity';
-import { Item } from './item';
-import { Job } from './job';
-import { Shipment } from './shipment';
+import { Company } from './company.js';
+import { Entity } from '../entity.js';
+import { Item } from './item.js';
+import { Job } from './job.js';
+import { Shipment } from './shipment.js';
 
 export class CountryTax extends Entity {
   protected static resourceName = 'country_taxes';

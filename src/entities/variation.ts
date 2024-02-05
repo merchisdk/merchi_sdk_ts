@@ -1,10 +1,10 @@
-import { CartItem } from './cart_item';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Job } from './job';
-import { VariationField } from './variation_field';
-import { VariationOption } from './variation_option';
-import { VariationsGroup } from './variations_group';
+import { CartItem } from './cart_item.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Job } from './job.js';
+import { VariationField } from './variation_field.js';
+import { VariationOption } from './variation_option.js';
+import { VariationsGroup } from './variations_group.js';
 
 export class Variation extends Entity {
   protected static resourceName = 'variations';

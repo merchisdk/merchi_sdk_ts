@@ -1,8 +1,8 @@
-import { Merchi } from '../merchi';
-import { Role } from '../constants/roles';
-import { SystemRoles } from '../constants/system_roles';
-import { DomainType } from '../constants/domain_types';
-import { setup, mockFetch } from '../test_util';
+import { Merchi } from '../merchi.js';
+import { Role } from '../constants/roles.js';
+import { SystemRoles } from '../constants/system_roles.js';
+import { DomainType } from '../constants/domain_types.js';
+import { setup, mockFetch } from '../test_util.js';
 import { every } from 'lodash';
 
 setup();
