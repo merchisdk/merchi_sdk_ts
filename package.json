@@ -1,6 +1,6 @@
 {
   "name": "merchi_sdk_ts",
-  "version": "1.0.2v",
+  "version": "1.0.2w",
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
