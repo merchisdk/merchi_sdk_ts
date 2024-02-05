@@ -1,9 +1,9 @@
-import { Merchi } from '../merchi';
-import { setup, mockFetch } from '../test_util';
-import { Role } from '../constants/roles';
-import { NotificationSection } from '../constants/notification_sections';
-import { NotificationType } from '../constants/notification_types';
-import { SerialiseMethod } from '../entity';
+import { Merchi } from '../merchi.js';
+import { setup, mockFetch } from '../test_util.js';
+import { Role } from '../constants/roles.js';
+import { NotificationSection } from '../constants/notification_sections.js';
+import { NotificationType } from '../constants/notification_types.js';
+import { SerialiseMethod } from '../entity.js';
 
 setup();
 

@@ -1,6 +1,6 @@
-import { Address } from './address';
-import { Company } from './company';
-import { Entity } from '../entity';
+import { Address } from './address.js';
+import { Company } from './company.js';
+import { Entity } from '../entity.js';
 
 export class Bank extends Entity {
   protected static resourceName = 'banks';

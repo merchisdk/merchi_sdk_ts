@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { CountryTax } from './country_tax';
-import { ShipmentMethod } from './shipment_method';
+import { Entity } from '../entity.js';
+import { CountryTax } from './country_tax.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 export class ShipmentMethodVariation extends Entity {
   protected static resourceName = 'shipment_method_variations';

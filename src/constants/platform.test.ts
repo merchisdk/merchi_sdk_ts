@@ -4,7 +4,7 @@ import {
   platformDomain,
   platformSellerDomain,
   platformSellerDomainPlus
-} from './platform';
+} from './platform.js';
 
 test('platform variables all there', () => {
   expect(platformName).toBe('Merchi');

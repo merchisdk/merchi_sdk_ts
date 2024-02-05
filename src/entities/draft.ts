@@ -1,9 +1,9 @@
-import { DraftComment } from './draft_comment';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Job } from './job';
-import { Notification } from './notification';
-import { User } from './user';
+import { DraftComment } from './draft_comment.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Job } from './job.js';
+import { Notification } from './notification.js';
+import { User } from './user.js';
 
 export class Draft extends Entity {
   protected static resourceName = 'drafts';

@@ -1,4 +1,4 @@
-import { Merchi } from '../merchi';
+import { Merchi } from '../merchi.js';
 
 test('can make SystemRole', () => {
   const merchi = new Merchi();

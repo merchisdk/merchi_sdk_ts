@@ -1,20 +1,20 @@
-import { Backup } from './backup';
-import { Company } from './company';
-import { Component } from './component';
-import { Domain } from './domain';
-import { Draft } from './draft';
-import { DraftComment } from './draft_comment';
-import { Entity } from '../entity';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { JobComment } from './job_comment';
-import { Notification } from './notification';
-import { Product } from './product';
-import { ProductionComment } from './production_comment';
-import { Theme } from './theme';
-import { User } from './user';
-import { Variation } from './variation';
-import { VariationFieldsOption } from './variation_fields_option';
+import { Backup } from './backup.js';
+import { Company } from './company.js';
+import { Component } from './component.js';
+import { Domain } from './domain.js';
+import { Draft } from './draft.js';
+import { DraftComment } from './draft_comment.js';
+import { Entity } from '../entity.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { JobComment } from './job_comment.js';
+import { Notification } from './notification.js';
+import { Product } from './product.js';
+import { ProductionComment } from './production_comment.js';
+import { Theme } from './theme.js';
+import { User } from './user.js';
+import { Variation } from './variation.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
 
 export class MerchiFile extends Entity {
   protected static resourceName = 'files';

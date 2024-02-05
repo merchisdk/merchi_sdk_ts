@@ -1,12 +1,12 @@
-import { Company } from './company';
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { Product } from './product';
-import { Shipment } from './shipment';
-import { Theme } from './theme';
-import { User } from './user';
+import { Company } from './company.js';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { Product } from './product.js';
+import { Shipment } from './shipment.js';
+import { Theme } from './theme.js';
+import { User } from './user.js';
 
 export class InternalTag extends Entity {
   protected static resourceName = 'internal_tags';

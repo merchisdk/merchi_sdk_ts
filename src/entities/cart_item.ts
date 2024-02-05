@@ -1,10 +1,10 @@
-import { Cart } from './cart';
-import { CountryTax } from './country_tax';
-import { Entity } from '../entity';
-import { Product } from './product';
-import { RequestOptions } from '../request';
-import { Variation } from './variation';
-import { VariationsGroup } from './variations_group';
+import { Cart } from './cart.js';
+import { CountryTax } from './country_tax.js';
+import { Entity } from '../entity.js';
+import { Product } from './product.js';
+import { RequestOptions } from '../request.js';
+import { Variation } from './variation.js';
+import { VariationsGroup } from './variations_group.js';
 
 export class CartItem extends Entity {
   protected static resourceName = 'cart_items';

@@ -1,6 +1,6 @@
-import { Domain } from './domain';
-import { Product } from './product';
-import { Entity } from '../entity';
+import { Domain } from './domain.js';
+import { Product } from './product.js';
+import { Entity } from '../entity.js';
 
 export class SeoDomainPage extends Entity {
   protected static resourceName = 'seo_domain_pages';

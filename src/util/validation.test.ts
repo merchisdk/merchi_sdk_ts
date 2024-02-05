@@ -1,4 +1,4 @@
-import { isUndefinedOrNull } from './validation';
+import { isUndefinedOrNull } from './validation.js';
 
 
 test('return true if value is null', () => {

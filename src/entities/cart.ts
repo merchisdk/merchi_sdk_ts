@@ -1,11 +1,11 @@
-import { Address } from './address';
-import { CartItem } from './cart_item';
-import { CartShipmentGroup } from './cart_shipment_group';
-import { Company } from './company';
-import { Domain } from './domain';
-import { Entity } from '../entity';
-import { Invoice } from './invoice';
-import { User } from './user';
+import { Address } from './address.js';
+import { CartItem } from './cart_item.js';
+import { CartShipmentGroup } from './cart_shipment_group.js';
+import { Company } from './company.js';
+import { Domain } from './domain.js';
+import { Entity } from '../entity.js';
+import { Invoice } from './invoice.js';
+import { User } from './user.js';
 
 export class Cart extends Entity {
   protected static resourceName = 'carts';

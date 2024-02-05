@@ -1,6 +1,6 @@
-import { Merchi } from '../merchi';
-import { setup, mockFetch } from '../test_util';
-import { InventoryStatus } from '../constants/inventory_statuses';
+import { Merchi } from '../merchi.js';
+import { setup, mockFetch } from '../test_util.js';
+import { InventoryStatus } from '../constants/inventory_statuses.js';
 
 setup();
 

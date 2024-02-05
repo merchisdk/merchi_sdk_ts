@@ -1,11 +1,11 @@
-import { Bank } from './bank';
-import { Company } from './company';
-import { Entity } from '../entity';
-import { Inventory } from './inventory';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { Shipment } from './shipment';
-import { User } from './user';
+import { Bank } from './bank.js';
+import { Company } from './company.js';
+import { Entity } from '../entity.js';
+import { Inventory } from './inventory.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { Shipment } from './shipment.js';
+import { User } from './user.js';
 
 export class Address extends Entity {
   protected static resourceName = 'addresses';

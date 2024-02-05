@@ -18,6 +18,10 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "pretty": true,
+    "alwaysStrict": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test"]
 }

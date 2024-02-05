@@ -1,6 +1,6 @@
-import { Entity } from '../entity';
-import { Product } from './product';
-import { Discount } from './discount';
+import { Entity } from '../entity.js';
+import { Product } from './product.js';
+import { Discount } from './discount.js';
 
 export class DiscountGroup extends Entity {
   protected static resourceName = 'discount_groups';

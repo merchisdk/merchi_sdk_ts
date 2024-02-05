@@ -1,6 +1,6 @@
-import { Company } from './company';
-import { Entity } from '../entity';
-import { User } from './user';
+import { Company } from './company.js';
+import { Entity } from '../entity.js';
+import { User } from './user.js';
 
 export class CompanyInvitation extends Entity {
   protected static resourceName = 'company_invitations';

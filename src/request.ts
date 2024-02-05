@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { ErrorType, getErrorFromCode } from './constants/errors';
+import { ErrorType, getErrorFromCode } from './constants/errors.js';
 
 export interface RequestOptions extends RequestInit {
   query?: string[][];

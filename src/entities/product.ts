@@ -1,26 +1,26 @@
 import * as _ from 'lodash';
-import { CartItem } from './cart_item';
-import { Category } from './category';
-import { Company } from './company';
-import { Component } from './component';
-import { CountryTax } from './country_tax';
-import { DiscountGroup } from './discount_group';
-import { Domain } from './domain';
-import { DomainTag } from './domain_tag';
-import { DraftTemplate } from './draft_template';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { InternalTag } from './internal_tag';
-import { Inventory } from './inventory';
-import { Job } from './job';
-import { SupplyDomain } from './supply_domain';
-import { User } from './user';
-import { VariationField } from './variation_field';
-import { SeoDomainPage } from './seo_domain_page';
-import { ShipmentMethod } from './shipment_method';
+import { CartItem } from './cart_item.js';
+import { Category } from './category.js';
+import { Company } from './company.js';
+import { Component } from './component.js';
+import { CountryTax } from './country_tax.js';
+import { DiscountGroup } from './discount_group.js';
+import { Domain } from './domain.js';
+import { DomainTag } from './domain_tag.js';
+import { DraftTemplate } from './draft_template.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { InternalTag } from './internal_tag.js';
+import { Inventory } from './inventory.js';
+import { Job } from './job.js';
+import { SupplyDomain } from './supply_domain.js';
+import { User } from './user.js';
+import { VariationField } from './variation_field.js';
+import { SeoDomainPage } from './seo_domain_page.js';
+import { ShipmentMethod } from './shipment_method.js';
 import {
   AutoAssignProductionOnAction
-} from '../constants/auto_assign_production_on_actions';
+} from '../constants/auto_assign_production_on_actions.js';
 
 export class Product extends Entity {
   protected static resourceName = 'products';

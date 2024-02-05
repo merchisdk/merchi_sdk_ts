@@ -1,15 +1,15 @@
-import { Assignment } from './assignment';
-import { Domain } from './domain';
-import { Draft } from './draft';
-import { DraftComment } from './draft_comment';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { Invoice } from './invoice';
-import { Job } from './job';
-import { JobComment } from './job_comment';
-import { ProductionComment } from './production_comment';
-import { ShortUrl } from './short_url';
-import { User } from './user';
+import { Assignment } from './assignment.js';
+import { Domain } from './domain.js';
+import { Draft } from './draft.js';
+import { DraftComment } from './draft_comment.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { Invoice } from './invoice.js';
+import { Job } from './job.js';
+import { JobComment } from './job_comment.js';
+import { ProductionComment } from './production_comment.js';
+import { ShortUrl } from './short_url.js';
+import { User } from './user.js';
 
 export class Notification extends Entity {
   protected static resourceName = 'notifications';

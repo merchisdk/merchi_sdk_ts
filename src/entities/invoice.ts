@@ -1,20 +1,20 @@
-import { Address } from './address';
-import { Cart } from './cart';
-import { Company } from './company';
-import { Domain } from './domain';
-import { DomainTag } from './domain_tag';
-import { EmailAddress } from './email_address';
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
-import { InternalTag } from './internal_tag';
-import { Item } from './item';
-import { Job } from './job';
-import { Quote } from './quote';
-import { Notification } from './notification';
-import { Payment } from './payment';
-import { PhoneNumber } from './phone_number';
-import { Shipment } from './shipment';
-import { User } from './user';
+import { Address } from './address.js';
+import { Cart } from './cart.js';
+import { Company } from './company.js';
+import { Domain } from './domain.js';
+import { DomainTag } from './domain_tag.js';
+import { EmailAddress } from './email_address.js';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
+import { InternalTag } from './internal_tag.js';
+import { Item } from './item.js';
+import { Job } from './job.js';
+import { Quote } from './quote.js';
+import { Notification } from './notification.js';
+import { Payment } from './payment.js';
+import { PhoneNumber } from './phone_number.js';
+import { Shipment } from './shipment.js';
+import { User } from './user.js';
 
 export class Invoice extends Entity {
   protected static resourceName = 'invoices';

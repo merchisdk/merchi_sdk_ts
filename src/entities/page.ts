@@ -1,5 +1,5 @@
-import { Entity } from '../entity';
-import { Theme } from './theme';
+import { Entity } from '../entity.js';
+import { Theme } from './theme.js';
 
 export class Page extends Entity {
   protected static resourceName = 'pages';

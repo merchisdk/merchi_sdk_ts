@@ -1,6 +1,6 @@
-import { apiFetch } from './request';
-import { ErrorType } from './constants/errors';
-import { setup, mockFetch } from './test_util';
+import { apiFetch } from './request.js';
+import { ErrorType } from './constants/errors.js';
+import { setup, mockFetch } from './test_util.js';
 
 setup();
 

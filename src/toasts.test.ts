@@ -1,8 +1,8 @@
-import { setup, mockFetch } from './test_util';
-import { toastNotifications } from './toasts';
-import { Merchi } from './merchi';
-import { NotificationSection } from './constants/notification_sections';
-import { NotificationType } from './constants/notification_types';
+import { setup, mockFetch } from './test_util.js';
+import { toastNotifications } from './toasts.js';
+import { Merchi } from './merchi.js';
+import { NotificationSection } from './constants/notification_sections.js';
+import { NotificationType } from './constants/notification_types.js';
 
 
 setup();

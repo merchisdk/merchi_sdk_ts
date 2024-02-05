@@ -1,5 +1,5 @@
-import { Entity } from '../entity';
-import { MerchiFile } from './file';
+import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
 
 export class VariationOption extends Entity {
   protected static singularName = 'variationOption';

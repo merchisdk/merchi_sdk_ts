@@ -1,5 +1,5 @@
-import { Entity } from '../entity';
-import { User } from './user';
+import { Entity } from '../entity.js';
+import { User } from './user.js';
 
 export class SystemRole extends Entity {
   protected static resourceName = 'system_roles';

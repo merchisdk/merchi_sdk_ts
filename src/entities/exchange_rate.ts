@@ -1,4 +1,4 @@
-import { Entity } from '../entity';
+import { Entity } from '../entity.js';
 
 export class ExchangeRate extends Entity {
   protected static resourceName = 'exchange_rates';

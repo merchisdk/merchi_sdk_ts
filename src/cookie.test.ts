@@ -1,4 +1,4 @@
-import { getCookie } from './cookie';
+import { getCookie } from './cookie.js';
 
 test('can get cookie', () => {
   const token = 'IMiF7rpT$5ciUJ38QY';

@@ -1,9 +1,9 @@
-import { Assignment } from './assignment';
-import { QuoteItem } from './quote_item';
-import { Shipment } from './shipment';
-import { Invoice } from './invoice';
-import { Entity } from '../entity';
-import { kahanSum } from '../util/float';
+import { Assignment } from './assignment.js';
+import { QuoteItem } from './quote_item.js';
+import { Shipment } from './shipment.js';
+import { Invoice } from './invoice.js';
+import { Entity } from '../entity.js';
+import { kahanSum } from '../util/float.js';
 
 interface CalculateOptions {
   strictEmbed?: boolean;

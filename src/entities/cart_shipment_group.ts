@@ -1,6 +1,6 @@
-import { CartItem } from './cart_item';
-import { CartShipmentQuote } from './cart_shipment_quote';
-import { Entity } from '../entity';
+import { CartItem } from './cart_item.js';
+import { CartShipmentQuote } from './cart_shipment_quote.js';
+import { Entity } from '../entity.js';
 
 export class CartShipmentGroup extends Entity {
   protected static resourceName = 'cart_shipment_groups';
