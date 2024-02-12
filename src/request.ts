@@ -28,12 +28,11 @@ export const version = 'v6';
 export function backendFetch(resource: string, options?: RequestOptions) {
   const defaultBackendUri: string = 'https://api.merchi.co/';
   // backend uri as defined on env
-  const envBackendUri = process && process.env && process.env.MERCHI_BACKEND_URI;
+  const envBackendUri = process?.env?.MERCHI_BACKEND_URI;
   // backend uri as defined on the window element takes priority
-  const clientBackendUri = (window as any)
-    && (window as any) !== undefined
-    && (window as any).merchiBackendUri;
-  const server = clientBackendUri || envBackendUri || defaultBackendUri;
+  const clientBackendUri = typeof window !== 'undefined' ?
+    (window as any).merchiBackendUri : undefined;
+  const server = clientBackendUri ?? envBackendUri ?? defaultBackendUri;
   const url = new URL(server + version + resource);
   if (options && options.query) {
     for (const entry of options.query) {
