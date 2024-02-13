@@ -1,6 +1,6 @@
 {
   "name": "merchi_sdk_ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "type": "module",
   "repository": "git@github.com:merchisdk/merchi_sdk_ts.git",
