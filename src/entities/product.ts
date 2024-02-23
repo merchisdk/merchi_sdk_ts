@@ -12,7 +12,6 @@ import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { InternalTag } from './internal_tag.js';
 import { Inventory } from './inventory.js';
-import { Job } from './job.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { VariationField } from './variation_field.js';
@@ -256,10 +255,10 @@ export class Product extends Entity {
   public featureImage?: MerchiFile | null;
 
   @Product.property({type: 'Job'})
-  public createdByJob?: Job | null;
+  public createdByJob?: 'Job' | null;
 
   @Product.property({type: 'Job'})
-  public defaultJob?: Job;
+  public defaultJob?: 'Job';
 
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
   public savedByCompanies?: Company[];
@@ -286,10 +285,10 @@ export class Product extends Entity {
   public cartItems?: CartItem[];
 
   @Product.property({arrayType: 'Job'})
-  public jobs?: Job[];
+  public jobs?: 'Job'[];
 
   @Product.property({arrayType: 'Job'})
-  public supplyChainRequestJobs?: Job[];
+  public supplyChainRequestJobs?: 'Job'[];
 
   @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
   public savedByUsers?: User[];
