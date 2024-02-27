@@ -30,12 +30,12 @@ export function backendFetch(resource: string, options?: RequestOptions) {
   // backend uri as defined on the window element takes priority
   const clientBackendUri = typeof window !== 'undefined' &&
     (window as any).merchiBackendUri ?
-      (window as any).merchiBackendUri : '';
+      (window as any).merchiBackendUri : undefined;
   // backend uri as defined on env
   const envBackendUri = typeof process !== 'undefined' &&
     process.env.MERCHI_BACKEND_URI ?
-      process.env.MERCHI_BACKEND_URI : '';
-  const server = clientBackendUri ?? envBackendUri ?? defaultBackendUri;
+      process.env.MERCHI_BACKEND_URI : undefined;
+  const server = envBackendUri ?? clientBackendUri ?? defaultBackendUri;
   const url = new URL(server + version + resource);
   if (options && options.query) {
     for (const entry of options.query) {
