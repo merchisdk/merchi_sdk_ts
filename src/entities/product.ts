@@ -1,25 +1,5 @@
 import * as _ from 'lodash';
-import { CartItem } from './cart_item.js';
-import { Category } from './category.js';
-import { Company } from './company.js';
-import { Component } from './component.js';
-import { CountryTax } from './country_tax.js';
-import { DiscountGroup } from './discount_group.js';
-import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
-import { DraftTemplate } from './draft_template.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { InternalTag } from './internal_tag.js';
-import { Inventory } from './inventory.js';
-import { SupplyDomain } from './supply_domain.js';
-import { User } from './user.js';
-import { VariationField } from './variation_field.js';
-import { SeoDomainPage } from './seo_domain_page.js';
-import { ShipmentMethod } from './shipment_method.js';
-import {
-  AutoAssignProductionOnAction
-} from '../constants/auto_assign_production_on_actions.js';
 
 export class Product extends Entity {
   protected static resourceName = 'products';
@@ -32,17 +12,17 @@ export class Product extends Entity {
   @Product.property()
   public id?: number;
 
-  @Component.property({type: Date})
+  @Product.property({type: Date})
   public created?: Date;
 
-  @Component.property({type: Date})
+  @Product.property({type: Date})
   public updated?: Date;
 
-  @Component.property({type: 'User'})
-  public createdBy?: User | null;
+  @Product.property({type: 'User'})
+  public createdBy?: 'User' | null;
 
-  @Component.property({type: 'User'})
-  public updatedBy?: User | null;
+  @Product.property({type: 'User'})
+  public updatedBy?: 'User' | null;
 
   @Product.property()
   public productType?: number;
@@ -63,10 +43,10 @@ export class Product extends Entity {
   public buyUnitPrice?: number;
 
   @Product.property({type: 'DiscountGroup'})
-  public unitPriceDiscountGroup?: DiscountGroup | null;
+  public unitPriceDiscountGroup?: 'DiscountGroup' | null;
 
   @Product.property({arrayType: 'ShipmentMethod'})
-  public shipmentMethods?: ShipmentMethod[];
+  public shipmentMethods?: 'ShipmentMethod'[];
 
   @Product.property()
   public margin?: number;
@@ -192,67 +172,67 @@ export class Product extends Entity {
   public unitVolume?: number;
 
   @Product.property({arrayType: 'Category'})
-  public categories?: Category[];
+  public categories?: 'Category'[];
 
   @Product.property({arrayType: 'Category'})
-  public platformCategories?: Category[];
+  public platformCategories?: 'Category'[];
 
   @Product.property({arrayType: 'DiscountGroup'})
-  public discountGroups?: DiscountGroup[];
+  public discountGroups?: 'DiscountGroup'[];
 
-  @Product.property()
-  public domain?: Domain;
+  @Product.property({type: 'Domain'})
+  public domain?: 'Domain';
 
-  @Product.property({type: CountryTax})
-  public taxType?: CountryTax | null;
+  @Product.property({type: 'CountryTax'})
+  public taxType?: 'CountryTax' | null;
 
-  @Product.property({type: Product})
-  public originalProduct?: Product | null;
+  @Product.property({type: 'Product'})
+  public originalProduct?: 'Product' | null;
 
-  @Product.property({type: Product})
-  public clonedFromProduct?: Product | null;
+  @Product.property({type: 'Product'})
+  public clonedFromProduct?: 'Product' | null;
 
-  @Product.property({type: Product})
-  public chainedSupplierProduct?: Product | null;
-
-  @Product.property({arrayType: 'Product'})
-  public chainedSellerProducts?: Product[];
-
-  @Product.property({type: Product})
-  public chainedInventorySupplierProduct?: Product | null;
+  @Product.property({type: 'Product'})
+  public chainedSupplierProduct?: 'Product' | null;
 
   @Product.property({arrayType: 'Product'})
-  public chainedInventorySellerProducts?: Product[];
+  public chainedSellerProducts?: 'Product'[];
 
-  @Product.property({type: Component})
-  public component?: Component | null;
+  @Product.property({type: 'Product'})
+  public chainedInventorySupplierProduct?: 'Product' | null;
+
+  @Product.property({arrayType: 'Product'})
+  public chainedInventorySellerProducts?: 'Product'[];
+
+  @Product.property({type: 'Component'})
+  public component?: 'Component' | null;
 
   @Product.property({arrayType: 'MerchiFile'})
-  public images?: MerchiFile[];
+  public images?: 'MerchiFile'[];
 
   @Product.property({arrayType: 'MerchiFile'})
-  public publicFiles?: MerchiFile[];
+  public publicFiles?: 'MerchiFile'[];
 
   @Product.property({arrayType: 'MerchiFile'})
-  public productionFiles?: MerchiFile[];
+  public productionFiles?: 'MerchiFile'[];
 
   @Product.property({arrayType: 'VariationField'})
-  public groupVariationFields?: VariationField[];
+  public groupVariationFields?: 'VariationField'[];
 
   @Product.property({arrayType: 'VariationField'})
-  public independentVariationFields?: VariationField[];
+  public independentVariationFields?: 'VariationField'[];
 
   @Product.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  public tags?: 'DomainTag'[];
 
   @Product.property({arrayType: 'InternalTag'})
-  public internalTags?: InternalTag[];
+  public internalTags?: 'InternalTag'[];
 
   @Product.property({arrayType: 'SeoDomainPage'})
-  public seoDomainPages?: SeoDomainPage[];
+  public seoDomainPages?: 'SeoDomainPage'[];
 
-  @Product.property({type: MerchiFile})
-  public featureImage?: MerchiFile | null;
+  @Product.property({type: 'MerchiFile'})
+  public featureImage?: 'MerchiFile' | null;
 
   @Product.property({type: 'Job'})
   public createdByJob?: 'Job' | null;
@@ -261,16 +241,16 @@ export class Product extends Entity {
   public defaultJob?: 'Job';
 
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
-  public savedByCompanies?: Company[];
+  public savedByCompanies?: 'Company'[];
 
   @Product.property({arrayType: 'SupplyDomain'})
-  public suppliedByDomains?: SupplyDomain[];
+  public suppliedByDomains?: 'SupplyDomain'[];
 
-  @Product.property()
-  public autoAssignProductionOnAction?: AutoAssignProductionOnAction;
+  @Product.property({type: 'AutoAssignProductionOnAction'})
+  public autoAssignProductionOnAction?: 'AutoAssignProductionOnAction';
 
   @Product.property({arrayType: 'SupplyDomain'})
-  public supplyDomains?: SupplyDomain[];
+  public supplyDomains?: 'SupplyDomain'[];
 
   @Product.property()
   public inventoriesOpen?: boolean;
@@ -279,10 +259,10 @@ export class Product extends Entity {
   public supplyChainDisabled?: boolean;
 
   @Product.property({arrayType: 'Inventory'})
-  public inventories?: Inventory[];
+  public inventories?: 'Inventory'[];
 
   @Product.property({arrayType: 'CartItem'})
-  public cartItems?: CartItem[];
+  public cartItems?: 'CartItem'[];
 
   @Product.property({arrayType: 'Job'})
   public jobs?: 'Job'[];
@@ -291,13 +271,13 @@ export class Product extends Entity {
   public supplyChainRequestJobs?: 'Job'[];
 
   @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
-  public savedByUsers?: User[];
+  public savedByUsers?: 'User'[];
 
   @Product.property({arrayType: 'User'})
-  public suppliers?: User[];
+  public suppliers?: 'User'[];
 
   @Product.property({arrayType: 'DraftTemplate'})
-  public draftTemplates?: DraftTemplate[];
+  public draftTemplates?: 'DraftTemplate'[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
@@ -359,9 +339,9 @@ export class Product extends Entity {
         ' embed it?';
       throw new Error(err);
     }
-    const result: VariationField[] = [];
-    return result.concat(this.groupVariationFields,
-      this.independentVariationFields);
+    const result: any[] = [];
+    return result.concat((this as any).groupVariationFields,
+      (this as any).independentVariationFields);
   };
 
   public buildEmptyVariations = () => {
@@ -370,8 +350,8 @@ export class Product extends Entity {
         ' embed it?';
       throw new Error(err);
     }
-    const iVF: VariationField[] =
-      _.orderBy(this.independentVariationFields, ['position'], ['asc']);
+    const iVF: any[] =
+      _.orderBy((this as any).independentVariationFields, ['position'], ['asc']);
     return iVF.map(field => field.buildEmptyVariation());
   };
 
@@ -388,7 +368,7 @@ export class Product extends Entity {
       this.groupVariationFields, ['position'], ['asc']);
     result.quantity = 0;
     for (const variationField of sortedFields) {
-      const empty = variationField.buildEmptyVariation();
+      const empty = (variationField as any).buildEmptyVariation();
       variations.push(empty);
       cost += empty.cost as number;
     }
@@ -397,7 +377,7 @@ export class Product extends Entity {
     return result;
   };
 
-  public removeVariationField = (variationField: VariationField) => {
+  public removeVariationField = (variationField: any) => {
     if (variationField.independent === undefined) {
       throw new Error('variation.independent is undefined, did you ' +
                       'forget to embed it?');
@@ -412,7 +392,7 @@ export class Product extends Entity {
         ' it?';
       throw new Error(err);
     }
-    const variationFields = variationField.independent ?
+    const variationFields: any[] = variationField.independent ?
       this.independentVariationFields : this.groupVariationFields;
     const index = variationFields.findIndex(v => {
       if (v.id === undefined) {

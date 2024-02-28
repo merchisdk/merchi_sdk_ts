@@ -1,27 +1,5 @@
-import { Address } from './address.js';
-import { Assignment } from './assignment.js';
-import { Company } from './company.js';
-import { CountryTax } from './country_tax.js';
-import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
-import { Draft } from './draft.js';
-import { DraftComment } from './draft_comment.js';
-import { EmailAddress } from './email_address.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { MatchingInventory } from './matching_inventory.js';
-import { InternalTag } from './internal_tag.js';
-import { Invoice } from './invoice.js';
-import { JobComment } from './job_comment.js';
-import { Notification } from './notification.js';
-import { PhoneNumber } from './phone_number.js';
-import { Product } from './product.js';
 import { RequestOptions } from '../request.js';
-import { Shipment } from './shipment.js';
-import { User } from './user.js';
-import { Variation } from './variation.js';
-import { VariationsGroup } from './variations_group.js';
-import { InventoryStatus } from '../constants/inventory_statuses.js';
 
 
 export class Job extends Entity {
@@ -165,7 +143,7 @@ export class Job extends Entity {
   public totalCost?: number | null;
 
   @Job.property({embeddedByDefault: false})
-  public inventoriesStatus?: InventoryStatus;
+  public inventoriesStatus?: 'InventoryStatus';
 
   @Job.property({embeddedByDefault: false})
   public unreadNotificationsCount?: number;
@@ -195,103 +173,103 @@ export class Job extends Entity {
   public inventorySufficient?: boolean;
 
   @Job.property({arrayType: 'Draft'})
-  public drafts?: Draft[];
+  public drafts?: 'Draft'[];
 
   @Job.property({arrayType: 'Draft'})
-  public sharedDrafts?: Draft[];
+  public sharedDrafts?: 'Draft'[];
 
   @Job.property({arrayType: 'Draft'})
-  public ownDrafts?: Draft[];
+  public ownDrafts?: 'Draft'[];
 
   @Job.property({arrayType: 'JobComment'})
-  public comments?: JobComment[];
+  public comments?: 'JobComment'[];
 
-  @Job.property()
-  public client?: User;
+  @Job.property({type: 'User'})
+  public client?: 'User';
 
-  @Job.property({type: User})
-  public manager?: User | null;
+  @Job.property({type: 'User'})
+  public manager?: 'User' | null;
 
-  @Job.property({type: User})
-  public designer?: User | null;
+  @Job.property({type: 'User'})
+  public designer?: 'User' | null;
 
-  @Job.property({type: Company})
-  public clientCompany?: Company | null;
+  @Job.property({type: 'Company'})
+  public clientCompany?: 'Company' | null;
 
-  @Job.property({type: PhoneNumber})
-  public clientPhone?: PhoneNumber | null;
+  @Job.property({type: 'PhoneNumber'})
+  public clientPhone?: 'PhoneNumber' | null;
 
-  @Job.property({type: EmailAddress})
-  public clientEmail?: EmailAddress | null;
+  @Job.property({type: 'EmailAddress'})
+  public clientEmail?: 'EmailAddress' | null;
 
-  @Job.property({type: PhoneNumber})
-  public clientCompanyPhone?: PhoneNumber | null;
+  @Job.property({type: 'PhoneNumber'})
+  public clientCompanyPhone?: 'PhoneNumber' | null;
 
-  @Job.property({type: EmailAddress})
-  public clientCompanyEmail?: EmailAddress | null;
+  @Job.property({type: 'EmailAddress'})
+  public clientCompanyEmail?: 'EmailAddress' | null;
 
-  @Job.property()
-  public product?: Product;
+  @Job.property({type: 'Product'})
+  public product?: 'Product';
 
-  @Job.property()
-  public supplyChainRequestProduct?: Product;
+  @Job.property({type: 'Product'})
+  public supplyChainRequestProduct?: 'Product';
 
   @Job.property({arrayType: 'DraftComment'})
-  public draftComments?: DraftComment[];
+  public draftComments?: 'DraftComment'[];
 
   @Job.property()
   public preDraftCommentsCount?: number;
 
-  @Job.property({type: CountryTax})
-  public taxType?: CountryTax | null;
+  @Job.property({type: 'CountryTax'})
+  public taxType?: 'CountryTax' | null;
 
   @Job.property({arrayType: 'InternalTag'})
-  public internalTags?: InternalTag[];
+  public internalTags?: 'InternalTag'[];
 
   @Job.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  public tags?: 'DomainTag'[];
 
   @Job.property({arrayType: 'Product'})
-  public createdProducts?: Product[];
+  public createdProducts?: 'Product'[];
 
-  @Job.property({type: Address})
-  public shipping?: Address | null;
+  @Job.property({type: 'Address'})
+  public shipping?: 'Address' | null;
 
-  @Job.property({type: Address})
-  public productionShippingAddress?: Address | null;
+  @Job.property({type: 'Address'})
+  public productionShippingAddress?: 'Address' | null;
 
-  @Job.property()
-  public domain?: Domain;
+  @Job.property({type: 'Domain'})
+  public domain?: 'Domain';
 
-  @Job.property({type: Invoice})
-  public invoice?: Invoice | null;
-
-  @Job.property({arrayType: 'MerchiFile'})
-  public productionFiles?: MerchiFile[];
+  @Job.property({type: 'Invoice'})
+  public invoice?: 'Invoice' | null;
 
   @Job.property({arrayType: 'MerchiFile'})
-  public clientFiles?: MerchiFile[];
+  public productionFiles?: 'MerchiFile'[];
 
-  @Job.property({type: Shipment})
-  public shipment?: Shipment | null;
+  @Job.property({arrayType: 'MerchiFile'})
+  public clientFiles?: 'MerchiFile'[];
+
+  @Job.property({type: 'Shipment'})
+  public shipment?: 'Shipment' | null;
 
   @Job.property({arrayType: 'MatchingInventory'})
-  public matchingInventories?: MatchingInventory[];
+  public matchingInventories?: 'MatchingInventory'[];
 
   @Job.property({arrayType: 'VariationsGroup'})
-  public variationsGroups?: VariationsGroup[];
+  public variationsGroups?: 'VariationsGroup'[];
 
   @Job.property({arrayType: 'Variation'})
-  public variations?: Variation[];
+  public variations?: 'Variation'[];
 
   @Job.property({arrayType: 'Notification'})
-  public notifications?: Notification[];
+  public notifications?: 'Notification'[];
 
   @Job.property({arrayType: 'Assignment'})
-  public assignments?: Assignment[];
+  public assignments?: 'Assignment'[];
 
-  @Job.property()
-  public supplyAssignment?: Assignment;
+  @Job.property({type: 'Assignment'})
+  public supplyAssignment?: 'Assignment';
 
   @Job.property()
   public supplyJob?: Job;
@@ -309,9 +287,10 @@ export class Job extends Entity {
     fetchOptions.query = [];
     fetchOptions.query.push(['skip_rights', 'y']);
     // insert product id to query for debug purposes
+    const product: any = this.product;
     fetchOptions.query.push([
       'product_id',
-      this.product!.id ? this.product!.id!.toString() : 'null'
+      product!.id ? product!.id!.toString() : 'null'
     ]);
 
     return this.merchi.authenticatedFetch(resource, fetchOptions).
@@ -319,10 +298,10 @@ export class Job extends Entity {
         return this;});
   };
 
-  public deduct = (matchingInventories: MatchingInventory[]) => {
+  public deduct = (matchingInventories: 'MatchingInventory'[]) => {
     const resource = `/jobs/${this.id}/deduct/`;
     const inventoriesNeedToBeDeducted = matchingInventories.map(
-      matchingInventory => matchingInventory.inventory!.id);
+      matchingInventory => (matchingInventory as any).inventory!.id);
     const embed = {matchingInventories: {inventory: {}, group: {}}};
     const data = new FormData();
     data.append('inventories', JSON.stringify(inventoriesNeedToBeDeducted));
