@@ -35,7 +35,7 @@ test('Job deadline serialised from milliseconds in JSON', () => {
 
 test('add two files to job', () => {
   const merchi = new Merchi();
-  const job = new merchi.Job();
+  const job: any = new merchi.Job();
   const f1 = new merchi.MerchiFile();
   f1.fromFormFile(new File([''], '1'));
   const f2 = new merchi.MerchiFile();
@@ -70,7 +70,7 @@ test('Get quote update job cost', () => {
 
 test('test deduct job inventory', () => {
   const merchi = new Merchi();
-  const job = new merchi.Job();
+  const job: any = new merchi.Job();
   const inventory = new merchi.Inventory();
   inventory.id = 1;
   job.id = 1;

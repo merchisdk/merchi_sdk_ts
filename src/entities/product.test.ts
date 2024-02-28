@@ -29,7 +29,7 @@ test('can get and set name', () => {
 
 test('can get and set featureImage', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const file = new merchi.MerchiFile();
   product.featureImage = file;
   expect(product.featureImage).toBe(file);
@@ -37,7 +37,7 @@ test('can get and set featureImage', () => {
 
 test('can get and set domain', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const domain = new merchi.Domain();
   product.domain = domain;
   expect(product.domain).toBe(domain);
@@ -448,7 +448,7 @@ test('can list products from server with category', () => {
 test('can save product', () => {
   const merchi = new Merchi();
   const c1 = new merchi.Category();
-  const p = new merchi.Product();
+  const p: any = new merchi.Product();
   const c2 = new merchi.Category();
   const d = new merchi.Domain();
   p.categories = [c2];
@@ -474,7 +474,7 @@ test('can save product', () => {
 test('can serialise product to form data understood by backend', () => {
   const merchi = new Merchi();
   const c1 = new merchi.Category();
-  const p = new merchi.Product();
+  const p: any = new merchi.Product();
   const c2 = new merchi.Category();
   const d = new merchi.Domain();
   p.categories = [c2];
@@ -502,7 +502,7 @@ test('undefined data will not be serialised', () => {
 
 test('can convert product data json format', () => {
   const merchi = new Merchi();
-  const p = new merchi.Product();
+  const p: any = new merchi.Product();
   const d = new merchi.Domain();
   const c1 = new merchi.Category();
   c1.name = 'category 1';
@@ -522,7 +522,7 @@ test('can convert product data json format', () => {
 
 test('can clean dirty on purpose', () => {
   const merchi = new Merchi();
-  const p = new merchi.Product();
+  const p: any = new merchi.Product();
   const d = new merchi.Domain();
   const c1 = new merchi.Category();
   c1.name = 'category 1';
@@ -567,7 +567,7 @@ test('use from json to merge json into entity', () => {
     categories: [{name: 'c1'}, {name: 'c2'}]
   };
   const merchi = new Merchi();
-  const p = new merchi.Product();
+  const p: any = new merchi.Product();
   p.fromJson(json);
 
   const updatedJson = {
@@ -614,7 +614,7 @@ test('primary key always serialised', () => {
 
 test('orderable attribute request', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const f = new merchi.MerchiFile();
   f.id = 24;
   product.id = 42;
@@ -640,7 +640,7 @@ test('duplicate', () => {
 
 test('primaryImage', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const i1 = new merchi.MerchiFile();
   const i2 = new merchi.MerchiFile();
   expect(product.primaryImage).toThrow();
@@ -656,7 +656,7 @@ test('primaryImage', () => {
 
 test('hasGroupVariationFields', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   expect(product.hasGroupVariationFields).toThrow();
   product.groupVariationFields = [];
   expect(product.hasGroupVariationFields()).toBe(false);
@@ -666,7 +666,7 @@ test('hasGroupVariationFields', () => {
 
 test('hasIndependentVariationFields', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   expect(product.hasIndependentVariationFields).toThrow();
   product.independentVariationFields = [];
   expect(product.hasIndependentVariationFields()).toBe(false);
@@ -676,7 +676,7 @@ test('hasIndependentVariationFields', () => {
 
 test('allVariationFields', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const vf1 = new merchi.VariationField();
   const vf2 = new merchi.VariationField();
   expect(product.allVariationFields).toThrow();
@@ -688,7 +688,7 @@ test('allVariationFields', () => {
 
 test('removeVariationField', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   const vf = new merchi.VariationField();
   expect(() => product.removeVariationField(vf)).toThrow();
   vf.independent = false;
@@ -708,7 +708,7 @@ test('removeVariationField', () => {
 
 test('buildEmptyVariations', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   expect(product.buildEmptyVariations).toThrow();
   product.independentVariationFields = [];
   expect(product.buildEmptyVariations()).toEqual([]);
@@ -722,7 +722,7 @@ test('buildEmptyVariations', () => {
 
 test('buildEmptyVariationGroup', () => {
   const merchi = new Merchi();
-  const product = new merchi.Product();
+  const product: any = new merchi.Product();
   expect(product.buildEmptyVariationGroup).toThrow();
   product.groupVariationFields = [new merchi.VariationField()];
   product.groupVariationFields[0].defaultValue = '';
