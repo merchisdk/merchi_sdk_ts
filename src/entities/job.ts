@@ -230,7 +230,7 @@ export class Job extends Entity {
   @Job.property({type: EmailAddress})
   public clientCompanyEmail?: EmailAddress | null;
 
-  @Job.property()
+  @Job.property({type: 'Product'})
   public product?: Product;
 
   @Job.property()

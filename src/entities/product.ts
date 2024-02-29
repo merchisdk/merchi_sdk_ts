@@ -20,6 +20,7 @@ import { ShipmentMethod } from './shipment_method.js';
 import {
   AutoAssignProductionOnAction
 } from '../constants/auto_assign_production_on_actions.js';
+import { Job } from './job.js';
 
 export class Product extends Entity {
   protected static resourceName = 'products';
@@ -255,10 +256,10 @@ export class Product extends Entity {
   public featureImage?: MerchiFile | null;
 
   @Product.property({type: 'Job'})
-  public createdByJob?: 'Job' | null;
+  public createdByJob?: Job | null;
 
   @Product.property({type: 'Job'})
-  public defaultJob?: 'Job';
+  public defaultJob?: Job | null;
 
   @Product.property({arrayType: 'Company', jsonName: 'saved_by_companies'})
   public savedByCompanies?: Company[];
@@ -285,10 +286,10 @@ export class Product extends Entity {
   public cartItems?: CartItem[];
 
   @Product.property({arrayType: 'Job'})
-  public jobs?: 'Job'[];
+  public jobs?: Job[];
 
   @Product.property({arrayType: 'Job'})
-  public supplyChainRequestJobs?: 'Job'[];
+  public supplyChainRequestJobs?: Job[];
 
   @Product.property({arrayType: 'User', jsonName: 'saved_by_users'})
   public savedByUsers?: User[];
