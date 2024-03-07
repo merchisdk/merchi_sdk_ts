@@ -70,13 +70,13 @@ import { VariationOption } from './entities/variation_option.js';
 import { VariationsGroup } from './entities/variations_group.js';
 import { generateUUID } from './uuid.js';
 import { getCookie } from './cookie.js';
-import * as constatns from './constants/index.js';
+import * as constants from './constants/index.js';
 import * as request from './request.js';
 import * as util from './util/index.js';
 import { toastNotifications } from './toasts.js';
 
 export {
-  constatns,
+  constants,
   request,
   util,
   toastNotifications,
