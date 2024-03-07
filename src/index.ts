@@ -70,8 +70,16 @@ import { VariationOption } from './entities/variation_option.js';
 import { VariationsGroup } from './entities/variations_group.js';
 import { generateUUID } from './uuid.js';
 import { getCookie } from './cookie.js';
+import * as constatns from './constants';
+import * as request from './request';
+import * as util from './util';
+import { toastNotifications } from './toasts';
 
 export {
+  constatns,
+  request,
+  util,
+  toastNotifications,
   Address,
   Assignment,
   AutomaticPaymentRelationship,
