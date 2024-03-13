@@ -49,6 +49,18 @@ export class Domain extends Entity {
   public isMaster?: boolean;
 
   @Domain.property()
+  public deploymentInProgress?: boolean;
+
+  @Domain.property()
+  public deploymentSucceeded?: boolean;
+
+  @Domain.property()
+  public deploymentMessage?: string;
+
+  @Domain.property()
+  public deploymentKey?: string;
+
+  @Domain.property()
   public internalUseNotes?: string;
 
   @Domain.property()
