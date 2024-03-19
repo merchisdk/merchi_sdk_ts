@@ -133,6 +133,9 @@ export class Domain extends Entity {
   public unltdAiApiSecretKey?: string;
 
   @Domain.property({type: String})
+  public scalablePressApiKey?: string;
+
+  @Domain.property({type: String})
   public socialBitchute?: string | null;
 
   @Domain.property({type: String})
