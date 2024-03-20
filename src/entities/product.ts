@@ -111,6 +111,9 @@ export class Product extends Entity {
   @Product.property({type: String})
   public shopifyProductId?: string | null;
 
+  @Product.property({type: String})
+  public spId?: string | null;
+
   @Product.property()
   public useCompanyShipmentMethods?: boolean;
 
