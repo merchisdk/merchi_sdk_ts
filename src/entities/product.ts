@@ -112,7 +112,7 @@ export class Product extends Entity {
   public shopifyProductId?: string | null;
 
   @Product.property({type: String})
-  public spId?: string | null;
+  public spProductId?: string | null;
 
   @Product.property()
   public useCompanyShipmentMethods?: boolean;
