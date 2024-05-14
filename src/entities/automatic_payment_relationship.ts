@@ -15,6 +15,9 @@ export class AutomaticPaymentRelationship extends Entity {
   @AutomaticPaymentRelationship.property()
   public creationDate?: Date;
 
+  @AutomaticPaymentRelationship.property()
+  public allowPostPayment?: boolean;
+
   @AutomaticPaymentRelationship.property({type: Company})
   public companyCustomer?: Company;
 
