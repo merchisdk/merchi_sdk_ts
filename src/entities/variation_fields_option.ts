@@ -4,6 +4,7 @@ import { MerchiFile } from './file.js';
 import { InventoryUnitVariation } from './inventory_unit_variation.js';
 import { Variation } from './variation.js';
 import { VariationField } from './variation_field.js';
+import { DraftTemplate } from './draft_template.js';
 
 export class VariationFieldsOption extends Entity {
   protected static resourceName = 'variation_fields_options';
@@ -63,6 +64,9 @@ export class VariationFieldsOption extends Entity {
 
   @VariationFieldsOption.property({arrayType: 'InventoryUnitVariation'})
   public inventoryUnitVariations?: InventoryUnitVariation[];
+
+  @VariationFieldsOption.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
 
   public totalCost = (quantity: number) => {
     if (this.variationCost === undefined) {
