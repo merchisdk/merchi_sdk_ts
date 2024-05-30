@@ -297,6 +297,9 @@ export class Job extends Entity {
   public supplyJob?: Job;
 
   @Job.property()
+  public supplyQuoteTotalCost?: number;
+
+  @Job.property()
   public hasValidVolume?: boolean;
 
   @Job.property()
