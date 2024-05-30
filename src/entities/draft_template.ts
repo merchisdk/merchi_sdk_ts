@@ -2,6 +2,7 @@ import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { Job } from './job.js';
 import { Product } from './product.js';
+import { VariationFieldsOption } from './variation_fields_option.js';
 
 export class DraftTemplate extends Entity {
   protected static resourceName = 'draft_templates';
@@ -37,4 +38,7 @@ export class DraftTemplate extends Entity {
 
   @DraftTemplate.property({type: Job})
   public job?: Job | null;
+
+  @DraftTemplate.property({type: 'VariationFieldsOption'})
+  public variationFieldOption?: VariationFieldsOption | null;
 }
