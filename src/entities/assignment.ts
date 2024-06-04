@@ -57,6 +57,9 @@ export class Assignment extends Entity {
   @Assignment.property({type: Quote})
   public quote?: Quote | null;
 
+  @Assignment.property()
+  public quoteTotalCost?: number;
+
   @Assignment.property({arrayType: 'ProductionComment'})
   public comments?: ProductionComment[];
 
