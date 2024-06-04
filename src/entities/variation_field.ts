@@ -29,6 +29,9 @@ export class VariationField extends Entity {
   @VariationField.property()
   public name?: string;
 
+  @VariationField.property()
+  public instructions?: string;
+
   @VariationField.property({type: String})
   public placeholder?: string | null;
 
