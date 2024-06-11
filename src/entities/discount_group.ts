@@ -15,9 +15,6 @@ export class DiscountGroup extends Entity {
   public created?: Date | null;
 
   @DiscountGroup.property()
-  public domain?: Domain | null;
-
-  @DiscountGroup.property()
   public id?: number;
 
   @DiscountGroup.property({type: Date})
@@ -41,4 +38,6 @@ export class DiscountGroup extends Entity {
   @DiscountGroup.property({type: 'Product'})
   public product?: Product | null;
 
+  @DiscountGroup.property({type: 'Domain'})
+  public domain?: Domain | null;
 }
