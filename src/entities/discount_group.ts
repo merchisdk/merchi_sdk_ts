@@ -33,6 +33,9 @@ export class DiscountGroup extends Entity {
   public discounts?: Discount[];
 
   @DiscountGroup.property()
+  public code?: string;
+
+  @DiscountGroup.property()
   public name?: string;
 
   @DiscountGroup.property({type: 'Product'})
