@@ -18,6 +18,15 @@ export class Discount extends Entity {
   @Discount.property()
   public amount?: number;
 
+  @Discount.property()
+  public usageLimit?: number;
+
+  @Discount.property()
+  public isPercentage?: boolean;
+
+  @Discount.property()
+  public code?: string;
+
   @Discount.property({type: DiscountGroup})
   public discountGroup?: DiscountGroup | null;
 
