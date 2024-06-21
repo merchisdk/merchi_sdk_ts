@@ -22,6 +22,7 @@ import { User } from './user.js';
 import { Variation } from './variation.js';
 import { VariationsGroup } from './variations_group.js';
 import { InventoryStatus } from '../constants/inventory_statuses.js';
+import { Item } from './item.js';
 
 
 export class Job extends Entity {
@@ -193,6 +194,9 @@ export class Job extends Entity {
 
   @Job.property({embeddedByDefault: false})
   public inventorySufficient?: boolean;
+
+  @Job.property({arrayType: 'Items'})
+  public items?: Item[];
 
   @Job.property({arrayType: 'Draft'})
   public drafts?: Draft[];
