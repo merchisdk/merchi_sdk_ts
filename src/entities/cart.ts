@@ -6,6 +6,7 @@ import { Domain } from './domain.js';
 import { Entity } from '../entity.js';
 import { Invoice } from './invoice.js';
 import { User } from './user.js';
+import { Item } from './item.js';
 
 export class Cart extends Entity {
   protected static resourceName = 'carts';
@@ -68,6 +69,9 @@ export class Cart extends Entity {
 
   @Cart.property({type: Address})
   public receiverAddress?: Address | null;
+
+  @Cart.property({arrayType: 'Item'})
+  public discountItems?: Item[];
 
   @Cart.property({arrayType: 'CartItem'})
   public cartItems?: CartItem[];
