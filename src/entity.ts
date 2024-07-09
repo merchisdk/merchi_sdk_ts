@@ -94,6 +94,7 @@ interface ListOptions {
   exclude?: number[];
   excludeComponents?: string[];
   excludeDomains?: number[];
+  excludeJobs?: number[];
   groupBuyForJobId?: number;
   groupBuyOnly?: boolean;
   inbound?: boolean;
@@ -629,6 +630,10 @@ export class Entity {
       if (options.excludeDomains !== undefined) {
         fetchOptions.query.push(
           ['exclude_domains', options.excludeDomains.join(',')]);
+      }
+      if (options.excludeJobs !== undefined) {
+        fetchOptions.query.push(
+          ['exclude_jobs', options.excludeJobs.join(',')]);
       }
       if (options.includeOnly !== undefined) {
         fetchOptions.query.push(['include_only', options.includeOnly.join(',')]);
