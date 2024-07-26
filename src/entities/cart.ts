@@ -35,6 +35,9 @@ export class Cart extends Entity {
   public currency?: string;
 
   @Cart.property()
+  public discountedAmount?: number;
+
+  @Cart.property()
   public cartItemsSubtotalCost?: number;
 
   @Cart.property()

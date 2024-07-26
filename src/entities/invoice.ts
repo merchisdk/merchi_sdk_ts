@@ -60,6 +60,9 @@ export class Invoice extends Entity {
   @Invoice.property({type: Number})
   public subtotalCost?: number | null;
 
+  @Invoice.property()
+  public discountedAmount?: number;
+
   @Invoice.property({type: Number})
   public taxAmount?: number | null;
 
