@@ -195,7 +195,7 @@ export class Job extends Entity {
   @Job.property({embeddedByDefault: false})
   public inventorySufficient?: boolean;
 
-  @Job.property({arrayType: 'Items'})
+  @Job.property({arrayType: 'Item'})
   public items?: Item[];
 
   @Job.property({arrayType: 'Draft'})
