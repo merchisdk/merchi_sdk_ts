@@ -5,6 +5,7 @@ import { Product } from './product.js';
 import { RequestOptions } from '../request.js';
 import { Variation } from './variation.js';
 import { VariationsGroup } from './variations_group.js';
+import { DomainTag } from './domain_tag.js';
 
 export class CartItem extends Entity {
   protected static resourceName = 'cart_items';
@@ -52,6 +53,9 @@ export class CartItem extends Entity {
 
   @CartItem.property({arrayType: 'Variation'})
   public variations?: Variation[];
+
+  @CartItem.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
   public requiresShipment = () => {
     if (this.product === undefined) {
