@@ -169,6 +169,9 @@ export class Product extends Entity {
   public acceptPhonePayment?: boolean;
 
   @Product.property()
+  public allowAddToCart?: boolean;
+  
+  @Product.property()
   public allowAutomaticPaymentSupply?: boolean;
 
   @Product.property()
