@@ -213,6 +213,15 @@ export class Job extends Entity {
   @Job.property()
   public client?: User;
 
+  @Job.property()
+  public clientBrowser?: string;
+
+  @Job.property()
+  public clientDevice?: string;
+
+  @Job.property()
+  public clientOs?: string;
+
   @Job.property({type: User})
   public manager?: User | null;
 
