@@ -1,5 +1,6 @@
 import { Address } from './address.js';
 import { Entity } from '../entity.js';
+import { InventoryGroup } from './inventory_group.js';
 import { InventoryUnitVariation } from './inventory_unit_variation.js';
 import { Job } from './job.js';
 import { Product } from './product.js';
@@ -32,6 +33,9 @@ export class Inventory extends Entity {
 
   @Inventory.property({arrayType: 'Product'})
   public products?: Product[];
+
+  @Inventory.property({arrayType: 'InventoryGroup'})
+  public inventoryGroups?: InventoryGroup[];
 
   @Inventory.property({type: Address})
   public address?: Address | null;
