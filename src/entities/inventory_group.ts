@@ -1,4 +1,5 @@
 import { Entity } from '../entity.js';
+import { Company } from './company.js';
 import { Inventory } from './Inventory.js';
 import { Job } from './job.js';
 import { Product } from './product.js';
@@ -14,6 +15,9 @@ export class InventoryGroup extends Entity {
 
   @InventoryGroup.property()
   public id?: number;
+
+  @InventoryGroup.property({type: 'Company'})
+  public company?: Company;
 
   @InventoryGroup.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
