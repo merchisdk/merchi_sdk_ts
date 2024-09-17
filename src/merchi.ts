@@ -17,6 +17,7 @@ import { ProductionComment } from './entities/production_comment.js';
 import { Product } from './entities/product.js';
 import { InternalTag } from './entities/internal_tag.js';
 import { Inventory } from './entities/inventory.js';
+import { InventoryGroup } from './entities/inventory_group.js';
 import { QuoteItem } from './entities/quote_item.js';
 import { Category } from './entities/category.js';
 import { Invoice } from './entities/invoice.js';
@@ -117,6 +118,7 @@ export class Merchi {
   public Assignment: typeof Assignment;
   public InternalTag: typeof InternalTag;
   public Inventory: typeof Inventory;
+  public InventoryGroup: typeof InventoryGroup;
   public JobComment: typeof JobComment;
   public VariationOption: typeof VariationOption;
   public SupplyDomain: typeof SupplyDomain;
@@ -223,6 +225,7 @@ export class Merchi {
     this.MenuItem = this.setupClass(MenuItem) as typeof MenuItem;
     this.InternalTag = this.setupClass(InternalTag) as typeof InternalTag;
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
+    this.InventoryGroup = this.setupClass(InventoryGroup) as typeof InventoryGroup;
     this.Notification = this.setupClass(Notification) as typeof Notification;
     this.Shipment = this.setupClass(Shipment) as typeof Shipment;
     this.ShipmentItem = this.setupClass(ShipmentItem) as typeof ShipmentItem;
