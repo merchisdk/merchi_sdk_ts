@@ -1,6 +1,7 @@
 import { cloneDeepWith } from 'lodash';
 import { DiscountGroup } from './discount_group.js';
 import { Entity } from '../entity.js';
+import { InventoryGroup } from './inventory_group.js';
 import { Product } from './product.js';
 import { Variation } from './variation.js';
 import { VariationFieldsOption } from './variation_fields_option.js';
@@ -106,6 +107,9 @@ export class VariationField extends Entity {
 
   @VariationField.property()
   public product?: Product;
+
+  @VariationField.property({type: 'InventoryGroup'})
+  public inventoryGroup?: InventoryGroup;
 
   @VariationField.property({arrayType: 'Variation'})
   public variations?: Variation[];
