@@ -12,6 +12,7 @@ import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { InternalTag } from './internal_tag.js';
 import { Inventory } from './inventory.js';
+import { InventoryGroup } from './inventory_group.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { VariationField } from './variation_field.js';
@@ -287,6 +288,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
+
+  @VariationField.property({type: 'InventoryGroup'})
+  public inventoryGroup?: InventoryGroup;
 
   @Product.property({arrayType: 'CartItem'})
   public cartItems?: CartItem[];
