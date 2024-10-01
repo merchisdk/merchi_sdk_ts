@@ -171,7 +171,7 @@ export class Product extends Entity {
 
   @Product.property()
   public allowAddToCart?: boolean;
-  
+
   @Product.property()
   public allowAutomaticPaymentSupply?: boolean;
 
@@ -289,7 +289,7 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
 
-  @VariationField.property({type: 'InventoryGroup'})
+  @Product.property({type: 'InventoryGroup'})
   public inventoryGroup?: InventoryGroup;
 
   @Product.property({arrayType: 'CartItem'})
