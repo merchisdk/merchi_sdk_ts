@@ -111,6 +111,9 @@ export class VariationField extends Entity {
   @VariationField.property({type: 'InventoryGroup'})
   public inventoryGroup?: InventoryGroup;
 
+  @VariationField.property({type: 'InventoryGroup'})
+  public linkedInventoryGroup?: InventoryGroup;
+
   @VariationField.property({arrayType: 'Variation'})
   public variations?: Variation[];
 
