@@ -1,6 +1,6 @@
 import { Entity } from '../entity.js';
 import { Company } from './company.js';
-import { Inventory } from './Inventory.js';
+import { Inventory } from './inventory.js';
 import { Job } from './job.js';
 import { Product } from './product.js';
 import { VariationField } from './variation_field.js';
