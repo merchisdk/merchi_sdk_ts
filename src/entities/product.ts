@@ -289,8 +289,8 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Inventory'})
   public inventories?: Inventory[];
 
-  @Product.property({type: 'InventoryGroup'})
-  public inventoryGroup?: InventoryGroup;
+  @Product.property({arrayType: 'InventoryGroup'})
+  public inventoryGroup?: InventoryGroup[];
 
   @Product.property({arrayType: 'CartItem'})
   public cartItems?: CartItem[];
