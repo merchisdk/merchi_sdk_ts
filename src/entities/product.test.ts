@@ -253,6 +253,7 @@ test('can list products with options set', () => {
     categoryId: 2,
     clientId: 349,
     clientCompanyId: 124,
+    categories: ['test1', 'test2'],
     clientOnly: false,
     companyCustomerId: 99,
     companyId: 91,
@@ -321,10 +322,18 @@ test('can list products with options set', () => {
     teamOnly: false,
     withRights: false,
   };
-  const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
-    {'product': {'name': 'p2'}}],
-  'available': 2,
-  'count': 2}, 200);
+  const fetch = mockFetch(
+    true,
+    {
+      'products': [
+        {'product': {'name': 'p1'}},
+        {'product': {'name': 'p2'}}
+      ],
+      'available': 2,
+      'count': 2
+    },
+    200
+  );
   const invocation = merchi.Product.list(options);
   const correct = [
     ['as', 'a'],
@@ -333,6 +342,7 @@ test('can list products with options set', () => {
     ['category_id', '2'],
     ['client_company_id', '124'],
     ['client_id', '349'],
+    ['categories', 'test1,test2'],
     ['client_only', 'false'],
     ['company_customer_id', '99'],
     ['company_id', '91'],
