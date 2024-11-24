@@ -38,6 +38,6 @@ export class Category extends Entity {
   @Category.property({arrayType: 'Category'})
   public subCategories?: Category[];
 
-  @Category.property({arrayType: 'Category'})
-  public parent?: Category[];
+  @Category.property({type: 'Category'})
+  public parent?: Category;
 }
