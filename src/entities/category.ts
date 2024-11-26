@@ -1,5 +1,6 @@
 import { Domain } from './domain.js';
 import { Entity } from '../entity.js';
+import { MerchiFile } from './file.js';
 import { Product } from './product.js';
 import { User } from './user.js';
 
@@ -40,4 +41,7 @@ export class Category extends Entity {
 
   @Category.property({type: 'Category'})
   public parent?: Category;
+
+  @Category.property({type: 'MerchiFile'})
+  public image?: MerchiFile | null;
 }
