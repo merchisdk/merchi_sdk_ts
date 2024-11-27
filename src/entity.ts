@@ -79,6 +79,7 @@ interface ListOptions {
   categoryId?: number;
   clientId?: number;
   clientCompanyId?: number;
+  categories?: string[];
   clientOnly?: boolean;
   companyCustomerId?: number;
   companyId?: number;
@@ -459,6 +460,9 @@ export class Entity {
       if (options.doesNotHaveAdminDomain !== undefined) {
         fetchOptions.query.push(['does_not_have_admin_domain',
           options.doesNotHaveAdminDomain.toString()]);
+      }
+      if (options.categories !== undefined) {
+        fetchOptions.query.push(['categories', options.categories.toString()]);
       }
       if (options.clientOnly !== undefined) {
         fetchOptions.query.push(['client_only',
