@@ -1,11 +1,11 @@
-import { Cart } from './cart.js';
-import { CountryTax } from './country_tax.js';
 import { Entity } from '../entity.js';
-import { Product } from './product.js';
+import { Product, ProductJson } from './product.js';
 import { RequestOptions } from '../request.js';
-import { Variation } from './variation.js';
-import { VariationsGroup } from './variations_group.js';
-import { DomainTag } from './domain_tag.js';
+import { Cart, CartJson } from './cart.js';
+import { CountryTax, CountryTaxJson } from './country_tax.js';
+import { Variation, VariationJson } from './variation.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
+import { DomainTag, DomainTagJson } from './domain_tag.js';
 
 export class CartItem extends Entity {
   protected static resourceName = 'cart_items';
@@ -98,11 +98,3 @@ export type CartItemJson = {
   variations: VariationJson[];
   tags: DomainTagJson[];
 }
-
-// Define missing Json types
-type ProductJson = any; // Replace 'any' with the actual structure
-type CartJson = any;
-type CountryTaxJson = any;
-type VariationsGroupJson = any;
-type VariationJson = any;
-type DomainTagJson = any;
