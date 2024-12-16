@@ -93,3 +93,36 @@ export class Assignment extends Entity {
   };
 
 }
+
+// based on above model, generate a JSON version type
+export type AssignmentJson = {
+  id: number;
+  archived: string | null;
+  managerAccepts: string | null;
+  supplierRefused: string | null;
+  needsDrafting: boolean;
+  needsShipping: boolean;
+  productionDeadline: string;
+  assignmentDeadline: string;
+  notes: string | null;
+  job: JobJson | null;
+  supplyJob: JobJson | null;
+  supplier: UserJson | null;
+  quote: QuoteJson | null;
+  quoteTotalCost: number;
+  comments: ProductionCommentJson[];
+  shipment: ShipmentJson | null;
+  supplyDomain: SupplyDomainJson | null;
+  notifications: NotificationJson[];
+  productionFiles: MerchiFileJson[];
+}
+
+// Define missing Json types
+type JobJson = any; // Replace 'any' with the actual structure
+type UserJson = any;
+type QuoteJson = any;
+type ProductionCommentJson = any;
+type ShipmentJson = any;
+type SupplyDomainJson = any;
+type NotificationJson = any;
+type MerchiFileJson = any;

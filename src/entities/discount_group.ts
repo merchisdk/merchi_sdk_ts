@@ -1,7 +1,7 @@
 import { Entity } from '../entity.js';
-import { Domain } from './domain.js';
-import { Product } from './product.js';
-import { Discount } from './discount.js';
+import { Domain, DomainJson } from './domain.js';
+import { Product, ProductJson } from './product.js';
+import { Discount, DiscountJson } from './discount.js';
 
 export class DiscountGroup extends Entity {
   protected static resourceName = 'discount_groups';
@@ -37,4 +37,18 @@ export class DiscountGroup extends Entity {
 
   @DiscountGroup.property({type: 'Domain'})
   public domain?: Domain | null;
+}
+
+// based on above model, generate a JSON version type
+export type DiscountGroupJson = {
+  archived: string | null;
+  created: string | null;
+  id: number;
+  dateStart: string | null;
+  dateEnd: string | null;
+  discountType: number;
+  discounts: DiscountJson[];
+  name: string;
+  product: ProductJson | null;
+  domain: DomainJson | null;
 }

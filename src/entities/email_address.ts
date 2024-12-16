@@ -22,3 +22,16 @@ export class EmailAddress extends Entity {
   @EmailAddress.property({arrayType: 'Company'})
   public companies?: Company[];
 }
+
+// based on above model, generate a JSON version type
+export type EmailAddressJson = {
+  id: number;
+  archived: string | null;
+  emailAddress: string;
+  users: UserJson[];
+  companies: CompanyJson[];
+}
+
+// Define missing Json types
+type UserJson = any; // Replace 'any' with the actual structure
+type CompanyJson = any;

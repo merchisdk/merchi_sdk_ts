@@ -1,6 +1,6 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 import { Role } from '../constants/roles.js';
 import { DomainType } from '../constants/domain_types.js';
 
@@ -37,4 +37,14 @@ export class EnrolledDomain extends Entity {
     }
     return this.role ? this.role : Role.PUBLIC;
   }
+}
+
+// based on above model, generate a JSON version type
+export type EnrolledDomainJson = {
+  id: number;
+  archived: string | null;
+  isJobsAssignee: boolean;
+  role: Role;
+  user: UserJson;
+  domain: DomainJson;
 }

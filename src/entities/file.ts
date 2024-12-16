@@ -1,20 +1,20 @@
-import { Backup } from './backup.js';
-import { Company } from './company.js';
-import { Component } from './component.js';
-import { Domain } from './domain.js';
-import { Draft } from './draft.js';
-import { DraftComment } from './draft_comment.js';
+import { Backup, BackupJson } from './backup.js';
+import { Company, CompanyJson } from './company.js';
+import { Component, ComponentJson } from './component.js';
+import { Domain, DomainJson } from './domain.js';
+import { Draft, DraftJson } from './draft.js';
+import { DraftComment, DraftCommentJson } from './draft_comment.js';
 import { Entity } from '../entity.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { JobComment } from './job_comment.js';
-import { Notification } from './notification.js';
-import { Product } from './product.js';
-import { ProductionComment } from './production_comment.js';
-import { Theme } from './theme.js';
-import { User } from './user.js';
-import { Variation } from './variation.js';
-import { VariationFieldsOption } from './variation_fields_option.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { JobComment, JobCommentJson } from './job_comment.js';
+import { Notification, NotificationJson } from './notification.js';
+import { Product, ProductJson } from './product.js';
+import { ProductionComment, ProductionCommentJson } from './production_comment.js';
+import { Theme, ThemeJson } from './theme.js';
+import { User, UserJson } from './user.js';
+import { Variation, VariationJson } from './variation.js';
+import { VariationFieldsOption, VariationFieldsOptionJson } from './variation_fields_option.js';
 
 export class MerchiFile extends Entity {
   protected static resourceName = 'files';
@@ -170,3 +170,51 @@ export class MerchiFile extends Entity {
     return this.mimetype.split('/')[0] === 'image';
   };
 }
+
+
+// based on above model, generate a JSON version type
+export type MerchiFileJson = {
+  id: number;
+  archived: string | null;
+  uploadId: string;
+  name: string | null;
+  mimetype: string | null;
+  size: number;
+  creationDate: string | null;
+  cachedViewUrl: string | null;
+  viewUrlExpires: string | null;
+  cachedDownloadUrl: string | null;
+  downloadUrlExpires: string | null;
+  uploader: UserJson | null;
+  viewUrl: string;
+  downloadUrl: string;
+  components: ComponentJson[];
+  componentFeatureImages: ComponentJson[];
+  draftComments: DraftCommentJson[];
+  variations: VariationJson[];
+  backups: BackupJson[];
+  notification: NotificationJson[];
+  companyLogos: CompanyJson[];
+  products: ProductJson[];
+  featuredProducts: ProductJson[];
+  drafts: DraftJson[];
+  options: VariationFieldsOptionJson[];
+  jobComments: JobCommentJson[];
+  jobs: JobJson[];
+  clientJobs: JobJson[];
+  domainLogos: DomainJson[];
+  domainFavicons: DomainJson[];
+  userProfilePictures: UserJson[];
+  invoices: InvoiceJson[];
+  invoicesPaid: InvoiceJson[];
+  themeMainCss: ThemeJson[];
+  themeMainCssUsing: ThemeJson[];
+  themeMainCssEditing: ThemeJson[];
+  themeEmailCss: ThemeJson[];
+  themeEmailCssUsing: ThemeJson[];
+  themeEmailCssEditing: ThemeJson[];
+  themes: ThemeJson[];
+  themeFeatureImages: ThemeJson[];
+  themeImages: ThemeJson[];
+  productionComments: ProductionCommentJson[];
+};

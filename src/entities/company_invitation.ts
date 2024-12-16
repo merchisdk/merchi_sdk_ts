@@ -1,6 +1,6 @@
-import { Company } from './company.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 
 export class CompanyInvitation extends Entity {
   protected static resourceName = 'company_invitations';
@@ -30,4 +30,16 @@ export class CompanyInvitation extends Entity {
 
   @CompanyInvitation.property()
   public sender?: User;
+}
+
+
+export type CompanyInvitationJson = {
+  id: number;
+  archived: string | null;
+  userName: string;
+  userEmail: string;
+  inviteAsAdmin: boolean;
+  token: string;
+  company: CompanyJson;
+  sender: UserJson;
 }

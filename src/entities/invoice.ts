@@ -1,20 +1,20 @@
-import { Address } from './address.js';
-import { Cart } from './cart.js';
-import { Company } from './company.js';
-import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
-import { EmailAddress } from './email_address.js';
+import { Address, AddressJson } from './address.js';
+import { Cart, CartJson } from './cart.js';
+import { Company, CompanyJson } from './company.js';
+import { Domain, DomainJson } from './domain.js';
+import { DomainTag, DomainTagJson } from './domain_tag.js';
+import { EmailAddress, EmailAddressJson } from './email_address.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { InternalTag } from './internal_tag.js';
-import { Item } from './item.js';
-import { Job } from './job.js';
-import { Quote } from './quote.js';
-import { Notification } from './notification.js';
-import { Payment } from './payment.js';
-import { PhoneNumber } from './phone_number.js';
-import { Shipment } from './shipment.js';
-import { User } from './user.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { InternalTag, InternalTagJson } from './internal_tag.js';
+import { Item, ItemJson } from './item.js';
+import { Job, JobJson } from './job.js';
+import { Quote, QuoteJson } from './quote.js';
+import { Notification, NotificationJson } from './notification.js';
+import { Payment, PaymentJson } from './payment.js';
+import { PhoneNumber, PhoneNumberJson } from './phone_number.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { User, UserJson } from './user.js';
 
 export class Invoice extends Entity {
   protected static resourceName = 'invoices';
@@ -176,4 +176,59 @@ export class Invoice extends Entity {
 
   @Invoice.property({arrayType: 'Payment'})
   public payments?: Payment[];
+}
+
+// JSON version of the model
+export type InvoiceJson = {
+  archived: string | null;
+  id: number;
+  client: UserJson;
+  clientCompany: CompanyJson | null;
+  creationDate: string | null;
+  paymentDeadline: string | null;
+  reminded: string | null;
+  reminderMessage: string;
+  shopifyOrderId: string;
+  forceReminders: boolean;
+  buySide: boolean;
+  canAutoPay: boolean;
+  note: string | null;
+  terms: string | null;
+  subtotalCost: number | null;
+  taxAmount: number | null;
+  totalCost: number | null;
+  sendSms: boolean | null;
+  sendEmail: boolean | null;
+  unpaid: boolean | null;
+  currency: string;
+  acceptSquare: boolean;
+  acceptStripe: boolean;
+  acceptPaypal: boolean;
+  acceptUtrust: boolean;
+  acceptBankTransfer: boolean;
+  acceptPhonePayment: boolean;
+  invoiceToken: string | null;
+  isRemindable: boolean;
+  owedMoney: number;
+  paidMoney: number;
+  isCompletelyPaid: boolean;
+  responsibleManager: UserJson | null;
+  creator: UserJson | null;
+  shipping: AddressJson | null;
+  domain: DomainJson;
+  items: ItemJson[];
+  pdf: MerchiFileJson | null;
+  receipt: MerchiFileJson | null;
+  clientPhone: PhoneNumberJson | null;
+  clientEmail: EmailAddressJson | null;
+  clientCompanyPhone: PhoneNumberJson | null;
+  clientCompanyEmail: EmailAddressJson | null;
+  internalTags: InternalTagJson[];
+  tags: DomainTagJson[];
+  shipments: ShipmentJson[];
+  notifications: NotificationJson[];
+  jobs: JobJson[];
+  quotes: QuoteJson[];
+  cart: CartJson;
+  payments: PaymentJson[];
 }

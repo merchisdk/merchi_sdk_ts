@@ -1,4 +1,4 @@
-import { Component } from './component.js';
+import { Component, ComponentJson } from './component.js';
 import { Entity } from '../entity.js';
 
 export class ComponentVersion extends Entity {
@@ -27,4 +27,15 @@ export class ComponentVersion extends Entity {
   @ComponentVersion.property({type: 'Component'})
   public component?: Component;
 
+}
+
+// based on above model, generate a JSON version type
+export type ComponentVersionJson = {
+  id: number;
+  archived: string | null;
+  created: string | null;
+  body: string;
+  description: string;
+  isClassBased: boolean;
+  component: ComponentJson;
 }

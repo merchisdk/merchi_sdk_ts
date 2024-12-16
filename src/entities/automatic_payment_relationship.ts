@@ -27,3 +27,17 @@ export class AutomaticPaymentRelationship extends Entity {
   @AutomaticPaymentRelationship.property({type: String})
   public stripeCustomerId?: string;
 }
+
+// based on above model, generate a JSON version type
+export type AutomaticPaymentRelationshipJson = {
+  id: number;
+  archived: string | null;
+  creationDate: string;
+  allowPostPayment: boolean;
+  companyCustomer: CompanyJson;
+  companySupplier: CompanyJson;
+  stripeCustomerId: string;
+}
+
+// Define missing Json types
+type CompanyJson = any; // Replace 'any' with the actual structure

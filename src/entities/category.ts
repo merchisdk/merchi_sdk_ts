@@ -35,3 +35,21 @@ export class Category extends Entity {
   @Category.property({arrayType: 'User'})
   public users?: User[];
 }
+
+// based on above model, generate a JSON version type
+export type CategoryJson = {
+  id: number;
+  archived: string | null;
+  name: string;
+  showDashboard: boolean;
+  showPublic: boolean;
+  showPublicSupplierResell: boolean;
+  domain: DomainJson;
+  products: ProductJson[];
+  users: UserJson[];
+}
+
+// Define missing Json types
+type DomainJson = any; // Replace 'any' with the actual structure
+type ProductJson = any;
+type UserJson = any;

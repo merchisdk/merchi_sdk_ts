@@ -1,7 +1,7 @@
-import { ComponentTag } from './component_tag.js';
-import { ComponentVersion } from './component_version.js';
+import { ComponentTag, ComponentTagJson } from './component_tag.js';
+import { ComponentVersion, ComponentVersionJson } from './component_version.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
 import { User } from './user.js';
 
 export class Component extends Entity {
@@ -89,4 +89,32 @@ export class Component extends Entity {
     return callable.call(proxy);
   };
 
+}
+
+// based on above model, generate a JSON version type
+export type ComponentJson = {
+  id: number;
+  archived: string | null;
+  created: string;
+  updated: string;
+  isClassBased: boolean;
+  outOfSyncWithOriginal: boolean;
+  needsUpdate: boolean;
+  hasImports: number;
+  isClone: boolean;
+  warnings: boolean;
+  name: string;
+  body: string;
+  description: string;
+  compiled: string;
+  componentExport: ComponentJson;
+  componentExports: ComponentJson[];
+  componentImports: ComponentJson[];
+  originalComponent: ComponentJson;
+  images: MerchiFileJson[];
+  featureImage: MerchiFileJson | null;
+  tags: ComponentTagJson[];
+  createdBy: User | null;
+  updatedBy: User | null;
+  versions: ComponentVersionJson[];
 }

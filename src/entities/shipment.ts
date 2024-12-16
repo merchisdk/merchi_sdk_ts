@@ -1,17 +1,17 @@
-import { Address } from './address.js';
-import { Assignment } from './assignment.js';
-import { Company } from './company.js';
-import { CountryTax } from './country_tax.js';
-import { DomainTag } from './domain_tag.js';
+import { Address, AddressJson } from './address.js';
+import { Assignment, AssignmentJson } from './assignment.js';
+import { Company, CompanyJson } from './company.js';
+import { CountryTax, CountryTaxJson } from './country_tax.js';
+import { DomainTag, DomainTagJson } from './domain_tag.js';
 import { Entity } from '../entity.js';
 import { InternalTag } from './internal_tag.js';
-import { Invoice } from './invoice.js';
-import { Quote } from './quote.js';
-import { Job } from './job.js';
-import { MerchiFile } from './file.js';
-import { User } from './user.js';
-import { ShipmentItem } from './shipment_item.js';
-import { ShipmentMethod } from './shipment_method.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Quote, QuoteJson } from './quote.js';
+import { Job, JobJson } from './job.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { User, UserJson } from './user.js';
+import { ShipmentItem, ShipmentItemJson } from './shipment_item.js';
+import { ShipmentMethod, ShipmentMethodJson } from './shipment_method.js';
 
 interface CalculateOptions {
   strictEmbed?: boolean;
@@ -182,4 +182,53 @@ export class Shipment extends Entity {
       parseFloat(this.calculateTaxAmount(options))
     ).toFixed(3);
   };
+}
+
+// based on above model, generate a JSON version type
+export type ShipmentJson = {
+  id: number;
+  archived: string | null;
+  name: string;
+  shipmentServiceBookingInfo: string;
+  shipmentServiceQuote: string;
+  pickUp: boolean;
+  internalTags: InternalTag[];
+  shipmentLabel: MerchiFileJson | null;
+  creationDate: string | null;
+  dispatchedDate: string | null;
+  dispatchDate: string | null;
+  expectedReceiveDate: string | null;
+  receivedDate: string | null;
+  senderResponsible: boolean;
+  senderNotes: string | null;
+  receiverNotes: string | null;
+  transportCompany: number | null;
+  transportCompanyName: string | null;
+  trackingNumber: string | null;
+  buyCost: number | null;
+  buyCurrency: string | null;
+  cost: number | null;
+  taxAmount: number | null;
+  maxWeight: number | null;
+  maxVolume: number | null;
+  sendSms: boolean;
+  sendEmail: boolean;
+  taxType: CountryTaxJson | null;
+  isOnBehalfOf: boolean;
+  onBehalfOf: UserJson | null;
+  onBehalfOfCompany: CompanyJson | null;
+  sender: UserJson | null;
+  senderCompany: CompanyJson | null;
+  senderAddress: AddressJson | null;
+  blindShipTo: string | null;
+  receiver: UserJson | null;
+  receiverCompany: CompanyJson | null;
+  receiverAddress: AddressJson | null;
+  invoices: InvoiceJson[];
+  quote: QuoteJson | null;
+  shipmentMethod: ShipmentMethodJson | null;
+  tags: DomainTagJson[];
+  assignments: AssignmentJson[];
+  items: ShipmentItemJson[];
+  jobs: JobJson[];
 }

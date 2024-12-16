@@ -1,12 +1,12 @@
-import { Company } from './company.js';
-import { Domain } from './domain.js';
+import { Company, CompanyJson } from './company.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { Product } from './product.js';
-import { Shipment } from './shipment.js';
-import { Theme } from './theme.js';
-import { User } from './user.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { Product, ProductJson } from './product.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { Theme, ThemeJson } from './theme.js';
+import { User, UserJson } from './user.js';
 
 export class InternalTag extends Entity {
   protected static resourceName = 'internal_tags';
@@ -48,4 +48,20 @@ export class InternalTag extends Entity {
 
   @InternalTag.property({arrayType: 'User'})
   public users?: User[];
+}
+
+// based on above model, generate a JSON version type
+export type InternalTagJson = {
+  id: number;
+  colour: number;
+  name: string;
+  description: string;
+  companies: CompanyJson[];
+  domains: DomainJson[];
+  jobs: JobJson[];
+  products: ProductJson[];
+  invoices: InvoiceJson[];
+  shipments: ShipmentJson[];
+  themes: ThemeJson[];
+  users: UserJson[];
 }

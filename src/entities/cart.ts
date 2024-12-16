@@ -91,3 +91,39 @@ export class Cart extends Entity {
     return false;
   };
 }
+
+// based on above model, generate a JSON version type
+export type CartJson = {
+  id: number;
+  archived: string | null;
+  creationDate: string;
+  ip: string | null;
+  token: string | null;
+  receiverNotes: string | null;
+  currency: string;
+  cartItemsSubtotalCost: number;
+  cartItemsTaxAmount: number;
+  cartItemsTotalCost: number;
+  shipmentTotalCost: number;
+  subtotalCost: number;
+  taxAmount: number;
+  totalCost: number;
+  client: UserJson | null;
+  clientCompany: CompanyJson | null;
+  domain: DomainJson;
+  invoice: InvoiceJson | null;
+  receiverAddress: AddressJson | null;
+  discountItems: ItemJson[];
+  cartItems: CartItemJson[];
+  shipmentGroups: CartShipmentGroupJson[];
+}
+
+// Define missing Json types
+type UserJson = any; // Replace 'any' with the actual structure
+type CompanyJson = any;
+type DomainJson = any;
+type InvoiceJson = any;
+type AddressJson = any;
+type ItemJson = any;
+type CartItemJson = any;
+type CartShipmentGroupJson = any;

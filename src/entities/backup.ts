@@ -12,3 +12,12 @@ export class Backup extends Entity {
   @Backup.property()
   public file?: MerchiFile;
 }
+
+// based on above model, generate a JSON version type
+export type BackupJson = {
+  id: number;
+  file: MerchiFileJson;
+}
+
+// Define missing Json types
+type MerchiFileJson = any; // Replace 'any' with the actual structure

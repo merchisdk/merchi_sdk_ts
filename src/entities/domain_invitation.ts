@@ -1,6 +1,6 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 
 export class DomainInvitation extends Entity {
   protected static resourceName = 'domain_invitations';
@@ -33,4 +33,17 @@ export class DomainInvitation extends Entity {
 
   @DomainInvitation.property({type: Date})
   public user?: User | null;
+}
+
+// based on above model, generate a JSON version type
+export type DomainInvitationJson = {
+  id: number;
+  archived: string | null;
+  userName: string;
+  userEmail: string;
+  role: number;
+  token: string;
+  domain: DomainJson;
+  sender: UserJson;
+  user: UserJson | null;
 }

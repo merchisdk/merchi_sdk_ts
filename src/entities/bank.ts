@@ -1,5 +1,5 @@
-import { Address } from './address.js';
-import { Company } from './company.js';
+import { Address, AddressJson } from './address.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
 
 export class Bank extends Entity {
@@ -42,4 +42,20 @@ export class Bank extends Entity {
 
   @Bank.property()
   public company?: Company;
+}
+
+// based on above model, generate a JSON version type
+export type BankJson = {
+  id: number;
+  archived: string | null;
+  default: boolean;
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+  bsb: string | null;
+  swiftCode: string | null;
+  iban: string | null;
+  bankCode: string | null;
+  bankAddress: AddressJson | null;
+  company: CompanyJson;
 }

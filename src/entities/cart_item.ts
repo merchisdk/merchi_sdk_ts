@@ -79,3 +79,30 @@ export class CartItem extends Entity {
         return this;});
   };
 }
+
+// based on above model, generate a JSON version type
+export type CartItemJson = {
+  id: number;
+  archived: string | null;
+  quantity: number;
+  notes: string | null;
+  creationDate: string;
+  currency: string;
+  subtotalCost: number;
+  taxAmount: number;
+  totalCost: number;
+  product: ProductJson;
+  cart: CartJson;
+  taxType: CountryTaxJson;
+  variationsGroups: VariationsGroupJson[];
+  variations: VariationJson[];
+  tags: DomainTagJson[];
+}
+
+// Define missing Json types
+type ProductJson = any; // Replace 'any' with the actual structure
+type CartJson = any;
+type CountryTaxJson = any;
+type VariationsGroupJson = any;
+type VariationJson = any;
+type DomainTagJson = any;
