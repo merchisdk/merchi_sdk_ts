@@ -1,12 +1,12 @@
-import { Address } from './address.js';
-import { CartItem } from './cart_item.js';
-import { CartShipmentGroup } from './cart_shipment_group.js';
-import { Company } from './company.js';
-import { Domain } from './domain.js';
+import { Address, AddressJson } from './address.js';
+import { CartItem, CartItemJson } from './cart_item.js';
+import { CartShipmentGroup, CartShipmentGroupJson } from './cart_shipment_group.js';
+import { Company, CompanyJson } from './company.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { Invoice } from './invoice.js';
-import { User } from './user.js';
-import { Item } from './item.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { User, UserJson } from './user.js';
+import { Item, ItemJson } from './item.js';
 
 export class Cart extends Entity {
   protected static resourceName = 'carts';
@@ -117,13 +117,3 @@ export type CartJson = {
   cartItems: CartItemJson[];
   shipmentGroups: CartShipmentGroupJson[];
 }
-
-// Define missing Json types
-type UserJson = any; // Replace 'any' with the actual structure
-type CompanyJson = any;
-type DomainJson = any;
-type InvoiceJson = any;
-type AddressJson = any;
-type ItemJson = any;
-type CartItemJson = any;
-type CartShipmentGroupJson = any;

@@ -1,6 +1,6 @@
-import { Company } from './company.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { Company, CompanyJson } from './company.js';
+import { User, UserJson } from './user.js';
 
 export class EmailAddress extends Entity {
   protected static resourceName = 'email_addresses';
@@ -31,7 +31,3 @@ export type EmailAddressJson = {
   users: UserJson[];
   companies: CompanyJson[];
 }
-
-// Define missing Json types
-type UserJson = any; // Replace 'any' with the actual structure
-type CompanyJson = any;

@@ -1,5 +1,5 @@
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
 
 export class Backup extends Entity {
   protected static resourceName = 'backups';
@@ -18,6 +18,3 @@ export type BackupJson = {
   id: number;
   file: MerchiFileJson;
 }
-
-// Define missing Json types
-type MerchiFileJson = any; // Replace 'any' with the actual structure

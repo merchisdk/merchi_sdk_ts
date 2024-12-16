@@ -1,12 +1,12 @@
 import { Entity } from '../entity.js';
-import { Quote } from './quote.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { Notification } from './notification.js';
-import { ProductionComment } from './production_comment.js';
-import { Shipment } from './shipment.js';
-import { SupplyDomain } from './supply_domain.js';
-import { User } from './user.js';
+import { Quote, QuoteJson } from './quote.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { Notification, NotificationJson } from './notification.js';
+import { ProductionComment, ProductionCommentJson } from './production_comment.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { SupplyDomain, SupplyDomainJson } from './supply_domain.js';
+import { User, UserJson } from './user.js';
 import { RequestOptions } from '../request.js';
 
 interface GenerateInvoiceProps {
@@ -116,13 +116,3 @@ export type AssignmentJson = {
   notifications: NotificationJson[];
   productionFiles: MerchiFileJson[];
 }
-
-// Define missing Json types
-type JobJson = any; // Replace 'any' with the actual structure
-type UserJson = any;
-type QuoteJson = any;
-type ProductionCommentJson = any;
-type ShipmentJson = any;
-type SupplyDomainJson = any;
-type NotificationJson = any;
-type MerchiFileJson = any;
