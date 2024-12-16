@@ -1,9 +1,9 @@
-import { CountryTax } from './country_tax.js';
 import { Entity } from '../entity.js';
-import { Cart } from './cart.js';
-import { Discount } from './discount.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
+import { Cart, CartJson } from './cart.js';
+import { Discount, DiscountJson } from './discount.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { CountryTax, CountryTaxJson } from './country_tax.js';
 
 export class Item extends Entity {
   protected static resourceName = 'items';
@@ -56,4 +56,21 @@ export class Item extends Entity {
     const quantity = this.quantity === null ? 0 : this.quantity;
     return quantity * this.cost;
   };
+}
+
+
+// Json version type
+export type ItemJson = {
+  archived: string | null;
+  code: string;
+  id: number;
+  quantity: number | null;
+  description: string;
+  cost: number;
+  taxAmount: number | null;
+  cart: CartJson | null;
+  discount: DiscountJson | null;
+  invoice: InvoiceJson | null;
+  job: JobJson | null;
+  taxType: CountryTaxJson | null;
 }

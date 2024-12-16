@@ -1,10 +1,10 @@
 import { ShipmentService } from '../constants/shipment_services.js';
 import { Entity } from '../entity.js';
-import { Address } from './address.js';
-import { Company } from './company.js';
+import { Address, AddressJson } from './address.js';
+import { Company, CompanyJson } from './company.js';
 import { CountryTax } from './country_tax.js';
-import { Product } from './product.js';
-import { ShipmentMethodVariation } from './shipment_method_variation.js';
+import { Product, ProductJson } from './product.js';
+import { ShipmentMethodVariation, ShipmentMethodVariationJson } from './shipment_method_variation.js';
 
 export class ShipmentMethod extends Entity {
   protected static resourceName = 'shipment_methods';
@@ -58,4 +58,24 @@ export class ShipmentMethod extends Entity {
 
   @ShipmentMethod.property({arrayType: 'Product'})
   public products?: Product[];
+}
+
+
+export type ShipmentMethodJson = {
+  id: number;
+  name: string;
+  shipmentService: ShipmentService | null;
+  originAddress: AddressJson | null;
+  pickUp: boolean;
+  company: CompanyJson | null;
+  companyDefault: boolean;
+  defaultCost: number;
+  currency: string;
+  buyCost: number;
+  buyCurrency: string;
+  transportCompany: number | null;
+  transportCompanyName: string;
+  taxType: CountryTax | null;
+  variations: ShipmentMethodVariationJson[];
+  products: ProductJson[];
 }

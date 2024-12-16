@@ -1,9 +1,9 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { Product } from './product.js';
-import { Shipment } from './shipment.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { Product, ProductJson } from './product.js';
+import { Shipment, ShipmentJson } from './shipment.js';
 
 export class DomainTag extends Entity {
   protected static resourceName = 'domain_tags';
@@ -39,4 +39,18 @@ export class DomainTag extends Entity {
 
   @DomainTag.property({arrayType: 'Shipment'})
   public shipments?: Shipment[];
+}
+
+// based on above model, generate a JSON version type
+export type DomainTagJson = {
+  id: number;
+  colour: number;
+  name: string;
+  description: string;
+  showPublic: boolean;
+  domain: DomainJson;
+  jobs: JobJson[];
+  products: ProductJson[];
+  invoices: InvoiceJson[];
+  shipments: ShipmentJson[];
 }

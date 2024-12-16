@@ -1,8 +1,8 @@
-import { Company } from './company.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
-import { Item } from './item.js';
-import { Job } from './job.js';
-import { Shipment } from './shipment.js';
+import { Item, ItemJson } from './item.js';
+import { Job, JobJson } from './job.js';
+import { Shipment, ShipmentJson } from './shipment.js';
 
 export class CountryTax extends Entity {
   protected static resourceName = 'country_taxes';
@@ -43,4 +43,18 @@ export class CountryTax extends Entity {
     result.taxPercent = 0;
     return result;
   }
+}
+
+
+// generate a JSON version type
+export type CountryTaxJson = {
+  id: number;
+  archived: string | null;
+  country: string;
+  taxName: string;
+  taxPercent: number | null;
+  shipments: ShipmentJson[];
+  company: CompanyJson;
+  jobs: JobJson[];
+  items: ItemJson[];
 }

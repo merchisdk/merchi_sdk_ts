@@ -1,6 +1,6 @@
 import { Entity } from '../entity.js';
 import { CountryTax } from './country_tax.js';
-import { ShipmentMethod } from './shipment_method.js';
+import { ShipmentMethod, ShipmentMethodJson } from './shipment_method.js';
 
 export class ShipmentMethodVariation extends Entity {
   protected static resourceName = 'shipment_method_variations';
@@ -36,4 +36,17 @@ export class ShipmentMethodVariation extends Entity {
 
   @ShipmentMethodVariation.property()
   public shipmentMethod?: ShipmentMethod;
+}
+
+export type ShipmentMethodVariationJson = {
+  id: number;
+  destinationCountry: string | null;
+  destinationState: string | null;
+  cost: number | null;
+  currency: string;
+  buyCost: number | null;
+  buyCurrency: string;
+  maxWeight: number | null;
+  taxType: CountryTax | null;
+  shipmentMethod: ShipmentMethodJson;
 }

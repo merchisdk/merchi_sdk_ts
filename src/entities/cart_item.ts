@@ -1,11 +1,11 @@
-import { Cart } from './cart.js';
-import { CountryTax } from './country_tax.js';
 import { Entity } from '../entity.js';
-import { Product } from './product.js';
+import { Product, ProductJson } from './product.js';
 import { RequestOptions } from '../request.js';
-import { Variation } from './variation.js';
-import { VariationsGroup } from './variations_group.js';
-import { DomainTag } from './domain_tag.js';
+import { Cart, CartJson } from './cart.js';
+import { CountryTax, CountryTaxJson } from './country_tax.js';
+import { Variation, VariationJson } from './variation.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
+import { DomainTag, DomainTagJson } from './domain_tag.js';
 
 export class CartItem extends Entity {
   protected static resourceName = 'cart_items';
@@ -78,4 +78,23 @@ export class CartItem extends Entity {
       then((data: any) => { this.fromJson(data, {makeDirty: true});
         return this;});
   };
+}
+
+// based on above model, generate a JSON version type
+export type CartItemJson = {
+  id: number;
+  archived: string | null;
+  quantity: number;
+  notes: string | null;
+  creationDate: string;
+  currency: string;
+  subtotalCost: number;
+  taxAmount: number;
+  totalCost: number;
+  product: ProductJson;
+  cart: CartJson;
+  taxType: CountryTaxJson;
+  variationsGroups: VariationsGroupJson[];
+  variations: VariationJson[];
+  tags: DomainTagJson[];
 }

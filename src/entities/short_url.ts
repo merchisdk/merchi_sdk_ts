@@ -1,6 +1,6 @@
 import { Entity } from '../entity.js';
-import { Notification } from './notification.js';
-import { User } from './user.js';
+import { Notification, NotificationJson } from './notification.js';
+import { User, UserJson } from './user.js';
 
 export class ShortUrl extends Entity {
   protected static resourceName = 'short_urls';
@@ -33,4 +33,18 @@ export class ShortUrl extends Entity {
 
   @ShortUrl.property({arrayType: 'Notification'})
   public notification?: Notification[];
+}
+
+
+// based on model, generate coresponding JSON type
+export type ShortUrlJson = {
+  archived?: string | null;
+  id?: number;
+  prefixToken?: string;
+  suffixToken?: string;
+  originalLink?: string;
+  triedTimes?: number;
+  lastLookup?: string | null;
+  user?: UserJson | null;
+  notification?: NotificationJson[];
 }

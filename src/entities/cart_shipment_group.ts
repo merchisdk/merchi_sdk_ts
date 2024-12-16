@@ -1,5 +1,5 @@
-import { CartItem } from './cart_item.js';
-import { CartShipmentQuote } from './cart_shipment_quote.js';
+import { CartItem, CartItemJson } from './cart_item.js';
+import { CartShipmentQuote, CartShipmentQuoteJson } from './cart_shipment_quote.js';
 import { Entity } from '../entity.js';
 
 export class CartShipmentGroup extends Entity {
@@ -19,3 +19,10 @@ export class CartShipmentGroup extends Entity {
   @CartShipmentGroup.property({type: 'CartShipmentQuote'})
   public selectedQuote?: CartShipmentQuote;
 }
+
+export type CartShipmentGroupJson = {
+  id?: number;
+  cartItems?: CartItemJson[];
+  quotes?: CartShipmentQuoteJson[];
+  selectedQuote?: CartShipmentQuoteJson;
+};

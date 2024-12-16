@@ -1,10 +1,10 @@
-import { Address } from './address.js';
+import { Address, AddressJson } from './address.js';
 import { Entity } from '../entity.js';
-import { InventoryGroup } from './inventory_group.js';
-import { InventoryUnitVariation } from './inventory_unit_variation.js';
-import { Job } from './job.js';
-import { Product } from './product.js';
-import { VariationsGroup } from './variations_group.js';
+import { InventoryGroup, InventoryGroupJson } from './inventory_group.js';
+import { InventoryUnitVariation, InventoryUnitVariationJson } from './inventory_unit_variation.js';
+import { Job, JobJson } from './job.js';
+import { Product, ProductJson } from './product.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
 import { VariationFieldsOption } from './variation_fields_option.js';
 import { some } from 'lodash';
 
@@ -57,4 +57,21 @@ export class Inventory extends Entity {
     return some(this.inventoryUnitVariations.map(
       (v: InventoryUnitVariation) => v.optionId() === option.id));
   };
+}
+
+
+// based on above model, generate a JSON version type
+export type InventoryJson = {
+  id: number;
+  archived: string | null;
+  quantity: number;
+  name: string;
+  notes: string;
+  isOrphan: boolean;
+  products: ProductJson[];
+  inventoryGroups: InventoryGroupJson[];
+  address: AddressJson | null;
+  variationsGroups: VariationsGroupJson[];
+  jobs: JobJson[];
+  inventoryUnitVariations: InventoryUnitVariationJson[];
 }

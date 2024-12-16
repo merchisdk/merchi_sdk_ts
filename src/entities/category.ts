@@ -1,7 +1,7 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { Product } from './product.js';
-import { User } from './user.js';
+import { Product, ProductJson } from './product.js';
+import { User, UserJson } from './user.js';
 
 export class Category extends Entity {
   protected static resourceName = 'categories';
@@ -40,4 +40,17 @@ export class Category extends Entity {
 
   @Category.property({arrayType: 'Category'})
   public parentCategories?: Category[];
+}
+
+// based on above model, generate a JSON version type
+export type CategoryJson = {
+  id: number;
+  archived: string | null;
+  name: string;
+  showDashboard: boolean;
+  showPublic: boolean;
+  showPublicSupplierResell: boolean;
+  domain: DomainJson;
+  products: ProductJson[];
+  users: UserJson[];
 }

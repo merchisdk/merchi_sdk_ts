@@ -1,7 +1,7 @@
 import { Entity } from '../entity.js';
-import { Job } from './job.js';
-import { Inventory } from './inventory.js';
-import { VariationsGroup } from './variations_group.js';
+import { Job, JobJson } from './job.js';
+import { Inventory, InventoryJson } from './inventory.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
 import { InventoryStatus } from '../constants/inventory_statuses.js';
 
 export class MatchingInventory extends Entity {
@@ -26,4 +26,16 @@ export class MatchingInventory extends Entity {
 
   @MatchingInventory.property()
   public status?: InventoryStatus;
+}
+
+
+// based on above model, generate a JSON version type
+export type MatchingInventoryJson = {
+  id: number;
+  archived: string | null;
+  deductionDate: string | null;
+  status: InventoryStatus;
+  job: JobJson;
+  group: VariationsGroupJson | null;
+  inventory: InventoryJson | null;
 }

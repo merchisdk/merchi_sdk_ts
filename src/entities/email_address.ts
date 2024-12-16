@@ -1,6 +1,6 @@
-import { Company } from './company.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { Company, CompanyJson } from './company.js';
+import { User, UserJson } from './user.js';
 
 export class EmailAddress extends Entity {
   protected static resourceName = 'email_addresses';
@@ -21,4 +21,13 @@ export class EmailAddress extends Entity {
 
   @EmailAddress.property({arrayType: 'Company'})
   public companies?: Company[];
+}
+
+// based on above model, generate a JSON version type
+export type EmailAddressJson = {
+  id: number;
+  archived: string | null;
+  emailAddress: string;
+  users: UserJson[];
+  companies: CompanyJson[];
 }

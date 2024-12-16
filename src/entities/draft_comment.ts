@@ -1,9 +1,9 @@
-import { Draft } from './draft.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { Notification } from './notification.js';
-import { User } from './user.js';
+import { Draft, DraftJson } from './draft.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { Notification, NotificationJson } from './notification.js';
+import { User, UserJson } from './user.js';
 
 export class DraftComment extends Entity {
   protected static resourceName = 'draft_comments';
@@ -52,3 +52,22 @@ export class DraftComment extends Entity {
   @DraftComment.property({type: Job})
   public job?: Job | null;
 }
+
+
+// based on model, generate coresponding JSON type
+export type DraftCommentJson = {
+  archived?: string | null;
+  id?: number;
+  date?: string | null;
+  urgency?: number;
+  text?: string;
+  changeRequest?: boolean;
+  sendSms?: boolean;
+  sendEmail?: boolean;
+  user?: UserJson;
+  files?: MerchiFileJson[];
+  forwards?: UserJson[];
+  notifications?: NotificationJson[];
+  draft?: DraftJson | null;
+  job?: JobJson | null;
+};

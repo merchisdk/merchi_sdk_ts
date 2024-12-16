@@ -1,8 +1,8 @@
-import { Assignment } from './assignment.js';
+import { Assignment, AssignmentJson } from './assignment.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Notification } from './notification.js';
-import { User } from './user.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Notification, NotificationJson } from './notification.js';
+import { User, UserJson } from './user.js';
 
 export class ProductionComment extends Entity {
   protected static resourceName = 'production_comments';
@@ -47,4 +47,22 @@ export class ProductionComment extends Entity {
 
   @ProductionComment.property()
   public assignment?: Assignment;
+}
+
+
+// based on model, generate coresponding JSON type
+export type ProductionCommentJson = {
+  archived?: string | null;
+  id?: number;
+  date?: string | null;
+  urgency?: number;
+  text?: string;
+  isUrgentQuestion?: boolean;
+  sendSms?: boolean;
+  sendEmail?: boolean;
+  files?: MerchiFileJson[];
+  user?: UserJson;
+  forwards?: UserJson[];
+  notifications?: NotificationJson[];
+  assignment?: AssignmentJson;
 }

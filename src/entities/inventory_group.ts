@@ -1,9 +1,9 @@
 import { Entity } from '../entity.js';
-import { Company } from './company.js';
-import { Inventory } from './inventory.js';
-import { Job } from './job.js';
-import { Product } from './product.js';
-import { VariationField } from './variation_field.js';
+import { Company, CompanyJson } from './company.js';
+import { Inventory, InventoryJson } from './inventory.js';
+import { Job, JobJson } from './job.js';
+import { Product, ProductJson } from './product.js';
+import { VariationField, VariationFieldJson } from './variation_field.js';
 
 export class InventoryGroup extends Entity {
   protected static resourceName = 'inventory_groups';
@@ -33,4 +33,16 @@ export class InventoryGroup extends Entity {
 
   @InventoryGroup.property({arrayType: 'VariationField'})
   public variationFields?: VariationField[];
+}
+
+// based on above model, generate a JSON version type
+export type InventoryGroupJson = {
+  id: number;
+  archived: string | null;
+  company: CompanyJson;
+  inventories: InventoryJson[];
+  name: string;
+  products: ProductJson[];
+  jobs: JobJson[];
+  variationFields: VariationFieldJson[];
 }

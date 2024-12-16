@@ -1,5 +1,5 @@
 import { Entity } from '../entity.js';
-import { Menu } from './menu.js';
+import { Menu, MenuJson } from './menu.js';
 
 export class MenuItem extends Entity {
   protected static resourceName = 'menu_items';
@@ -27,3 +27,13 @@ export class MenuItem extends Entity {
   @MenuItem.property()
   public menu?: Menu;
 }
+
+export type MenuItemJson = {
+  id?: number;
+  archived?: string | null;
+  name?: string;
+  linkType?: number;
+  linkUri?: string;
+  position?: number;
+  menu?: MenuJson;
+};

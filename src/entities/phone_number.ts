@@ -1,6 +1,6 @@
-import { Company } from './company.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 
 export class PhoneNumber extends Entity {
   protected static resourceName = 'phone_numbers';
@@ -34,3 +34,17 @@ export class PhoneNumber extends Entity {
   @PhoneNumber.property({embeddedByDefault: false})
   public internationalFormatNumber?: string;
 }
+
+
+// based current model, generate JSON type
+export type PhoneNumberJson = {
+  archived?: string | null;
+  id?: number;
+  number?: string;
+  code?: string;
+  users?: UserJson[];
+  companies?: CompanyJson[];
+  paymentCompanies?: CompanyJson[];
+  localFormatNumber?: string;
+  internationalFormatNumber?: string;
+};

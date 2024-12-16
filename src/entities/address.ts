@@ -1,11 +1,11 @@
-import { Bank } from './bank.js';
-import { Company } from './company.js';
+import { Bank, BankJson } from './bank.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
-import { Inventory } from './inventory.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { Shipment } from './shipment.js';
-import { User } from './user.js';
+import { Inventory, InventoryJson } from './inventory.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { User, UserJson } from './user.js';
 
 export class Address extends Entity {
   protected static resourceName = 'addresses';
@@ -62,4 +62,25 @@ export class Address extends Entity {
 
   @Address.property({arrayType: 'Company'})
   public companies?: Company[];
+}
+
+// based on above model, generate a JSON version type
+export type AddressJson = {
+  id: number;
+  archived: string | null;
+  lineOne: string | null;
+  lineTwo: string | null;
+  city: string | null;
+  state: string | null;
+  country: string | null;
+  postcode: string | null;
+  shipmentAsSenderAddress: ShipmentJson[];
+  shipmentsAsReceiverAddress: ShipmentJson[];
+  banks: BankJson[];
+  users: UserJson[];
+  inventories: InventoryJson[];
+  jobs: JobJson[];
+  productedJobs: JobJson[];
+  shippingTo: InvoiceJson[];
+  companies: CompanyJson[];
 }

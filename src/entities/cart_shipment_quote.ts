@@ -1,4 +1,4 @@
-import { ShipmentMethod } from './shipment_method.js';
+import { ShipmentMethod, ShipmentMethodJson } from './shipment_method.js';
 import { Entity } from '../entity.js';
 import { ShipmentService } from '../constants/shipment_services.js';
 
@@ -31,3 +31,14 @@ export class CartShipmentQuote extends Entity {
   @CartShipmentQuote.property({type: 'ShipmentMethod'})
   public shipmentMethod?: ShipmentMethod;
 }
+
+export type CartShipmentQuoteJson = {
+  id?: number;
+  name?: string;
+  subtotalCost?: number;
+  taxAmount?: number;
+  totalCost?: number;
+  shipmentService?: ShipmentService | null;
+  shipmentServiceQuote?: string;
+  shipmentMethod?: ShipmentMethodJson;
+};

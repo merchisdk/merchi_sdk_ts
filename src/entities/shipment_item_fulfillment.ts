@@ -1,6 +1,6 @@
 import { Entity } from '../entity.js';
-import { Assignment } from './assignment.js';
-import { Job } from './job.js';
+import { Assignment, AssignmentJson } from './assignment.js';
+import { Job, JobJson } from './job.js';
 
 export class ShipmentItemFulfillment extends Entity {
   protected static resourceName = 'shipment_item_fulfillments';
@@ -12,4 +12,10 @@ export class ShipmentItemFulfillment extends Entity {
 
   @ShipmentItemFulfillment.property({type: 'Job'})
   public job?: Job;
+}
+
+// based on above model, generate a JSON version type
+export type ShipmentItemFulfillmentJson = {
+  assignment: AssignmentJson;
+  job: JobJson;
 }

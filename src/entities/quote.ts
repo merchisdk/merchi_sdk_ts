@@ -1,7 +1,7 @@
-import { Assignment } from './assignment.js';
-import { QuoteItem } from './quote_item.js';
-import { Shipment } from './shipment.js';
-import { Invoice } from './invoice.js';
+import { Assignment, AssignmentJson } from './assignment.js';
+import { QuoteItem, QuoteItemJson } from './quote_item.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { Invoice, InvoiceJson } from './invoice.js';
 import { Entity } from '../entity.js';
 import { kahanSum } from '../util/float.js';
 
@@ -137,4 +137,16 @@ export class Quote extends Entity {
     const productionDeadline = assignment.productionDeadline;
     return productionDeadline.valueOf() - this.agreedDeadline.valueOf();
   };
+}
+
+// based on above model, generate a JSON version type
+export type QuoteJson = {
+  id: number;
+  archived: string | null;
+  currency: string;
+  agreedDeadline: string | null;
+  shipments: ShipmentJson[];
+  quoteItems: QuoteItemJson[];
+  assignments: AssignmentJson[];
+  invoice: InvoiceJson | null;
 }

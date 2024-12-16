@@ -1,4 +1,4 @@
-import { Company } from './company.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
 
 export class AutomaticPaymentRelationship extends Entity {
@@ -26,4 +26,15 @@ export class AutomaticPaymentRelationship extends Entity {
 
   @AutomaticPaymentRelationship.property({type: String})
   public stripeCustomerId?: string;
+}
+
+// based on above model, generate a JSON version type
+export type AutomaticPaymentRelationshipJson = {
+  id: number;
+  archived: string | null;
+  creationDate: string;
+  allowPostPayment: boolean;
+  companyCustomer: CompanyJson;
+  companySupplier: CompanyJson;
+  stripeCustomerId: string;
 }

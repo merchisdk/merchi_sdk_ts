@@ -1,12 +1,12 @@
 import { Entity } from '../entity.js';
-import { Quote } from './quote.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { Notification } from './notification.js';
-import { ProductionComment } from './production_comment.js';
-import { Shipment } from './shipment.js';
-import { SupplyDomain } from './supply_domain.js';
-import { User } from './user.js';
+import { Quote, QuoteJson } from './quote.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { Notification, NotificationJson } from './notification.js';
+import { ProductionComment, ProductionCommentJson } from './production_comment.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { SupplyDomain, SupplyDomainJson } from './supply_domain.js';
+import { User, UserJson } from './user.js';
 import { RequestOptions } from '../request.js';
 
 interface GenerateInvoiceProps {
@@ -92,4 +92,27 @@ export class Assignment extends Entity {
       });
   };
 
+}
+
+// based on above model, generate a JSON version type
+export type AssignmentJson = {
+  id: number;
+  archived: string | null;
+  managerAccepts: string | null;
+  supplierRefused: string | null;
+  needsDrafting: boolean;
+  needsShipping: boolean;
+  productionDeadline: string;
+  assignmentDeadline: string;
+  notes: string | null;
+  job: JobJson | null;
+  supplyJob: JobJson | null;
+  supplier: UserJson | null;
+  quote: QuoteJson | null;
+  quoteTotalCost: number;
+  comments: ProductionCommentJson[];
+  shipment: ShipmentJson | null;
+  supplyDomain: SupplyDomainJson | null;
+  notifications: NotificationJson[];
+  productionFiles: MerchiFileJson[];
 }

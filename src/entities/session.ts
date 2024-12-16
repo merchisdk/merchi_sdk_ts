@@ -1,6 +1,6 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 
 export class Session extends Entity {
   protected static resourceName = 'sessions';
@@ -26,3 +26,13 @@ export class Session extends Entity {
   @Session.property({type: Domain})
   public domain?: Domain | null;
 }
+
+// based on model, generate corresponding JSON type
+export type SessionJson = {
+  archived?: string | null;
+  ip?: string | null;
+  token?: string;
+  remember?: boolean | null;
+  user?: UserJson;
+  domain?: DomainJson | null;
+};
