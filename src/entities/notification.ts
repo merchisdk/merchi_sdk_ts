@@ -1,15 +1,39 @@
-import { Assignment } from './assignment.js';
-import { Domain } from './domain.js';
-import { Draft } from './draft.js';
-import { DraftComment } from './draft_comment.js';
-import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { JobComment } from './job_comment.js';
-import { ProductionComment } from './production_comment.js';
-import { ShortUrl } from './short_url.js';
-import { User } from './user.js';
+import {
+  Assignment, AssignmentJson
+} from './assignment.js';
+import {
+  Domain, DomainJson
+} from './domain.js';
+import {
+  Draft, DraftJson
+} from './draft.js';
+import {
+  DraftComment, DraftCommentJson
+} from './draft_comment.js';
+import {
+  Entity
+} from '../entity.js';
+import {
+  MerchiFile, MerchiFileJson
+} from './file.js';
+import {
+  Invoice, InvoiceJson
+} from './invoice.js';
+import {
+  Job, JobJson
+} from './job.js';
+import {
+  JobComment, JobCommentJson
+} from './job_comment.js';
+import {
+  ProductionComment, ProductionCommentJson
+} from './production_comment.js';
+import {
+  ShortUrl, ShortUrlJson
+} from './short_url.js';
+import {
+  User, UserJson
+} from './user.js';
 
 export class Notification extends Entity {
   protected static resourceName = 'notifications';
@@ -97,3 +121,35 @@ export class Notification extends Entity {
   @Notification.property({type: MerchiFile})
   public attachment?: MerchiFile | null;
 }
+
+
+// based on model, generate coresponding JSON type
+export type NotificationJson = {
+  archived?: string | null;
+  id?: number;
+  notificationType?: number;
+  date?: string;
+  seen?: boolean;
+  sendEmail?: boolean;
+  sendSms?: boolean;
+  urgency?: number;
+  description?: string | null;
+  subject?: string | null;
+  message?: string;
+  htmlMessage?: string;
+  link?: string | null;
+  section?: number;
+  shortUrl?: ShortUrlJson | null;
+  recipient?: UserJson;
+  sender?: UserJson | null;
+  relatedJob?: JobJson | null;
+  relatedDraft?: DraftJson | null;
+  relatedAssignment?: AssignmentJson | null;
+  relatedInvoice?: InvoiceJson | null;
+  relatedJobComment?: JobCommentJson | null;
+  relatedDraftComment?: DraftCommentJson | null;
+  relatedProductionComment?: ProductionCommentJson | null;
+  domain?: DomainJson;
+  avatar?: MerchiFileJson | null;
+  attachment?: MerchiFileJson | null;
+};

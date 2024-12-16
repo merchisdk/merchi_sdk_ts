@@ -1,6 +1,6 @@
 import { CountryTax } from './country_tax.js';
 import { Entity } from '../entity.js';
-import { Quote } from './quote.js';
+import { Quote, QuoteJson } from './quote.js';
 
 interface CalculateOptions {
   strictEmbed?: boolean;
@@ -68,4 +68,17 @@ export class QuoteItem extends Entity {
     ).toFixed(3);
   };
 
+}
+
+// based on above model, generate a JSON version type
+export type QuoteItemJson = {
+  id: number;
+  archived: string | null;
+  type: number;
+  quantity: number;
+  description: string | null;
+  unitPrice: number | null;
+  taxAmount: number | null;
+  taxType: CountryTax;
+  quote: QuoteJson;
 }

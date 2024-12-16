@@ -1,6 +1,6 @@
 import { Entity } from '../entity.js';
-import { Theme } from './theme.js';
-import { MenuItem } from './menu_item.js';
+import { Theme, ThemeJson } from './theme.js';
+import { MenuItem, MenuItemJson } from './menu_item.js';
 
 export class Menu extends Entity {
   protected static resourceName = 'menus';
@@ -28,3 +28,13 @@ export class Menu extends Entity {
   @Menu.property({arrayType: 'MenuItem'})
   public menuItems?: MenuItem[];
 }
+
+export type MenuJson = {
+  id?: number;
+  archived?: string | null;
+  name?: string;
+  menuHandle?: string;
+  menuType?: number;
+  theme?: ThemeJson;
+  menuItems?: MenuItemJson[];
+};

@@ -1,7 +1,10 @@
 import { Entity } from '../entity.js';
-import { Invoice } from './invoice.js';
-import { User } from './user.js';
-import { AutomaticPaymentRelationship } from './automatic_payment_relationship.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { User, UserJson } from './user.js';
+import {
+  AutomaticPaymentRelationship,
+  AutomaticPaymentRelationshipJson
+} from './automatic_payment_relationship.js';
 import { RequestOptions } from '../request.js';
 
 export class Payment extends Entity {
@@ -63,3 +66,22 @@ export class Payment extends Entity {
       });
   };
 }
+
+
+// based on the model, generate JSON type
+export type PaymentJson = {
+  archived?: string | null;
+  id?: number;
+  pay_date?: string;
+  payment_type?: number;
+  note?: string;
+  amount?: number;
+  auto_refundable?: boolean;
+  refunded?: string | null;
+  send_sms?: boolean;
+  send_email?: boolean;
+  invoice?: InvoiceJson | null;
+  payment_recorder?: UserJson | null;
+  refund_issuer?: UserJson | null;
+  charged_by_payment_relationship?: AutomaticPaymentRelationshipJson | null;
+};

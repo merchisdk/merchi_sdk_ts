@@ -1,8 +1,8 @@
-import { CartItem } from './cart_item.js';
+import { CartItem, CartItemJson } from './cart_item.js';
 import { Entity } from '../entity.js';
-import { Job } from './job.js';
-import { Variation } from './variation.js';
-import { MatchingInventory } from './matching_inventory.js';
+import { Job, JobJson } from './job.js';
+import { Variation, VariationJson } from './variation.js';
+import { MatchingInventory, MatchingInventoryJson } from './matching_inventory.js';
 
 export class VariationsGroup extends Entity {
   protected static resourceName = 'variations_groups';
@@ -38,4 +38,19 @@ export class VariationsGroup extends Entity {
 
   @VariationsGroup.property({embeddedByDefault: false})
   public inventorySufficient?: boolean;
+}
+
+
+// based on above model, generate a JSON version type
+export type VariationsGroupJson = {
+  id: number;
+  archived: string | null;
+  quantity: number;
+  groupCost: number | null;
+  job: JobJson | null;
+  cartItem: CartItemJson | null;
+  matchingInventory: MatchingInventoryJson | null;
+  variations: VariationJson[];
+  inventoryCount: number;
+  inventorySufficient: boolean;
 }

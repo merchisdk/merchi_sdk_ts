@@ -1,8 +1,8 @@
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { Notification } from './notification.js';
-import { User } from './user.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { Notification, NotificationJson } from './notification.js';
+import { User, UserJson } from './user.js';
 
 export class JobComment extends Entity {
   protected static resourceName = 'job_comments';
@@ -47,4 +47,22 @@ export class JobComment extends Entity {
 
   @JobComment.property()
   public user?: User;
+}
+
+
+// based on model, generate coresponding JSON type
+export type JobCommentJson = {
+  archived?: string | null;
+  id?: number;
+  date?: string | null;
+  text?: string;
+  sendSms?: boolean;
+  sendEmail?: boolean;
+  openToClient?: boolean;
+  urgency?: number;
+  files?: MerchiFileJson[];
+  forwards?: UserJson[];
+  notifications?: NotificationJson[];
+  job?: JobJson;
+  user?: UserJson;
 }

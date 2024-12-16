@@ -1,37 +1,37 @@
-import { Address } from './address.js';
-import { Assignment } from './assignment.js';
-import { Cart } from './cart.js';
-import { Category } from './category.js';
-import { CompanyInvitation } from './company_invitation.js';
-import { DomainInvitation } from './domain_invitation.js';
-import { Draft } from './draft.js';
-import { DraftComment } from './draft_comment.js';
-import { EmailAddress } from './email_address.js';
-import { EnrolledDomain } from './enrolled_domain.js';
-import { Domain } from './domain.js';
+import { Address, AddressJson } from './address.js';
+import { Assignment, AssignmentJson } from './assignment.js';
+import { Cart, CartJson } from './cart.js';
+import { Category, CategoryJson } from './category.js';
+import { CompanyInvitation, CompanyInvitationJson } from './company_invitation.js';
+import { DomainInvitation, DomainInvitationJson } from './domain_invitation.js';
+import { Draft, DraftJson } from './draft.js';
+import { DraftComment, DraftCommentJson } from './draft_comment.js';
+import { EmailAddress, EmailAddressJson } from './email_address.js';
+import { EnrolledDomain, EnrolledDomainJson } from './enrolled_domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Invoice } from './invoice.js';
-import { Job, JobJson } from './job.js'; // Importing JobJson
-import { JobComment } from './job_comment.js';
-import { Notification } from './notification.js';
-import { Payment } from './payment.js';
-import { PhoneNumber } from './phone_number.js';
-import { Product } from './product.js';
-import { ProductionComment } from './production_comment.js';
-import { Session } from './session.js';
-import { Shipment } from './shipment.js';
-import { SystemRole } from './system_role.js';
-import { Theme } from './theme.js';
-import { UserCompany } from './user_company.js';
-import { Company } from './company.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { Job, JobJson } from './job.js';
+import { JobComment, JobCommentJson } from './job_comment.js';
+import { Notification, NotificationJson } from './notification.js';
+import { Payment, PaymentJson } from './payment.js';
+import { PhoneNumber, PhoneNumberJson } from './phone_number.js';
+import { Product, ProductJson } from './product.js';
+import { ProductionComment, ProductionCommentJson } from './production_comment.js';
+import { Session, SessionJson } from './session.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { SystemRole, SystemRoleJson } from './system_role.js';
+import { Theme, ThemeJson } from './theme.js';
+import { UserCompany, UserCompanyJson } from './user_company.js';
+import { Company, CompanyJson } from './company.js';
 import { Role,
   DOMAIN_MANAGERS,
   MANAGEMENT_TEAM,
   BUSINESS_ACCOUNTS,
   ROLES_RANK
 } from '../constants/roles.js';
-import { InternalTag } from './internal_tag.js';
+import { InternalTag, InternalTagJson } from './internal_tag.js';
 import { UserType } from '../constants/user_types.js';
 import { SystemRoles as SR } from '../constants/system_roles.js';
 
@@ -393,6 +393,7 @@ export class User extends Entity {
   }
 }
 
+
 // based on above model, generate a JSON version type
 export type UserJson = {
   id: number;
@@ -471,31 +472,3 @@ export type UserJson = {
   forwardedProductionComments: ProductionCommentJson[];
   accessibleDomainsAsClient: DomainJson[];
 }
-
-// Define missing Json types
-type InternalTagJson = any; // Replace 'any' with the actual structure
-type DomainJson = any;
-type JobCommentJson = any;
-type EmailAddressJson = any;
-type PhoneNumberJson = any;
-type AddressJson = any;
-type UserCompanyJson = any;
-type CompanyJson = any;
-type CategoryJson = any;
-type ProductJson = any;
-type MerchiFileJson = any;
-type SessionJson = any;
-type ShipmentJson = any;
-type DraftCommentJson = any;
-type SystemRoleJson = any;
-type NotificationJson = any;
-type AssignmentJson = any;
-type DraftJson = any;
-type CompanyInvitationJson = any;
-type CartJson = any;
-type PaymentJson = any;
-type EnrolledDomainJson = any;
-type InvoiceJson = any;
-type DomainInvitationJson = any;
-type ThemeJson = any;
-type ProductionCommentJson = any;

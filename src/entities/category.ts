@@ -1,7 +1,7 @@
-import { Domain } from './domain.js';
+import { Domain, DomainJson } from './domain.js';
 import { Entity } from '../entity.js';
-import { Product } from './product.js';
-import { User } from './user.js';
+import { Product, ProductJson } from './product.js';
+import { User, UserJson } from './user.js';
 
 export class Category extends Entity {
   protected static resourceName = 'categories';
@@ -54,8 +54,3 @@ export type CategoryJson = {
   products: ProductJson[];
   users: UserJson[];
 }
-
-// Define missing Json types
-type DomainJson = any; // Replace 'any' with the actual structure
-type ProductJson = any;
-type UserJson = any;

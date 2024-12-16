@@ -1,5 +1,5 @@
 import { Entity } from '../entity.js';
-import { DiscountGroup } from './discount_group.js';
+import { DiscountGroup, DiscountGroupJson } from './discount_group.js';
 
 export class Discount extends Entity {
   protected static resourceName = 'discounts';
@@ -40,4 +40,15 @@ export class Discount extends Entity {
     const discount = 100 - this.amount;
     return (unitPrice * discount / 100).toFixed(3);
   };
+}
+
+export type DiscountJson = {
+  archived: string | null;
+  id: number;
+  lowerLimit: number;
+  amount: number;
+  usageLimit: number;
+  isPercentage: boolean;
+  code: string;
+  discountGroup: DiscountGroupJson | null;
 }

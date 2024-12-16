@@ -434,7 +434,7 @@ export class Product extends Entity {
   };
 }
 
- // based on above model, generate a JSON version type
+// based on above model, generate a JSON version type
 export type ProductJson = {
   id: number;
   createdByJob: JobJson | null;

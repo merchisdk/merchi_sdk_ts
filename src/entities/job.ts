@@ -1,28 +1,28 @@
-import { Address } from './address.js';
-import { Assignment } from './assignment.js';
-import { Company } from './company.js';
-import { CountryTax } from './country_tax.js';
-import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
-import { Draft } from './draft.js';
-import { DraftComment } from './draft_comment.js';
-import { EmailAddress } from './email_address.js';
+import { Address, AddressJson } from './address.js';
+import { Assignment, AssignmentJson } from './assignment.js';
+import { Company, CompanyJson } from './company.js';
+import { CountryTax, CountryTaxJson } from './country_tax.js';
+import { Domain, DomainJson } from './domain.js';
+import { DomainTag, DomainTagJson } from './domain_tag.js';
+import { Draft, DraftJson } from './draft.js';
+import { DraftComment, DraftCommentJson } from './draft_comment.js';
+import { EmailAddress, EmailAddressJson } from './email_address.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { MatchingInventory } from './matching_inventory.js';
-import { InternalTag } from './internal_tag.js';
-import { Invoice } from './invoice.js';
-import { JobComment } from './job_comment.js';
-import { Notification } from './notification.js';
-import { PhoneNumber } from './phone_number.js';
-import { Product } from './product.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { MatchingInventory, MatchingInventoryJson } from './matching_inventory.js';
+import { InternalTag, InternalTagJson } from './internal_tag.js';
+import { Invoice, InvoiceJson } from './invoice.js';
+import { JobComment, JobCommentJson } from './job_comment.js';
+import { Notification, NotificationJson } from './notification.js';
+import { PhoneNumber, PhoneNumberJson } from './phone_number.js';
+import { Product, ProductJson } from './product.js';
 import { RequestOptions } from '../request.js';
-import { Shipment } from './shipment.js';
-import { User } from './user.js';
-import { Variation } from './variation.js';
-import { VariationsGroup } from './variations_group.js';
+import { Shipment, ShipmentJson } from './shipment.js';
+import { User, UserJson } from './user.js';
+import { Variation, VariationJson } from './variation.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
 import { InventoryStatus } from '../constants/inventory_statuses.js';
-import { Item } from './item.js';
+import { Item, ItemJson } from './item.js';
 
 export class Job extends Entity {
   protected static resourceName = 'jobs';
@@ -466,27 +466,3 @@ export type JobJson = { // Exporting JobJson
   hasValidWeight: boolean;
   isNewClient: boolean;
 }
-
-// Define missing Json types
-type ItemJson = any; // Replace 'any' with the actual structure
-type DraftJson = any;
-type JobCommentJson = any;
-type UserJson = any;
-type CompanyJson = any;
-type PhoneNumberJson = any;
-type EmailAddressJson = any;
-type ProductJson = any;
-type DraftCommentJson = any;
-type CountryTaxJson = any;
-type InternalTagJson = any;
-type DomainTagJson = any;
-type AddressJson = any;
-type DomainJson = any;
-type InvoiceJson = any;
-type MerchiFileJson = any;
-type ShipmentJson = any;
-type MatchingInventoryJson = any;
-type VariationsGroupJson = any;
-type VariationJson = any;
-type NotificationJson = any;
-type AssignmentJson = any;

@@ -1,5 +1,5 @@
 import { Entity } from '../entity.js';
-import { User } from './user.js';
+import { User, UserJson } from './user.js';
 
 export class SystemRole extends Entity {
   protected static resourceName = 'system_roles';
@@ -15,3 +15,11 @@ export class SystemRole extends Entity {
   @SystemRole.property()
   public user?: User;
 }
+
+
+// based on model, generated corresponding JSON type
+export type SystemRoleJson = {
+  id?: number;
+  role?: number;
+  user?: UserJson;
+};

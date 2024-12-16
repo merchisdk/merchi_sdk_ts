@@ -1,10 +1,10 @@
-import { CartItem } from './cart_item.js';
+import { CartItem, CartItemJson } from './cart_item.js';
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { VariationField } from './variation_field.js';
-import { VariationOption } from './variation_option.js';
-import { VariationsGroup } from './variations_group.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { VariationField, VariationFieldJson } from './variation_field.js';
+import { VariationOption, VariationOptionJson } from './variation_option.js';
+import { VariationsGroup, VariationsGroupJson } from './variations_group.js';
 
 export class Variation extends Entity {
   protected static resourceName = 'variations';
@@ -58,4 +58,25 @@ export class Variation extends Entity {
 
   @Variation.property({arrayType: 'VariationOption'})
   public selectableOptions?: VariationOption[];
+}
+
+
+// based on above model, generate a JSON version type
+export type VariationJson = {
+  id: number;
+  archived: string | null;
+  value: string | null;
+  currency: string;
+  cost: number;
+  quantity: number;
+  onceOffCost: number;
+  unitCost: number;
+  unitCostTotal: number;
+  variationField: VariationFieldJson;
+  variationsGroup: VariationsGroupJson | null;
+  job: JobJson | null;
+  cartItem: CartItemJson | null;
+  variationFiles: MerchiFileJson[];
+  selectedOptions: VariationOptionJson[];
+  selectableOptions: VariationOptionJson[];
 }

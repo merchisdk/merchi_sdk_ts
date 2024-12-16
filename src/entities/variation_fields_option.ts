@@ -1,9 +1,26 @@
-import { DiscountGroup } from './discount_group.js';
-import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { InventoryUnitVariation } from './inventory_unit_variation.js';
-import { Variation } from './variation.js';
-import { VariationField } from './variation_field.js';
+import {
+  DiscountGroup,
+  DiscountGroupJson
+} from './discount_group.js';
+import {
+  Entity
+} from '../entity.js';
+import {
+  MerchiFile,
+  MerchiFileJson
+} from './file.js';
+import {
+  InventoryUnitVariation,
+  InventoryUnitVariationJson
+} from './inventory_unit_variation.js';
+import {
+  Variation,
+  VariationJson
+} from './variation.js';
+import {
+  VariationField,
+  VariationFieldJson
+} from './variation_field.js';
 
 export class VariationFieldsOption extends Entity {
   protected static resourceName = 'variation_fields_options';
@@ -95,4 +112,28 @@ export class VariationFieldsOption extends Entity {
     result.totalCost = this.variationCost;
     return result;
   };
+}
+
+
+// based on above model, generate a JSON version type
+export type VariationFieldsOptionJson = {
+  id: number;
+  archived: string | null;
+  value: string | null;
+  colour: string | null;
+  currency: string;
+  default: boolean;
+  include: boolean;
+  noInventory: boolean;
+  position: number;
+  variationCost: number;
+  variationCostDiscountGroup: DiscountGroupJson | null;
+  variationUnitCost: number;
+  buyUnitCost: number;
+  buyCost: number;
+  variationUnitCostDiscountGroup: DiscountGroupJson | null;
+  variationField: VariationFieldJson | null;
+  linkedFile: MerchiFileJson | null;
+  selectedByVariations: VariationJson[];
+  inventoryUnitVariations: InventoryUnitVariationJson[];
 }

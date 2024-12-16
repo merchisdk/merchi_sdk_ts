@@ -1,7 +1,7 @@
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
-import { Job } from './job.js';
-import { Product } from './product.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
+import { Job, JobJson } from './job.js';
+import { Product, ProductJson } from './product.js';
 
 export class DraftTemplate extends Entity {
   protected static resourceName = 'draft_templates';
@@ -37,4 +37,19 @@ export class DraftTemplate extends Entity {
 
   @DraftTemplate.property({type: Job})
   public job?: Job | null;
+}
+
+
+// based on above model, generate a JSON version type
+export type DraftTemplateJson = {
+  id: number;
+  archived: string | null;
+  date: string | null;
+  description: string;
+  name: string;
+  height: number;
+  width: number;
+  file: MerchiFileJson;
+  product: ProductJson | null;
+  job: JobJson | null;
 }

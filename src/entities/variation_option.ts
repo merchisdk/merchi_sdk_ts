@@ -1,5 +1,5 @@
 import { Entity } from '../entity.js';
-import { MerchiFile } from './file.js';
+import { MerchiFile, MerchiFileJson } from './file.js';
 
 export class VariationOption extends Entity {
   protected static singularName = 'variationOption';
@@ -49,4 +49,24 @@ export class VariationOption extends Entity {
 
   @VariationOption.property()
   public totalCost?: number;
+}
+
+
+// based on above model, generate a JSON version type
+export type VariationOptionJson = {
+  optionId: number;
+  value: string;
+  colour: string;
+  position: number;
+  available: boolean;
+  default: boolean;
+  include: boolean;
+  linkedFile: MerchiFileJson;
+  fieldName: string;
+  quantity: number;
+  currency: string;
+  onceOffCost: number;
+  unitCost: number;
+  unitCostTotal: number;
+  totalCost: number;
 }

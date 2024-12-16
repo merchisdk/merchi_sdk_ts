@@ -1,4 +1,4 @@
-import { Company } from './company.js';
+import { Company, CompanyJson } from './company.js';
 import { Entity } from '../entity.js';
 
 export class AutomaticPaymentRelationship extends Entity {
@@ -38,6 +38,3 @@ export type AutomaticPaymentRelationshipJson = {
   companySupplier: CompanyJson;
   stripeCustomerId: string;
 }
-
-// Define missing Json types
-type CompanyJson = any; // Replace 'any' with the actual structure

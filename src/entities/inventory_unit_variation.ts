@@ -1,6 +1,9 @@
 import { Entity } from '../entity.js';
-import { Inventory } from './inventory.js';
-import { VariationFieldsOption } from './variation_fields_option.js';
+import { Inventory, InventoryJson } from './inventory.js';
+import {
+  VariationFieldsOption,
+  VariationFieldsOptionJson
+} from './variation_fields_option.js';
 
 export class InventoryUnitVariation extends Entity {
   protected static resourceName = 'inventory_unit_variations';
@@ -26,4 +29,13 @@ export class InventoryUnitVariation extends Entity {
     }
     return this.variationFieldsOption.id;
   };
+}
+
+
+// based on above model, generate a JSON version type
+export type InventoryUnitVariationJson = {
+  id: number;
+  archived: string | null;
+  inventory: InventoryJson;
+  variationFieldsOption: VariationFieldsOptionJson;
 }

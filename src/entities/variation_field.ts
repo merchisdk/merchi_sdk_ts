@@ -1,10 +1,10 @@
 import { cloneDeepWith } from 'lodash';
-import { DiscountGroup } from './discount_group.js';
+import { DiscountGroup, DiscountGroupJson } from './discount_group.js';
 import { Entity } from '../entity.js';
-import { InventoryGroup } from './inventory_group.js';
-import { Product } from './product.js';
-import { Variation } from './variation.js';
-import { VariationFieldsOption } from './variation_fields_option.js';
+import { InventoryGroup, InventoryGroupJson } from './inventory_group.js';
+import { Product, ProductJson } from './product.js';
+import { Variation, VariationJson } from './variation.js';
+import { VariationFieldsOption, VariationFieldsOptionJson } from './variation_fields_option.js';
 import { FieldType } from '../constants/field_types.js';
 
 export class VariationField extends Entity {
@@ -177,3 +177,43 @@ export class VariationField extends Entity {
     return result;
   };
 }
+
+// based on above model, generate a JSON version type
+export type VariationFieldJson = {
+  id: number;
+  archived: string | null;
+  position: number;
+  required: boolean;
+  independent: boolean;
+  name: string;
+  instructions: string;
+  placeholder: string | null;
+  defaultValue: string;
+  currency: string;
+  fieldType: FieldType;
+  margin: number;
+  variationCost: number;
+  variationCostDiscountGroup: DiscountGroupJson | null;
+  variationUnitCost: number;
+  variationUnitCostDiscountGroup: DiscountGroupJson | null;
+  buyUnitCost: number;
+  buyCost: number;
+  rows: number;
+  fieldMin: number | null;
+  fieldMax: number | null;
+  allowDecimal: boolean;
+  sellerProductEditable: boolean;
+  multipleSelect: boolean;
+  showFilePreview: boolean;
+  allowFileMultiple: boolean;
+  allowFileJpeg: boolean;
+  allowFileGif: boolean;
+  allowFilePdf: boolean;
+  allowFilePng: boolean;
+  allowFileAi: boolean;
+  product: ProductJson;
+  inventoryGroup: InventoryGroupJson;
+  linkedInventoryGroup: InventoryGroupJson;
+  variations: VariationJson[];
+  options: VariationFieldsOptionJson[];
+};
