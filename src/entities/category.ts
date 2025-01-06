@@ -28,6 +28,9 @@ export class Category extends Entity {
   public showPublicSupplierResell?: boolean;
 
   @Category.property()
+  public descendant?: number;
+
+  @Category.property()
   public domain?: Domain;
 
   @Category.property({arrayType: 'Product'})

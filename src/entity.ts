@@ -107,6 +107,7 @@ interface ListOptions {
   isOrder?: boolean;
   isPrivate?: boolean;
   jobNotifiable?: number;
+  descendants?: number;
   limit?: number;
   managedDomainsOnly?: boolean;
   managedOnly?: boolean;
@@ -123,6 +124,7 @@ interface ListOptions {
   order?: string;
   originalOf?: number;
   platformCategoryId?: number;
+  priceRange?: number[];
   productTypes?: ProductType[];
   publicOnly?: boolean;
   q?: string;
@@ -147,6 +149,7 @@ interface ListOptions {
   tagsInternal?: number[];
   tagNames?: string[];
   teamOnly?: boolean;
+  turnaroundTimeDays?: number;
   withRights?: boolean;
 }
 
@@ -400,6 +403,9 @@ export class Entity {
       if (options.offset !== undefined) {
         fetchOptions.query.push(['offset', options.offset.toString()]);
       }
+      if (options.descendants !== undefined) {
+        fetchOptions.query.push(['descendants', options.descendants.toString()]);
+      }
       if (options.limit !== undefined) {
         fetchOptions.query.push(['limit', options.limit.toString()]);
       }
@@ -503,6 +509,10 @@ export class Entity {
       if (options.entityTypes !== undefined) {
         fetchOptions.query.push(['entity_types',
           options.entityTypes.join(',')]);
+      }
+      if (options.priceRange !== undefined) {
+        fetchOptions.query.push(['product_range',
+          options.priceRange.join(',')]);
       }
       if (options.productTypes !== undefined) {
         fetchOptions.query.push(['product_types',
@@ -623,6 +633,11 @@ export class Entity {
       }
       if (options.tagNames !== undefined) {
         fetchOptions.query.push(['tag_names', options.tagNames.join(',')]);
+      }
+      if (options.turnaroundTimeDays !== undefined) {
+        fetchOptions.query.push(
+          ['turnaround_time_days', options.turnaroundTimeDays.toString()]
+        );
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
