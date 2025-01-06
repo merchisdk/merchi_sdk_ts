@@ -253,6 +253,7 @@ test('can list products with options set', () => {
     categoryId: 2,
     clientId: 349,
     clientCompanyId: 124,
+    categories: ['test1', 'test2'],
     clientOnly: false,
     companyCustomerId: 99,
     companyId: 91,
@@ -280,6 +281,7 @@ test('can list products with options set', () => {
     isOrder: true,
     isPrivate: false,
     jobNotifiable: 1,
+    descendants: 2,
     limit: 20,
     managedDomainsOnly: true,
     managedOnly: false,
@@ -296,6 +298,7 @@ test('can list products with options set', () => {
     order: 'asc',
     originalOf: 1,
     platformCategoryId: 3,
+    priceRange: [0, 1],
     productTypes: [0, 1],
     publicOnly: false,
     q: 'example',
@@ -319,12 +322,21 @@ test('can list products with options set', () => {
     tagsInternal: [2, 3, 5],
     tagNames: ['a'],
     teamOnly: false,
+    turnaroundTimeDays: 7,
     withRights: false,
   };
-  const fetch = mockFetch(true, {'products': [{'product': {'name': 'p1'}},
-    {'product': {'name': 'p2'}}],
-  'available': 2,
-  'count': 2}, 200);
+  const fetch = mockFetch(
+    true,
+    {
+      'products': [
+        {'product': {'name': 'p1'}},
+        {'product': {'name': 'p2'}}
+      ],
+      'available': 2,
+      'count': 2
+    },
+    200
+  );
   const invocation = merchi.Product.list(options);
   const correct = [
     ['as', 'a'],
@@ -333,6 +345,7 @@ test('can list products with options set', () => {
     ['category_id', '2'],
     ['client_company_id', '124'],
     ['client_id', '349'],
+    ['categories', 'test1,test2'],
     ['client_only', 'false'],
     ['company_customer_id', '99'],
     ['company_id', '91'],
@@ -360,6 +373,7 @@ test('can list products with options set', () => {
     ['is_order', 'true'],
     ['is_private', 'false'],
     ['job_notifiable', '1'],
+    ['descendants', '2'],
     ['limit', '20'],
     ['managed_domains_only', 'true'],
     ['managed_only', 'false'],
@@ -376,6 +390,7 @@ test('can list products with options set', () => {
     ['order', 'asc'],
     ['original_of', '1'],
     ['platform_category_id', '3'],
+    ['price_range', '0,1'],
     ['product_types', '0,1'],
     ['public_only', 'false'],
     ['q', 'example'],
@@ -400,6 +415,7 @@ test('can list products with options set', () => {
     ['tags_internal', '2,3,5'],
     ['tag_names', 'a'],
     ['team_only', 'false'],
+    ['turnaround_time_days', '7'],
   ];
   expect(
     fetch.mock.calls[0][1]['query'].sort(
