@@ -97,6 +97,9 @@ export class User extends Entity {
   public hasStore?: boolean;
 
   @User.property()
+  public canEdit?: boolean;
+
+  @User.property()
   public enableCrashReports?: boolean;
 
   @User.property()
