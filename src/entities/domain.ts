@@ -118,6 +118,9 @@ export class Domain extends Entity {
   public webflowApiKey?: string | null;
 
   @Domain.property({type: String})
+  public telegramChatId?: string;
+
+  @Domain.property({type: String})
   public shopifyShopUrl?: string | null;
 
   @Domain.property()
