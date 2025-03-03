@@ -99,6 +99,9 @@ export class Invoice extends Entity {
   @Invoice.property({type: String})
   public invoiceToken?: string | null;
 
+  @Invoice.property({type: String})
+  public paymentUrl?: string;
+
   @Invoice.property()
   public isRemindable?: boolean;
 
