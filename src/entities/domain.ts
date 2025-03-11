@@ -18,6 +18,7 @@ import { SupplyDomain } from './supply_domain.js';
 import { SeoDomainPage } from './seo_domain_page.js';
 import { Theme } from './theme.js';
 import { DomainType } from '../constants/domain_types.js';
+import { ShipmentMethod } from './shipment_method.js';
 
 export class Domain extends Entity {
   protected static resourceName = 'domains';
@@ -182,6 +183,9 @@ export class Domain extends Entity {
 
   @Domain.property({type: MerchiFile})
   public favicon?: MerchiFile | null;
+
+  @Domain.property({arrayType: 'ShipmentMethod'})
+  public shipmentMethods?: ShipmentMethod[];
 
   @Domain.property()
   public activeTheme?: Theme;
