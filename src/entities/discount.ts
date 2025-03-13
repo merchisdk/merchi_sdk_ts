@@ -27,6 +27,9 @@ export class Discount extends Entity {
   @Discount.property()
   public code?: string;
 
+  @Discount.property()
+  public groupRestricted?: boolean;
+
   @Discount.property({type: DiscountGroup})
   public discountGroup?: DiscountGroup | null;
 
