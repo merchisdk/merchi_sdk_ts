@@ -4,6 +4,7 @@ import { MerchiFile } from './file.js';
 import { Job } from './job.js';
 import { Notification } from './notification.js';
 import { User } from './user.js';
+import { DraftTemplate } from './draft_template.js';
 
 export class Draft extends Entity {
   protected static resourceName = 'drafts';
@@ -37,6 +38,9 @@ export class Draft extends Entity {
   @Draft.property({arrayType: 'DraftComment'})
   public comments?: DraftComment[];
 
+  @Draft.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
+
   @Draft.property()
   public commentsCount?: number;
 
@@ -57,22 +61,6 @@ export class Draft extends Entity {
 
   @Draft.property()
   public sharedWithJob?: Job;
-
-  public wereChangesRequested = () => {
-    /* true if any comment is/was a change request comment. */
-    if (this.comments === undefined) {
-      throw 'comments is undefined. did you forget to embed it?';
-    }
-    for (const comment of this.comments) {
-      if (comment.changeRequest === undefined) {
-        throw 'changeRequest is undefined.';
-      }
-      if (comment.changeRequest) {
-        return true;
-      }
-    }
-    return false;
-  };
 
   public commentsYoungestToEldest = () => {
     if (this.comments === undefined) {
