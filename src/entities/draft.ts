@@ -4,6 +4,7 @@ import { MerchiFile } from './file.js';
 import { Job } from './job.js';
 import { Notification } from './notification.js';
 import { User } from './user.js';
+import { DraftTemplate } from './draft_template.js';
 
 export class Draft extends Entity {
   protected static resourceName = 'drafts';
@@ -36,6 +37,9 @@ export class Draft extends Entity {
 
   @Draft.property({arrayType: 'DraftComment'})
   public comments?: DraftComment[];
+
+  @Draft.property({type: 'DraftTemplate'})
+  public draftTemplate?: DraftTemplate;
 
   @Draft.property()
   public commentsCount?: number;
