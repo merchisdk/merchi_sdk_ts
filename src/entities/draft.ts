@@ -38,8 +38,8 @@ export class Draft extends Entity {
   @Draft.property({arrayType: 'DraftComment'})
   public comments?: DraftComment[];
 
-  @Draft.property({type: 'DraftTemplate'})
-  public draftTemplate?: DraftTemplate;
+  @Draft.property({arrayType: 'DraftTemplate'})
+  public draftTemplates?: DraftTemplate[];
 
   @Draft.property()
   public commentsCount?: number;
@@ -61,22 +61,6 @@ export class Draft extends Entity {
 
   @Draft.property()
   public sharedWithJob?: Job;
-
-  public wereChangesRequested = () => {
-    /* true if any comment is/was a change request comment. */
-    if (this.comments === undefined) {
-      throw 'comments is undefined. did you forget to embed it?';
-    }
-    for (const comment of this.comments) {
-      if (comment.changeRequest === undefined) {
-        throw 'changeRequest is undefined.';
-      }
-      if (comment.changeRequest) {
-        return true;
-      }
-    }
-    return false;
-  };
 
   public commentsYoungestToEldest = () => {
     if (this.comments === undefined) {

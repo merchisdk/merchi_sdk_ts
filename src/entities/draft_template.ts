@@ -34,6 +34,9 @@ export class DraftTemplate extends Entity {
   @DraftTemplate.property({type: MerchiFile})
   public file?: MerchiFile;
 
+  @DraftTemplate.property({type: 'MerchiFile'})
+  public design?: MerchiFile;
+
   @DraftTemplate.property({type: Product})
   public product?: Product | null;
 
@@ -46,6 +49,4 @@ export class DraftTemplate extends Entity {
   @DraftTemplate.property({arrayType: 'VariationField'})
   public editedByVariationFields?: VariationField[];
 
-  @DraftTemplate.property({arrayType: 'MerchiFile'})
-  public draftPreviews?: MerchiFile[];
 }
