@@ -48,6 +48,7 @@ import { ShortUrl } from './entities/short_url.js';
 import { VariationsGroup } from './entities/variations_group.js';
 import { Quote } from './entities/quote.js';
 import { Draft } from './entities/draft.js';
+import { DraftPreview } from './entities/draft_preview.js';
 import { DraftTemplate } from './entities/draft_template.js';
 import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
@@ -130,6 +131,7 @@ export class Merchi {
   public ShipmentMethod: typeof ShipmentMethod;
   public ShipmentMethodVariation: typeof ShipmentMethodVariation;
   public Draft: typeof Draft;
+  public DraftPreview: typeof DraftPreview;
   public DraftTemplate: typeof DraftTemplate;
   public VariationFieldsOption: typeof VariationFieldsOption;
   public Category: typeof Category;
@@ -255,6 +257,7 @@ export class Merchi {
     this.Menu = this.setupClass(Menu) as typeof Menu;
     this.Assignment = this.setupClass(Assignment) as typeof Assignment;
     this.Draft = this.setupClass(Draft) as typeof Draft;
+    this.DraftPreview = this.setupClass(DraftPreview) as typeof DraftPreview;
     this.DraftTemplate = this.setupClass(DraftTemplate) as typeof DraftTemplate;
     this.VariationsGroup = this.setupClass(
       VariationsGroup
