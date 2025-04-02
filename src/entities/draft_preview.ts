@@ -33,5 +33,5 @@ export class DraftPreview extends Entity {
   public width?: number;
 
   @DraftPreview.property({arrayType: 'DraftTemplate'})
-  public draftTemplates?: DraftTemplate;
+  public draftTemplates?: DraftTemplate[];
 }
