@@ -1,3 +1,4 @@
+import { DraftPreviewLayer } from './draft_preview_layer.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { Job } from './job.js';
@@ -26,9 +27,6 @@ export class DraftTemplate extends Entity {
   public name?: string;
 
   @DraftTemplate.property()
-  public layerName?: string;
-
-  @DraftTemplate.property()
   public height?: number;
 
   @DraftTemplate.property()
@@ -52,4 +50,6 @@ export class DraftTemplate extends Entity {
   @DraftTemplate.property({arrayType: 'VariationField'})
   public editedByVariationFields?: VariationField[];
 
+  @DraftTemplate.property({arrayType: 'DraftPreviewLayer'})
+  public draftPreviewLayers?: DraftPreviewLayer[];
 }

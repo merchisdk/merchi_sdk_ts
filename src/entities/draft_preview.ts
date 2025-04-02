@@ -1,7 +1,7 @@
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { Product } from './product.js';
-import { DraftTemplate } from './draft_template.js';
+import { DraftPreviewLayer } from './draft_preview_layer.js';
 
 export class DraftPreview extends Entity {
   protected static resourceName = 'draft_previews';
@@ -32,6 +32,6 @@ export class DraftPreview extends Entity {
   @DraftPreview.property()
   public width?: number;
 
-  @DraftPreview.property({arrayType: 'DraftTemplate'})
-  public draftTemplates?: DraftTemplate[];
+  @DraftPreview.property({arrayType: 'DraftPreviewLayer'})
+  public draftPreviewLayers?: DraftPreviewLayer[];
 }
