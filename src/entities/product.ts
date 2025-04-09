@@ -7,6 +7,7 @@ import { CountryTax } from './country_tax.js';
 import { DiscountGroup } from './discount_group.js';
 import { Domain } from './domain.js';
 import { DomainTag } from './domain_tag.js';
+import { DraftPreview } from './draft_preview.js';
 import { DraftTemplate } from './draft_template.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
@@ -309,6 +310,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'DraftTemplate'})
   public draftTemplates?: DraftTemplate[];
+
+  @Product.property({arrayType: 'DraftPreview'})
+  public draftPreviews?: DraftPreview[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
