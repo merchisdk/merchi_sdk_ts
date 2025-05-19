@@ -25,18 +25,43 @@ export class ApiError extends Error {
 
 export const version = 'v6';
 
-export function backendFetch(resource: string, options?: RequestOptions) {
-  const defaultBackendUri: string = 'https://api.merchi.co/';
-  // backend uri as defined on the window element takes priority
-  const clientBackendUri = typeof window !== 'undefined' &&
-    (window as any).merchiBackendUri ?
-      (window as any).merchiBackendUri : undefined;
-  // backend uri as defined on env
-  const envBackendUri = typeof process !== 'undefined' &&
-    process.env.MERCHI_BACKEND_URI ?
-      process.env.MERCHI_BACKEND_URI : undefined;
-  const server = envBackendUri ?? clientBackendUri ?? defaultBackendUri;
-  const url = new URL(server + version + resource);
+interface UriComponents {
+  baseUrl: string;
+  version: string;
+}
+
+function ensureVersionInUri(baseUrl: string): UriComponents {
+  // Ensure baseUrl ends with a slash
+  let uri = baseUrl;
+  if (!uri.endsWith('/')) {
+    uri += '/';
+  }
+
+  // Check if the URI already includes a version
+  const versionPattern = new RegExp('/v\\d+/?$');
+  const match = uri.match(versionPattern);
+  
+  if (match) {
+    // Extract the version and remove it from the URI
+    const foundVersion = match[0].replace(/\//g, '');
+    const strippedUri = uri.replace(versionPattern, '/');
+    return {
+      baseUrl: strippedUri,
+      version: foundVersion
+    };
+  }
+
+  return {
+    baseUrl: uri,
+    version: version
+  };
+}
+
+export function backendFetch(baseUrl: string, resource: string, options?: RequestOptions) {
+  const { baseUrl: cleanBaseUrl, version: apiVersion } = ensureVersionInUri(baseUrl);
+  // Remove leading slash from resource if it exists to prevent double slashes
+  const cleanResource = resource.startsWith('/') ? resource.slice(1) : resource;
+  const url = new URL(cleanBaseUrl + apiVersion + '/' + cleanResource);
   if (options && options.query) {
     for (const entry of options.query) {
       url.searchParams.append(entry[0], entry[1]);
@@ -46,11 +71,12 @@ export function backendFetch(resource: string, options?: RequestOptions) {
 }
 
 export function apiFetch(
+  baseUrl: string,
   resource: string,
   options?: RequestOptions,
   expectEmptyResponse?: boolean
 ) {
-  return backendFetch(resource, options as RequestInit | undefined).then(
+  return backendFetch(baseUrl, resource, options as RequestInit | undefined).then(
     function (response) {
       if (response.status < 200 || response.status > 299) {
         return response.json().then(function (json) {
@@ -66,11 +92,12 @@ export function apiFetch(
 
 /* istanbul ignore next */
 export function apiFetchWithProgress(
+  baseUrl: string,
   resource: string,
   options?: RequestOptions,
   progressCallback?: (progress: number) => void
 ) {
-  return backendFetch(resource, options as RequestInit | undefined).then(
+  return backendFetch(baseUrl, resource, options as RequestInit | undefined).then(
     function (response) {
       if (!response.body) {
         const err = new ApiError('empty response');
