@@ -99,6 +99,8 @@ interface UserRequestOptions {
   embed?: EmbedDescriptor;
 }
 
+export const API_VERSION = 'v6';
+
 export class Merchi {
   public id: string = generateUUID();
 
@@ -106,6 +108,7 @@ export class Merchi {
   public invoiceToken?: string;
   public clientToken?: string;
   public cartToken?: string;
+  public readonly backendUri: string;
 
   public AutomaticPaymentRelationship: typeof AutomaticPaymentRelationship;
   public Notification: typeof Notification;
@@ -189,7 +192,8 @@ export class Merchi {
     sessionToken?: string,
     clientToken?: string,
     invoiceToken?: string,
-    cartToken?: string
+    cartToken?: string,
+    backendUri?: string
   ) {
     if (sessionToken) {
       this.sessionToken = sessionToken;
@@ -214,6 +218,34 @@ export class Merchi {
     } else {
       this.cartToken = getCookie('cart_token');
     }
+
+    let determinedBaseUri = backendUri;
+    if (!determinedBaseUri) {
+      const clientBackendUri = typeof window !== 'undefined' &&
+        (window as any).merchiBackendUri ?
+        (window as any).merchiBackendUri : undefined;
+      if (clientBackendUri) {
+        determinedBaseUri = clientBackendUri;
+      }
+    }
+    if (!determinedBaseUri) {
+      const envBackendUri = typeof process !== 'undefined' &&
+        process.env.MERCHI_BACKEND_URI ?
+        process.env.MERCHI_BACKEND_URI : undefined;
+      if (envBackendUri) {
+        determinedBaseUri = envBackendUri;
+      }
+    }
+    if (!determinedBaseUri) {
+      determinedBaseUri = 'https://api.merchi.co/';
+    }
+
+    // Ensure determinedBaseUri ends with a slash
+    if (!determinedBaseUri.endsWith('/')) {
+      determinedBaseUri += '/';
+    }
+
+    this.backendUri = determinedBaseUri;
 
     // re-export configured versions of all classes
     this.AutomaticPaymentRelationship = this.setupClass(
@@ -348,7 +380,8 @@ export class Merchi {
       /* istanbul ignore next */
       options.query.push(['cart_token', this.cartToken]);
     }
-    return apiFetch(resource, options, expectEmptyResponse);
+    // Pass the full backendUri, and resource is now just the endpoint
+    return apiFetch(this.backendUri, resource, options, expectEmptyResponse);
   };
 
   /* istanbul ignore next */
@@ -372,7 +405,8 @@ export class Merchi {
     if (this.cartToken) {
       options.query.push(['cart_token', this.cartToken]);
     }
-    return apiFetchWithProgress(resource, options, progressCallback);
+    // Pass the full backendUri, and resource is now just the endpoint
+    return apiFetchWithProgress(this.backendUri, resource, options, progressCallback);
   };
 
   public getCurrentUser = (options?: UserRequestOptions) => {

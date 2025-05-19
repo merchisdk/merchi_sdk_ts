@@ -45,11 +45,38 @@ Product.get(123).then(product => {
 
 ## Configuration
 
-The SDK by default is set up to make requests to the Merchi production server at `https://api.merchi.co/`.
+The SDK by default is set up to make requests to the Merchi production server at `https://api.merchi.co/v6/`.
 
-You can customize the API endpoint by setting:
-- `process.env.MERCHI_BACKEND_URI` in your Node.js environment
-- `window.merchiBackendUri` in the browser
+You can customize the API endpoint by:
+
+1.  Setting `process.env.MERCHI_BACKEND_URI` in your Node.js environment.
+2.  Setting `window.merchiBackendUri` in the browser.
+3.  Passing the `backendUri` directly to the `Merchi` constructor (highest precedence).
+
+The SDK will look for these in the order of 3, 2, 1, and finally use the default production URL if none are found.
+The API version (e.g., `/v6/`) will be appended automatically if not included in your custom URI, assuming the URI ends with the base domain (e.g. `https://custom.merchi.co`). If your custom URI already includes a path (e.g., `https://custom.merchi.co/api/`), ensure it ends with a trailing slash for the version to be appended correctly (e.g., `https://custom.merchi.co/api/v6/`).
+
+**Example: Passing `backendUri` to the constructor**
+
+```typescript
+import { Merchi } from 'merchi_sdk_ts';
+
+// Initialize the SDK with a custom backend URI
+// This URI should be the base path to your Merchi backend instance.
+// The API version (e.g., /v6/) will be appended.
+const customBackend = 'https://my-custom-merchi-instance.com/';
+const merchi = new Merchi(undefined, undefined, undefined, undefined, customBackend);
+
+// If your custom URI already includes a specific path and you want to control the full endpoint:
+const specificCustomBackend = 'https://my-custom-merchi-instance.com/api/custom_version/';
+const merchiSpecific = new Merchi(undefined, undefined, undefined, undefined, specificCustomBackend);
+
+// Now, all API calls made using this 'merchi' or 'merchiSpecific' instance
+// will be directed to your specified backend.
+// For example:
+// merchi.Product.get(1) will call https://my-custom-merchi-instance.com/v6/products/1/
+// merchiSpecific.Product.get(1) will call https://my-custom-merchi-instance.com/api/custom_version/products/1/
+```
 
 ## Authentication
 
