@@ -10,7 +10,6 @@ import { Domain } from './entities/domain.js';
 import { ExchangeRate } from './entities/exchange_rate.js';
 import { Job } from './entities/job.js';
 import { Menu } from './entities/menu.js';
-import { Backup } from './entities/backup.js';
 import { VariationField } from './entities/variation_field.js';
 import { VariationOption } from './entities/variation_option.js';
 import { ProductionComment } from './entities/production_comment.js';
@@ -113,7 +112,6 @@ export class Merchi {
   public AutomaticPaymentRelationship: typeof AutomaticPaymentRelationship;
   public Notification: typeof Notification;
   public EnrolledDomain: typeof EnrolledDomain;
-  public Backup: typeof Backup;
   public SystemRole: typeof SystemRole;
   public UserCompany: typeof UserCompany;
   public Variation: typeof Variation;
@@ -309,7 +307,6 @@ export class Merchi {
     this.ProductionComment = this.setupClass(
       ProductionComment
     ) as typeof ProductionComment;
-    this.Backup = this.setupClass(Backup) as typeof Backup;
     this.CountryTax = this.setupClass(CountryTax) as typeof CountryTax;
     this.ShortUrl = this.setupClass(ShortUrl) as typeof ShortUrl;
     this.Product = this.setupClass(Product) as typeof Product;
