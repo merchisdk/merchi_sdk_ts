@@ -1,4 +1,3 @@
-import { Backup } from './backup.js';
 import { Company } from './company.js';
 import { Component } from './component.js';
 import { Domain } from './domain.js';
@@ -83,9 +82,6 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: 'Variation'})
   public variations?: Variation[];
-
-  @MerchiFile.property({arrayType: 'Backup'})
-  public backups?: Backup[];
 
   @MerchiFile.property({arrayType: 'Notification'})
   public notification?: Notification[];

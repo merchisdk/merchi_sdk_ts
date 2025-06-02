@@ -1,7 +1,6 @@
 import { Address } from './entities/address.js';
 import { Assignment } from './entities/assignment.js';
 import { AutomaticPaymentRelationship } from './entities/automatic_payment_relationship.js';
-import { Backup } from './entities/backup.js';
 import { Bank } from './entities/bank.js';
 import { Cart } from './entities/cart.js';
 import { CartItem } from './entities/cart_item.js';
@@ -83,7 +82,6 @@ export {
   Address,
   Assignment,
   AutomaticPaymentRelationship,
-  Backup,
   Bank,
   Cart,
   CartItem,
