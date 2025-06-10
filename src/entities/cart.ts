@@ -22,6 +22,9 @@ export class Cart extends Entity {
   @Cart.property()
   public creationDate?: Date;
 
+  @Cart.property()
+  public updated?: Date;
+
   @Cart.property({type: Date})
   public ip?: string | null;
 
