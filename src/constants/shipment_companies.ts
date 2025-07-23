@@ -15,4 +15,5 @@ export enum ShipmentCompany {
   NZ_POST = 13,
   SENDLE = 14,
   USPS = 15,
+  FUSION_FREIGHT = 16,
 }
