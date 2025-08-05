@@ -143,6 +143,9 @@ export class Domain extends Entity {
   public googleMerchantApiKey?: string;
 
   @Domain.property({type: String})
+  public googleMerchantId?: string;
+
+  @Domain.property({type: String})
   public socialBitchute?: string | null;
 
   @Domain.property({type: String})
