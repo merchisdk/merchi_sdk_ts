@@ -111,6 +111,21 @@ export class Product extends Entity {
   public aiContext?: string;
 
   @Product.property({type: String})
+  public googleMerchantCenterId?: string;
+
+  @Product.property({type: String})
+  public googleMerchantCenterTitle?: string;
+
+  @Product.property({type: String})
+  public googleMerchantCenterDescription?: string;
+
+  @Product.property({type: String})
+  public googleMerchantCenterProductUrl?: string;
+
+  @Product.property({type: String})
+  public googleMerchantCenterPrice?: number;
+
+  @Product.property({type: String})
   public shopifyProductId?: string | null;
 
   @Product.property({type: String})

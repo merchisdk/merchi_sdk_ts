@@ -140,6 +140,12 @@ export class Domain extends Entity {
   public scalablePressApiKey?: string;
 
   @Domain.property({type: String})
+  public googleMerchantApiKey?: string;
+
+  @Domain.property({type: String})
+  public googleMerchantId?: string;
+
+  @Domain.property({type: String})
   public socialBitchute?: string | null;
 
   @Domain.property({type: String})
