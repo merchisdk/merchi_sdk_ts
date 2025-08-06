@@ -363,6 +363,7 @@ test('can list products with options set', () => {
     ['exclude_domains', '0,1'],
     ['exclude_jobs', '0,1'],
     ['group_buy_for_job_id', '88'],
+    ['google_merchant_center_exported', 'true'],
     ['group_buy_only', 'false'],
     ['in_domain', '2'],
     ['in_domain_name', 'example.com'],

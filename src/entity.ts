@@ -96,6 +96,7 @@ interface ListOptions {
   excludeComponents?: string[];
   excludeDomains?: number[];
   excludeJobs?: number[];
+  googleMerchantCenterExported?: boolean;
   groupBuyForJobId?: number;
   groupBuyOnly?: boolean;
   inbound?: boolean;
@@ -615,6 +616,10 @@ export class Entity {
       if (options.groupBuyForJobId !== undefined) {
         fetchOptions.query.push(['group_buy_for_job_id',
           options.groupBuyForJobId.toString()]);
+      }
+      if (options.googleMerchantCenterExported !== undefined) {
+        fetchOptions.query.push(['google_merchant_center_exported',
+          options.googleMerchantCenterExported.toString()]);
       }
       if (options.section !== undefined) {
         fetchOptions.query.push(['section', options.section.toString()]);
