@@ -59,8 +59,8 @@ export class Draft extends Entity {
   @Draft.property()
   public job?: Job;
 
-  @Draft.property()
-  public sharedWithJob?: Job;
+  @Draft.property({arrayType: 'Job'})
+  public sharedWithJobs?: Job[];
 
   public commentsYoungestToEldest = () => {
     if (this.comments === undefined) {
