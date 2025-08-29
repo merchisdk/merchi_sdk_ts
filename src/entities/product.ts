@@ -54,6 +54,9 @@ export class Product extends Entity {
   public minimum?: number;
 
   @Product.property()
+  public defaultQuantity?: number;
+
+  @Product.property()
   public minimumPrice?: number;
 
   @Product.property()
