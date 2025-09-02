@@ -39,6 +39,9 @@ export class Variation extends Entity {
   public unitCostTotal?: number;
 
   @Variation.property()
+  public isVisible?: boolean;
+
+  @Variation.property()
   public variationField?: VariationField;
 
   @Variation.property({type: VariationsGroup})
