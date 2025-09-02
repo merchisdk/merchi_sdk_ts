@@ -26,6 +26,9 @@ export class VariationOption extends Entity {
   @VariationOption.property()
   public include?: boolean;
 
+  @VariationOption.property()
+  public isVisible?: boolean;
+
   @VariationOption.property({type: MerchiFile})
   public linkedFile?: MerchiFile | null;
 

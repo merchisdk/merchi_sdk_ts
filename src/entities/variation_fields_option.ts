@@ -67,6 +67,9 @@ export class VariationFieldsOption extends Entity {
   @VariationFieldsOption.property({arrayType: 'InventoryUnitVariation'})
   public inventoryUnitVariations?: InventoryUnitVariation[];
 
+  @VariationFieldsOption.property({arrayType: 'VariationFieldsOption'})
+  public selectedBy?: VariationFieldsOption[];
+
   public totalCost = (quantity: number) => {
     if (this.variationCost === undefined) {
       throw new Error('variationCost is unknown');
