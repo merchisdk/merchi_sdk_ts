@@ -70,6 +70,7 @@ import { PhoneNumber } from './entities/phone_number.js';
 import { Variation } from './entities/variation.js';
 import { CartItem } from './entities/cart_item.js';
 import { Address } from './entities/address.js';
+import { AgentConversation } from './entities/agent_conversation.js';
 import { Assignment } from './entities/assignment.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
 import { SubscriptionPlan } from './entities/subscription_plan.js';
@@ -150,6 +151,7 @@ export class Merchi {
   public PhoneNumber: typeof PhoneNumber;
   public Company: typeof Company;
   public Address: typeof Address;
+  public AgentConversation: typeof AgentConversation;
   public ComponentTag: typeof ComponentTag;
   public Discount: typeof Discount;
   public DiscountGroup: typeof DiscountGroup;
@@ -318,6 +320,7 @@ export class Merchi {
       VariationFieldsOption
     ) as typeof VariationFieldsOption;
     this.Address = this.setupClass(Address) as typeof Address;
+    this.AgentConversation = this.setupClass(AgentConversation) as typeof AgentConversation;
     this.Item = this.setupClass(Item) as typeof Item;
     this.SupplyDomain = this.setupClass(SupplyDomain) as typeof SupplyDomain;
     this.DomainInvitation = this.setupClass(

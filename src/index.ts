@@ -1,4 +1,5 @@
 import { Address } from './entities/address.js';
+import { AgentConversation } from './entities/agent_conversation.js';
 import { Assignment } from './entities/assignment.js';
 import { AutomaticPaymentRelationship } from './entities/automatic_payment_relationship.js';
 import { Bank } from './entities/bank.js';
@@ -80,6 +81,7 @@ export {
   util,
   toastNotifications,
   Address,
+  AgentConversation,
   Assignment,
   AutomaticPaymentRelationship,
   Bank,
