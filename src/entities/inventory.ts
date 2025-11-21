@@ -26,6 +26,9 @@ export class Inventory extends Entity {
   public name?: string;
 
   @Inventory.property()
+  public position?: number;
+
+  @Inventory.property()
   public notes?: string;
 
   @Inventory.property()
