@@ -10,4 +10,5 @@ export enum FieldType {
   IMAGE_SELECT = 9,
   COLOUR_PICKER = 10,
   COLOUR_SELECT = 11,
+  TURNAROUND_TIME = 12,
 }
