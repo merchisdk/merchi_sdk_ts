@@ -82,6 +82,12 @@ export class VariationField extends Entity {
   public isHtml?: boolean;
 
   @VariationField.property()
+  public considerBusinessHours?: boolean;
+
+  @VariationField.property()
+  public shippingTimeIncluded?: boolean;
+
+  @VariationField.property()
   public sellerProductEditable?: boolean;
 
   @VariationField.property()
