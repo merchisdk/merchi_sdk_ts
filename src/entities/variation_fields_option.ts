@@ -38,6 +38,9 @@ export class VariationFieldsOption extends Entity {
   public position?: number;
 
   @VariationFieldsOption.property()
+  public deliveryDays?: number;
+
+  @VariationFieldsOption.property()
   public variationCost?: number;
 
   @VariationFieldsOption.property({type: 'DiscountGroup'})
