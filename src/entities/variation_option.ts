@@ -36,6 +36,9 @@ export class VariationOption extends Entity {
   public fieldName?: string;
 
   @VariationOption.property()
+  public userDeadline?: Date;
+
+  @VariationOption.property()
   public quantity?: number;
 
   @VariationOption.property()
