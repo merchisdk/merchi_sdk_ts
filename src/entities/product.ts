@@ -63,6 +63,9 @@ export class Product extends Entity {
   public minimumPerGroup?: boolean;
 
   @Product.property()
+  public groupsFirst?: boolean;
+
+  @Product.property()
   public deliveryDaysNormal?: number;
 
   @Product.property()
