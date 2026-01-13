@@ -87,11 +87,17 @@ export class User extends Entity {
   @User.property({type: String})
   public smsClientToken?: string | null;
 
-  @User.property()
+  @User.property({type: Boolean})
   public smsTokenConfirmed?: boolean;
 
-  @User.property()
+  @User.property({type: Number})
   public smsLoginThreshold?: number;
+
+  @User.property()
+  public jobCountAsClient?: number;
+
+  @User.property()
+  public totalInvoiceValue?: number;
 
   @User.property()
   public hasStore?: boolean;
