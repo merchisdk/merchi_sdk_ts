@@ -148,6 +148,8 @@ interface ListOptions {
   tab?: string;
   tags?: number[];
   tagsInternal?: number[];
+  excludeTags?: number[];
+  excludeTagsInternal?: number[];
   tagNames?: string[];
   teamOnly?: boolean;
   turnaroundTimeDays?: number;
@@ -632,6 +634,12 @@ export class Entity {
       }
       if (options.tags !== undefined) {
         fetchOptions.query.push(['tags', options.tags.join(',')]);
+      }
+      if (options.excludeTags !== undefined) {
+        fetchOptions.query.push(['exclude_tags', options.excludeTags.join(',')]);
+      }
+      if (options.excludeTagsInternal !== undefined) {
+        fetchOptions.query.push(['exclude_tags_internal', options.excludeTagsInternal.join(',')]);
       }
       if (options.tagsInternal !== undefined) {
         fetchOptions.query.push(['tags_internal', options.tagsInternal.join(',')]);

@@ -320,6 +320,8 @@ test('can list products with options set', () => {
     tab: 'job',
     tags: [2, 3, 5],
     tagsInternal: [2, 3, 5],
+    excludeTags: [6, 7, 8],
+    excludeTagsInternal: [6, 7, 8],
     tagNames: ['a'],
     teamOnly: false,
     turnaroundTimeDays: 7,
