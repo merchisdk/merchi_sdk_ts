@@ -120,6 +120,9 @@ export class Product extends Entity {
   public aiContext?: string;
 
   @Product.property({type: String})
+  public aiContextDrafting?: string;
+
+  @Product.property({type: String})
   public googleMerchantCenterId?: string;
 
   @Product.property({type: String})
