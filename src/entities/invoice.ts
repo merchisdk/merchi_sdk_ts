@@ -10,6 +10,7 @@ import { InternalTag } from './internal_tag.js';
 import { Item } from './item.js';
 import { Job } from './job.js';
 import { Quote } from './quote.js';
+import { Reminder } from './reminder.js';
 import { Notification } from './notification.js';
 import { Payment } from './payment.js';
 import { PhoneNumber } from './phone_number.js';
@@ -167,6 +168,9 @@ export class Invoice extends Entity {
 
   @Invoice.property({arrayType: 'Notification'})
   public notifications?: Notification[];
+
+  @Invoice.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Invoice.property({arrayType: 'Job'})
   public jobs?: Job[];

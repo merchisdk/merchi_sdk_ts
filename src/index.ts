@@ -48,6 +48,7 @@ import { Product } from './entities/product.js';
 import { ProductionComment } from './entities/production_comment.js';
 import { Quote } from './entities/quote.js';
 import { QuoteItem } from './entities/quote_item.js';
+import { Reminder } from './entities/reminder.js';
 import { RequestOptions, apiFetch, apiFetchWithProgress } from './request.js'; // eslint-disable-next-line no-unused-vars
 import { Session } from './entities/session.js';
 import { Shipment } from './entities/shipment.js';
@@ -131,6 +132,7 @@ export {
   ProductionComment,
   Quote,
   QuoteItem,
+  Reminder,
   RequestOptions,
   apiFetch,
   apiFetchWithProgress,

@@ -13,6 +13,7 @@ import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
+import { Reminder } from './reminder.js';
 import { Shipment } from './shipment.js';
 import { User } from './user.js';
 import { UserCompany } from './user_company.js';
@@ -233,6 +234,9 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Product'})
   public savedProducts?: Product[];
+
+  @Company.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Company.property({arrayType: 'Bank'})
   public banks?: Bank[];

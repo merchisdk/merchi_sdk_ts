@@ -13,6 +13,7 @@ import { Menu } from './menu.js';
 import { User } from './user.js';
 import { Notification } from './notification.js';
 import { Product } from './product.js';
+import { Reminder } from './reminder.js';
 import { Session } from './session.js';
 import { SupplyDomain } from './supply_domain.js';
 import { SeoDomainPage } from './seo_domain_page.js';
@@ -225,6 +226,9 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'Notification'})
   public notifications?: Notification[];
+
+  @Domain.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Domain.property({arrayType: 'Product'})
   public products?: Product[];

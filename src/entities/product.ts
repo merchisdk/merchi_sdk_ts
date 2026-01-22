@@ -11,6 +11,7 @@ import { DraftPreview } from './draft_preview.js';
 import { DraftTemplate } from './draft_template.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
+import { Reminder } from './reminder.js';
 import { InternalTag } from './internal_tag.js';
 import { Inventory } from './inventory.js';
 import { InventoryGroup } from './inventory_group.js';
@@ -325,6 +326,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  @Product.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Product.property({arrayType: 'Job'})
   public supplyChainRequestJobs?: Job[];
