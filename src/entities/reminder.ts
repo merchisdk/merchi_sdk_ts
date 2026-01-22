@@ -21,6 +21,15 @@ export class Reminder extends Entity {
   @Reminder.property()
   public user?: User;
 
+  @Reminder.property()
+  public userProfile?: User;
+
+  @Reminder.property()
+  public sendEmail?: boolean;
+
+  @Reminder.property()
+  public sendSms?: boolean;
+
   @Reminder.property({type: Date})
   public created?: Date;
 
