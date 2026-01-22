@@ -4,6 +4,7 @@ import { MerchiFile } from './file.js';
 import { Job } from './job.js';
 import { Notification } from './notification.js';
 import { ProductionComment } from './production_comment.js';
+import { Reminder } from './reminder.js';
 import { Shipment } from './shipment.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
@@ -71,6 +72,9 @@ export class Assignment extends Entity {
 
   @Assignment.property({arrayType: 'Notification'})
   public notifications?: Notification[];
+
+  @Assignment.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Assignment.property({arrayType: 'MerchiFile'})
   public productionFiles?: MerchiFile[];

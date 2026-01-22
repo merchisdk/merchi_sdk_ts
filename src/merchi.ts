@@ -46,6 +46,7 @@ import { SeoDomainPage } from './entities/seo_domain_page.js';
 import { ShortUrl } from './entities/short_url.js';
 import { VariationsGroup } from './entities/variations_group.js';
 import { Quote } from './entities/quote.js';
+import { Reminder } from './entities/reminder.js';
 import { Draft } from './entities/draft.js';
 import { DraftPreview } from './entities/draft_preview.js';
 import { DraftPreviewLayer } from './entities/draft_preview_layer.js';
@@ -179,6 +180,7 @@ export class Merchi {
   public Component: typeof Component;
   public ComponentVersion : typeof ComponentVersion;
   public QuoteItem: typeof QuoteItem;
+  public Reminder: typeof Reminder;
   public MatchingInventory: typeof MatchingInventory;
   public SubscriptionPlan: typeof SubscriptionPlan;
 
@@ -304,6 +306,7 @@ export class Merchi {
       CompanyInvitation
     ) as typeof CompanyInvitation;
     this.Quote = this.setupClass(Quote) as typeof Quote;
+    this.Reminder = this.setupClass(Reminder) as typeof Reminder;
     this.EmailAddress = this.setupClass(EmailAddress) as typeof EmailAddress;
     this.SeoDomainPage = this.setupClass(SeoDomainPage) as typeof SeoDomainPage;
     this.ProductionComment = this.setupClass(

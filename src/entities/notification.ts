@@ -8,6 +8,7 @@ import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { JobComment } from './job_comment.js';
 import { ProductionComment } from './production_comment.js';
+import { Reminder } from './reminder.js';
 import { ShortUrl } from './short_url.js';
 import { User } from './user.js';
 
@@ -96,4 +97,7 @@ export class Notification extends Entity {
 
   @Notification.property({type: MerchiFile})
   public attachment?: MerchiFile | null;
+
+  @Notification.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 }

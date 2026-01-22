@@ -18,6 +18,7 @@ import { Notification } from './notification.js';
 import { Payment } from './payment.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
+import { Reminder } from './reminder.js';
 import { ProductionComment } from './production_comment.js';
 import { Session } from './session.js';
 import { Shipment } from './shipment.js';
@@ -215,6 +216,9 @@ export class User extends Entity {
 
   @User.property({ arrayType: 'Notification' })
   public sentNotifications?: Notification[];
+
+  @User.property({ arrayType: 'Reminder' })
+  public reminders?: Reminder[];
 
   @User.property({ arrayType: 'Assignment' })
   public assignments?: Assignment[];

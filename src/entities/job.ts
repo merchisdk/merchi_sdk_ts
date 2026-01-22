@@ -16,6 +16,7 @@ import { JobComment } from './job_comment.js';
 import { Notification } from './notification.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
+import { Reminder } from './reminder.js';
 import { RequestOptions } from '../request.js';
 import { Shipment } from './shipment.js';
 import { User } from './user.js';
@@ -302,6 +303,9 @@ export class Job extends Entity {
 
   @Job.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];
+
+  @Job.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   @Job.property()
   public supplyAssignment?: Assignment;

@@ -7,6 +7,7 @@ import { Entity } from '../entity.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
 import { Quote } from './quote.js';
+import { Reminder } from './reminder.js';
 import { Job } from './job.js';
 import { MerchiFile } from './file.js';
 import { User } from './user.js';
@@ -156,6 +157,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Job'})
   public jobs?: Job[];
+
+  @Shipment.property({arrayType: 'Reminder'})
+  public reminders?: Reminder[];
 
   public calculateSubTotal = (options?: CalculateOptions) => {
     const { strictEmbed = true } = options ? options : {};
