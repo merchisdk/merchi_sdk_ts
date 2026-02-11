@@ -1,8 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import { ErrorType, getErrorFromCode } from './constants/errors.js';
 
-export interface RequestOptions extends RequestInit {
+export interface RequestOptions extends Omit<RequestInit, 'body' | 'headers'> {
+  /**
+   * Extra query params appended to the request URL.
+   */
   query?: string[][];
+  /**
+   * Request headers. When sending JSON bodies, `Content-Type: application/json`
+   * will be applied if not already present.
+   */
+  headers?: HeadersInit;
+  /**
+   * Body must be either:
+   * - `FormData` (for multipart/form-data requests), or
+   * - a JSON-serialisable object/array (will be JSON-stringified automatically)
+   */
+  body?: FormData | Record<string, unknown> | unknown[];
 }
 
 export class ApiError extends Error {
@@ -57,6 +71,54 @@ function ensureVersionInUri(baseUrl: string): UriComponents {
   };
 }
 
+function isFormData(value: any): value is FormData {
+  // FormData exists in browsers/jsdom; guard for environments without it.
+  return typeof FormData !== 'undefined' && value instanceof FormData;
+}
+
+function toHeaders(headers: HeadersInit | undefined): Headers {
+  return new Headers(headers || undefined);
+}
+
+function stripContentType(headers: Headers) {
+  // Prevent incorrect boundary handling when using FormData.
+  headers.delete('content-type');
+}
+
+function normaliseBodyAndHeaders(options?: RequestOptions): RequestInit | undefined {
+  if (!options) return undefined;
+
+  const headers = toHeaders(options.headers);
+  const body = (options as any).body;
+
+  // Body omitted.
+  if (body === undefined || body === null) {
+    return { ...options, headers } as RequestInit;
+  }
+
+  // Multipart/form-data.
+  if (isFormData(body)) {
+    stripContentType(headers);
+    return { ...options, headers, body } as RequestInit;
+  }
+
+  // JSON: caller must pass a JSON-serialisable object/array.
+  if (typeof body !== 'object') {
+    throw new Error(
+      'RequestOptions.body must be a JSON object/array or a FormData instance.'
+    );
+  }
+
+  if (!headers.has('content-type')) {
+    headers.set('Content-Type', 'application/json');
+  }
+  if (!headers.has('accept')) {
+    headers.set('Accept', 'application/json');
+  }
+
+  return { ...options, headers, body: JSON.stringify(body) } as RequestInit;
+}
+
 export function backendFetch(baseUrl: string, resource: string, options?: RequestOptions) {
   const { baseUrl: cleanBaseUrl, version: apiVersion } = ensureVersionInUri(baseUrl);
   // Remove leading slash from resource if it exists to prevent double slashes
@@ -67,7 +129,8 @@ export function backendFetch(baseUrl: string, resource: string, options?: Reques
       url.searchParams.append(entry[0], entry[1]);
     }
   }
-  return fetch(url.toString(), options);
+  const requestInit = normaliseBodyAndHeaders(options);
+  return fetch(url.toString(), requestInit);
 }
 
 export function apiFetch(
@@ -76,7 +139,7 @@ export function apiFetch(
   options?: RequestOptions,
   expectEmptyResponse?: boolean
 ) {
-  return backendFetch(baseUrl, resource, options as RequestInit | undefined).then(
+  return backendFetch(baseUrl, resource, options).then(
     function (response) {
       if (response.status < 200 || response.status > 299) {
         return response.json().then(function (json) {
@@ -97,7 +160,7 @@ export function apiFetchWithProgress(
   options?: RequestOptions,
   progressCallback?: (progress: number) => void
 ) {
-  return backendFetch(baseUrl, resource, options as RequestInit | undefined).then(
+  return backendFetch(baseUrl, resource, options).then(
     function (response) {
       if (!response.body) {
         const err = new ApiError('empty response');

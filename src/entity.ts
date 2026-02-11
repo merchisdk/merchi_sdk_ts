@@ -48,11 +48,21 @@ interface FromJsonOptions {
 interface CreateOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
+  /**
+   * Set to true to send `FormData` (via `toFormData()`).
+   * Defaults to JSON (via `toJson()`).
+   */
+  useFormData?: boolean;
 }
 
 interface SaveOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
+  /**
+   * Set to true to send `FormData` (via `toFormData()`).
+   * Defaults to JSON (via `toJson()`).
+   */
+  useFormData?: boolean;
 }
 
 interface DeleteOptions {
@@ -707,9 +717,9 @@ export class Entity {
     const resourceName: string = constructor.resourceName;
     const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
-    const data = this.toFormData();
-    const fetchOptions: RequestOptions = {method: 'PATCH',
-      body: data};
+    const useFormData = options?.useFormData === true;
+    const body = useFormData ? this.toFormData() : this.toJson();
+    const fetchOptions: RequestOptions = {method: 'PATCH', body: body};
     fetchOptions.query = [];
     if (options && options.embed) {
       fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
@@ -728,10 +738,10 @@ export class Entity {
     {resourceName = (this.constructor as typeof Entity).resourceName}
   ) => (options?: CreateOptions) => {
     const resource = `/${resourceName}/`;
-    const data = this.toFormData();
     const singularName = (this.constructor as typeof Entity).singularName;
-    const fetchOptions: RequestOptions = {method: 'POST',
-      body: data};
+    const useFormData = options?.useFormData === true;
+    const body = useFormData ? this.toFormData() : this.toJson();
+    const fetchOptions: RequestOptions = {method: 'POST', body: body};
 
     fetchOptions.query = [];
     if (options && options.embed) {

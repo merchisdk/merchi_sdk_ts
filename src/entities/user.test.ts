@@ -17,12 +17,13 @@ test('can issue public create request to server', () => {
   const merchi = new Merchi();
   const user = new merchi.User();
   user.name = 'Test User';
-  const data = Array.from((user.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
   user.publicCreate();
   const fetchUrl = fetch.mock.calls[0][0];
-  const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
-  expect(sentToServer).toEqual(data);
+  const sentBody = fetch.mock.calls[0][1]['body'];
+  expect(typeof sentBody).toBe('string');
+  expect(JSON.parse(sentBody)).toEqual({ name: 'Test User' });
+  expect(fetch.mock.calls[0][1]['headers'].get('Content-Type')).toBe('application/json');
   expect(fetchUrl).toMatch('public_user_create');
 });
 

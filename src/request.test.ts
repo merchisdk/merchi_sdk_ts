@@ -11,6 +11,33 @@ test('can pass through data from server', () => {
   });
 });
 
+test('serialises plain object body as JSON by default', () => {
+  const fetch = mockFetch(true, {'animal': 'turtle'}, 200);
+  return apiFetch('https://api.merchi.co/', '/test', {
+    method: 'POST',
+    body: { a: 1 }
+  }).then(() => {
+    const init = fetch.mock.calls[0][1];
+    expect(init.body).toBe(JSON.stringify({ a: 1 }));
+    expect(init.headers.get('Content-Type')).toBe('application/json');
+    expect(init.headers.get('Accept')).toBe('application/json');
+  });
+});
+
+test('passes through FormData body without forcing Content-Type', () => {
+  const fetch = mockFetch(true, {'animal': 'turtle'}, 200);
+  const fd = new FormData();
+  fd.set('x', 'y');
+  return apiFetch('https://api.merchi.co/', '/test', {
+    method: 'POST',
+    body: fd
+  }).then(() => {
+    const init = fetch.mock.calls[0][1];
+    expect(init.body).toBe(fd);
+    expect(init.headers.get('Content-Type')).toBe(null);
+  });
+});
+
 test('can pass through data from server with override url', () => {
   (window as any).merchiBackendUri = 'http://override.example.com/';
   mockFetch(true, {'animal': 'turtle'}, 200);
