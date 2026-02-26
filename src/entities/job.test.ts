@@ -42,7 +42,7 @@ test('add two files to job', () => {
   f2.fromFormFile(new File([''], '2'));
   job.clientFiles = [f1, f2];
   const fetch = mockFetch(true, {'job': {}}, 200);
-  return job.save().then(() => {
+  return job.save({ useFormData: true }).then(() => {
     const data: any = Array.from(fetch.mock.calls[0][1]['body'].entries());
     expect(data[1][1]).toEqual('0');
     expect(data[2][1]).toEqual('1');

@@ -477,13 +477,11 @@ test('can save product', () => {
   p.categories = [c2];
   p.domain = d;
   c1.products = [p];
-  c1.save();
   d.domain = '3onrb6o4';
   p.name = 'pHyz7ZucK#';
   c2.name = '8&OaUsDgJ$ev3FYZ3';
-  p.save();
   const fetch = mockFetch(true, {}, 200);
-  c1.save();
+  c1.save({ useFormData: true });
   const correct =  [['products-0-name', 'pHyz7ZucK#'],
     ['products-0-categories-0-name', '8&OaUsDgJ$ev3FYZ3'],
     ['products-0-categories-count', '1'],

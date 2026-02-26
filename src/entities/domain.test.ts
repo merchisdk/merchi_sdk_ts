@@ -27,11 +27,12 @@ test('can create domain on server', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
   domain.domain = 'example.com';
-  const data = Array.from((domain.toFormData() as any).entries());
   const fetch = mockFetch(true, {}, 201);
   domain.create();
-  const sentToServer = Array.from(fetch.mock.calls[0][1]['body'].entries());
-  expect(sentToServer).toEqual(data);
+  const sentBody = fetch.mock.calls[0][1]['body'];
+  expect(typeof sentBody).toBe('string');
+  expect(JSON.parse(sentBody)).toEqual({ domain: 'example.com' });
+  expect(fetch.mock.calls[0][1]['headers'].get('Content-Type')).toBe('application/json');
 });
 
 test('can delete domain', () => {
