@@ -1,0 +1,26 @@
+import { Entity } from '../entity.js';
+import { User } from './user.js';
+
+export class SupportMessage extends Entity {
+  protected static resourceName = 'support_messages';
+  protected static singularName = 'supportMessage';
+  protected static pluralName = 'supportMessages';
+
+  @SupportMessage.property()
+  public id?: number;
+
+  @SupportMessage.property()
+  public conversationId?: number;
+
+  @SupportMessage.property()
+  public senderType?: string;  // 'guest' | 'manager'
+
+  @SupportMessage.property()
+  public user?: User | null;
+
+  @SupportMessage.property()
+  public content?: string;
+
+  @SupportMessage.property({ type: Date })
+  public creationDate?: Date | null;
+}

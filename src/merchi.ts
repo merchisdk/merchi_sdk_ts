@@ -72,6 +72,9 @@ import { Variation } from './entities/variation.js';
 import { CartItem } from './entities/cart_item.js';
 import { Address } from './entities/address.js';
 import { AgentConversation } from './entities/agent_conversation.js';
+import { DomainChatSettings } from './entities/domain_chat_settings.js';
+import { SupportConversation } from './entities/support_conversation.js';
+import { SupportMessage } from './entities/support_message.js';
 import { Assignment } from './entities/assignment.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
 import { SubscriptionPlan } from './entities/subscription_plan.js';
@@ -153,6 +156,9 @@ export class Merchi {
   public Company: typeof Company;
   public Address: typeof Address;
   public AgentConversation: typeof AgentConversation;
+  public DomainChatSettings: typeof DomainChatSettings;
+  public SupportConversation: typeof SupportConversation;
+  public SupportMessage: typeof SupportMessage;
   public ComponentTag: typeof ComponentTag;
   public Discount: typeof Discount;
   public DiscountGroup: typeof DiscountGroup;
@@ -324,6 +330,9 @@ export class Merchi {
     ) as typeof VariationFieldsOption;
     this.Address = this.setupClass(Address) as typeof Address;
     this.AgentConversation = this.setupClass(AgentConversation) as typeof AgentConversation;
+    this.DomainChatSettings = this.setupClass(DomainChatSettings) as typeof DomainChatSettings;
+    this.SupportConversation = this.setupClass(SupportConversation) as typeof SupportConversation;
+    this.SupportMessage = this.setupClass(SupportMessage) as typeof SupportMessage;
     this.Item = this.setupClass(Item) as typeof Item;
     this.SupplyDomain = this.setupClass(SupplyDomain) as typeof SupplyDomain;
     this.DomainInvitation = this.setupClass(
