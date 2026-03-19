@@ -17,6 +17,7 @@ import { Reminder } from './reminder.js';
 import { Session } from './session.js';
 import { SupplyDomain } from './supply_domain.js';
 import { SeoDomainPage } from './seo_domain_page.js';
+import { DomainChatSettings } from './domain_chat_settings.js';
 import { Theme } from './theme.js';
 import { DomainType } from '../constants/domain_types.js';
 import { ShipmentMethod } from './shipment_method.js';
@@ -256,6 +257,9 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'SeoDomainPage'})
   public seoDomainPages?: SeoDomainPage[];
+
+  @Domain.property({ type: DomainChatSettings })
+  public domainChatSettings?: DomainChatSettings | null;
 
   @Domain.property({arrayType: 'Theme'})
   public themes?: Theme[];
