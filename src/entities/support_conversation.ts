@@ -17,13 +17,17 @@ export class SupportConversation extends Entity {
   @SupportConversation.property({ type: Date })
   public lastMessageAt?: Date | null;
 
-  @SupportConversation.property()
+  @SupportConversation.property({ type: Domain })
   public domain?: Domain;
 
-  @SupportConversation.property()
+  @SupportConversation.property({ type: String })
   public guestId?: string | null;
 
-  @SupportConversation.property()
+  /** Opaque client fingerprint for repeat-visitor / spam correlation (max 512 chars). */
+  @SupportConversation.property({ type: String })
+  public clientFingerprint?: string | null;
+
+  @SupportConversation.property({ type: User })
   public user?: User | null;
 
   @SupportConversation.property({ arrayType: 'SupportMessage' })

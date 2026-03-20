@@ -85,6 +85,7 @@ interface ListOptions {
   companyId?: number;
   companySupplierId?: number;
   componentId?: number;
+  conversationId?: number;
   dateFrom?: Date;
   dateTo?: Date;
   domainRoles?: Role[];
@@ -614,6 +615,10 @@ export class Entity {
       if (options.componentId !== undefined) {
         fetchOptions.query.push(['component_id',
           options.componentId.toString()]);
+      }
+      if (options.conversationId !== undefined) {
+        fetchOptions.query.push(['conversation_id',
+          options.conversationId.toString()]);
       }
       if (options.groupBuyForJobId !== undefined) {
         fetchOptions.query.push(['group_buy_for_job_id',
