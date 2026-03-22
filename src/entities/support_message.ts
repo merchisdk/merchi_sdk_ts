@@ -1,4 +1,5 @@
 import { Entity } from '../entity.js';
+import { SupportConversation } from './support_conversation.js';
 import { User } from './user.js';
 
 export class SupportMessage extends Entity {
@@ -9,16 +10,16 @@ export class SupportMessage extends Entity {
   @SupportMessage.property()
   public id?: number;
 
-  @SupportMessage.property()
-  public conversationId?: number;
+  @SupportMessage.property({ type: SupportConversation })
+  public conversation?: SupportConversation;
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: String })
   public senderType?: string;  // 'guest' | 'manager'
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: User })
   public user?: User | null;
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: String })
   public content?: string;
 
   @SupportMessage.property({ type: Date })

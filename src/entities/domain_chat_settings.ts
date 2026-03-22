@@ -39,4 +39,7 @@ export class DomainChatSettings extends Entity {
 
   @DomainChatSettings.property()
   public notifyEmailNewMessage?: boolean;
+
+  @DomainChatSettings.property()
+  public requireGuestContact?: boolean;
 }

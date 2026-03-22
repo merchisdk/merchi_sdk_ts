@@ -259,6 +259,7 @@ test('can list products with options set', () => {
     companyId: 91,
     companySupplierId: 100,
     componentId: 37,
+    conversationId: 1,
     dateFrom: new Date(0),
     dateTo: new Date(1),
     doesNotHaveAdminDomain: false,
