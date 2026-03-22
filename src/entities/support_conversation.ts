@@ -1,4 +1,5 @@
 import { Domain } from './domain.js';
+import { DomainTag } from './domain_tag.js';
 import { Entity } from '../entity.js';
 import { User } from './user.js';
 import { SupportMessage } from './support_message.js';
@@ -17,11 +18,23 @@ export class SupportConversation extends Entity {
   @SupportConversation.property({ type: Date })
   public lastMessageAt?: Date | null;
 
+  @SupportConversation.property({ type: Date })
+  public archivedAt?: Date | null;
+
   @SupportConversation.property({ type: Domain })
   public domain?: Domain;
 
+  @SupportConversation.property({ arrayType: 'DomainTag' })
+  public tags?: DomainTag[];
+
   @SupportConversation.property({ type: String })
   public guestId?: string | null;
+
+  @SupportConversation.property({ type: String })
+  public guestContactEmail?: string | null;
+
+  @SupportConversation.property({ type: String })
+  public guestContactName?: string | null;
 
   /** Opaque client fingerprint for repeat-visitor / spam correlation (max 512 chars). */
   @SupportConversation.property({ type: String })

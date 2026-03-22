@@ -13,13 +13,13 @@ export class SupportMessage extends Entity {
   @SupportMessage.property({ type: SupportConversation })
   public conversation?: SupportConversation;
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: String })
   public senderType?: string;  // 'guest' | 'manager'
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: User })
   public user?: User | null;
 
-  @SupportMessage.property()
+  @SupportMessage.property({ type: String })
   public content?: string;
 
   @SupportMessage.property({ type: Date })
