@@ -42,4 +42,7 @@ export class DomainChatSettings extends Entity {
 
   @DomainChatSettings.property()
   public requireGuestContact?: boolean;
+
+  @DomainChatSettings.property()
+  public embedTestMode?: boolean;
 }
