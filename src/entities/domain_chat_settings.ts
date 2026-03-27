@@ -1,6 +1,7 @@
 import { Domain } from './domain.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
+import { User } from './user.js';
 
 export class DomainChatSettings extends Entity {
   protected static resourceName = 'domain_chat_settings';
@@ -39,6 +40,9 @@ export class DomainChatSettings extends Entity {
 
   @DomainChatSettings.property()
   public notifyEmailNewMessage?: boolean;
+
+  @DomainChatSettings.property({ arrayType: 'User' })
+  public assignedUsers?: User[];
 
   @DomainChatSettings.property()
   public requireGuestContact?: boolean;
