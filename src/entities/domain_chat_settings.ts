@@ -49,4 +49,13 @@ export class DomainChatSettings extends Entity {
 
   @DomainChatSettings.property()
   public embedTestMode?: boolean;
+
+  @DomainChatSettings.property()
+  public autoOpenDelay?: number | null;
+
+  @DomainChatSettings.property()
+  public autoOpenMessage?: string | null;
+
+  @DomainChatSettings.property()
+  public autoOpenMode?: string | null;
 }
