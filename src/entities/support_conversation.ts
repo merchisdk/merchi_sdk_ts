@@ -45,4 +45,7 @@ export class SupportConversation extends Entity {
 
   @SupportConversation.property({ arrayType: 'SupportMessage' })
   public messages?: SupportMessage[];
+
+  @SupportConversation.property()
+  public messagesCount?: number;
 }
