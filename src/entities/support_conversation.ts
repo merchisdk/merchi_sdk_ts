@@ -40,6 +40,14 @@ export class SupportConversation extends Entity {
   @SupportConversation.property({ type: String })
   public clientFingerprint?: string | null;
 
+  /** Manager-assigned display name for this conversation. */
+  @SupportConversation.property({ type: String })
+  public name?: string | null;
+
+  /** Freeform internal notes written by managers (not visible to guests). */
+  @SupportConversation.property({ type: String })
+  public notes?: string | null;
+
   @SupportConversation.property({ type: User })
   public user?: User | null;
 
