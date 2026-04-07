@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/entities/address.ts</title>
+    <title>Code coverage report for src/entities/agent_skill_version.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/entities</a> address.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/entities</a> agent_skill_version.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>0/38</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>0/35</span>
             </div>
         
             
@@ -127,14 +127,7 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -170,93 +163,97 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Bank } from './bank.js';
-import { Company } from './company.js';
-<span class="cstat-no" title="statement not covered" >import { Entity } from '../entity.js';</span>
-import { Inventory } from './inventory.js';
-import { Invoice } from './invoice.js';
-import { Job } from './job.js';
-import { Shipment } from './shipment.js';
-import { User } from './user.js';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Entity } from '../entity.js';</span>
+import { RequestOptions } from '../request.js';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export class <span class="cstat-no" title="statement not covered" >A</span>ddress </span>extends <span class="cstat-no" title="statement not covered" >Entity </span>{</span>
-  protected static <span class="cstat-no" title="statement not covered" >resourceName = 'addresses';</span>
-  protected static <span class="cstat-no" title="statement not covered" >singularName = 'address';</span>
-  protected static <span class="cstat-no" title="statement not covered" >pluralName = 'addresses';</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export class <span class="cstat-no" title="statement not covered" >A</span></span>gentSkillVersion </span>extends <span class="cstat-no" title="statement not covered" >Entity </span>{</span>
+  protected static <span class="cstat-no" title="statement not covered" >resourceName = 'agent_skill_versions';</span>
+  protected static <span class="cstat-no" title="statement not covered" >singularName = 'agentSkillVersion';</span>
+  protected static <span class="cstat-no" title="statement not covered" >pluralName = 'agentSkillVersions';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: Date})</span>
-  public archived?: Date | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public id?: string;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property()</span>
-  public id?: number;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public skillId?: string;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public lineOne?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public versionNumber?: number;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public lineTwo?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public contentMd?: string;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public city?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public contentHash?: string;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public state?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property()</span>
+  public status?: string;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public country?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property({ type: Date })</span>
+  public requestedAt?: Date | null;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({type: String})</span>
-  public postcode?: string | null;
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property({ type: Date })</span>
+  public publishedAt?: Date | null;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Shipment'})</span>
-  public shipmentAsSenderAddress?: Shipment[];
+<span class="cstat-no" title="statement not covered" >  @AgentSkillVersion.property({ type: Date })</span>
+  public disabledAt?: Date | null;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Shipment'})</span>
-  public shipmentsAsReceiverAddress?: Shipment[];
+  public <span class="cstat-no" title="statement not covered" >submit = <span class="fstat-no" title="function not covered" >(s</span>killId: string) =&gt; {</span>
+    const resource = <span class="cstat-no" title="statement not covered" >`/agent_skills/${skillId}/versions/${this.id}/submit/`;</span>
+    const fetchOptions: RequestOptions = <span class="cstat-no" title="statement not covered" >{ method: 'POST' };</span>
+<span class="cstat-no" title="statement not covered" >    return this.merchi.authenticatedFetch(resource, fetchOptions).then(<span class="fstat-no" title="function not covered" >(d</span>ata: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.fromJson(data.agentSkillVersion);</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    });
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Bank'})</span>
-  public banks?: Bank[];
+  public <span class="cstat-no" title="statement not covered" >approve = <span class="fstat-no" title="function not covered" >(s</span>killId: string, comment: string) =&gt; {</span>
+    const resource = <span class="cstat-no" title="statement not covered" >`/agent_skills/${skillId}/versions/${this.id}/approve/`;</span>
+    const fetchOptions: RequestOptions = <span class="cstat-no" title="statement not covered" >{ method: 'POST', body: new FormData() };</span>
+    (<span class="cstat-no" title="statement not covered" >fetchOptions.body as FormData).set('comment', comment);</span>
+<span class="cstat-no" title="statement not covered" >    return this.merchi.authenticatedFetch(resource, fetchOptions).then(<span class="fstat-no" title="function not covered" >(d</span>ata: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.fromJson(data.agentSkillVersion);</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    });
+  };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'User'})</span>
-  public users?: User[];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Inventory'})</span>
-  public inventories?: Inventory[];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Job'})</span>
-  public jobs?: Job[];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Job'})</span>
-  public productedJobs?: Job[];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Invoice'})</span>
-  public shippingTo?: Invoice[];
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  @Address.property({arrayType: 'Company'})</span>
-  public companies?: Company[];
+  public <span class="cstat-no" title="statement not covered" >reject = <span class="fstat-no" title="function not covered" >(s</span>killId: string, comment: string) =&gt; {</span>
+    const resource = <span class="cstat-no" title="statement not covered" >`/agent_skills/${skillId}/versions/${this.id}/reject/`;</span>
+    const fetchOptions: RequestOptions = <span class="cstat-no" title="statement not covered" >{ method: 'POST', body: new FormData() };</span>
+    (<span class="cstat-no" title="statement not covered" >fetchOptions.body as FormData).set('comment', comment);</span>
+<span class="cstat-no" title="statement not covered" >    return this.merchi.authenticatedFetch(resource, fetchOptions).then(<span class="fstat-no" title="function not covered" >(d</span>ata: any) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.fromJson(data.agentSkillVersion);</span>
+<span class="cstat-no" title="statement not covered" >      return this;</span>
+    });
+  };
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/207</span>
+                <span class='fraction'>0/213</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/205</span>
+                <span class='fraction'>0/211</span>
             </div>
         
             
@@ -497,7 +497,16 @@
 <a name='L432'></a><a href='#L432'>432</a>
 <a name='L433'></a><a href='#L433'>433</a>
 <a name='L434'></a><a href='#L434'>434</a>
-<a name='L435'></a><a href='#L435'>435</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L435'></a><a href='#L435'>435</a>
+<a name='L436'></a><a href='#L436'>436</a>
+<a name='L437'></a><a href='#L437'>437</a>
+<a name='L438'></a><a href='#L438'>438</a>
+<a name='L439'></a><a href='#L439'>439</a>
+<a name='L440'></a><a href='#L440'>440</a>
+<a name='L441'></a><a href='#L441'>441</a>
+<a name='L442'></a><a href='#L442'>442</a>
+<a name='L443'></a><a href='#L443'>443</a>
+<a name='L444'></a><a href='#L444'>444</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -578,6 +587,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -606,6 +618,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -689,6 +702,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -827,6 +842,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1005,6 +1023,9 @@
 <span class="cstat-no" title="statement not covered" >import { CartItem } from './entities/cart_item.js';</span>
 <span class="cstat-no" title="statement not covered" >import { Address } from './entities/address.js';</span>
 <span class="cstat-no" title="statement not covered" >import { AgentConversation } from './entities/agent_conversation.js';</span>
+<span class="cstat-no" title="statement not covered" >import { AgentSkill } from './entities/agent_skill.js';</span>
+<span class="cstat-no" title="statement not covered" >import { AgentSkillVersion } from './entities/agent_skill_version.js';</span>
+<span class="cstat-no" title="statement not covered" >import { AgentSkillApproval } from './entities/agent_skill_approval.js';</span>
 <span class="cstat-no" title="statement not covered" >import { DomainChatSettings } from './entities/domain_chat_settings.js';</span>
 <span class="cstat-no" title="statement not covered" >import { SupportConversation } from './entities/support_conversation.js';</span>
 <span class="cstat-no" title="statement not covered" >import { SupportMessage } from './entities/support_message.js';</span>
@@ -1089,6 +1110,9 @@ export const <span class="cstat-no" title="statement not covered" >API_VERSION =
   public Company: typeof Company;
   public Address: typeof Address;
   public AgentConversation: typeof AgentConversation;
+  public AgentSkill: typeof AgentSkill;
+  public AgentSkillVersion: typeof AgentSkillVersion;
+  public AgentSkillApproval: typeof AgentSkillApproval;
   public DomainChatSettings: typeof DomainChatSettings;
   public SupportConversation: typeof SupportConversation;
   public SupportMessage: typeof SupportMessage;
@@ -1263,6 +1287,9 @@ export const <span class="cstat-no" title="statement not covered" >API_VERSION =
     ) as typeof VariationFieldsOption;
 <span class="cstat-no" title="statement not covered" >    this.Address = this.setupClass(Address) as typeof Address;</span>
 <span class="cstat-no" title="statement not covered" >    this.AgentConversation = this.setupClass(AgentConversation) as typeof AgentConversation;</span>
+<span class="cstat-no" title="statement not covered" >    this.AgentSkill = this.setupClass(AgentSkill) as typeof AgentSkill;</span>
+<span class="cstat-no" title="statement not covered" >    this.AgentSkillVersion = this.setupClass(AgentSkillVersion) as typeof AgentSkillVersion;</span>
+<span class="cstat-no" title="statement not covered" >    this.AgentSkillApproval = this.setupClass(AgentSkillApproval) as typeof AgentSkillApproval;</span>
 <span class="cstat-no" title="statement not covered" >    this.DomainChatSettings = this.setupClass(DomainChatSettings) as typeof DomainChatSettings;</span>
 <span class="cstat-no" title="statement not covered" >    this.SupportConversation = this.setupClass(SupportConversation) as typeof SupportConversation;</span>
 <span class="cstat-no" title="statement not covered" >    this.SupportMessage = this.setupClass(SupportMessage) as typeof SupportMessage;</span>
@@ -1372,7 +1399,7 @@ export const <span class="cstat-no" title="statement not covered" >API_VERSION =
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-03-27T21:19:36.477Z
+                at 2026-04-05T23:47:51.061Z
             </div>
         <script src="../prettify.js"></script>
         <script>

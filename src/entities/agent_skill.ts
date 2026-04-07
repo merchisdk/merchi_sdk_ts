@@ -1,6 +1,9 @@
 import { Entity } from '../entity.js';
 import { RequestOptions } from '../request.js';
 import { AgentSkillVersion } from './agent_skill_version.js';
+import { Category } from './category.js';
+import { Domain } from './domain.js';
+import { Product } from './product.js';
 
 interface CreateDraftOptions {
   contentMd?: string;
@@ -20,6 +23,18 @@ export class AgentSkill extends Entity {
 
   @AgentSkill.property()
   public title?: string;
+
+  @AgentSkill.property()
+  public scope?: 'global' | 'domain' | 'domain_category' | 'domain_product';
+
+  @AgentSkill.property({ type: Domain })
+  public domain?: Domain | null;
+
+  @AgentSkill.property({ type: Category })
+  public category?: Category | null;
+
+  @AgentSkill.property({ type: Product })
+  public product?: Product | null;
 
   @AgentSkill.property()
   public description?: string | null;

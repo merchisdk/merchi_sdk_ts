@@ -41,6 +41,9 @@ export class DomainChatSettings extends Entity {
   @DomainChatSettings.property()
   public notifyEmailNewMessage?: boolean;
 
+  @DomainChatSettings.property()
+  public telegramChatId?: string | null;
+
   @DomainChatSettings.property({ arrayType: 'User' })
   public assignedUsers?: User[];
 
@@ -58,4 +61,22 @@ export class DomainChatSettings extends Entity {
 
   @DomainChatSettings.property()
   public autoOpenMode?: string | null;
+
+  @DomainChatSettings.property()
+  public aiFallbackEnabled?: boolean;
+
+  @DomainChatSettings.property()
+  public aiFallbackScope?: 'faq_only' | 'faq_and_status' | 'collect_and_escalate' | 'full_support_limited' | null;
+
+  @DomainChatSettings.property()
+  public aiDisclosureMode?: 'on' | 'off' | null;
+
+  @DomainChatSettings.property()
+  public aiMaxRepliesPerConversation?: number | null;
+
+  @DomainChatSettings.property()
+  public aiCooldownSeconds?: number;
+
+  @DomainChatSettings.property()
+  public aiEscalationMessage?: string | null;
 }

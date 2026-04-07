@@ -117,6 +117,7 @@ interface ListOptions {
   masterProduct?: number;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  notificationSender?: number;
   notificationJob?: number;
   notificationRecipient?: number;
   notificationType?: NotificationType;
@@ -574,6 +575,10 @@ export class Entity {
       if (options.notificationRecipient !== undefined) {
         fetchOptions.query.push(['notification_recipient',
           options.notificationRecipient.toString()]);
+      }
+      if (options.notificationSender !== undefined) {
+        fetchOptions.query.push(['notification_sender',
+          options.notificationSender.toString()]);
       }
       if (options.notificationJob !== undefined) {
         fetchOptions.query.push(['notification_job',
