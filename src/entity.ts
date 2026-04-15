@@ -132,6 +132,7 @@ interface ListOptions {
   publicOnly?: boolean;
   q?: string;
   receiverId?: number;
+  userAsReceiver?: number;
   relatedAssignment?: number;
   relatedComponent?: number;
   relatedDraft?: number;
@@ -607,6 +608,11 @@ export class Entity {
       }
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
+      }
+      if (options.userAsReceiver !== undefined) {
+        fetchOptions.query.push(
+          ['user_as_receiver', options.userAsReceiver.toString()]
+        );
       }
       if (options.companyCustomerId !== undefined) {
         fetchOptions.query.push(['company_customer_id', options.companyCustomerId.toString()]);

@@ -51,6 +51,12 @@ export class SupportConversation extends Entity {
   @SupportConversation.property({ type: User })
   public user?: User | null;
 
+  @SupportConversation.property({ type: User })
+  public assignedUser?: User | null;
+
+  @SupportConversation.property({ type: Boolean })
+  public aiAutoReply?: boolean;
+
   @SupportConversation.property({ arrayType: 'SupportMessage' })
   public messages?: SupportMessage[];
 
