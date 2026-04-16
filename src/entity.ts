@@ -150,6 +150,7 @@ interface ListOptions {
   supplierResellOnly?: boolean;
   tab?: string;
   tags?: number[];
+  trackingNumber?: string;
   tagsInternal?: number[];
   excludeTags?: number[];
   excludeTagsInternal?: number[];
@@ -429,6 +430,9 @@ export class Entity {
       }
       if (options.tab !== undefined) {
         fetchOptions.query.push(['tab', options.tab]);
+      }
+      if (options.trackingNumber !== undefined) {
+        fetchOptions.query.push(['tracking_number', options.trackingNumber]);
       }
       if (options.as !== undefined) {
         fetchOptions.query.push(['as', options.as]);
