@@ -5,10 +5,51 @@ export interface RequestOptions extends RequestInit {
   query?: string[][];
 }
 
+export interface ApiErrorDetails {
+  /**
+   * The json_name of the missing / disallowed related entity type
+   * (e.g. 'file', 'product', 'domain').
+   */
+  relation?: string;
+  /**
+   * The json_name of the parent entity the relation was being
+   * attached to (e.g. 'variation', 'job').
+   */
+  parentType?: string;
+  /**
+   * The id the client supplied for the missing / disallowed entity.
+   * May be a numeric id as a number, or a string id depending on
+   * the model.
+   */
+  id?: number | string;
+  /**
+   * The form-data index the client sent the entity under (i.e. the
+   * ``N`` in ``parent-N-id``).
+   */
+  index?: number;
+  /**
+   * The fields the client sent for the missing entity, with noisy
+   * keys (signed URLs, their expiries) stripped and long string
+   * values truncated. Useful when debugging uploads where the
+   * client knows the uploadId but the server has no matching row.
+   */
+  provided?: { [key: string]: any };
+  // Backend may add new keys over time; keep the type permissive.
+  [key: string]: any;
+}
+
 export class ApiError extends Error {
   public statusCode?: number;
   public errorCode?: ErrorType;
   public errorMessage: string;
+  /**
+   * Structured context the API may include alongside the error
+   * message (e.g. the missing entity id and payload echo). Present
+   * only when the backend chooses to populate it - most error
+   * responses still carry just ``statusCode``, ``errorCode`` and
+   * ``message``.
+   */
+  public details?: ApiErrorDetails;
   public original: any;
   public constructor(err: any) {
     const message = JSON.stringify(err);
@@ -18,6 +59,7 @@ export class ApiError extends Error {
     this.errorCode = getErrorFromCode(err.errorCode);
     this.errorMessage = err.message ?
       err.message : 'No error message';
+    this.details = err.details;
     this.name = 'ApiError';
     this.original = err;
   }
