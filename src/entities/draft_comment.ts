@@ -19,6 +19,9 @@ export class DraftComment extends Entity {
   @DraftComment.property({type: Date})
   public date?: Date | null;
 
+  @DraftComment.property({type: Date})
+  public lastEditedTime?: Date | null;
+
   @DraftComment.property()
   public urgency?: number;
 
@@ -37,7 +40,10 @@ export class DraftComment extends Entity {
   @DraftComment.property()
   public user?: User;
 
-  @DraftComment.property({arrayType: "MerchiFile"})
+  @DraftComment.property()
+  public lastEditedBy?: User;
+
+  @DraftComment.property({arrayType: 'MerchiFile'})
   public files?: MerchiFile[];
 
   @DraftComment.property({arrayType: 'User'})

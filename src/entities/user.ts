@@ -33,6 +33,7 @@ import { Role,
   ROLES_RANK
 } from '../constants/roles.js';
 import { InternalTag } from './internal_tag.js';
+import { DomainTag } from './domain_tag.js';
 import { UserType } from '../constants/user_types.js';
 import { SystemRoles as SR } from '../constants/system_roles.js';
 
@@ -60,6 +61,9 @@ export class User extends Entity {
 
   @User.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
+
+  @User.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
   @User.property({arrayType: 'Domain'})
   public registeredUnderDomains?: Domain[];

@@ -89,6 +89,57 @@ export class Company extends Entity {
   public unltdAiApiSecretKey?: string;
 
   @Company.property({type: String})
+  public australiaPostApiKey?: string;
+
+  @Company.property({type: String})
+  public australiaPostPassword?: string;
+
+  @Company.property({type: String})
+  public startrackApiKey?: string;
+
+  @Company.property({type: String})
+  public startrackPassword?: string;
+
+  @Company.property({type: String})
+  public dhlApiKey?: string;
+
+  @Company.property({type: String})
+  public dhlApiSecret?: string;
+
+  @Company.property({type: String})
+  public fedexApiKey?: string;
+
+  @Company.property({type: String})
+  public fedexApiSecret?: string;
+
+  @Company.property({type: String})
+  public upsClientId?: string;
+
+  @Company.property({type: String})
+  public upsClientSecret?: string;
+
+  @Company.property({type: String})
+  public uspsApiKey?: string;
+
+  @Company.property({type: String})
+  public tntApiKey?: string;
+
+  @Company.property({type: String})
+  public tntApiSecret?: string;
+
+  @Company.property({type: String})
+  public aramexAccountNumber?: string;
+
+  @Company.property({type: String})
+  public aramexApiKey?: string;
+
+  @Company.property({type: String})
+  public aramexApiSecret?: string;
+
+  @Company.property({type: String})
+  public nzPostApiKey?: string;
+
+  @Company.property({type: String})
   public internalUseNotes?: string;
 
   @Company.property({type: String})

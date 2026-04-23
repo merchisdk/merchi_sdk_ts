@@ -1,5 +1,8 @@
 import { Address } from './entities/address.js';
 import { AgentConversation } from './entities/agent_conversation.js';
+import { AgentSkill } from './entities/agent_skill.js';
+import { AgentSkillVersion } from './entities/agent_skill_version.js';
+import { AgentSkillApproval } from './entities/agent_skill_approval.js';
 import { DomainChatSettings } from './entities/domain_chat_settings.js';
 import { SupportConversation } from './entities/support_conversation.js';
 import { SupportMessage } from './entities/support_message.js';
@@ -86,6 +89,9 @@ export {
   toastNotifications,
   Address,
   AgentConversation,
+  AgentSkill,
+  AgentSkillVersion,
+  AgentSkillApproval,
   DomainChatSettings,
   SupportConversation,
   SupportMessage,

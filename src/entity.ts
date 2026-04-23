@@ -117,6 +117,7 @@ interface ListOptions {
   masterProduct?: number;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  notificationSender?: number;
   notificationJob?: number;
   notificationRecipient?: number;
   notificationType?: NotificationType;
@@ -131,6 +132,7 @@ interface ListOptions {
   publicOnly?: boolean;
   q?: string;
   receiverId?: number;
+  userAsReceiver?: number;
   relatedAssignment?: number;
   relatedComponent?: number;
   relatedDraft?: number;
@@ -148,6 +150,7 @@ interface ListOptions {
   supplierResellOnly?: boolean;
   tab?: string;
   tags?: number[];
+  trackingNumber?: string;
   tagsInternal?: number[];
   excludeTags?: number[];
   excludeTagsInternal?: number[];
@@ -428,6 +431,9 @@ export class Entity {
       if (options.tab !== undefined) {
         fetchOptions.query.push(['tab', options.tab]);
       }
+      if (options.trackingNumber !== undefined) {
+        fetchOptions.query.push(['tracking_number', options.trackingNumber]);
+      }
       if (options.as !== undefined) {
         fetchOptions.query.push(['as', options.as]);
       }
@@ -575,6 +581,10 @@ export class Entity {
         fetchOptions.query.push(['notification_recipient',
           options.notificationRecipient.toString()]);
       }
+      if (options.notificationSender !== undefined) {
+        fetchOptions.query.push(['notification_sender',
+          options.notificationSender.toString()]);
+      }
       if (options.notificationJob !== undefined) {
         fetchOptions.query.push(['notification_job',
           options.notificationJob.toString()]);
@@ -602,6 +612,11 @@ export class Entity {
       }
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
+      }
+      if (options.userAsReceiver !== undefined) {
+        fetchOptions.query.push(
+          ['user_as_receiver', options.userAsReceiver.toString()]
+        );
       }
       if (options.companyCustomerId !== undefined) {
         fetchOptions.query.push(['company_customer_id', options.companyCustomerId.toString()]);
