@@ -1,7 +1,6 @@
 import { Domain } from './domain.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
-import { User } from './user.js';
 
 export class DomainChatSettings extends Entity {
   protected static resourceName = 'domain_chat_settings';
@@ -42,41 +41,5 @@ export class DomainChatSettings extends Entity {
   public notifyEmailNewMessage?: boolean;
 
   @DomainChatSettings.property()
-  public telegramChatId?: string | null;
-
-  @DomainChatSettings.property({ arrayType: 'User' })
-  public assignedUsers?: User[];
-
-  @DomainChatSettings.property()
   public requireGuestContact?: boolean;
-
-  @DomainChatSettings.property()
-  public embedTestMode?: boolean;
-
-  @DomainChatSettings.property()
-  public autoOpenDelay?: number | null;
-
-  @DomainChatSettings.property()
-  public autoOpenMessage?: string | null;
-
-  @DomainChatSettings.property()
-  public autoOpenMode?: string | null;
-
-  @DomainChatSettings.property()
-  public aiFallbackEnabled?: boolean;
-
-  @DomainChatSettings.property()
-  public aiFallbackScope?: 'faq_only' | 'faq_and_status' | 'collect_and_escalate' | 'full_support_limited' | null;
-
-  @DomainChatSettings.property()
-  public aiDisclosureMode?: 'on' | 'off' | null;
-
-  @DomainChatSettings.property()
-  public aiMaxRepliesPerConversation?: number | null;
-
-  @DomainChatSettings.property()
-  public aiCooldownSeconds?: number;
-
-  @DomainChatSettings.property()
-  public aiEscalationMessage?: string | null;
 }

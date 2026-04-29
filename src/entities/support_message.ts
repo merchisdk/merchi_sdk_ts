@@ -24,7 +24,4 @@ export class SupportMessage extends Entity {
 
   @SupportMessage.property({ type: Date })
   public creationDate?: Date | null;
-
-  @SupportMessage.property({ type: Boolean })
-  public isAiReply?: boolean;
 }

@@ -1,12 +1,14 @@
 import { Address } from './address.js';
 import { Cart } from './cart.js';
 import { Company } from './company.js';
+import { CompanyInvoiceSettingsVersion } from './company_invoice_settings_version.js';
 import { Domain } from './domain.js';
 import { DomainTag } from './domain_tag.js';
 import { EmailAddress } from './email_address.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { InternalTag } from './internal_tag.js';
+import { InvoiceTemplateVersion } from './invoice_template_version.js';
 import { Item } from './item.js';
 import { Job } from './job.js';
 import { Quote } from './quote.js';
@@ -115,6 +117,9 @@ export class Invoice extends Entity {
   @Invoice.property({embeddedByDefault: false})
   public isCompletelyPaid?: boolean;
 
+  @Invoice.property({embeddedByDefault: false})
+  public rendererUsed?: string;
+
   @Invoice.property({type: User})
   public responsibleManager?: User | null;
 
@@ -144,6 +149,12 @@ export class Invoice extends Entity {
 
   @Invoice.property({type: MerchiFile})
   public receipt?: MerchiFile | null;
+
+  @Invoice.property({type: InvoiceTemplateVersion})
+  public templateVersion?: InvoiceTemplateVersion | null;
+
+  @Invoice.property({type: CompanyInvoiceSettingsVersion})
+  public settingsVersion?: CompanyInvoiceSettingsVersion | null;
 
   @Invoice.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;

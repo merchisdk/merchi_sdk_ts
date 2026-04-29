@@ -3,6 +3,7 @@ import { AutomaticPaymentRelationship } from './automatic_payment_relationship.j
 import { Bank } from './bank.js';
 import { Cart } from './cart.js';
 import { CompanyInvitation } from './company_invitation.js';
+import { CompanyInvoiceSettings } from './company_invoice_settings.js';
 import { CountryTax } from './country_tax.js';
 import { Domain } from './domain.js';
 import { EmailAddress } from './email_address.js';
@@ -87,57 +88,6 @@ export class Company extends Entity {
 
   @Company.property({type: String})
   public unltdAiApiSecretKey?: string;
-
-  @Company.property({type: String})
-  public australiaPostApiKey?: string;
-
-  @Company.property({type: String})
-  public australiaPostPassword?: string;
-
-  @Company.property({type: String})
-  public startrackApiKey?: string;
-
-  @Company.property({type: String})
-  public startrackPassword?: string;
-
-  @Company.property({type: String})
-  public dhlApiKey?: string;
-
-  @Company.property({type: String})
-  public dhlApiSecret?: string;
-
-  @Company.property({type: String})
-  public fedexApiKey?: string;
-
-  @Company.property({type: String})
-  public fedexApiSecret?: string;
-
-  @Company.property({type: String})
-  public upsClientId?: string;
-
-  @Company.property({type: String})
-  public upsClientSecret?: string;
-
-  @Company.property({type: String})
-  public uspsApiKey?: string;
-
-  @Company.property({type: String})
-  public tntApiKey?: string;
-
-  @Company.property({type: String})
-  public tntApiSecret?: string;
-
-  @Company.property({type: String})
-  public aramexAccountNumber?: string;
-
-  @Company.property({type: String})
-  public aramexApiKey?: string;
-
-  @Company.property({type: String})
-  public aramexApiSecret?: string;
-
-  @Company.property({type: String})
-  public nzPostApiKey?: string;
 
   @Company.property({type: String})
   public internalUseNotes?: string;
@@ -324,6 +274,9 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Invoice'})
   public subscriptionInvoices?: Invoice[];
+
+  @Company.property({type: CompanyInvoiceSettings})
+  public invoiceSettings?: CompanyInvoiceSettings | null;
 
   @Company.property({arrayType: 'Address'})
   public addresses?: Address[];
