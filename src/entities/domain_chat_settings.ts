@@ -28,7 +28,7 @@ export class DomainChatSettings extends Entity {
   @DomainChatSettings.property()
   public privacyPolicyUrl?: string | null;
 
-  @DomainChatSettings.property()
+  @DomainChatSettings.property({ type: Object })
   public workingHours?: any | null;
 
   @DomainChatSettings.property()
