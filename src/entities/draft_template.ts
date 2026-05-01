@@ -52,4 +52,21 @@ export class DraftTemplate extends Entity {
 
   @DraftTemplate.property({arrayType: 'DraftPreviewLayer'})
   public draftPreviewLayers?: DraftPreviewLayer[];
+
+  // Cached template customisation map -- which regions of the template
+  // image are editable (text placeholders, body colour fill, print
+  // area) versus preserved. Populated lazily by the backend when a
+  // template is first rendered, or set manually by an operator (in
+  // which case ``customisationMapSource === 'manual'`` and the auto
+  // analyser leaves it alone). ``customisationMapFileId`` records the
+  // ``file.id`` the cached map was generated from so the analyser
+  // knows when to re-run after the template image is replaced.
+  @DraftTemplate.property()
+  public customisationMap?: any | null;
+
+  @DraftTemplate.property()
+  public customisationMapSource?: string | null;
+
+  @DraftTemplate.property()
+  public customisationMapFileId?: string | null;
 }
