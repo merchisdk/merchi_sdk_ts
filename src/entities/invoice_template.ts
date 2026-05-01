@@ -18,7 +18,7 @@ export class InvoiceTemplate extends Entity {
   @InvoiceTemplate.property()
   public baseCss?: string;
 
-  @InvoiceTemplate.property({type: InvoiceTemplateVersion})
+  @InvoiceTemplate.property({type: 'InvoiceTemplateVersion'})
   public activeVersion?: InvoiceTemplateVersion | null;
 
   @InvoiceTemplate.property({arrayType: 'InvoiceTemplateVersion'})

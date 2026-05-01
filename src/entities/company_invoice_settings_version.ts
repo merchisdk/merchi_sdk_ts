@@ -10,16 +10,16 @@ export class CompanyInvoiceSettingsVersion extends Entity {
   @CompanyInvoiceSettingsVersion.property()
   public id?: number;
 
-  @CompanyInvoiceSettingsVersion.property({type: CompanyInvoiceSettings})
+  @CompanyInvoiceSettingsVersion.property({type: 'CompanyInvoiceSettings'})
   public settings?: CompanyInvoiceSettings | null;
 
-  @CompanyInvoiceSettingsVersion.property({type: InvoiceTemplate})
+  @CompanyInvoiceSettingsVersion.property({type: 'InvoiceTemplate'})
   public template?: InvoiceTemplate | null;
 
-  @CompanyInvoiceSettingsVersion.property()
+  @CompanyInvoiceSettingsVersion.property({type: Object})
   public themeOverrides?: any;
 
-  @CompanyInvoiceSettingsVersion.property()
+  @CompanyInvoiceSettingsVersion.property({type: Object})
   public blockOverrides?: any;
 
   @CompanyInvoiceSettingsVersion.property()

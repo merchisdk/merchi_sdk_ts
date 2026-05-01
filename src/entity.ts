@@ -283,7 +283,7 @@ export class Entity {
       const embeddedByDefault = options.embeddedByDefault !== undefined ?
         options.embeddedByDefault : normallyEmbeddedByDefault;
       /* istanbul ignore next */
-      if (type === Object) {
+      if (type === Object && options.type === undefined) {
         /* istanbul ignore next */
         const resource = (self.constructor as typeof Entity).resourceName;
         const err = 'Bad attribute type ' +
@@ -306,6 +306,12 @@ export class Entity {
     /* istanbul ignore next */
     if (merchi !== undefined) {
       this.merchi = merchi;
+    } else {
+      // Try to find merchi on the constructor if it was set via setupClass but not passed to constructor
+      const staticMerchi = (this.constructor as any).merchi;
+      if (staticMerchi) {
+        this.merchi = staticMerchi;
+      }
     }
     this.propertiesMap = this.makePropertiesMap();
     this.setupProperties();
@@ -956,6 +962,8 @@ export class Entity {
         (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
           value = value.getTime() / 1000;
+        } else if (info.type === Object && !!value) {
+          value = JSON.stringify(value);
         }
         appendData(info.property, value);
       }

@@ -9,10 +9,10 @@ export class InvoiceTemplateVersion extends Entity {
   @InvoiceTemplateVersion.property()
   public id?: number;
 
-  @InvoiceTemplateVersion.property({type: InvoiceTemplate})
+  @InvoiceTemplateVersion.property({type: 'InvoiceTemplate'})
   public template?: InvoiceTemplate | null;
 
-  @InvoiceTemplateVersion.property()
+  @InvoiceTemplateVersion.property({type: Object})
   public blocksJson?: any;
 
   @InvoiceTemplateVersion.property({type: Date})

@@ -275,7 +275,7 @@ export class Company extends Entity {
   @Company.property({arrayType: 'Invoice'})
   public subscriptionInvoices?: Invoice[];
 
-  @Company.property({type: CompanyInvoiceSettings})
+  @Company.property({type: 'CompanyInvoiceSettings'})
   public invoiceSettings?: CompanyInvoiceSettings | null;
 
   @Company.property({arrayType: 'Address'})

@@ -129,10 +129,10 @@ export class Invoice extends Entity {
   @Invoice.property()
   public client?: User;
 
-  @Invoice.property({type: Company})
+  @Invoice.property({type: 'Company'})
   public clientCompany?: Company | null;
 
-  @Company.property({arrayType: 'Company'})
+  @Invoice.property({arrayType: 'Company'})
   public subscriptionCompanies?: Company[];
 
   @Invoice.property({type: Address})
@@ -150,10 +150,10 @@ export class Invoice extends Entity {
   @Invoice.property({type: MerchiFile})
   public receipt?: MerchiFile | null;
 
-  @Invoice.property({type: InvoiceTemplateVersion})
+  @Invoice.property({type: 'InvoiceTemplateVersion'})
   public templateVersion?: InvoiceTemplateVersion | null;
 
-  @Invoice.property({type: CompanyInvoiceSettingsVersion})
+  @Invoice.property({type: 'CompanyInvoiceSettingsVersion'})
   public settingsVersion?: CompanyInvoiceSettingsVersion | null;
 
   @Invoice.property({type: PhoneNumber})
