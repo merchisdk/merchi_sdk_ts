@@ -73,9 +73,9 @@ export class DraftTemplate extends Entity {
   @DraftTemplate.property({type: customisationMapPropertyType})
   public customisationMap?: Record<string, unknown> | null;
 
-  @DraftTemplate.property()
+  @DraftTemplate.property({type: String})
   public customisationMapSource?: string | null;
 
-  @DraftTemplate.property()
+  @DraftTemplate.property({type: String})
   public customisationMapFileId?: string | null;
 }
