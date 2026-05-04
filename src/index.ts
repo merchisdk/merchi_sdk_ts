@@ -58,6 +58,7 @@ import { Reminder } from './entities/reminder.js';
 import { RequestOptions, apiFetch, apiFetchWithProgress } from './request.js'; // eslint-disable-next-line no-unused-vars
 import { Session } from './entities/session.js';
 import { Shipment } from './entities/shipment.js';
+import { ShipmentLog } from './entities/shipment_log.js';
 import { ShipmentItem } from './entities/shipment_item.js';
 import { ShipmentItemFulfillment } from './entities/shipment_item_fulfillment.js';
 import { ShipmentMethod } from './entities/shipment_method.js';
@@ -150,6 +151,7 @@ export {
   apiFetchWithProgress,
   Session,
   Shipment,
+  ShipmentLog,
   ShipmentItem,
   ShipmentItemFulfillment,
   ShipmentMethod,

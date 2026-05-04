@@ -22,6 +22,7 @@ import { Reminder } from './reminder.js';
 import { ProductionComment } from './production_comment.js';
 import { Session } from './session.js';
 import { Shipment } from './shipment.js';
+import { ShipmentLog } from './shipment_log.js';
 import { SystemRole } from './system_role.js';
 import { Theme } from './theme.js';
 import { UserCompany } from './user_company.js';
@@ -166,6 +167,9 @@ export class User extends Entity {
 
   @User.property({ arrayType: 'JobComment' })
   public jobComments?: JobComment[];
+
+  @User.property({ arrayType: 'ShipmentLog' })
+  public shipmentLogs?: ShipmentLog[];
 
   @User.property({ arrayType: 'EmailAddress' })
   public _emailAddresses?: EmailAddress[];
