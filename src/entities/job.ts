@@ -142,7 +142,7 @@ export class Job extends Entity {
   @Job.property()
   public updated?: Date;
 
-  @Job.property()
+  @Job.property({type: Date})
   public dateLastActioned?: Date | null;
 
   @Job.property()

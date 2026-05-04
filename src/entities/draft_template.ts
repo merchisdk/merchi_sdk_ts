@@ -6,6 +6,15 @@ import { Product } from './product.js';
 import { VariationField } from './variation_field.js';
 import { VariationFieldsOption } from './variation_fields_option.js';
 
+/**
+ * Runtime type tag only. The API returns `customisationMap` as arbitrary JSON;
+ * the entity layer refuses `Object` from decorator metadata, so we cannot use
+ * `any` / plain object without an explicit `type` option here. A const class
+ * expression is used so `noUnusedLocals` counts the symbol as used (a named
+ * class referenced only from decorators can trigger TS6196).
+ */
+const customisationMapPropertyType = class {};
+
 export class DraftTemplate extends Entity {
   protected static resourceName = 'draft_templates';
   protected static singularName = 'draftTemplate';
@@ -61,12 +70,12 @@ export class DraftTemplate extends Entity {
   // analyser leaves it alone). ``customisationMapFileId`` records the
   // ``file.id`` the cached map was generated from so the analyser
   // knows when to re-run after the template image is replaced.
-  @DraftTemplate.property()
-  public customisationMap?: any | null;
+  @DraftTemplate.property({type: customisationMapPropertyType})
+  public customisationMap?: Record<string, unknown> | null;
 
-  @DraftTemplate.property()
+  @DraftTemplate.property({type: String})
   public customisationMapSource?: string | null;
 
-  @DraftTemplate.property()
+  @DraftTemplate.property({type: String})
   public customisationMapFileId?: string | null;
 }
