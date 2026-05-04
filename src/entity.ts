@@ -138,6 +138,7 @@ interface ListOptions {
   relatedDraft?: number;
   relatedJob?: number;
   relatedJobs?: number[];
+  relatedShipment?: number;
   relatedProduct?: number;
   relatedUser?: number;
   savedByUser?: number;
@@ -564,6 +565,10 @@ export class Entity {
       }
       if (options.relatedJobs !== undefined) {
         fetchOptions.query.push(['related_jobs', options.relatedJobs.toString()]);
+      }
+      if (options.relatedShipment !== undefined) {
+        fetchOptions.query.push(['related_shipment',
+          options.relatedShipment.toString()]);
       }
       if (options.relatedProduct !== undefined) {
         fetchOptions.query.push(['related_product',

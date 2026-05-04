@@ -25,6 +25,7 @@ import { InventoryUnitVariation } from './entities/inventory_unit_variation.js';
 import { VariationFieldsOption } from './entities/variation_fields_option.js';
 import { Bank } from './entities/bank.js';
 import { Shipment } from './entities/shipment.js';
+import { ShipmentLog } from './entities/shipment_log.js';
 import { ShipmentItem } from './entities/shipment_item.js';
 import { ShipmentItemFulfillment } from './entities/shipment_item_fulfillment.js';
 import { ShipmentMethod } from './entities/shipment_method.js';
@@ -136,6 +137,7 @@ export class Merchi {
   public ProductionComment: typeof ProductionComment;
   public DraftComment: typeof DraftComment;
   public Shipment: typeof Shipment;
+  public ShipmentLog: typeof ShipmentLog;
   public ShipmentItem: typeof ShipmentItem;
   public ShipmentItemFulfillment: typeof ShipmentItemFulfillment;
   public ShipmentMethod: typeof ShipmentMethod;
@@ -278,6 +280,7 @@ export class Merchi {
     this.InventoryGroup = this.setupClass(InventoryGroup) as typeof InventoryGroup;
     this.Notification = this.setupClass(Notification) as typeof Notification;
     this.Shipment = this.setupClass(Shipment) as typeof Shipment;
+    this.ShipmentLog = this.setupClass(ShipmentLog) as typeof ShipmentLog;
     this.ShipmentItem = this.setupClass(ShipmentItem) as typeof ShipmentItem;
     this.ShipmentItemFulfillment = this.setupClass(
       ShipmentItemFulfillment
