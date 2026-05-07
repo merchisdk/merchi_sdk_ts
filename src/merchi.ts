@@ -14,6 +14,7 @@ import { VariationField } from './entities/variation_field.js';
 import { VariationOption } from './entities/variation_option.js';
 import { ProductionComment } from './entities/production_comment.js';
 import { Product } from './entities/product.js';
+import { ProductReview } from './entities/product_review.js';
 import { InternalTag } from './entities/internal_tag.js';
 import { Inventory } from './entities/inventory.js';
 import { InventoryGroup } from './entities/inventory_group.js';
@@ -155,6 +156,7 @@ export class Merchi {
   public Job: typeof Job;
   public DomainInvitation: typeof DomainInvitation;
   public Product: typeof Product;
+  public ProductReview: typeof ProductReview;
   public DomainTag: typeof DomainTag;
   public EmailAddress: typeof EmailAddress;
   public PhoneNumber: typeof PhoneNumber;
@@ -330,6 +332,9 @@ export class Merchi {
     this.CountryTax = this.setupClass(CountryTax) as typeof CountryTax;
     this.ShortUrl = this.setupClass(ShortUrl) as typeof ShortUrl;
     this.Product = this.setupClass(Product) as typeof Product;
+    this.ProductReview = this.setupClass(
+      ProductReview
+    ) as typeof ProductReview;
     this.SystemRole = this.setupClass(SystemRole) as typeof SystemRole;
     this.CartItem = this.setupClass(CartItem) as typeof CartItem;
     this.UserCompany = this.setupClass(UserCompany) as typeof UserCompany;
