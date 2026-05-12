@@ -77,3 +77,123 @@ test('fail to delete non-existant domain', () => {
   expect(fetch.mock.calls[0][1].method).toBe('DELETE');
   return invocation.catch(e => expect(e.statusCode).toEqual(404));
 });
+
+test('can get storefront v2 config', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontV2();
+  const fetchUrl = fetch.mock.calls[0][0];
+  const query = fetch.mock.calls[0][1].query;
+  expect(fetch.mock.calls[0][1].method).toBe('GET');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/');
+  expect(query).toContainEqual(['skip_rights', 'y']);
+});
+
+test('can provision storefront v2', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.provisionStorefrontV2({force: true});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/provision/');
+  expect(body).toEqual({force: true});
+});
+
+test('can create storefront v2 change request', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.createStorefrontChangeRequest({prompt: 'update hero'});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/requests/');
+  expect(body).toEqual({prompt: 'update hero'});
+});
+
+test('can get storefront v2 change request by id', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontChangeRequest(9);
+  const fetchUrl = fetch.mock.calls[0][0];
+  expect(fetch.mock.calls[0][1].method).toBe('GET');
+  expect(fetchUrl).toContain('/storefront_change_requests/9/');
+});
+
+test('can run storefront v2 change request', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  const fetch = mockFetch(true, {}, 200);
+  domain.runStorefrontChangeRequest(9, {dryRun: true});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/storefront_change_requests/9/run/');
+  expect(body).toEqual({dryRun: true});
+});
+
+test('can approve storefront v2 change request', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  const fetch = mockFetch(true, {}, 200);
+  domain.approveStorefrontChangeRequest(9, {comment: 'looks good'});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/storefront_change_requests/9/approve/');
+  expect(body).toEqual({comment: 'looks good'});
+});
+
+test('can reject storefront v2 change request', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  const fetch = mockFetch(true, {}, 200);
+  domain.rejectStorefrontChangeRequest(9, {reason: 'needs edits'});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/storefront_change_requests/9/reject/');
+  expect(body).toEqual({reason: 'needs edits'});
+});
+
+test('can get storefront v2 deployments', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontV2Deployments();
+  const fetchUrl = fetch.mock.calls[0][0];
+  expect(fetch.mock.calls[0][1].method).toBe('GET');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/deployments/');
+});
+
+test('can get storefront v2 deployment logs', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontV2DeploymentLogs('dep_123');
+  const fetchUrl = fetch.mock.calls[0][0];
+  expect(fetch.mock.calls[0][1].method).toBe('GET');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/deployments/dep_123/logs/');
+});
+
+test('can rollback storefront v2 deployment', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.rollbackStorefrontV2({deploymentId: 'dep_123'});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/rollback/');
+  expect(body).toEqual({deploymentId: 'dep_123'});
+});

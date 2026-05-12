@@ -21,6 +21,7 @@ import { DomainChatSettings } from './domain_chat_settings.js';
 import { Theme } from './theme.js';
 import { DomainType } from '../constants/domain_types.js';
 import { ShipmentMethod } from './shipment_method.js';
+import { RequestOptions } from '../request.js';
 
 export class Domain extends Entity {
   protected static resourceName = 'domains';
@@ -281,5 +282,114 @@ export class Domain extends Entity {
       throw new Error('activeTheme is undefined, did you forget to embed it?');
     }
     return this.activeTheme!;
+  };
+
+  private getDomainId = () => {
+    if (this.id === undefined || this.id === null) {
+      throw new Error('id is undefined, did you forget to set it?');
+    }
+    return this.id;
+  };
+
+  private storefrontV2DomainResource = (suffix = '') => {
+    return `/domains/${this.getDomainId()}/storefront_v2/${suffix}`;
+  };
+
+  private storefrontV2Request = (
+    resource: string,
+    method: 'GET' | 'POST',
+    payload?: Record<string, any>
+  ) => {
+    const fetchOptions: RequestOptions = {
+      method: method,
+      query: [['skip_rights', 'y']]
+    };
+    if (payload !== undefined) {
+      fetchOptions.body = JSON.stringify(payload);
+      fetchOptions.headers = {'Content-Type': 'application/json'};
+    }
+    return this.merchi.authenticatedFetch(resource, fetchOptions);
+  };
+
+  public getStorefrontV2 = () => {
+    return this.storefrontV2Request(this.storefrontV2DomainResource(), 'GET');
+  };
+
+  public provisionStorefrontV2 = (payload?: Record<string, any>) => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('provision/'),
+      'POST',
+      payload
+    );
+  };
+
+  public createStorefrontChangeRequest = (payload?: Record<string, any>) => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('requests/'),
+      'POST',
+      payload
+    );
+  };
+
+  public getStorefrontChangeRequest = (requestId: number | string) => {
+    return this.storefrontV2Request(
+      `/storefront_change_requests/${String(requestId)}/`,
+      'GET'
+    );
+  };
+
+  public runStorefrontChangeRequest = (
+    requestId: number | string,
+    payload?: Record<string, any>
+  ) => {
+    return this.storefrontV2Request(
+      `/storefront_change_requests/${String(requestId)}/run/`,
+      'POST',
+      payload
+    );
+  };
+
+  public approveStorefrontChangeRequest = (
+    requestId: number | string,
+    payload?: Record<string, any>
+  ) => {
+    return this.storefrontV2Request(
+      `/storefront_change_requests/${String(requestId)}/approve/`,
+      'POST',
+      payload
+    );
+  };
+
+  public rejectStorefrontChangeRequest = (
+    requestId: number | string,
+    payload?: Record<string, any>
+  ) => {
+    return this.storefrontV2Request(
+      `/storefront_change_requests/${String(requestId)}/reject/`,
+      'POST',
+      payload
+    );
+  };
+
+  public getStorefrontV2Deployments = () => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('deployments/'),
+      'GET'
+    );
+  };
+
+  public getStorefrontV2DeploymentLogs = (deploymentId: number | string) => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource(`deployments/${String(deploymentId)}/logs/`),
+      'GET'
+    );
+  };
+
+  public rollbackStorefrontV2 = (payload?: Record<string, any>) => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('rollback/'),
+      'POST',
+      payload
+    );
   };
 }
