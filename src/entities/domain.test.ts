@@ -131,12 +131,28 @@ test('can run storefront v2 change request', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
   const fetch = mockFetch(true, {}, 200);
-  domain.runStorefrontChangeRequest(9, {dryRun: true});
+  domain.runStorefrontChangeRequest(9, {
+    status: 'running',
+    pullRequestNumber: 42,
+    checksSummary: {
+      overall: 'passing',
+      counts: {total: 4, passed: 4, failed: 0, pending: 0, neutral: 0},
+    },
+    checksUpdatedAt: '2026-05-15T00:00:00Z',
+  });
   const fetchUrl = fetch.mock.calls[0][0];
   const body = JSON.parse(fetch.mock.calls[0][1].body as string);
   expect(fetch.mock.calls[0][1].method).toBe('POST');
   expect(fetchUrl).toContain('/storefront_change_requests/9/run/');
-  expect(body).toEqual({dryRun: true});
+  expect(body).toEqual({
+    status: 'running',
+    pullRequestNumber: 42,
+    checksSummary: {
+      overall: 'passing',
+      counts: {total: 4, passed: 4, failed: 0, pending: 0, neutral: 0},
+    },
+    checksUpdatedAt: '2026-05-15T00:00:00Z',
+  });
 });
 
 test('can approve storefront v2 change request', () => {

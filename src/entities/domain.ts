@@ -23,6 +23,42 @@ import { DomainType } from '../constants/domain_types.js';
 import { ShipmentMethod } from './shipment_method.js';
 import { RequestOptions } from '../request.js';
 
+export type StorefrontChangeRequestStatus =
+  | 'created'
+  | 'running'
+  | 'preview_ready'
+  | 'approved'
+  | 'rejected';
+
+export interface StorefrontChecksSummary {
+  overall?: 'passing' | 'failing' | 'pending' | 'unknown';
+  statusState?: string;
+  counts?: {
+    total?: number;
+    passed?: number;
+    failed?: number;
+    pending?: number;
+    neutral?: number;
+  };
+  updatedAt?: string;
+}
+
+export interface StorefrontV2ChangeRequest {
+  id: number;
+  domainId: number;
+  storefrontV2Id: number;
+  status: StorefrontChangeRequestStatus;
+  prompt: string;
+  branchName?: string | null;
+  commitSha?: string | null;
+  pullRequestNumber?: number | null;
+  previewUrl?: string | null;
+  summary?: string | null;
+  checksSummary?: StorefrontChecksSummary | null;
+  checksUpdatedAt?: string | null;
+  errorDetails?: string | null;
+}
+
 export class Domain extends Entity {
   protected static resourceName = 'domains';
   protected static singularName = 'domain';
@@ -323,52 +359,56 @@ export class Domain extends Entity {
     );
   };
 
-  public createStorefrontChangeRequest = (payload?: Record<string, any>) => {
+  public createStorefrontChangeRequest = (
+    payload?: Record<string, any>
+  ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource('requests/'),
       'POST',
       payload
-    );
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
-  public getStorefrontChangeRequest = (requestId: number | string) => {
+  public getStorefrontChangeRequest = (
+    requestId: number | string
+  ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/`,
       'GET'
-    );
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
   public runStorefrontChangeRequest = (
     requestId: number | string,
     payload?: Record<string, any>
-  ) => {
+  ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/run/`,
       'POST',
       payload
-    );
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
   public approveStorefrontChangeRequest = (
     requestId: number | string,
     payload?: Record<string, any>
-  ) => {
+  ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/approve/`,
       'POST',
       payload
-    );
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
   public rejectStorefrontChangeRequest = (
     requestId: number | string,
     payload?: Record<string, any>
-  ) => {
+  ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/reject/`,
       'POST',
       payload
-    );
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
   public getStorefrontV2Deployments = () => {
