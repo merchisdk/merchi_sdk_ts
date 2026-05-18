@@ -184,6 +184,15 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public googleMerchantId?: string;
 
+  @Domain.property({type: Boolean})
+  public googleProductReviewsFeedEnabled?: boolean;
+
+  @Domain.property({type: String})
+  public googleProductReviewsFeedToken?: string | null;
+
+  @Domain.property({type: String})
+  public googleProductReviewsFeedUrl?: string | null;
+
   @Domain.property({type: String})
   public socialBitchute?: string | null;
 
