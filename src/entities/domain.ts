@@ -43,6 +43,27 @@ export interface StorefrontChecksSummary {
   updatedAt?: string;
 }
 
+export interface StorefrontExecutionEvent {
+  timestamp: string;
+  stage: string;
+  level?: 'info' | 'error' | string;
+  message: string;
+  metadata?: Record<string, any>;
+}
+
+export interface StorefrontRequestContextImage {
+  name: string;
+  mimeType?: string | null;
+  dataUrl: string;
+}
+
+export interface StorefrontV2ChangeRequestPayload {
+  prompt: string;
+  contextFilePaths?: string[];
+  contextImages?: StorefrontRequestContextImage[];
+  [key: string]: any;
+}
+
 export interface StorefrontV2ChangeRequest {
   id: number;
   domainId: number;
@@ -57,6 +78,91 @@ export interface StorefrontV2ChangeRequest {
   checksSummary?: StorefrontChecksSummary | null;
   checksUpdatedAt?: string | null;
   errorDetails?: string | null;
+  executionEvents?: StorefrontExecutionEvent[] | null;
+}
+
+export interface StorefrontV2Config {
+  id?: number;
+  domainId?: number;
+  status?: 'provisioning' | 'ready' | 'failed' | 'archived' | string;
+  starterTemplate?: string | null;
+  urlStructure?: string | null;
+  defaultBranch?: string | null;
+  activePreviewBranchName?: string | null;
+  activePreviewStartedAt?: string | null;
+  activePreviewLastRequestId?: number | null;
+  repoProvider?: string | null;
+  repoOwner?: string | null;
+  repoName?: string | null;
+  vercelProjectId?: string | null;
+  lastSuccessfulCommitSha?: string | null;
+  approvedStarterTemplates?: string[];
+  providerMode?: 'real' | 'deterministic' | 'unknown' | string;
+}
+
+export interface StorefrontV2ProvisionPayload {
+  starterTemplate?: string;
+  urlStructure?: string;
+  [key: string]: any;
+}
+
+export interface StorefrontV2SiteContextInput {
+  url: string;
+}
+
+export interface StorefrontV2EmulationRoute {
+  name?: string;
+  path: string;
+  pageType?: string;
+  targetFile?: string;
+}
+
+export interface StorefrontV2EmulationSpec {
+  routeContract?: {
+    recommendedUrlStructure?: string;
+    dynamicParams?: string[];
+    routes?: StorefrontV2EmulationRoute[];
+  };
+  componentMapping?: Array<{
+    section?: string;
+    sourceSignals?: string[];
+    boilerplateTargets?: string[];
+    implementationNotes?: string;
+  }>;
+}
+
+export interface StorefrontV2PageAnalysisItem {
+  url: string;
+  title?: string | null;
+  description?: string | null;
+  h1?: string | null;
+  headings?: string[];
+  contentPreview?: string | null;
+}
+
+export interface StorefrontV2SiteContext {
+  sourceUrl: string;
+  style?: {
+    title?: string | null;
+    description?: string | null;
+    colors?: string[];
+    fontFamilies?: string[];
+  } | null;
+  sitemap?: string[];
+  navigation?: Array<{label?: string; url: string}>;
+  categories?: string[];
+  products?: string[];
+  tracking?: Array<{provider?: string; value?: string}>;
+  wireframe?: string[];
+  stylesheets?: Array<{url: string; content: string}>;
+  pageAnalysis?: StorefrontV2PageAnalysisItem[];
+  emulationSpec?: StorefrontV2EmulationSpec | null;
+  analysisMarkdown?: string | null;
+  analysisFilePath?: string | null;
+  analysisJsonFilePath?: string | null;
+  analysisBranch?: string | null;
+  analysisCommitSha?: string | null;
+  analysisJsonCommitSha?: string | null;
 }
 
 export class Domain extends Entity {
@@ -356,11 +462,13 @@ export class Domain extends Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions);
   };
 
-  public getStorefrontV2 = () => {
+  public getStorefrontV2 = (): Promise<{storefrontV2: StorefrontV2Config}> => {
     return this.storefrontV2Request(this.storefrontV2DomainResource(), 'GET');
   };
 
-  public provisionStorefrontV2 = (payload?: Record<string, any>) => {
+  public provisionStorefrontV2 = (
+    payload?: StorefrontV2ProvisionPayload
+  ): Promise<{storefrontV2: StorefrontV2Config}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource('provision/'),
       'POST',
@@ -368,8 +476,18 @@ export class Domain extends Entity {
     );
   };
 
+  public extractStorefrontV2SiteContext = (
+    payload: StorefrontV2SiteContextInput
+  ): Promise<{siteContext: StorefrontV2SiteContext}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('site_context/extract/'),
+      'POST',
+      payload
+    ) as Promise<{siteContext: StorefrontV2SiteContext}>;
+  };
+
   public createStorefrontChangeRequest = (
-    payload?: Record<string, any>
+    payload?: StorefrontV2ChangeRequestPayload
   ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource('requests/'),
@@ -385,6 +503,15 @@ export class Domain extends Entity {
       `/storefront_change_requests/${String(requestId)}/`,
       'GET'
     ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
+  };
+
+  public getStorefrontChangeRequestEvents = (
+    requestId: number | string
+  ): Promise<{requestId: number; events: StorefrontExecutionEvent[]}> => {
+    return this.storefrontV2Request(
+      `/storefront_change_requests/${String(requestId)}/events/`,
+      'GET'
+    ) as Promise<{requestId: number; events: StorefrontExecutionEvent[]}>;
   };
 
   public runStorefrontChangeRequest = (

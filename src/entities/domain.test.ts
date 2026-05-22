@@ -96,12 +96,28 @@ test('can provision storefront v2', () => {
   const domain = new merchi.Domain();
   domain.id = 42;
   const fetch = mockFetch(true, {}, 200);
-  domain.provisionStorefrontV2({force: true});
+  domain.provisionStorefrontV2({
+    force: true,
+    urlStructure: '/products/:product',
+  });
   const fetchUrl = fetch.mock.calls[0][0];
   const body = JSON.parse(fetch.mock.calls[0][1].body as string);
   expect(fetch.mock.calls[0][1].method).toBe('POST');
   expect(fetchUrl).toContain('/domains/42/storefront_v2/provision/');
-  expect(body).toEqual({force: true});
+  expect(body).toEqual({force: true, urlStructure: '/products/:product'});
+});
+
+test('can extract storefront v2 site context', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.extractStorefrontV2SiteContext({url: 'https://example.com'});
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/site_context/extract/');
+  expect(body).toEqual({url: 'https://example.com'});
 });
 
 test('can create storefront v2 change request', () => {
@@ -117,6 +133,39 @@ test('can create storefront v2 change request', () => {
   expect(body).toEqual({prompt: 'update hero'});
 });
 
+test('can create storefront v2 change request with context payload', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.createStorefrontChangeRequest({
+    prompt: 'update hero',
+    contextFilePaths: ['src/app/page.tsx', 'components/hero.tsx'],
+    contextImages: [
+      {
+        name: 'hero-ref.png',
+        mimeType: 'image/png',
+        dataUrl: 'data:image/png;base64,abc123',
+      },
+    ],
+  });
+  const fetchUrl = fetch.mock.calls[0][0];
+  const body = JSON.parse(fetch.mock.calls[0][1].body as string);
+  expect(fetch.mock.calls[0][1].method).toBe('POST');
+  expect(fetchUrl).toContain('/domains/42/storefront_v2/requests/');
+  expect(body).toEqual({
+    prompt: 'update hero',
+    contextFilePaths: ['src/app/page.tsx', 'components/hero.tsx'],
+    contextImages: [
+      {
+        name: 'hero-ref.png',
+        mimeType: 'image/png',
+        dataUrl: 'data:image/png;base64,abc123',
+      },
+    ],
+  });
+});
+
 test('can get storefront v2 change request by id', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
@@ -125,6 +174,16 @@ test('can get storefront v2 change request by id', () => {
   const fetchUrl = fetch.mock.calls[0][0];
   expect(fetch.mock.calls[0][1].method).toBe('GET');
   expect(fetchUrl).toContain('/storefront_change_requests/9/');
+});
+
+test('can get storefront v2 change request events by id', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontChangeRequestEvents(9);
+  const fetchUrl = fetch.mock.calls[0][0];
+  expect(fetch.mock.calls[0][1].method).toBe('GET');
+  expect(fetchUrl).toContain('/storefront_change_requests/9/events/');
 });
 
 test('can run storefront v2 change request', () => {
