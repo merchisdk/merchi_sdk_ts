@@ -160,6 +160,18 @@ export interface StorefrontV2SiteContext {
   analysisMarkdown?: string | null;
   analysisFilePath?: string | null;
   analysisJsonFilePath?: string | null;
+  analysisScreenshotPaths?: string[];
+  analysisScreenshots?: Array<{
+    name?: string;
+    pageUrl?: string;
+    path?: string;
+    viewport?: string;
+    width?: number;
+    height?: number;
+    screenshotUrl?: string;
+    mimeType?: string;
+    dataUrl?: string;
+  }>;
   analysisBranch?: string | null;
   analysisCommitSha?: string | null;
   analysisJsonCommitSha?: string | null;
