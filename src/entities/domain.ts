@@ -61,13 +61,35 @@ export interface StorefrontV2ChangeRequestPayload {
   prompt: string;
   contextFilePaths?: string[];
   contextImages?: StorefrontRequestContextImage[];
-  [key: string]: any;
+  branchName?: string;
+  startNewBranch?: boolean;
+  clarificationAnswers?: Record<string, string | string[]>;
+  generationBriefSummary?: string;
+  generationBoilerplateFit?: string;
+  clarificationSkipped?: boolean;
+}
+
+export interface StorefrontV2ChangeRequestRunPayload {
+  status?: 'running' | 'preview_ready';
+  branchName?: string;
+  commitSha?: string;
+  previewUrl?: string;
+  summary?: string;
+  pullRequestNumber?: number;
+  checksSummary?: StorefrontChecksSummary;
+  checksUpdatedAt?: string;
+  errorDetails?: string;
+}
+
+export interface StorefrontV2ChangeRequestRejectPayload {
+  errorDetails?: string;
 }
 
 export interface StorefrontV2ChangeRequest {
   id: number;
   domainId: number;
   storefrontV2Id: number;
+  requestedByUserId?: number | null;
   status: StorefrontChangeRequestStatus;
   prompt: string;
   branchName?: string | null;
@@ -79,6 +101,8 @@ export interface StorefrontV2ChangeRequest {
   checksUpdatedAt?: string | null;
   errorDetails?: string | null;
   executionEvents?: StorefrontExecutionEvent[] | null;
+  creationDate?: string | null;
+  updatedAt?: string | null;
 }
 
 export interface StorefrontV2Config {
@@ -98,16 +122,172 @@ export interface StorefrontV2Config {
   lastSuccessfulCommitSha?: string | null;
   approvedStarterTemplates?: string[];
   providerMode?: 'real' | 'deterministic' | 'unknown' | string;
+  isProvisioned?: boolean;
+  creationDate?: string | null;
+  updatedAt?: string | null;
+}
+
+export interface StorefrontV2GetResponse {
+  storefrontV2?: StorefrontV2Config;
+  isProvisioned?: boolean;
+  provisioned?: boolean;
+  providerMode?: string;
+  approvedStarterTemplates?: string[];
 }
 
 export interface StorefrontV2ProvisionPayload {
   starterTemplate?: string;
   urlStructure?: string;
-  [key: string]: any;
+}
+
+export interface StorefrontV2StarterTemplateUrlStructureResult {
+  starterTemplate: string;
+  urlStructure: string;
 }
 
 export interface StorefrontV2SiteContextInput {
-  url: string;
+  url?: string;
+  sourceUrl?: string;
+}
+
+export interface StorefrontV2GenerationBriefQuestionOption {
+  id: string;
+  label: string;
+}
+
+export interface StorefrontV2GenerationBriefQuestion {
+  id: string;
+  topicId: string;
+  prompt: string;
+  type: 'single' | 'multi' | 'text';
+  options?: StorefrontV2GenerationBriefQuestionOption[];
+  required?: boolean;
+}
+
+export interface StorefrontV2GenerationBriefGapTopic {
+  id: string;
+  category: string;
+  severity: 'high' | 'medium' | 'low' | string;
+  evidence: string;
+  suggestedOptions?: string[];
+}
+
+export interface StorefrontV2GenerationBrief {
+  planSummary: string;
+  boilerplateFit: string;
+  gapTopics: StorefrontV2GenerationBriefGapTopic[];
+  questions: StorefrontV2GenerationBriefQuestion[];
+  questionCount: number;
+}
+
+export interface StorefrontV2GenerationBriefPayload {
+  siteContext: StorefrontV2SiteContext;
+  urlStructure?: string;
+  starterTemplate?: string;
+}
+
+export interface StorefrontV2ResetResult {
+  status: string;
+  isProvisioned: boolean;
+  providerMode?: 'real' | 'deterministic' | 'unknown' | string;
+  approvedStarterTemplates?: string[];
+}
+
+export interface StorefrontV2RepositoryTreeEntry {
+  name: string;
+  path: string;
+  type: 'directory' | 'file';
+}
+
+export interface StorefrontV2RepositoryTree {
+  path: string;
+  ref: string;
+  entries: StorefrontV2RepositoryTreeEntry[];
+}
+
+export interface StorefrontV2RepositoryBranches {
+  defaultBranch: string;
+  activeBranchName?: string | null;
+  branches: string[];
+}
+
+export interface StorefrontV2RepositoryFile {
+  path: string;
+  ref: string;
+  sha?: string;
+  content: string;
+}
+
+export interface StorefrontV2RepositoryFileUpdate {
+  path: string;
+  branch: string;
+  commitSha: string;
+}
+
+export interface StorefrontV2RepositoryFileUpdatePayload {
+  path: string;
+  content: string;
+  message?: string;
+  branch?: string;
+}
+
+export interface StorefrontV2Deployment {
+  id: string;
+  environment: 'preview' | 'production' | string;
+  status: string;
+  commitSha?: string | null;
+  url?: string | null;
+}
+
+export interface StorefrontV2DeploymentLog {
+  timestamp: string;
+  level: string;
+  message: string;
+}
+
+export interface StorefrontV2RollbackResult {
+  status: string;
+  targetCommitSha: string;
+  deployment?: {
+    deploymentId: string;
+    status?: string;
+  };
+}
+
+export interface StorefrontV2ProductPublishResult {
+  action: 'deploy' | 'recache' | string;
+  productName?: string | null;
+  status?: string;
+  productUrl?: string;
+  deploymentId?: string;
+  previewUrl?: string;
+  branchName?: string;
+  message?: string;
+  httpStatus?: number;
+}
+
+export interface StorefrontV2CategoryPublishResult {
+  action: 'deploy' | 'recache' | string;
+  categoryName?: string | null;
+  status?: string;
+  categoryUrl?: string;
+  deploymentId?: string;
+  previewUrl?: string;
+  branchName?: string;
+  message?: string;
+  httpStatus?: number;
+}
+
+export interface StorefrontV2ProductPublishPayload {
+  productName?: string;
+  productUrl?: string;
+  branchName?: string;
+}
+
+export interface StorefrontV2CategoryPublishPayload {
+  categoryName?: string;
+  categoryUrl?: string;
+  branchName?: string;
 }
 
 export interface StorefrontV2EmulationRoute {
@@ -152,6 +332,37 @@ export interface StorefrontV2SiteContext {
   navigation?: Array<{label?: string; url: string}>;
   categories?: string[];
   products?: string[];
+  scrapedCategories?: string[];
+  scrapedProducts?: string[];
+  domainCatalog?: {
+    categories?: Array<{id?: number; name?: string; slug?: string}>;
+    products?: Array<{
+      id?: number;
+      name?: string;
+      slug?: string;
+      categories?: Array<{id?: number; name?: string; slug?: string}>;
+    }>;
+  } | null;
+  catalogMapping?: {
+    categories?: Array<{
+      domainCategoryId?: number;
+      domainCategoryName?: string;
+      domainCategorySlug?: string;
+      scrapedCategoryLabel?: string | null;
+      matchedScrapedUrl?: string | null;
+      matchSource?: string | null;
+    }>;
+    products?: Array<{
+      domainProductId?: number;
+      domainProductName?: string;
+      domainProductSlug?: string;
+      domainCategoryIds?: number[];
+      domainCategoryNames?: string[];
+      scrapedProductLabel?: string | null;
+      matchedScrapedUrl?: string | null;
+      matchSource?: string | null;
+    }>;
+  } | null;
   tracking?: Array<{provider?: string; value?: string}>;
   wireframe?: string[];
   stylesheets?: Array<{url: string; content: string}>;
@@ -461,11 +672,20 @@ export class Domain extends Entity {
   private storefrontV2Request = (
     resource: string,
     method: 'GET' | 'POST',
-    payload?: Record<string, any>
+    payload?: Record<string, any>,
+    queryParams?: Record<string, string | undefined>
   ) => {
+    const query: Array<[string, string]> = [['skip_rights', 'y']];
+    if (queryParams) {
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== '') {
+          query.push([key, value]);
+        }
+      });
+    }
     const fetchOptions: RequestOptions = {
       method: method,
-      query: [['skip_rights', 'y']]
+      query: query
     };
     if (payload !== undefined) {
       fetchOptions.body = JSON.stringify(payload);
@@ -474,7 +694,7 @@ export class Domain extends Entity {
     return this.merchi.authenticatedFetch(resource, fetchOptions);
   };
 
-  public getStorefrontV2 = (): Promise<{storefrontV2: StorefrontV2Config}> => {
+  public getStorefrontV2 = (): Promise<StorefrontV2GetResponse> => {
     return this.storefrontV2Request(this.storefrontV2DomainResource(), 'GET');
   };
 
@@ -488,6 +708,16 @@ export class Domain extends Entity {
     );
   };
 
+  public resolveStarterTemplateUrlStructure = (
+    payload: {starterTemplate: string}
+  ): Promise<StorefrontV2StarterTemplateUrlStructureResult> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('starter_template/url_structure/'),
+      'POST',
+      payload
+    ) as Promise<StorefrontV2StarterTemplateUrlStructureResult>;
+  };
+
   public extractStorefrontV2SiteContext = (
     payload: StorefrontV2SiteContextInput
   ): Promise<{siteContext: StorefrontV2SiteContext}> => {
@@ -496,6 +726,23 @@ export class Domain extends Entity {
       'POST',
       payload
     ) as Promise<{siteContext: StorefrontV2SiteContext}>;
+  };
+
+  public createStorefrontV2GenerationBrief = (
+    payload: StorefrontV2GenerationBriefPayload
+  ): Promise<{generationBrief: StorefrontV2GenerationBrief}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('generation_brief/'),
+      'POST',
+      payload
+    ) as Promise<{generationBrief: StorefrontV2GenerationBrief}>;
+  };
+
+  public resetStorefrontV2 = (): Promise<StorefrontV2ResetResult> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('reset/'),
+      'POST'
+    ) as Promise<StorefrontV2ResetResult>;
   };
 
   public createStorefrontChangeRequest = (
@@ -528,7 +775,7 @@ export class Domain extends Entity {
 
   public runStorefrontChangeRequest = (
     requestId: number | string,
-    payload?: Record<string, any>
+    payload?: StorefrontV2ChangeRequestRunPayload
   ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/run/`,
@@ -550,7 +797,7 @@ export class Domain extends Entity {
 
   public rejectStorefrontChangeRequest = (
     requestId: number | string,
-    payload?: Record<string, any>
+    payload?: StorefrontV2ChangeRequestRejectPayload
   ): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
     return this.storefrontV2Request(
       `/storefront_change_requests/${String(requestId)}/reject/`,
@@ -559,25 +806,89 @@ export class Domain extends Entity {
     ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
-  public getStorefrontV2Deployments = () => {
+  public getStorefrontV2Deployments = (): Promise<{deployments: StorefrontV2Deployment[]}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource('deployments/'),
       'GET'
-    );
+    ) as Promise<{deployments: StorefrontV2Deployment[]}>;
   };
 
-  public getStorefrontV2DeploymentLogs = (deploymentId: number | string) => {
+  public getStorefrontV2DeploymentLogs = (
+    deploymentId: number | string
+  ): Promise<{deploymentId: string; logs: StorefrontV2DeploymentLog[]}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource(`deployments/${String(deploymentId)}/logs/`),
       'GET'
-    );
+    ) as Promise<{deploymentId: string; logs: StorefrontV2DeploymentLog[]}>;
   };
 
-  public rollbackStorefrontV2 = (payload?: Record<string, any>) => {
+  public rollbackStorefrontV2 = (): Promise<{rollback: StorefrontV2RollbackResult}> => {
     return this.storefrontV2Request(
       this.storefrontV2DomainResource('rollback/'),
+      'POST'
+    ) as Promise<{rollback: StorefrontV2RollbackResult}>;
+  };
+
+  public getStorefrontV2RepositoryTree = (input?: {
+    path?: string;
+    ref?: string;
+  }): Promise<{repositoryTree: StorefrontV2RepositoryTree}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('repository_tree/'),
+      'GET',
+      undefined,
+      input
+    ) as Promise<{repositoryTree: StorefrontV2RepositoryTree}>;
+  };
+
+  public getStorefrontV2RepositoryBranches = (): Promise<{
+    repositoryBranches: StorefrontV2RepositoryBranches;
+  }> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('repository_branches/'),
+      'GET'
+    ) as Promise<{repositoryBranches: StorefrontV2RepositoryBranches}>;
+  };
+
+  public getStorefrontV2RepositoryFile = (
+    path: string,
+    input?: {ref?: string}
+  ): Promise<{repositoryFile: StorefrontV2RepositoryFile}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('repository_file/'),
+      'GET',
+      undefined,
+      {path, ...input}
+    ) as Promise<{repositoryFile: StorefrontV2RepositoryFile}>;
+  };
+
+  public updateStorefrontV2RepositoryFile = (
+    payload: StorefrontV2RepositoryFileUpdatePayload
+  ): Promise<{repositoryFileUpdate: StorefrontV2RepositoryFileUpdate}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('repository_file/'),
       'POST',
       payload
-    );
+    ) as Promise<{repositoryFileUpdate: StorefrontV2RepositoryFileUpdate}>;
+  };
+
+  public publishStorefrontV2Product = (
+    payload?: StorefrontV2ProductPublishPayload
+  ): Promise<{productPublish: StorefrontV2ProductPublishResult}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('products/publish/'),
+      'POST',
+      payload
+    ) as Promise<{productPublish: StorefrontV2ProductPublishResult}>;
+  };
+
+  public publishStorefrontV2Category = (
+    payload?: StorefrontV2CategoryPublishPayload
+  ): Promise<{categoryPublish: StorefrontV2CategoryPublishResult}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('categories/publish/'),
+      'POST',
+      payload
+    ) as Promise<{categoryPublish: StorefrontV2CategoryPublishResult}>;
   };
 }
