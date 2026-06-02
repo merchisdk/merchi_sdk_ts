@@ -159,11 +159,22 @@ interface ListOptions {
   teamOnly?: boolean;
   turnaroundTimeDays?: number;
   withRights?: boolean;
+  // Opt out of the unbounded ``SELECT count(*)`` the API runs to
+  // populate ``available``. When ``skipCount`` is true the response's
+  // ``available`` is ``null``. Use this whenever the caller only
+  // renders the visible page of rows (search modals, autocomplete,
+  // navbar dropdowns, infinite scroll, ...) and never reads
+  // ``metadata.available``. Paginated tables that show "Showing X
+  // of Y" or compute a page count must NOT set this.
+  skipCount?: boolean;
 }
 
 export interface ListMetadata {
   canCreate?: boolean;
-  available: number;
+  // ``null`` when the caller passed ``skipCount: true``: the API
+  // intentionally skipped the ``COUNT(*)`` query. JSON consumers
+  // can detect the absence rather than mistaking it for zero.
+  available: number | null;
   count: number;
   limit: number;
   offset: number;
@@ -416,6 +427,16 @@ export class Entity {
       }
       if (options.limit !== undefined) {
         fetchOptions.query.push(['limit', options.limit.toString()]);
+      }
+      if (options.skipCount !== undefined) {
+        // Snake-case is the canonical form on the server; the API
+        // also accepts ``skipCount`` via its camelCase alias, but
+        // matching the wire shape of the other ``*_only`` /
+        // ``*_filter`` flags keeps logs and traffic captures
+        // consistent.
+        fetchOptions.query.push(
+          ['skip_count', options.skipCount.toString()]
+        );
       }
       if (options.q !== undefined) {
         fetchOptions.query.push(['q', options.q]);
