@@ -105,6 +105,7 @@ interface ListOptions {
   inDomain?: number;
   inDomainName?: string;
   inDomainRoles?: number[];
+  isJobManager?: boolean;
   isMaster?: boolean;
   isOrder?: boolean;
   isPrivate?: boolean;
@@ -483,6 +484,10 @@ export class Entity {
       }
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
+      }
+      if (options.isJobManager !== undefined) {
+        fetchOptions.query.push(
+          ['is_job_manager', options.isJobManager.toString()]);
       }
       if (options.groupBuyOnly !== undefined) {
         fetchOptions.query.push(
