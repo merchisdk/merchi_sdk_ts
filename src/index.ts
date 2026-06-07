@@ -40,6 +40,7 @@ import { Invoice } from './entities/invoice.js';
 import { Item } from './entities/item.js';
 import { Job } from './entities/job.js';
 import { JobComment } from './entities/job_comment.js';
+import { JobNote } from './entities/job_note.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
 import { Menu } from './entities/menu.js';
 import { MenuItem } from './entities/menu_item.js';
@@ -136,6 +137,7 @@ export {
   Item,
   Job,
   JobComment,
+  JobNote,
   MatchingInventory,
   Menu,
   MenuItem,

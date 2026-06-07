@@ -13,6 +13,7 @@ import { MatchingInventory } from './matching_inventory.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
 import { JobComment } from './job_comment.js';
+import { JobNote } from './job_note.js';
 import { Notification } from './notification.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
@@ -46,11 +47,8 @@ export class Job extends Entity {
   @Job.property()
   public currency?: string;
 
-  @Job.property({type: String})
-  public notes?: string | null;
-
-  @Job.property({type: String})
-  public productionNotes?: string | null;
+  @Job.property({arrayType: 'JobNote'})
+  public jobNotes?: JobNote[];
 
   @Job.property({type: String})
   public shopifyShopUrl?: string | null;
