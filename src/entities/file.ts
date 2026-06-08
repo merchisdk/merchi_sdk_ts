@@ -7,6 +7,7 @@ import { Entity } from '../entity.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { JobComment } from './job_comment.js';
+import { JobNote } from './job_note.js';
 import { Notification } from './notification.js';
 import { Product } from './product.js';
 import { ProductionComment } from './production_comment.js';
@@ -103,6 +104,9 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: 'JobComment'})
   public jobComments?: JobComment[];
+
+  @MerchiFile.property({arrayType: 'JobNote'})
+  public jobNotes?: JobNote[];
 
   @MerchiFile.property({arrayType: 'Job'})
   public jobs?: Job[];
