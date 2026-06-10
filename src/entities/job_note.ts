@@ -29,12 +29,12 @@ export class JobNote extends Entity {
   @JobNote.property({arrayType: 'MerchiFile'})
   public files?: MerchiFile[];
 
-  @JobNote.property({type: "Job"})
+  @JobNote.property({type: 'Job'})
   public job?: Job;
 
-  @JobNote.property({type: "User"})
+  @JobNote.property({type: 'User'})
   public createdBy?: User;
 
-  @JobNote.property({type: "User"})
+  @JobNote.property({type: 'User'})
   public lastEditedBy?: User;
 }
