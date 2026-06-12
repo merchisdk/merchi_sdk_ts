@@ -3,7 +3,7 @@ import { Assignment } from './assignment.js';
 import { Company } from './company.js';
 import { CountryTax } from './country_tax.js';
 import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { Draft } from './draft.js';
 import { DraftComment } from './draft_comment.js';
 import { EmailAddress } from './email_address.js';
@@ -266,8 +266,8 @@ export class Job extends Entity {
   @Job.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
 
-  @Job.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  @Job.property({arrayType: 'CompanyTag'})
+  public tags?: CompanyTag[];
 
   @Job.property({arrayType: 'Product'})
   public createdProducts?: Product[];

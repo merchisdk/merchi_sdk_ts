@@ -24,7 +24,7 @@ import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
 import { Domain } from './entities/domain.js';
 import { DomainInvitation } from './entities/domain_invitation.js';
-import { DomainTag } from './entities/domain_tag.js';
+import { CompanyTag } from './entities/company_tag.js';
 import { Draft } from './entities/draft.js';
 import { DraftComment } from './entities/draft_comment.js';
 import { DraftTemplate } from './entities/draft_template.js';
@@ -120,7 +120,7 @@ export {
   DiscountGroup,
   Domain,
   DomainInvitation,
-  DomainTag,
+  CompanyTag,
   Draft,
   DraftComment,
   DraftTemplate,

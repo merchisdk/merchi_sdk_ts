@@ -6,7 +6,7 @@ import { Component } from './component.js';
 import { CountryTax } from './country_tax.js';
 import { DiscountGroup } from './discount_group.js';
 import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { DraftPreview } from './draft_preview.js';
 import { DraftTemplate } from './draft_template.js';
 import { Entity } from '../entity.js';
@@ -279,8 +279,8 @@ export class Product extends Entity {
   @Product.property({arrayType: 'VariationField'})
   public independentVariationFields?: VariationField[];
 
-  @Product.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  @Product.property({arrayType: 'CompanyTag'})
+  public tags?: CompanyTag[];
 
   @Product.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];

@@ -2,7 +2,7 @@ import { Address } from './address.js';
 import { Cart } from './cart.js';
 import { Company } from './company.js';
 import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { EmailAddress } from './email_address.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
@@ -160,8 +160,8 @@ export class Invoice extends Entity {
   @Invoice.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
 
-  @Invoice.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  @Invoice.property({arrayType: 'CompanyTag'})
+  public tags?: CompanyTag[];
 
   @Invoice.property({arrayType: 'Shipment'})
   public shipments?: Shipment[];

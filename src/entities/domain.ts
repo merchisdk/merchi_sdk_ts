@@ -2,7 +2,6 @@ import { Cart } from './cart.js';
 import { Category } from './category.js';
 import { Company } from './company.js';
 import { DomainInvitation } from './domain_invitation.js';
-import { DomainTag } from './domain_tag.js';
 import { EnrolledDomain } from './enrolled_domain.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
@@ -575,9 +574,6 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
-
-  @Domain.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
 
   @Domain.property({arrayType: 'Domain'})
   public canSupply?: Domain[];

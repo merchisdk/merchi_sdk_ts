@@ -2,7 +2,7 @@ import { Address } from './address.js';
 import { Assignment } from './assignment.js';
 import { Company } from './company.js';
 import { CountryTax } from './country_tax.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { Entity } from '../entity.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
@@ -147,8 +147,8 @@ export class Shipment extends Entity {
   @Shipment.property({type: ShipmentMethod})
   public shipmentMethod?: ShipmentMethod | null;
 
-  @Shipment.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  @Shipment.property({arrayType: 'CompanyTag'})
+  public tags?: CompanyTag[];
 
   @Shipment.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];

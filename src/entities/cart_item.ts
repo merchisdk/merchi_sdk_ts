@@ -5,7 +5,7 @@ import { Product } from './product.js';
 import { RequestOptions } from '../request.js';
 import { Variation } from './variation.js';
 import { VariationsGroup } from './variations_group.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { Draft } from './draft.js';
 
 export class CartItem extends Entity {
@@ -55,8 +55,8 @@ export class CartItem extends Entity {
   @CartItem.property({arrayType: 'Variation'})
   public variations?: Variation[];
 
-  @CartItem.property({arrayType: 'DomainTag'})
-  public tags?: DomainTag[];
+  @CartItem.property({arrayType: 'CompanyTag'})
+  public tags?: CompanyTag[];
 
   @CartItem.property({arrayType: 'Draft'})
   public ownDrafts?: Draft[];

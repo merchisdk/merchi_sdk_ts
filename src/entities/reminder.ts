@@ -1,7 +1,7 @@
 import { Assignment } from './assignment.js';
 import { Company } from './company.js';
 import { Domain } from './domain.js';
-import { DomainTag } from './domain_tag.js';
+import { CompanyTag } from './company_tag.js';
 import { Entity } from '../entity.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
@@ -42,8 +42,8 @@ export class Reminder extends Entity {
   @Reminder.property()
   public message?: string;
 
-  @Reminder.property({arrayType: 'DomainTag'})
-  public domainTags?: DomainTag[];
+  @Reminder.property({arrayType: 'CompanyTag'})
+  public companyTags?: CompanyTag[];
 
   @Reminder.property({arrayType: 'User'})
   public remindUsers?: User[];

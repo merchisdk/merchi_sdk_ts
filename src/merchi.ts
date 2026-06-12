@@ -62,7 +62,7 @@ import { ComponentTag } from './entities/component_tag.js';
 import { EnrolledDomain } from './entities/enrolled_domain.js';
 import { CountryTax } from './entities/country_tax.js';
 import { Item } from './entities/item.js';
-import { DomainTag } from './entities/domain_tag.js';
+import { CompanyTag } from './entities/company_tag.js';
 import { DraftComment } from './entities/draft_comment.js';
 import { Notification } from './entities/notification.js';
 import { Payment } from './entities/payment.js';
@@ -158,8 +158,12 @@ export class Merchi {
   public Job: typeof Job;
   public DomainInvitation: typeof DomainInvitation;
   public Product: typeof Product;
+<<<<<<< Updated upstream
   public ProductReview: typeof ProductReview;
   public DomainTag: typeof DomainTag;
+=======
+  public CompanyTag: typeof CompanyTag;
+>>>>>>> Stashed changes
   public EmailAddress: typeof EmailAddress;
   public PhoneNumber: typeof PhoneNumber;
   public Company: typeof Company;
@@ -340,7 +344,7 @@ export class Merchi {
     this.SystemRole = this.setupClass(SystemRole) as typeof SystemRole;
     this.CartItem = this.setupClass(CartItem) as typeof CartItem;
     this.UserCompany = this.setupClass(UserCompany) as typeof UserCompany;
-    this.DomainTag = this.setupClass(DomainTag) as typeof DomainTag;
+    this.CompanyTag = this.setupClass(CompanyTag) as typeof CompanyTag;
     this.VariationFieldsOption = this.setupClass(
       VariationFieldsOption
     ) as typeof VariationFieldsOption;
