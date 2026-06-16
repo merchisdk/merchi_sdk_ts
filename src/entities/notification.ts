@@ -29,6 +29,9 @@ export class Notification extends Entity {
   @Notification.property()
   public date?: Date;
 
+  @Notification.property({type: Date})
+  public emailOpenedAt?: Date | null;
+
   @Notification.property()
   public seen?: boolean;
 
