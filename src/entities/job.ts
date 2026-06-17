@@ -14,6 +14,7 @@ import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
 import { JobComment } from './job_comment.js';
 import { JobNote } from './job_note.js';
+import { JobOperationLog } from './job_operation_log.js';
 import { Notification } from './notification.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
@@ -49,6 +50,9 @@ export class Job extends Entity {
 
   @Job.property({arrayType: 'JobNote'})
   public jobNotes?: JobNote[];
+
+  @Job.property({arrayType: 'JobOperationLog'})
+  public operationLogs?: JobOperationLog[];
 
   @Job.property({type: String})
   public shopifyShopUrl?: string | null;

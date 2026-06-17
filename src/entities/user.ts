@@ -14,6 +14,7 @@ import { MerchiFile } from './file.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { JobComment } from './job_comment.js';
+import { JobOperationLog } from './job_operation_log.js';
 import { Notification } from './notification.js';
 import { Payment } from './payment.js';
 import { PhoneNumber } from './phone_number.js';
@@ -167,6 +168,9 @@ export class User extends Entity {
 
   @User.property({ arrayType: 'JobComment' })
   public jobComments?: JobComment[];
+
+  @User.property({ arrayType: 'JobOperationLog' })
+  public jobOperationLogs?: JobOperationLog[];
 
   @User.property({ arrayType: 'ShipmentLog' })
   public shipmentLogs?: ShipmentLog[];

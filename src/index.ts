@@ -41,6 +41,7 @@ import { Item } from './entities/item.js';
 import { Job } from './entities/job.js';
 import { JobComment } from './entities/job_comment.js';
 import { JobNote } from './entities/job_note.js';
+import { JobOperationLog } from './entities/job_operation_log.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
 import { Menu } from './entities/menu.js';
 import { MenuItem } from './entities/menu_item.js';
@@ -138,6 +139,7 @@ export {
   Job,
   JobComment,
   JobNote,
+  JobOperationLog,
   MatchingInventory,
   Menu,
   MenuItem,
