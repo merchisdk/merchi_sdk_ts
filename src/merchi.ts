@@ -7,6 +7,7 @@ import { AutomaticPaymentRelationship } from './entities/automatic_payment_relat
 import { Session } from './entities/session.js';
 import { JobComment } from './entities/job_comment.js';
 import { JobNote } from './entities/job_note.js';
+import { JobOperationLog } from './entities/job_operation_log.js';
 import { Domain } from './entities/domain.js';
 import { ExchangeRate } from './entities/exchange_rate.js';
 import { Job } from './entities/job.js';
@@ -135,6 +136,7 @@ export class Merchi {
   public InventoryGroup: typeof InventoryGroup;
   public JobComment: typeof JobComment;
   public JobNote: typeof JobNote;
+  public JobOperationLog: typeof JobOperationLog;
   public VariationOption: typeof VariationOption;
   public SupplyDomain: typeof SupplyDomain;
   public ProductionComment: typeof ProductionComment;
@@ -376,6 +378,7 @@ export class Merchi {
     this.User = this.setupClass(User) as typeof User;
     this.JobComment = this.setupClass(JobComment) as typeof JobComment;
     this.JobNote = this.setupClass(JobNote) as typeof JobNote;
+    this.JobOperationLog = this.setupClass(JobOperationLog) as typeof JobOperationLog;
     this.VariationOption = this.setupClass(
       VariationOption
     ) as typeof VariationOption;
