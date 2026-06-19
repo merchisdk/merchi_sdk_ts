@@ -26,3 +26,22 @@ test('picks highest tier whose lowerLimit <= qty', () => {
 test('empty discounts: no discount', () => {
   expect(applyDiscount(10, 1000, { groupRestricted: false, discounts: [] })).toBe(10);
 });
+
+test('explicit zero-amount tier is applied (distinct from below-tier)', () => {
+  expect(
+    applyDiscount(10, 100, {
+      groupRestricted: false,
+      discounts: [{ lowerLimit: 100, amount: 0 }],
+    })
+  ).toBe(10);
+});
+
+test('applied discount is rounded to 3dp', () => {
+  // 10 * (1 - 33.333/100) = 6.6667 -> 3dp -> 6.667
+  expect(
+    applyDiscount(10, 100, {
+      groupRestricted: false,
+      discounts: [{ lowerLimit: 100, amount: 33.333 }],
+    })
+  ).toBe(6.667);
+});

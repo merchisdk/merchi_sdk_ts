@@ -1,3 +1,15 @@
+/**
+ * Round `value` to `dp` decimal places using decimal half-even (round half to
+ * even / banker's rounding) so it mirrors the server's `Decimal(round(x, n))`.
+ *
+ * This intentionally matches Python's *decimal* half-even behaviour, NOT Python
+ * float `round()` (e.g. `roundHalfEven(2.675, 2) === 2.68`, whereas float
+ * `round(2.675, 2)` yields 2.67).
+ *
+ * Targeted at the money domain: small magnitudes and `dp <= 3`. The `EPS`
+ * half-detection tolerance is tuned for that domain and is not intended for
+ * arbitrary large magnitudes or high precision.
+ */
 export function roundHalfEven(value: number, dp: number): number {
   if (!isFinite(value)) return value;
   const factor = Math.pow(10, dp);
