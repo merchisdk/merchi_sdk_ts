@@ -109,8 +109,14 @@ export function estimateQuote(
   let costPerUnit: number;
   let groupQuantities: number[];
 
-  if (rules.hasGroups) {
-    const groups = selections.groups || [];
+  // Mirror the server's `update_group_variations_cost_and_job_cost`
+  // (jobs.py ~3321): the group-vs-single branch keys off whether the *job*
+  // actually has variation groups (`if self.variations_groups:`), NOT the
+  // product's `hasGroups` capability. A group-capable product with no groups
+  // submitted is priced as a single non-group job (the server's `else` branch
+  // sets `group_quantities = [self.quantity or 0]`).
+  const groups = selections.groups || [];
+  if (groups.length > 0) {
     groupQuantities = groups.map((g) => g.quantity || 0);
     const totalQty = groupQuantities.reduce((a, b) => a + b, 0);
     const restricted = Boolean(rules.product.discountGroup?.groupRestricted);

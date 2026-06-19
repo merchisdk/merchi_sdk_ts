@@ -50,6 +50,21 @@ test('chained conditional field requires its parent to be fulfilled', () => {
   expect(v.has(3)).toBe(true);
 });
 
+test('group fields are not visible when the job has no groups', () => {
+  const groupRules: PricingRules = {
+    ...rules,
+    fields: [field(1, [], [101])],
+    hasGroups: true,
+    groupFields: [field(20, []), field(21, [])],
+  };
+  // No groups submitted -> the job is a single non-group job, so group fields
+  // never materialise as variations (mirrors the server).
+  const v = resolveVisibleFields(groupRules, { fieldValues: { 1: { selectedOptionIds: [101] } } });
+  expect(v.has(1)).toBe(true);
+  expect(v.has(20)).toBe(false);
+  expect(v.has(21)).toBe(false);
+});
+
 test('group field selections also drive visibility', () => {
   const groupRules: PricingRules = {
     ...rules, fields: [], hasGroups: true,

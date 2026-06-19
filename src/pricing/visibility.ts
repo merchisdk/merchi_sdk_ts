@@ -61,8 +61,16 @@ export function resolveVisibleFields(
     return false;
   };
 
+  // Group variation fields only materialise as variations when the job
+  // actually has groups (the server builds them inside each `variations_group`
+  // via `VariationsGroups.mapper_variations`; with no groups there are no group
+  // variations at all). Independent fields are always in play. This mirrors the
+  // server, where a non-group job exposes no group fields.
+  const hasGroups = Boolean(selections.groups && selections.groups.length > 0);
+  const fieldsToConsider = hasGroups ? allFields : rules.fields;
+
   const visible = new Set<number>();
-  for (const f of allFields) {
+  for (const f of fieldsToConsider) {
     if (isFulfilled(f.selectedBy, [])) visible.add(f.id);
   }
   return visible;
