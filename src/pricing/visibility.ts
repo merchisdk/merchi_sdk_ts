@@ -13,10 +13,18 @@ function collectSelectedOptionIds(selections: Selections): number[] {
   return ids;
 }
 
-export function resolveVisibleFields(
-  rules: PricingRules,
-  selections: Selections
-): Set<number> {
+interface Resolver {
+  allFields: PricingField[];
+  fieldsToConsider: PricingField[];
+  isFulfilled: (selectedBy: number[], checked: number[]) => boolean;
+}
+
+// Shared machinery for both field- and option-level conditional visibility.
+// Mirrors the server's `check_selected_by_fullfilled` recursion: a `selectedBy`
+// list is fulfilled when any of its trigger option ids is currently selected
+// AND that selecting option is itself fulfilled (its own `selectedBy` and its
+// owning field's `selectedBy`), with a `checked` accumulator to break cycles.
+function buildResolver(rules: PricingRules, selections: Selections): Resolver {
   const allFields: PricingField[] = [...rules.fields, ...rules.groupFields];
   const optionsById = new Map<number, PricingOption>();
   const fieldByOptionId = new Map<number, PricingField>();
@@ -69,9 +77,35 @@ export function resolveVisibleFields(
   const hasGroups = Boolean(selections.groups && selections.groups.length > 0);
   const fieldsToConsider = hasGroups ? allFields : rules.fields;
 
+  return { allFields, fieldsToConsider, isFulfilled };
+}
+
+export function resolveVisibleFields(
+  rules: PricingRules,
+  selections: Selections
+): Set<number> {
+  const { fieldsToConsider, isFulfilled } = buildResolver(rules, selections);
   const visible = new Set<number>();
   for (const f of fieldsToConsider) {
     if (isFulfilled(f.selectedBy, [])) visible.add(f.id);
+  }
+  return visible;
+}
+
+// Returns the set of option ids whose own `selectedBy` is fulfilled — i.e. the
+// options that should be visible/selectable given the current selections.
+// Mirrors the server's per-option `isVisible = check_selected_by_fullfilled(
+// option.selected_by)`. Options with no `selectedBy` are always visible.
+export function resolveVisibleOptionIds(
+  rules: PricingRules,
+  selections: Selections
+): Set<number> {
+  const { fieldsToConsider, isFulfilled } = buildResolver(rules, selections);
+  const visible = new Set<number>();
+  for (const f of fieldsToConsider) {
+    for (const o of f.options) {
+      if (isFulfilled(o.selectedBy, [])) visible.add(o.id);
+    }
   }
   return visible;
 }

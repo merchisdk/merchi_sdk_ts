@@ -1,4 +1,4 @@
-import { resolveVisibleFields } from './visibility.js';
+import { resolveVisibleFields, resolveVisibleOptionIds } from './visibility.js';
 import { PricingRules } from './types.js';
 
 function field(id: number, selectedBy: number[], options: number[] = []): any {
@@ -152,4 +152,72 @@ test('group without fieldValues falls back to an empty selection map', () => {
   });
   expect(v.has(1)).toBe(true);
   expect(v.has(2)).toBe(false);
+});
+
+// --- resolveVisibleOptionIds (option-level conditional visibility) ---
+
+// Mirrors the production case: a Size field with options (24mm=901, 25mm=902)
+// and a Colour field whose Green option (912) is gated by `selectedBy: [902]`.
+function sizeAndColourRules(): PricingRules {
+  const opt = (id: number, selectedBy: number[] = []) => ({
+    id, originalId: id, position: id, default: false,
+    variationCost: 0, variationUnitCost: 0,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    selectedBy,
+  });
+  const f = (id: number, options: any[]): any => ({
+    id, originalId: id, position: 0, fieldType: 2, independent: true,
+    isSelectable: true, selectedBy: [],
+    variationCost: 0, variationUnitCost: 0,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    options,
+  });
+  return {
+    ...rules,
+    fields: [
+      f(900, [opt(901), opt(902)]),                     // Size: 24mm, 25mm
+      f(910, [opt(911), opt(912, [902]), opt(913)]),    // Colour: Red, Green(gated by 25mm), Blue
+    ],
+    groupFields: [],
+  };
+}
+
+test('option with no selectedBy is always visible', () => {
+  const v = resolveVisibleOptionIds(sizeAndColourRules(), { fieldValues: {} });
+  expect(v.has(901)).toBe(true);
+  expect(v.has(911)).toBe(true);
+  expect(v.has(913)).toBe(true);
+});
+
+test('gated option is hidden until its trigger option is selected', () => {
+  const r = sizeAndColourRules();
+  const hidden = resolveVisibleOptionIds(r, { fieldValues: { 900: { selectedOptionIds: [901] } } });
+  expect(hidden.has(912)).toBe(false); // 24mm selected -> Green hidden
+  const visible = resolveVisibleOptionIds(r, { fieldValues: { 900: { selectedOptionIds: [902] } } });
+  expect(visible.has(912)).toBe(true); // 25mm selected -> Green visible
+});
+
+test('group option visibility resolves from group selections', () => {
+  const opt = (id: number, selectedBy: number[] = []) => ({
+    id, originalId: id, position: id, default: false,
+    variationCost: 0, variationUnitCost: 0,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    selectedBy,
+  });
+  const f = (id: number, options: any[]): any => ({
+    id, originalId: id, position: 0, fieldType: 2, independent: true,
+    isSelectable: true, selectedBy: [],
+    variationCost: 0, variationUnitCost: 0,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    options,
+  });
+  const groupRules: PricingRules = {
+    ...rules, fields: [], hasGroups: true,
+    groupFields: [f(800, [opt(801), opt(802)]), f(810, [opt(811, [802])])],
+  };
+  const v = resolveVisibleOptionIds(groupRules, {
+    fieldValues: {},
+    groups: [{ quantity: 5, fieldValues: { 800: { selectedOptionIds: [802] } } }],
+  });
+  expect(v.has(811)).toBe(true);
 });
