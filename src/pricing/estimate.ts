@@ -103,7 +103,6 @@ export function estimateQuote(
     return { unsupported: rules.unsupported };
   }
 
-  const visible = resolveVisibleFields(rules, selections);
   const groupCosts: number[] = [];
   let cost = 0;
   let costPerUnit: number;
@@ -134,9 +133,17 @@ export function estimateQuote(
         groupCosts.push(0);
         continue;
       }
+      // A group's field visibility is scoped to that group's own selections
+      // plus the job-level (independent) selections — NOT other groups'
+      // (server `VariationsGroups.selected_options` = group.variations +
+      // job.variations, variations_groups.py ~252).
+      const groupVisible = resolveVisibleFields(rules, {
+        fieldValues: selections.fieldValues,
+        groups: [group],
+      });
       let groupVariationCost = 0;
       for (const field of rules.groupFields) {
-        if (!visible.has(field.id)) continue;
+        if (!groupVisible.has(field.id)) continue;
         const { setup, unitList } = costFactor(field, group.fieldValues[field.id], [gQty]);
         groupVariationCost += setup + unitList[0] * gQty;
       }
@@ -149,8 +156,15 @@ export function estimateQuote(
       ? perGroupCpu.reduce((acc, cpu, i) => acc + cpu * groupQuantities[i], 0) / totalQty
       : baseUnitPrice;
 
+    // Independent (job-level) field visibility is scoped to independent
+    // selections only (server `Jobs.selected_options` = job.variations,
+    // jobs.py ~1392), so other groups' selections never reveal them.
+    const independentVisible = resolveVisibleFields(rules, {
+      quantity: selections.quantity,
+      fieldValues: selections.fieldValues,
+    });
     for (const field of rules.fields) {
-      if (!visible.has(field.id)) continue;
+      if (!independentVisible.has(field.id)) continue;
       const { setup, unitList } = costFactor(field, selections.fieldValues[field.id], groupQuantities);
       const unitTotal = unitList.reduce((acc, uc, i) => acc + uc * groupQuantities[i], 0);
       cost += setup + unitTotal;
@@ -160,6 +174,9 @@ export function estimateQuote(
     groupQuantities = [qty];
     costPerUnit = unitPriceAt(rules, qty);
     cost = costPerUnit * qty;
+    // No groups: single-job scope (resolveVisibleFields with no groups uses
+    // only the top-level selections and considers only independent fields).
+    const visible = resolveVisibleFields(rules, selections);
     for (const field of rules.fields) {
       if (!visible.has(field.id)) continue;
       const { setup, unitList } = costFactor(field, selections.fieldValues[field.id], groupQuantities);

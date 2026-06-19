@@ -321,3 +321,47 @@ test('group product: restricted product discount, zero-qty group, hidden fields 
   expect(r.groupCosts).toEqual([0]);
   expect(r.costPerUnit).toBe(10);
 });
+
+test('group field visibility is scoped per group (no cross-group leak)', () => {
+  // Size field (24mm=801, 25mm=802) and a premium group field gated by 25mm
+  // (selectedBy [802]) whose selected option 811 costs 5 setup.
+  const opt = (id: number, selectedBy: number[] = []) => ({
+    id, originalId: id, position: id, default: false,
+    variationCost: 0, variationUnitCost: 0,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    selectedBy,
+  });
+  const rules: PricingRules = {
+    ...base, hasGroups: true,
+    product: { unitPrice: 0, minimumPrice: null, discountGroup: null },
+    taxPercent: 0,
+    groupFields: [
+      {
+        id: 800, originalId: 800, position: 0, fieldType: 2, independent: false,
+        isSelectable: true, selectedBy: [],
+        variationCost: 0, variationUnitCost: 0,
+        variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+        options: [opt(801), opt(802)],
+      },
+      {
+        id: 810, originalId: 810, position: 1, fieldType: 2, independent: false,
+        isSelectable: true, selectedBy: [802], // gated by 25mm
+        variationCost: 0, variationUnitCost: 0,
+        variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+        options: [{ ...opt(811), variationCost: 5 }],
+      },
+    ],
+  };
+  // Group A picks 24mm but ALSO has premium 811 selected; Group B picks 25mm + 811.
+  // Scoped: A's premium field is hidden (24mm) -> 811 NOT costed; B's is visible
+  // -> 811 costs 5. A global resolver would wrongly cost A's 811 too (total 10).
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [
+      { quantity: 10, fieldValues: { 800: { selectedOptionIds: [801] }, 810: { selectedOptionIds: [811] } } },
+      { quantity: 10, fieldValues: { 800: { selectedOptionIds: [802] }, 810: { selectedOptionIds: [811] } } },
+    ],
+  }) as QuoteResult;
+  expect(r.groupCosts).toEqual([0, 5]);
+  expect(r.cost).toBe(5);
+});
