@@ -96,6 +96,84 @@ test('non-selectable field with value adds field cost; empty adds nothing', () =
   expect(mk({ value: 'hello' }).cost).toBe(104);
   expect(mk({ value: '' }).cost).toBe(100);
   expect(mk(undefined as any).cost).toBe(100);
+  // Server `is_empty` uses `not self.value`: numeric 0 is empty, string '0' is not.
+  expect(mk({ value: 0 }).cost).toBe(100);
+  expect(mk({ value: '0' }).cost).toBe(104);
+});
+
+test('tax computed from unrounded cost, not rounded cost (non-10% rate)', () => {
+  const rules: PricingRules = {
+    ...base,
+    taxPercent: 33,
+    fields: [{
+      id: 7, originalId: 7, position: 0, fieldType: 5, independent: true,
+      isSelectable: false, selectedBy: [],
+      variationCost: 0.075, variationUnitCost: 0,
+      variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+      options: [],
+    }],
+  };
+  const r = estimateQuote(rules, { quantity: 10, fieldValues: { 7: { value: 'x' } } }) as QuoteResult;
+  // unrounded cost = 100 + 0.075 = 100.075
+  expect(r.cost).toBe(100.08); // roundHalfEven(100.075, 2)
+  // tax from UNROUNDED: round(100.075*0.33, 2) = round(33.02475, 2) = 33.02
+  // (the buggy round(round(100.075,2)*0.33,2) would give 33.03)
+  expect(r.taxAmount).toBe(33.02);
+  expect(r.totalCost).toBe(133.1); // round(100.075 + 33.02475, 3)
+});
+
+test('zero-qty group adds no field cost even when a visible field has value', () => {
+  const rules: PricingRules = {
+    ...base,
+    hasGroups: true,
+    groupFields: [
+      {
+        id: 50, originalId: 50, position: 0, fieldType: 5, independent: false,
+        isSelectable: false, selectedBy: [],
+        variationCost: 20, variationUnitCost: 0,
+        variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+        options: [],
+      },
+      {
+        // hidden conditional group field: skipped in the non-zero-qty group too
+        id: 51, originalId: 51, position: 1, fieldType: 5, independent: false,
+        isSelectable: false, selectedBy: [888],
+        variationCost: 99, variationUnitCost: 0,
+        variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+        options: [],
+      },
+    ],
+  };
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [
+      { quantity: 0, fieldValues: { 50: { value: 'present' } } },
+      { quantity: 5, fieldValues: {} },
+    ],
+  }) as QuoteResult;
+  // zero-qty group contributes exactly 0 (no +20 setup); other group: 5*10 = 50
+  expect(r.groupCosts).toEqual([0, 50]);
+  expect(r.cost).toBe(50);
+});
+
+test('groupCost preserves 3rd-decimal precision', () => {
+  const rules: PricingRules = {
+    ...base,
+    hasGroups: true,
+    groupFields: [{
+      id: 60, originalId: 60, position: 0, fieldType: 5, independent: false,
+      isSelectable: false, selectedBy: [],
+      variationCost: 0, variationUnitCost: 0.001,
+      variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+      options: [],
+    }],
+  };
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [{ quantity: 3, fieldValues: { 60: { value: 'x' } } }],
+  }) as QuoteResult;
+  // groupCost = 3*10 + 0.001*3 = 30.003, serialized at 3dp (not 2dp)
+  expect(r.groupCosts).toEqual([30.003]);
 });
 
 test('group product: weighted unit price and summed group costs', () => {

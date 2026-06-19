@@ -52,7 +52,14 @@ function isEmpty(field: PricingField, sel: FieldSelection | undefined): boolean 
   if (field.isSelectable) {
     return !sel.selectedOptionIds || sel.selectedOptionIds.length === 0;
   }
-  return sel.value === undefined || sel.value === null || sel.value === '';
+  // Server `is_empty` non-selectable branch is `return not self.value`, so
+  // numeric 0 is empty (but string '0' stays non-empty, since `not '0'` is False).
+  return (
+    sel.value === undefined ||
+    sel.value === null ||
+    sel.value === '' ||
+    sel.value === 0
+  );
 }
 
 function costFactor(
@@ -114,6 +121,13 @@ export function estimateQuote(
       const gQty = group.quantity || 0;
       const cpu = restricted ? unitPriceAt(rules, gQty) : baseUnitPrice;
       perGroupCpu.push(cpu);
+      // Server `VariationsGroups.update_cost` (variations_groups.py ~238):
+      // `if not self.quantity: self.group_cost = 0; return` — a zero-qty group
+      // contributes exactly 0 and adds NO field/variation costs.
+      if (!gQty) {
+        groupCosts.push(0);
+        continue;
+      }
       let groupVariationCost = 0;
       for (const field of rules.groupFields) {
         if (!visible.has(field.id)) continue;
@@ -147,14 +161,26 @@ export function estimateQuote(
     }
   }
 
-  cost = roundHalfEven(cost, 2);
-  const taxAmount = roundHalfEven((cost * rules.taxPercent) / 100, 2);
+  // Server `Jobs.update_cost` (jobs.py ~3452-3454) accumulates `self.cost` at
+  // full precision and computes `self.tax_amount = tax(self.cost, ...)` on the
+  // UNROUNDED cost (money_protocol.py `tax` does NOT round). `cost` and
+  // `taxAmount` are then rounded INDEPENDENTLY at serialization to 2dp
+  // (jobs.py ~2169-2171). So tax must be derived from the unrounded cost.
+  const unroundedCost = cost;
+  const roundedCost = roundHalfEven(unroundedCost, 2);
+  const unroundedTax = (unroundedCost * rules.taxPercent) / 100;
+  const taxAmount = roundHalfEven(unroundedTax, 2);
   return {
     costPerUnit: roundHalfEven(costPerUnit, 3),
-    cost,
+    cost: roundedCost,
     taxAmount,
-    totalCost: roundHalfEven(cost + taxAmount, 2),
-    groupCosts: groupCosts.map((c) => roundHalfEven(c, 2)),
+    // `totalCost` mirrors `Jobs.all_total_cost` = `self.cost + self.tax_amount`
+    // (jobs.py ~1724), serialized UNROUNDED at jobs.py ~1899. We round to 3dp to
+    // strip float noise while matching the server's effective Numeric scale.
+    totalCost: roundHalfEven(unroundedCost + unroundedTax, 3),
+    // `result["groupCost"] = self.group_cost` is serialized UNROUNDED
+    // (variations_groups.py ~154); round to 3dp to match the Numeric scale.
+    groupCosts: groupCosts.map((c) => roundHalfEven(c, 3)),
     currency: rules.currency,
   };
 }
