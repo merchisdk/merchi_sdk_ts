@@ -1,0 +1,130 @@
+{
+  "bundle": {
+    "currency": "AUD",
+    "fields": [
+      {
+        "fieldType": 1,
+        "id": 12,
+        "independent": true,
+        "isSelectable": false,
+        "options": [],
+        "originalId": null,
+        "position": 1,
+        "selectedBy": [],
+        "variationCost": 11.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      }
+    ],
+    "groupFields": [
+      {
+        "fieldType": 2,
+        "id": 10,
+        "independent": false,
+        "isSelectable": true,
+        "options": [
+          {
+            "default": true,
+            "id": 7,
+            "originalId": null,
+            "position": 1,
+            "selectedBy": [],
+            "variationCost": 0.0,
+            "variationCostDiscountGroup": null,
+            "variationUnitCost": 0.0,
+            "variationUnitCostDiscountGroup": null
+          },
+          {
+            "default": false,
+            "id": 8,
+            "originalId": null,
+            "position": 2,
+            "selectedBy": [],
+            "variationCost": 0.0,
+            "variationCostDiscountGroup": null,
+            "variationUnitCost": 13.0,
+            "variationUnitCostDiscountGroup": null
+          }
+        ],
+        "originalId": null,
+        "position": 1,
+        "selectedBy": [],
+        "variationCost": 0.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      },
+      {
+        "fieldType": 3,
+        "id": 11,
+        "independent": false,
+        "isSelectable": false,
+        "options": [],
+        "originalId": null,
+        "position": 2,
+        "selectedBy": [],
+        "variationCost": 0.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      }
+    ],
+    "hasGroups": true,
+    "product": {
+      "discountGroup": {
+        "discounts": [
+          {
+            "amount": 10.0,
+            "lowerLimit": 400.0
+          }
+        ],
+        "groupRestricted": false
+      },
+      "minimumPrice": 0.0,
+      "unitPrice": 30.0
+    },
+    "taxPercent": 10.0
+  },
+  "expected": {
+    "cost": 645.0,
+    "costPerUnit": 30.0,
+    "groupCosts": [
+      215.0,
+      430.0
+    ],
+    "taxAmount": 64.5,
+    "totalCost": 709.5,
+    "visibleFieldIds": [
+      10,
+      11,
+      12
+    ]
+  },
+  "name": "group_product",
+  "selections": {
+    "fieldValues": {},
+    "groups": [
+      {
+        "fieldValues": {
+          "10": {
+            "selectedOptionIds": [
+              8
+            ]
+          }
+        },
+        "quantity": 5
+      },
+      {
+        "fieldValues": {
+          "10": {
+            "selectedOptionIds": [
+              8
+            ]
+          }
+        },
+        "quantity": 10
+      }
+    ]
+  }
+}
