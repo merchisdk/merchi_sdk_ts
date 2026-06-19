@@ -13,6 +13,9 @@ export interface PricingOption {
   originalId: number | null;
   position: number;
   default: boolean;
+  // Per-option stock availability snapshot (only meaningful for
+  // inventory-limited products; defaults true otherwise).
+  available?: boolean;
   variationCost: number;
   variationUnitCost: number;
   variationCostDiscountGroup: DiscountGroup | null;
@@ -46,6 +49,10 @@ export interface PricingRules {
   fields: PricingField[];
   groupFields: PricingField[];
   hasGroups: boolean;
+  // True when the product is inventory-limited (needs_inventory and not
+  // inventories_open): the client disables out-of-stock options from the
+  // bundle snapshot and refreshes sufficiency from the server in the background.
+  needsInventory?: boolean;
   unsupported?: string;
 }
 
