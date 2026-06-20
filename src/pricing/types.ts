@@ -53,7 +53,16 @@ export interface PricingRules {
   // inventories_open): the client disables out-of-stock options from the
   // bundle snapshot and refreshes sufficiency from the server in the background.
   needsInventory?: boolean;
+  // Per-combination stock for inventory-limited products: each entry is one
+  // inventory record's option-id combination and its quantity. Used for
+  // combination-aware option availability.
+  inventoryUnits?: InventoryUnit[];
   unsupported?: string;
+}
+
+export interface InventoryUnit {
+  optionIds: number[];
+  quantity: number;
 }
 
 export interface FieldSelection {
