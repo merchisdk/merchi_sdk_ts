@@ -313,6 +313,9 @@ export class Product extends Entity {
   public inventoriesOpen?: boolean;
 
   @Product.property()
+  public clientSideCalculation?: boolean;
+
+  @Product.property()
   public supplyChainDisabled?: boolean;
 
   @Product.property({arrayType: 'Inventory'})

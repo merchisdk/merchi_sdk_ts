@@ -88,12 +88,14 @@ import { getCookie } from './cookie.js';
 import * as constants from './constants/index.js';
 import * as request from './request.js';
 import * as util from './util/index.js';
+import * as pricing from './pricing/index.js';
 import { toastNotifications } from './toasts.js';
 
 export {
   constants,
   request,
   util,
+  pricing,
   toastNotifications,
   Address,
   AgentConversation,
