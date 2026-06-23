@@ -19,6 +19,8 @@ import { CompanyInvitation } from './entities/company_invitation.js';
 import { Component } from './entities/component.js';
 import { ComponentTag } from './entities/component_tag.js';
 import { ComponentVersion } from './entities/component_version.js';
+import { ProductForm } from './entities/product_form.js';
+import { ProductFormVersion } from './entities/product_form_version.js';
 import { CountryTax } from './entities/country_tax.js';
 import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
@@ -118,6 +120,8 @@ export {
   Component,
   ComponentTag,
   ComponentVersion,
+  ProductForm,
+  ProductFormVersion,
   CountryTax,
   Discount,
   DiscountGroup,

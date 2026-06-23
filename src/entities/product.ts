@@ -3,6 +3,7 @@ import { CartItem } from './cart_item.js';
 import { Category } from './category.js';
 import { Company } from './company.js';
 import { Component } from './component.js';
+import { ProductForm } from './product_form.js';
 import { CountryTax } from './country_tax.js';
 import { DiscountGroup } from './discount_group.js';
 import { Domain } from './domain.js';
@@ -263,6 +264,9 @@ export class Product extends Entity {
 
   @Product.property({type: Component})
   public component?: Component | null;
+
+  @Product.property({type: ProductForm})
+  public productForm?: ProductForm | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];

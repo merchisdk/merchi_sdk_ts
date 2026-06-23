@@ -44,6 +44,8 @@ import { Theme } from './entities/theme.js';
 import { ThemeCssSetting } from './entities/theme_css_setting.js';
 import { Component } from './entities/component.js';
 import { ComponentVersion } from './entities/component_version.js';
+import { ProductForm } from './entities/product_form.js';
+import { ProductFormVersion } from './entities/product_form_version.js';
 import { MerchiFile } from './entities/file.js';
 import { EmailAddress } from './entities/email_address.js';
 import { SeoDomainPage } from './entities/seo_domain_page.js';
@@ -199,6 +201,8 @@ export class Merchi {
   public Quote: typeof Quote;
   public Component: typeof Component;
   public ComponentVersion : typeof ComponentVersion;
+  public ProductForm: typeof ProductForm;
+  public ProductFormVersion: typeof ProductFormVersion;
   public QuoteItem: typeof QuoteItem;
   public Reminder: typeof Reminder;
   public MatchingInventory: typeof MatchingInventory;
@@ -277,6 +281,8 @@ export class Merchi {
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
     this.Component = this.setupClass(Component) as typeof Component;
     this.ComponentVersion = this.setupClass(ComponentVersion) as typeof ComponentVersion;
+    this.ProductForm = this.setupClass(ProductForm) as typeof ProductForm;
+    this.ProductFormVersion = this.setupClass(ProductFormVersion) as typeof ProductFormVersion;
     this.Theme = this.setupClass(Theme) as typeof Theme;
     this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;
