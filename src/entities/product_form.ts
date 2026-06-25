@@ -16,25 +16,25 @@ export class ProductForm extends Entity {
   @ProductForm.property({type: Date})
   public updated?: Date;
 
-  @ProductForm.property()
+  @ProductForm.property({type: Number})
   public id?: number;
 
-  @ProductForm.property()
+  @ProductForm.property({type: String})
   public name?: string;
 
-  @ProductForm.property()
+  @ProductForm.property({type: String})
   public description?: string;
 
   @ProductForm.property()
   public tags?: string[];
 
-  @ProductForm.property()
+  @ProductForm.property({type: String})
   public source?: string;
 
-  @ProductForm.property()
+  @ProductForm.property({type: String})
   public sdkVersion?: string;
 
-  @ProductForm.property()
+  @ProductForm.property({type: String})
   public status?: string;
 
   @ProductForm.property({type: 'ProductFormVersion'})

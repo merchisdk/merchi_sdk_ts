@@ -1,6 +1,10 @@
 import { Entity } from '../entity.js';
 import { User } from './user.js';
 
+// Sentinel type for passthrough JSON columns (mirrors other entities). Must not
+// be `Object`, which the property decorator rejects ("Bad attribute type").
+const jsonPropertyType = class {};
+
 export class ProductFormVersion extends Entity {
   protected static resourceName = 'product_form_versions';
   protected static singularName = 'productFormVersion';
@@ -9,31 +13,31 @@ export class ProductFormVersion extends Entity {
   @ProductFormVersion.property({type: Date})
   public created?: Date;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: Number})
   public id?: number;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: Number})
   public versionNumber?: number;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public source?: string;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public sdkVersion?: string;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public compiledBundleUrl?: string | null;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public bundleSha?: string | null;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public compiledError?: string | null;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: jsonPropertyType})
   public staticGateReport?: any;
 
-  @ProductFormVersion.property()
+  @ProductFormVersion.property({type: String})
   public status?: string;
 
   @ProductFormVersion.property({type: Date})
