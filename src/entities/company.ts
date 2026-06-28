@@ -19,6 +19,11 @@ import { User } from './user.js';
 import { UserCompany } from './user_company.js';
 import { SubscriptionPlan } from './subscription_plan.js';
 import { PaymentDevice } from './payment_device.js';
+import type {
+  AgentTokenAnalyticsTimeseries,
+  CompanyAnalyticsResponse,
+} from './agent_token_analytics.js';
+import type { RequestOptions } from '../request.js';
 
 export class Company extends Entity {
   protected static resourceName = 'companies';
@@ -333,4 +338,54 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Address'})
   public addresses?: Address[];
+
+  private getCompanyId = () => {
+    if (this.id === undefined || this.id === null) {
+      throw new Error('id is undefined, did you forget to set it?');
+    }
+    return this.id;
+  };
+
+  private analyticsRequest = (
+    resource: string,
+    method: 'GET' | 'POST' = 'GET',
+    payload?: Record<string, any>,
+    queryParams?: Record<string, string | undefined>
+  ) => {
+    const query: Array<[string, string]> = [];
+    if (queryParams) {
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== '') {
+          query.push([key, value]);
+        }
+      });
+    }
+    const fetchOptions: RequestOptions = {
+      method: method,
+      query: query,
+    };
+    if (payload !== undefined) {
+      fetchOptions.body = JSON.stringify(payload);
+      fetchOptions.headers = {'Content-Type': 'application/json'};
+    }
+    return this.merchi.authenticatedFetch(resource, fetchOptions);
+  };
+
+  public getAnalytics = (): Promise<CompanyAnalyticsResponse> => {
+    return this.analyticsRequest(
+      `/companies/${this.getCompanyId()}/analytics/`,
+      'GET'
+    ) as Promise<CompanyAnalyticsResponse>;
+  };
+
+  public getAgentTokenAnalytics = (
+    queryParams?: Record<string, string | undefined>
+  ): Promise<AgentTokenAnalyticsTimeseries> => {
+    return this.analyticsRequest(
+      `/companies/${this.getCompanyId()}/agent_token_analytics/`,
+      'GET',
+      undefined,
+      queryParams
+    ) as Promise<AgentTokenAnalyticsTimeseries>;
+  };
 }
