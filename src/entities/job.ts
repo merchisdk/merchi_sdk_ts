@@ -76,6 +76,15 @@ export class Job extends Entity {
   public needsDrafting?: boolean;
 
   @Job.property()
+  public assignToAgent?: boolean;
+
+  @Job.property({ type: Date })
+  public agentLastRunAt?: Date | null;
+
+  @Job.property({ type: Date })
+  public agentNextCheckAt?: Date | null;
+
+  @Job.property()
   public needsGroupBuy?: boolean;
 
   @Job.property()
