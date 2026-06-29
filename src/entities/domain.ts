@@ -478,6 +478,12 @@ export class Domain extends Entity {
   @Domain.property()
   public enableNotifications?: boolean;
 
+  @Domain.property()
+  public assignToAgent?: boolean;
+
+  @Domain.property({ type: User })
+  public merchiAgentUser?: User | null;
+
   @Domain.property({type: String})
   public trackingCodeGoogleConversion?: string | null;
 

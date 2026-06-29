@@ -61,6 +61,9 @@ export class User extends Entity {
   @User.property()
   public registeredAsGuest?: boolean;
 
+  @User.property()
+  public isMerchiAgent?: boolean;
+
   @User.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
 
