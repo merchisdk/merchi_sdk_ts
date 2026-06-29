@@ -1,5 +1,15 @@
 import { Address } from './entities/address.js';
 import { AgentConversation } from './entities/agent_conversation.js';
+import { AgentTokenUsage } from './entities/agent_token_usage.js';
+export type {
+  AgentTokenAnalyticsSummary,
+  AgentTokenAnalyticsTimeseries,
+  AgentTokenUsageRecordPayload,
+  AgentTokenUsageRecordResponse,
+  CompanyAnalyticsResponse,
+  DomainAnalyticsResponse,
+  ProfileAnalyticsSummaryMetric,
+} from './entities/agent_token_analytics.js';
 import { AgentSkill } from './entities/agent_skill.js';
 import { AgentSkillVersion } from './entities/agent_skill_version.js';
 import { AgentSkillApproval } from './entities/agent_skill_approval.js';
@@ -101,6 +111,7 @@ export {
   toastNotifications,
   Address,
   AgentConversation,
+  AgentTokenUsage,
   AgentSkill,
   AgentSkillVersion,
   AgentSkillApproval,

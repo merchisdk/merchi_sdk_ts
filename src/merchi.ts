@@ -78,6 +78,7 @@ import { Variation } from './entities/variation.js';
 import { CartItem } from './entities/cart_item.js';
 import { Address } from './entities/address.js';
 import { AgentConversation } from './entities/agent_conversation.js';
+import { AgentTokenUsage } from './entities/agent_token_usage.js';
 import { AgentSkill } from './entities/agent_skill.js';
 import { AgentSkillVersion } from './entities/agent_skill_version.js';
 import { AgentSkillApproval } from './entities/agent_skill_approval.js';
@@ -169,6 +170,7 @@ export class Merchi {
   public Company: typeof Company;
   public Address: typeof Address;
   public AgentConversation: typeof AgentConversation;
+  public AgentTokenUsage: typeof AgentTokenUsage;
   public AgentSkill: typeof AgentSkill;
   public AgentSkillVersion: typeof AgentSkillVersion;
   public AgentSkillApproval: typeof AgentSkillApproval;
@@ -354,6 +356,7 @@ export class Merchi {
     ) as typeof VariationFieldsOption;
     this.Address = this.setupClass(Address) as typeof Address;
     this.AgentConversation = this.setupClass(AgentConversation) as typeof AgentConversation;
+    this.AgentTokenUsage = this.setupClass(AgentTokenUsage) as typeof AgentTokenUsage;
     this.AgentSkill = this.setupClass(AgentSkill) as typeof AgentSkill;
     this.AgentSkillVersion = this.setupClass(AgentSkillVersion) as typeof AgentSkillVersion;
     this.AgentSkillApproval = this.setupClass(AgentSkillApproval) as typeof AgentSkillApproval;

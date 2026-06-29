@@ -5,6 +5,10 @@ import { DomainInvitation } from './domain_invitation.js';
 import { DomainTag } from './domain_tag.js';
 import { EnrolledDomain } from './enrolled_domain.js';
 import { Entity } from '../entity.js';
+import type {
+  AgentTokenAnalyticsTimeseries,
+  DomainAnalyticsResponse,
+} from './agent_token_analytics.js';
 import { MerchiFile } from './file.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
@@ -890,5 +894,23 @@ export class Domain extends Entity {
       'POST',
       payload
     ) as Promise<{categoryPublish: StorefrontV2CategoryPublishResult}>;
+  };
+
+  public getAnalytics = (): Promise<DomainAnalyticsResponse> => {
+    return this.storefrontV2Request(
+      `/domains/${this.getDomainId()}/analytics/`,
+      'GET'
+    ) as Promise<DomainAnalyticsResponse>;
+  };
+
+  public getAgentTokenAnalytics = (
+    queryParams?: Record<string, string | undefined>
+  ): Promise<AgentTokenAnalyticsTimeseries> => {
+    return this.storefrontV2Request(
+      `/domains/${this.getDomainId()}/agent_token_analytics/`,
+      'GET',
+      undefined,
+      queryParams
+    ) as Promise<AgentTokenAnalyticsTimeseries>;
   };
 }
