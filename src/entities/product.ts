@@ -47,6 +47,9 @@ export class Product extends Entity {
   public createdBy?: User | null;
 
   @Component.property({type: 'User'})
+  public designer?: User | null;
+
+  @Component.property({type: 'User'})
   public updatedBy?: User | null;
 
   @Product.property()
