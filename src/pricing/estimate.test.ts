@@ -187,6 +187,33 @@ test('group product: weighted unit price and summed group costs', () => {
   expect(r.costPerUnit).toBe(10);
 });
 
+test('group quantities from form inputs are numeric strings and must not concatenate', () => {
+  const rules: PricingRules = {
+    ...base,
+    hasGroups: true,
+    product: {
+      unitPrice: 10,
+      minimumPrice: null,
+      discountGroup: {
+        groupRestricted: false,
+        discounts: [{ lowerLimit: 1000, amount: 50 }],
+      },
+    },
+  };
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [
+      { quantity: '100' as unknown as number, fieldValues: {} },
+      { quantity: '1' as unknown as number, fieldValues: {} },
+    ],
+  }) as QuoteResult;
+  // 100+1=101, below the 1000-unit break. String concat would yield "01001"→1001
+  // and incorrectly apply the 50% discount.
+  expect(r.groupCosts).toEqual([1000, 10]);
+  expect(r.cost).toBe(1010);
+  expect(r.costPerUnit).toBe(10);
+});
+
 test('group product with no groups array: zero cost', () => {
   const rules: PricingRules = { ...base, hasGroups: true };
   const r = estimateQuote(rules, { fieldValues: {} }) as QuoteResult;

@@ -6,6 +6,13 @@ import { applyDiscount } from './discount.js';
 import { roundHalfEven } from './round.js';
 import { resolveVisibleFields } from './visibility.js';
 
+/** Form inputs often supply quantities as strings. Coerce before any arithmetic
+ * so `reduce((a,b)=>a+b)` cannot concatenate ("100"+"1" → "01001" → 1001). */
+function toQuantity(value: unknown): number {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+}
+
 function unitPriceAt(rules: PricingRules, qty: number): number {
   let unitPrice = applyDiscount(rules.product.unitPrice, qty, rules.product.discountGroup);
   const mop = rules.product.minimumPrice;
@@ -116,14 +123,15 @@ export function estimateQuote(
   // sets `group_quantities = [self.quantity or 0]`).
   const groups = selections.groups || [];
   if (groups.length > 0) {
-    groupQuantities = groups.map((g) => g.quantity || 0);
+    groupQuantities = groups.map((g) => toQuantity(g.quantity));
     const totalQty = groupQuantities.reduce((a, b) => a + b, 0);
     const restricted = Boolean(rules.product.discountGroup?.groupRestricted);
     const baseUnitPrice = unitPriceAt(rules, totalQty);
     const perGroupCpu: number[] = [];
 
-    for (const group of groups) {
-      const gQty = group.quantity || 0;
+    for (let gi = 0; gi < groups.length; gi++) {
+      const group = groups[gi];
+      const gQty = groupQuantities[gi];
       const cpu = restricted ? unitPriceAt(rules, gQty) : baseUnitPrice;
       perGroupCpu.push(cpu);
       // Server `VariationsGroups.update_cost` (variations_groups.py ~238):
@@ -170,7 +178,7 @@ export function estimateQuote(
       cost += setup + unitTotal;
     }
   } else {
-    const qty = selections.quantity || 0;
+    const qty = toQuantity(selections.quantity);
     groupQuantities = [qty];
     costPerUnit = unitPriceAt(rules, qty);
     cost = costPerUnit * qty;
