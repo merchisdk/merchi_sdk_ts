@@ -109,6 +109,14 @@ export interface StorefrontV2ChangeRequest {
   updatedAt?: string | null;
 }
 
+export interface StorefrontGoogleIntegrations {
+  ga4MeasurementId?: string;
+  ga4PropertyId?: string;
+  googleAdsId?: string;
+  googleAdsConversionLabel?: string;
+  googleAdsQuoteConversionLabel?: string;
+}
+
 export interface StorefrontV2Config {
   id?: number;
   domainId?: number;
@@ -124,6 +132,7 @@ export interface StorefrontV2Config {
   repoName?: string | null;
   vercelProjectId?: string | null;
   lastSuccessfulCommitSha?: string | null;
+  googleIntegrations?: StorefrontGoogleIntegrations | null;
   approvedStarterTemplates?: string[];
   providerMode?: 'real' | 'deterministic' | 'unknown' | string;
   isProvisioned?: boolean;
@@ -753,6 +762,104 @@ export class Domain extends Entity {
       this.storefrontV2DomainResource('reset/'),
       'POST'
     ) as Promise<StorefrontV2ResetResult>;
+  };
+
+  public getStorefrontV2GoogleIntegrations = (): Promise<{
+    googleIntegrations: StorefrontGoogleIntegrations;
+  }> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('google_integrations/'),
+      'GET'
+    ) as Promise<{googleIntegrations: StorefrontGoogleIntegrations}>;
+  };
+
+  public saveStorefrontV2GoogleIntegrations = (
+    payload: StorefrontGoogleIntegrations | {googleIntegrations: StorefrontGoogleIntegrations}
+  ): Promise<{googleIntegrations: StorefrontGoogleIntegrations}> => {
+    const body =
+      payload &&
+      typeof payload === 'object' &&
+      ('googleIntegrations' in payload || 'google_integrations' in payload)
+        ? payload
+        : {googleIntegrations: payload};
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('google_integrations/'),
+      'POST',
+      body
+    ) as Promise<{googleIntegrations: StorefrontGoogleIntegrations}>;
+  };
+
+  public getStorefrontV2GaStatus = (): Promise<{gaStatus: Record<string, any>}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('ga/status/'),
+      'GET'
+    ) as Promise<{gaStatus: Record<string, any>}>;
+  };
+
+  public verifyStorefrontV2GaInstallation = (): Promise<{
+    gaVerification: Record<string, any>;
+  }> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('ga/verify/'),
+      'POST'
+    ) as Promise<{gaVerification: Record<string, any>}>;
+  };
+
+  public analyzeStorefrontV2Ga = (
+    payload?: {days?: number}
+  ): Promise<{gaAnalysis: Record<string, any>}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('ga/analyze/'),
+      'POST',
+      payload
+    ) as Promise<{gaAnalysis: Record<string, any>}>;
+  };
+
+  public applyStorefrontV2GaRecommendations = (payload: {
+    recommendationIds: string[];
+    recommendations?: Array<Record<string, any>>;
+    narrative?: string;
+    days?: number;
+    startNewBranch?: boolean;
+    branchName?: string;
+  }): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('ga/apply/'),
+      'POST',
+      payload
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
+  };
+
+  public getStorefrontV2GscStatus = (): Promise<{gscStatus: Record<string, any>}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('gsc/status/'),
+      'GET'
+    ) as Promise<{gscStatus: Record<string, any>}>;
+  };
+
+  public analyzeStorefrontV2Gsc = (
+    payload?: {days?: number}
+  ): Promise<{gscAnalysis: Record<string, any>}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('gsc/analyze/'),
+      'POST',
+      payload
+    ) as Promise<{gscAnalysis: Record<string, any>}>;
+  };
+
+  public applyStorefrontV2GscRecommendations = (payload: {
+    recommendationIds: string[];
+    recommendations?: Array<Record<string, any>>;
+    narrative?: string;
+    days?: number;
+    startNewBranch?: boolean;
+    branchName?: string;
+  }): Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource('gsc/apply/'),
+      'POST',
+      payload
+    ) as Promise<{storefrontChangeRequest: StorefrontV2ChangeRequest}>;
   };
 
   public createStorefrontChangeRequest = (
