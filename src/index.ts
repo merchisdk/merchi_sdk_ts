@@ -26,9 +26,6 @@ import { CartShipmentQuote } from './entities/cart_shipment_quote.js';
 import { Category } from './entities/category.js';
 import { Company } from './entities/company.js';
 import { CompanyInvitation } from './entities/company_invitation.js';
-import { Component } from './entities/component.js';
-import { ComponentTag } from './entities/component_tag.js';
-import { ComponentVersion } from './entities/component_version.js';
 import { ProductForm } from './entities/product_form.js';
 import { ProductFormVersion } from './entities/product_form_version.js';
 import { CountryTax } from './entities/country_tax.js';
@@ -55,12 +52,9 @@ import { JobComment } from './entities/job_comment.js';
 import { JobNote } from './entities/job_note.js';
 import { JobOperationLog } from './entities/job_operation_log.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
-import { Menu } from './entities/menu.js';
-import { MenuItem } from './entities/menu_item.js';
 import { Merchi } from './merchi.js';
 import { MerchiFile } from './entities/file.js';
 import { Notification } from './entities/notification.js';
-import { Page } from './entities/page.js';
 import { Payment } from './entities/payment.js';
 import { PaymentDevice } from './entities/payment_device.js';
 import { PhoneNumber } from './entities/phone_number.js';
@@ -128,9 +122,6 @@ export {
   Category,
   Company,
   CompanyInvitation,
-  Component,
-  ComponentTag,
-  ComponentVersion,
   ProductForm,
   ProductFormVersion,
   CountryTax,
@@ -158,12 +149,9 @@ export {
   JobNote,
   JobOperationLog,
   MatchingInventory,
-  Menu,
-  MenuItem,
   Merchi,
   MerchiFile,
   Notification,
-  Page,
   Payment,
   PaymentDevice,
   PhoneNumber,

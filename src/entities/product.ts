@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item.js';
 import { Category } from './category.js';
 import { Company } from './company.js';
-import { Component } from './component.js';
 import { ProductForm } from './product_form.js';
 import { CountryTax } from './country_tax.js';
 import { DiscountGroup } from './discount_group.js';
@@ -19,7 +18,6 @@ import { InventoryGroup } from './inventory_group.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { VariationField } from './variation_field.js';
-import { SeoDomainPage } from './seo_domain_page.js';
 import { ShipmentMethod } from './shipment_method.js';
 import {
   AutoAssignProductionOnAction
@@ -37,19 +35,19 @@ export class Product extends Entity {
   @Product.property()
   public id?: number;
 
-  @Component.property({type: Date})
+  @Product.property({type: Date})
   public created?: Date;
 
-  @Component.property({type: Date})
+  @Product.property({type: Date})
   public updated?: Date;
 
-  @Component.property({type: 'User'})
+  @Product.property({type: 'User'})
   public createdBy?: User | null;
 
-  @Component.property({type: 'User'})
+  @Product.property({type: 'User'})
   public designer?: User | null;
 
-  @Component.property({type: 'User'})
+  @Product.property({type: 'User'})
   public updatedBy?: User | null;
 
   @Product.property()
@@ -265,9 +263,6 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Product'})
   public chainedInventorySellerProducts?: Product[];
 
-  @Product.property({type: Component})
-  public component?: Component | null;
-
   @Product.property({type: ProductForm})
   public productForm?: ProductForm | null;
 
@@ -291,9 +286,6 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
-
-  @Product.property({arrayType: 'SeoDomainPage'})
-  public seoDomainPages?: SeoDomainPage[];
 
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;

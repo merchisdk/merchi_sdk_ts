@@ -13,14 +13,12 @@ import { MerchiFile } from './file.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
-import { Menu } from './menu.js';
 import { User } from './user.js';
 import { Notification } from './notification.js';
 import { Product } from './product.js';
 import { Reminder } from './reminder.js';
 import { Session } from './session.js';
 import { SupplyDomain } from './supply_domain.js';
-import { SeoDomainPage } from './seo_domain_page.js';
 import { DomainChatSettings } from './domain_chat_settings.js';
 import { Theme } from './theme.js';
 import { DomainType } from '../constants/domain_types.js';
@@ -610,9 +608,6 @@ export class Domain extends Entity {
   @Domain.property({arrayType: 'Company'})
   public accessibleClientCompanies?: Company[];
 
-  @Domain.property({arrayType: 'Menu'})
-  public menus?: Menu[];
-
   @Domain.property({arrayType: 'Session'})
   public sessions?: Session[];
 
@@ -648,9 +643,6 @@ export class Domain extends Entity {
 
   @Domain.property({arrayType: 'DomainInvitation'})
   public domainInvitations?: DomainInvitation[];
-
-  @Domain.property({arrayType: 'SeoDomainPage'})
-  public seoDomainPages?: SeoDomainPage[];
 
   @Domain.property({ type: DomainChatSettings })
   public domainChatSettings?: DomainChatSettings | null;
