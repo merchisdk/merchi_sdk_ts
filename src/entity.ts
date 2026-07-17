@@ -84,7 +84,6 @@ interface ListOptions {
   companyCustomerId?: number;
   companyId?: number;
   companySupplierId?: number;
-  componentId?: number;
   conversationId?: number;
   dateFrom?: Date;
   dateTo?: Date;
@@ -94,7 +93,6 @@ interface ListOptions {
   embed?: EmbedDescriptor;
   entityTypes?: number[];
   exclude?: number[];
-  excludeComponents?: string[];
   excludeDomains?: number[];
   excludeJobs?: number[];
   googleMerchantCenterExported?: boolean;
@@ -135,7 +133,6 @@ interface ListOptions {
   receiverId?: number;
   userAsReceiver?: number;
   relatedAssignment?: number;
-  relatedComponent?: number;
   relatedDraft?: number;
   relatedJob?: number;
   relatedJobs?: number[];
@@ -574,10 +571,6 @@ export class Entity {
         fetchOptions.query.push(['original_of',
           options.originalOf.toString()]);
       }
-      if (options.relatedComponent !== undefined) {
-        fetchOptions.query.push(['related_component',
-          options.relatedComponent.toString()]);
-      }
       if (options.relatedAssignment !== undefined) {
         fetchOptions.query.push(['related_assignment',
           options.relatedAssignment.toString()]);
@@ -658,10 +651,6 @@ export class Entity {
       if (options.companySupplierId !== undefined) {
         fetchOptions.query.push(['company_supplier_id', options.companySupplierId.toString()]);
       }
-      if (options.componentId !== undefined) {
-        fetchOptions.query.push(['component_id',
-          options.componentId.toString()]);
-      }
       if (options.conversationId !== undefined) {
         fetchOptions.query.push(['conversation_id',
           options.conversationId.toString()]);
@@ -705,10 +694,6 @@ export class Entity {
       }
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
-      }
-      if (options.excludeComponents !== undefined) {
-        fetchOptions.query.push(
-          ['exclude_components', options.excludeComponents.join(',')]);
       }
       if (options.excludeDomains !== undefined) {
         fetchOptions.query.push(

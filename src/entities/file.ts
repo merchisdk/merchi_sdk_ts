@@ -1,5 +1,4 @@
 import { Company } from './company.js';
-import { Component } from './component.js';
 import { Domain } from './domain.js';
 import { Draft } from './draft.js';
 import { DraftComment } from './draft_comment.js';
@@ -71,12 +70,6 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property()
   public downloadUrl?: string;
-
-  @MerchiFile.property({arrayType: 'Component'})
-  public components?: Component[];
-
-  @MerchiFile.property({arrayType: 'Component'})
-  public componentFeatureImages?: Component[];
 
   @MerchiFile.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];

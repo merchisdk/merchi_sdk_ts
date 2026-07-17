@@ -21,7 +21,6 @@ import * as job_status from './job_status.js';
 import * as white_label_accessibilities from './white_label_accessibilities.js';
 import * as robots_meta_directives from './robots_meta_directives.js';
 import * as inventory_statuses from './inventory_statuses.js';
-import * as theme_foundations from './theme_foundations.js';
 import * as discount_types from './discount_types.js';
 
 export {
@@ -32,7 +31,6 @@ export {
   platform,
   robots_meta_directives,
   system_roles,
-  theme_foundations,
   user_types,
   white_label_accessibilities,
   roles,

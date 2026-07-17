@@ -11,7 +11,6 @@ import { JobOperationLog } from './entities/job_operation_log.js';
 import { Domain } from './entities/domain.js';
 import { ExchangeRate } from './entities/exchange_rate.js';
 import { Job } from './entities/job.js';
-import { Menu } from './entities/menu.js';
 import { VariationField } from './entities/variation_field.js';
 import { VariationOption } from './entities/variation_option.js';
 import { ProductionComment } from './entities/production_comment.js';
@@ -35,20 +34,16 @@ import { ShipmentMethod } from './entities/shipment_method.js';
 import { ShipmentMethodVariation } from './entities/shipment_method_variation.js';
 import { DomainInvitation } from './entities/domain_invitation.js';
 import { EmailCounter } from './entities/email_counter.js';
-import { MenuItem } from './entities/menu_item.js';
 import { SupplyDomain } from './entities/supply_domain.js';
 import { Cart } from './entities/cart.js';
 import { CartShipmentGroup } from './entities/cart_shipment_group.js';
 import { CartShipmentQuote } from './entities/cart_shipment_quote.js';
 import { Theme } from './entities/theme.js';
 import { ThemeCssSetting } from './entities/theme_css_setting.js';
-import { Component } from './entities/component.js';
-import { ComponentVersion } from './entities/component_version.js';
 import { ProductForm } from './entities/product_form.js';
 import { ProductFormVersion } from './entities/product_form_version.js';
 import { MerchiFile } from './entities/file.js';
 import { EmailAddress } from './entities/email_address.js';
-import { SeoDomainPage } from './entities/seo_domain_page.js';
 import { ShortUrl } from './entities/short_url.js';
 import { VariationsGroup } from './entities/variations_group.js';
 import { Quote } from './entities/quote.js';
@@ -61,7 +56,6 @@ import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
 import { User } from './entities/user.js';
 import { Company } from './entities/company.js';
-import { ComponentTag } from './entities/component_tag.js';
 import { EnrolledDomain } from './entities/enrolled_domain.js';
 import { CountryTax } from './entities/country_tax.js';
 import { Item } from './entities/item.js';
@@ -69,7 +63,6 @@ import { DomainTag } from './entities/domain_tag.js';
 import { DraftComment } from './entities/draft_comment.js';
 import { Notification } from './entities/notification.js';
 import { Payment } from './entities/payment.js';
-import { Page } from './entities/page.js';
 import { CompanyInvitation } from './entities/company_invitation.js';
 import { SystemRole } from './entities/system_role.js';
 import { PaymentDevice } from './entities/payment_device.js';
@@ -131,7 +124,6 @@ export class Merchi {
   public UserCompany: typeof UserCompany;
   public Variation: typeof Variation;
   public CountryTax: typeof CountryTax;
-  public MenuItem: typeof MenuItem;
   public VariationField: typeof VariationField;
   public Assignment: typeof Assignment;
   public InternalTag: typeof InternalTag;
@@ -177,7 +169,6 @@ export class Merchi {
   public DomainChatSettings: typeof DomainChatSettings;
   public SupportConversation: typeof SupportConversation;
   public SupportMessage: typeof SupportMessage;
-  public ComponentTag: typeof ComponentTag;
   public Discount: typeof Discount;
   public DiscountGroup: typeof DiscountGroup;
   public User: typeof User;
@@ -186,23 +177,18 @@ export class Merchi {
   public ThemeCssSetting: typeof ThemeCssSetting;
   public Item: typeof Item;
   public EmailCounter: typeof EmailCounter;
-  public SeoDomainPage: typeof SeoDomainPage;
   public Domain: typeof Domain;
   public ExchangeRate: typeof ExchangeRate;
   public Payment: typeof Payment;
   public PaymentDevice: typeof PaymentDevice;
-  public Page: typeof Page;
   public ShortUrl: typeof ShortUrl;
   public CartItem: typeof CartItem;
   public InventoryUnitVariation: typeof InventoryUnitVariation;
   public VariationsGroup: typeof VariationsGroup;
-  public Menu: typeof Menu;
   public Cart: typeof Cart;
   public CartShipmentGroup: typeof CartShipmentGroup;
   public CartShipmentQuote: typeof CartShipmentQuote;
   public Quote: typeof Quote;
-  public Component: typeof Component;
-  public ComponentVersion : typeof ComponentVersion;
   public ProductForm: typeof ProductForm;
   public ProductFormVersion: typeof ProductFormVersion;
   public QuoteItem: typeof QuoteItem;
@@ -281,14 +267,11 @@ export class Merchi {
     ) as typeof AutomaticPaymentRelationship;
     this.Variation = this.setupClass(Variation) as typeof Variation;
     this.DraftComment = this.setupClass(DraftComment) as typeof DraftComment;
-    this.Component = this.setupClass(Component) as typeof Component;
-    this.ComponentVersion = this.setupClass(ComponentVersion) as typeof ComponentVersion;
     this.ProductForm = this.setupClass(ProductForm) as typeof ProductForm;
     this.ProductFormVersion = this.setupClass(ProductFormVersion) as typeof ProductFormVersion;
     this.Theme = this.setupClass(Theme) as typeof Theme;
     this.ThemeCssSetting = this.setupClass(ThemeCssSetting) as typeof ThemeCssSetting;
     this.Company = this.setupClass(Company) as typeof Company;
-    this.MenuItem = this.setupClass(MenuItem) as typeof MenuItem;
     this.InternalTag = this.setupClass(InternalTag) as typeof InternalTag;
     this.Inventory = this.setupClass(Inventory) as typeof Inventory;
     this.InventoryGroup = this.setupClass(InventoryGroup) as typeof InventoryGroup;
@@ -309,7 +292,6 @@ export class Merchi {
     this.ExchangeRate = this.setupClass(ExchangeRate) as typeof ExchangeRate;
     this.Invoice = this.setupClass(Invoice) as typeof Invoice;
     this.Job = this.setupClass(Job) as typeof Job;
-    this.ComponentTag = this.setupClass(ComponentTag) as typeof ComponentTag;
     this.Category = this.setupClass(Category) as typeof Category;
     this.VariationField = this.setupClass(
       VariationField
@@ -319,7 +301,6 @@ export class Merchi {
     ) as typeof InventoryUnitVariation;
     this.PhoneNumber = this.setupClass(PhoneNumber) as typeof PhoneNumber;
     this.QuoteItem = this.setupClass(QuoteItem) as typeof QuoteItem;
-    this.Menu = this.setupClass(Menu) as typeof Menu;
     this.Assignment = this.setupClass(Assignment) as typeof Assignment;
     this.Draft = this.setupClass(Draft) as typeof Draft;
     this.DraftPreview = this.setupClass(DraftPreview) as typeof DraftPreview;
@@ -337,7 +318,6 @@ export class Merchi {
     this.Quote = this.setupClass(Quote) as typeof Quote;
     this.Reminder = this.setupClass(Reminder) as typeof Reminder;
     this.EmailAddress = this.setupClass(EmailAddress) as typeof EmailAddress;
-    this.SeoDomainPage = this.setupClass(SeoDomainPage) as typeof SeoDomainPage;
     this.ProductionComment = this.setupClass(
       ProductionComment
     ) as typeof ProductionComment;
@@ -375,7 +355,6 @@ export class Merchi {
     this.DiscountGroup = this.setupClass(DiscountGroup) as typeof DiscountGroup;
     this.Payment = this.setupClass(Payment) as typeof Payment;
     this.PaymentDevice = this.setupClass(PaymentDevice) as typeof PaymentDevice;
-    this.Page = this.setupClass(Page) as typeof Page;
     this.Cart = this.setupClass(Cart) as typeof Cart;
     this.CartShipmentGroup = this.setupClass(
       CartShipmentGroup
