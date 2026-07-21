@@ -187,6 +187,57 @@ test('group product: weighted unit price and summed group costs', () => {
   expect(r.costPerUnit).toBe(10);
 });
 
+test('product setupPrice applied once to job', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: {
+      unitPrice: 10, minimumPrice: null, setupPrice: 25,
+      setupPerGroup: false, discountGroup: null,
+    },
+  };
+  const r = estimateQuote(rules, { quantity: 5, fieldValues: {} }) as QuoteResult;
+  expect(r.cost).toBe(75);
+  expect(r.taxAmount).toBe(7.5);
+});
+
+test('product setupPrice applied once across groups when setupPerGroup is false', () => {
+  const rules: PricingRules = {
+    ...base,
+    hasGroups: true,
+    product: {
+      unitPrice: 10, minimumPrice: null, setupPrice: 25,
+      setupPerGroup: false, discountGroup: null,
+    },
+  };
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [{ quantity: 3, fieldValues: {} }, { quantity: 7, fieldValues: {} }],
+  }) as QuoteResult;
+  expect(r.groupCosts).toEqual([30, 70]);
+  expect(r.cost).toBe(125);
+});
+
+test('product setupPrice applied per non-empty group when setupPerGroup is true', () => {
+  const rules: PricingRules = {
+    ...base,
+    hasGroups: true,
+    product: {
+      unitPrice: 10, minimumPrice: null, setupPrice: 25,
+      setupPerGroup: true, discountGroup: null,
+    },
+  };
+  const r = estimateQuote(rules, {
+    fieldValues: {},
+    groups: [
+      { quantity: 3, fieldValues: {} },
+      { quantity: 0, fieldValues: {} },
+      { quantity: 7, fieldValues: {} },
+    ],
+  }) as QuoteResult;
+  expect(r.groupCosts).toEqual([55, 0, 95]);
+  expect(r.cost).toBe(150);
+});
+
 test('group quantities from form inputs are numeric strings and must not concatenate', () => {
   const rules: PricingRules = {
     ...base,

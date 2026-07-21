@@ -66,6 +66,12 @@ export class Product extends Entity {
   public minimumPrice?: number;
 
   @Product.property()
+  public setupPrice?: number;
+
+  @Product.property()
+  public setupPerGroup?: boolean;
+
+  @Product.property()
   public minimumPerGroup?: boolean;
 
   @Product.property()
