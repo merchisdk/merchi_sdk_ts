@@ -192,6 +192,22 @@ export function estimateQuote(
     }
   }
 
+  // Server `Jobs.apply_product_setup_price`: product setup fee once per job,
+  // or once per non-empty group when setupPerGroup is true. With no groups the
+  // job is a single group, so setup is charged once either way.
+  const setupPrice = rules.product.setupPrice || 0;
+  if (setupPrice) {
+    if (groups.length > 0 && rules.product.setupPerGroup) {
+      for (let gi = 0; gi < groups.length; gi++) {
+        if (!groupQuantities[gi]) continue;
+        groupCosts[gi] += setupPrice;
+        cost += setupPrice;
+      }
+    } else {
+      cost += setupPrice;
+    }
+  }
+
   // Server `Jobs.update_cost` (jobs.py ~3452-3454) accumulates `self.cost` at
   // full precision and computes `self.tax_amount = tax(self.cost, ...)` on the
   // UNROUNDED cost (money_protocol.py `tax` does NOT round). `cost` and

@@ -44,6 +44,10 @@ export interface PricingRules {
   product: {
     unitPrice: number;
     minimumPrice: number | null;
+    /** Product-level setup fee. Applied once to the job, or once per
+     * non-empty variation group when setupPerGroup is true. */
+    setupPrice?: number;
+    setupPerGroup?: boolean;
     discountGroup: DiscountGroup | null;
   };
   fields: PricingField[];
