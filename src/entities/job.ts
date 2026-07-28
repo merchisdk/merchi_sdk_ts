@@ -240,6 +240,12 @@ export class Job extends Entity {
   @Job.property()
   public clientOs?: string;
 
+  @Job.property()
+  public clientIp?: string;
+
+  @Job.property()
+  public clientOrigin?: string;
+
   @Job.property({type: User})
   public manager?: User | null;
 
