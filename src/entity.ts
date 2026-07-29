@@ -122,7 +122,7 @@ interface ListOptions {
   notificationType?: NotificationType;
   offset?: number;
   orClientId?: number;
-  orClientCompanyId?: number;
+  orClientCompanyId?: number | number[];
   order?: string;
   originalOf?: number;
   platformCategoryId?: number;
@@ -710,8 +710,10 @@ export class Entity {
         fetchOptions.query.push(['or_client_id', options.orClientId.toString()]);
       }
       if (options.orClientCompanyId !== undefined) {
-        fetchOptions.query.push(
-          ['or_client_company_id', options.orClientCompanyId.toString()]);
+        const companyIds = Array.isArray(options.orClientCompanyId)
+          ? options.orClientCompanyId.join(',')
+          : options.orClientCompanyId.toString();
+        fetchOptions.query.push(['or_client_company_id', companyIds]);
       }
     }
     if (!(options && options.withRights)) {
