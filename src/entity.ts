@@ -141,6 +141,7 @@ interface ListOptions {
   relatedUser?: number;
   savedByUser?: number;
   section?: NotificationSection;
+  senderCompanyId?: number;
   senderRole?: Role;
   serialiseMethod?: SerialiseMethod;
   shopifyOnly?: boolean;
@@ -633,6 +634,10 @@ export class Entity {
       if (options.savedByUser !== undefined) {
         fetchOptions.query.push(['saved_by_user',
           options.savedByUser.toString()]);
+      }
+      if (options.senderCompanyId !== undefined) {
+        fetchOptions.query.push(['sender_company_id',
+          options.senderCompanyId.toString()]);
       }
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
