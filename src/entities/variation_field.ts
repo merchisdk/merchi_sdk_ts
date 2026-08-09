@@ -115,6 +115,24 @@ export class VariationField extends Entity {
   public allowFileAi?: boolean;
 
   @VariationField.property()
+  public maxColours?: number;
+
+  @VariationField.property()
+  public simplifyColours?: boolean;
+
+  @VariationField.property()
+  public colourVariationCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public colourVariationCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public colourVariationUnitCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public colourVariationUnitCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
   public product?: Product;
 
   @VariationField.property({arrayType: 'VariationFieldsOption'})
@@ -140,7 +158,8 @@ export class VariationField extends Entity {
       FieldType.CHECKBOX,
       FieldType.RADIO,
       FieldType.IMAGE_SELECT,
-      FieldType.COLOUR_SELECT]);
+      FieldType.COLOUR_SELECT,
+      FieldType.COLOUR_EXTRACT]);
     return selectable.has(this.fieldType);
   };
 
@@ -157,7 +176,11 @@ export class VariationField extends Entity {
     }
     const result = new this.merchi.Variation(this.merchi);
     result.selectableOptions = [];
-    if (this.isSelectable()) {
+    if (this.fieldType === FieldType.COLOUR_EXTRACT) {
+      result.value = this.defaultValue;
+      result.onceOffCost = 0;
+      result.variationFiles = [];
+    } else if (this.isSelectable()) {
       let onceOffCost = 0;
       const value = [];
       for (const option of this.options) {
