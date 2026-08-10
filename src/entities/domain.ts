@@ -23,6 +23,9 @@ import { DomainChatSettings } from './domain_chat_settings.js';
 import { Theme } from './theme.js';
 import { DomainType } from '../constants/domain_types.js';
 import { ShipmentMethod } from './shipment_method.js';
+
+// Sentinel for passthrough JSON columns. Must not be `Object` (decorator rejects it).
+const jsonPropertyType = class {};
 import { RequestOptions } from '../request.js';
 
 export type StorefrontChangeRequestStatus =
@@ -488,7 +491,7 @@ export class Domain extends Entity {
   @Domain.property()
   public assignToAgent?: boolean;
 
-  @Domain.property({type: Object})
+  @Domain.property({type: jsonPropertyType})
   public jobAgentPolicy?: {
     toneInstructions?: string;
     outreach?: {
