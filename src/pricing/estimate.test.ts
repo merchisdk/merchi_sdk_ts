@@ -79,6 +79,47 @@ test('hidden conditional field is not costed', () => {
   expect(r.cost).toBe(100);
 });
 
+test('area field multiplies height/width rate cards when dimensions set', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: { unitPrice: 1, minimumPrice: null, discountGroup: null },
+    fields: [{
+      id: 14, originalId: 14, position: 0, fieldType: 14, independent: true,
+      isSelectable: false, selectedBy: [],
+      variationCost: 0, variationUnitCost: 0,
+      variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+      areaUnit: 'mm',
+      heightVariationCost: 2, widthVariationCost: 2,
+      heightVariationUnitCost: 3, widthVariationUnitCost: 4,
+      heightVariationCostDiscountGroup: null,
+      heightVariationUnitCostDiscountGroup: null,
+      widthVariationCostDiscountGroup: null,
+      widthVariationUnitCostDiscountGroup: null,
+      options: [],
+    }],
+  };
+  const empty = estimateQuote(rules, {
+    quantity: 1, fieldValues: { 14: { value: '' } },
+  }) as QuoteResult;
+  expect(empty.cost).toBe(1);
+  const priced = estimateQuote(rules, {
+    quantity: 1, fieldValues: { 14: { value: '2,5' } },
+  }) as QuoteResult;
+  // area 2*5=10; onceOff 2*2*10=40; unit 3*4*10=120 → cost = 1 + 40 + 120 = 161
+  expect(priced.cost).toBe(161);
+  expect(priced.totalCost).toBe(177.1); // +10% tax
+
+  // String fieldType (some JSON paths) must still hit the area calculator.
+  const asString = estimateQuote(
+    {
+      ...rules,
+      fields: [{ ...rules.fields[0], fieldType: '14' as unknown as number }],
+    },
+    { quantity: 1, fieldValues: { 14: { value: '2,5' } } },
+  ) as QuoteResult;
+  expect(asString.cost).toBe(161);
+});
+
 test('non-selectable field with value adds field cost; empty adds nothing', () => {
   const mk = (sel: any) => {
     const rules: PricingRules = {

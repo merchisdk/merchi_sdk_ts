@@ -35,6 +35,16 @@ export interface PricingField {
   variationUnitCost: number;
   variationCostDiscountGroup: DiscountGroup | null;
   variationUnitCostDiscountGroup: DiscountGroup | null;
+  /** Area field (type 14): once-off and per-edge unit costs. */
+  areaUnit?: 'mm' | 'cm' | 'm' | string;
+  heightVariationCost?: number;
+  heightVariationUnitCost?: number;
+  widthVariationCost?: number;
+  widthVariationUnitCost?: number;
+  heightVariationCostDiscountGroup?: DiscountGroup | null;
+  heightVariationUnitCostDiscountGroup?: DiscountGroup | null;
+  widthVariationCostDiscountGroup?: DiscountGroup | null;
+  widthVariationUnitCostDiscountGroup?: DiscountGroup | null;
   options: PricingOption[];
 }
 
