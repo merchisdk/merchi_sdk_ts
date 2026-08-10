@@ -488,6 +488,26 @@ export class Domain extends Entity {
   @Domain.property()
   public assignToAgent?: boolean;
 
+  @Domain.property({type: Object})
+  public jobAgentPolicy?: {
+    toneInstructions?: string;
+    outreach?: {
+      clientMessaging?: 'auto' | 'team_draft_only';
+      sendEmail?: boolean;
+      sendSms?: boolean;
+      proactiveChase?: boolean;
+    };
+    playbooks?: {
+      deadlineAsk?: boolean;
+      emailIntake?: boolean;
+      drafting?: boolean;
+      designerAssign?: boolean;
+      productionTender?: boolean;
+      shipment?: boolean;
+      invoice?: boolean;
+    };
+  } | null;
+
   @Domain.property({ type: User })
   public merchiAgentUser?: User | null;
 
