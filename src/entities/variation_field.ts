@@ -133,6 +133,54 @@ export class VariationField extends Entity {
   public colourVariationUnitCostDiscountGroup?: DiscountGroup | null;
 
   @VariationField.property()
+  public heightVariationCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public heightVariationCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public heightVariationUnitCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public heightVariationUnitCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public widthVariationCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public widthVariationCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property()
+  public widthVariationUnitCost?: number;
+
+  @VariationField.property({type: 'DiscountGroup'})
+  public widthVariationUnitCostDiscountGroup?: DiscountGroup | null;
+
+  @VariationField.property({type: Number})
+  public heightFieldMin?: number | null;
+
+  @VariationField.property({type: Number})
+  public heightFieldMax?: number | null;
+
+  @VariationField.property({type: Number})
+  public widthFieldMin?: number | null;
+
+  @VariationField.property({type: Number})
+  public widthFieldMax?: number | null;
+
+  @VariationField.property()
+  public areaUnit?: string;
+
+  @VariationField.property()
+  public areaInputType?: string;
+
+  @VariationField.property()
+  public aspectRatioLock?: boolean;
+
+  @VariationField.property({type: Number})
+  public aspectRatio?: number | null;
+
+  @VariationField.property()
   public product?: Product;
 
   @VariationField.property({arrayType: 'VariationFieldsOption'})
@@ -180,6 +228,9 @@ export class VariationField extends Entity {
       result.value = this.defaultValue;
       result.onceOffCost = 0;
       result.variationFiles = [];
+    } else if (this.fieldType === FieldType.AREA) {
+      result.value = this.defaultValue;
+      result.onceOffCost = 0;
     } else if (this.isSelectable()) {
       let onceOffCost = 0;
       const value = [];
