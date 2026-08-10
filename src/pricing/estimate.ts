@@ -5,12 +5,26 @@ import {
 import { applyDiscount } from './discount.js';
 import { roundHalfEven } from './round.js';
 import { resolveVisibleFields } from './visibility.js';
+import { FieldType } from '../constants/field_types.js';
 
 /** Form inputs often supply quantities as strings. Coerce before any arithmetic
  * so `reduce((a,b)=>a+b)` cannot concatenate ("100"+"1" → "01001" → 1001). */
 function toQuantity(value: unknown): number {
   const n = Number(value);
   return Number.isFinite(n) ? n : 0;
+}
+
+function parseAreaMm(
+  value: string | number | null | undefined
+): { heightMm: number; widthMm: number } | null {
+  if (value === undefined || value === null || value === '') return null;
+  const parts = String(value).split(',').map((p) => p.trim());
+  if (parts.length !== 2) return null;
+  const heightMm = Number(parts[0]);
+  const widthMm = Number(parts[1]);
+  if (!Number.isFinite(heightMm) || !Number.isFinite(widthMm)) return null;
+  if (heightMm <= 0 || widthMm <= 0) return null;
+  return { heightMm, widthMm };
 }
 
 function unitPriceAt(rules: PricingRules, qty: number): number {
@@ -69,12 +83,75 @@ function isEmpty(field: PricingField, sel: FieldSelection | undefined): boolean 
   );
 }
 
+function areaCostFactor(
+  field: PricingField,
+  sel: FieldSelection | undefined,
+  groupQuantities: number[]
+): { setup: number; unitList: number[] } {
+  const n = groupQuantities.length;
+  const parsed = parseAreaMm(sel?.value ?? null);
+  if (!parsed) {
+    return { setup: 0, unitList: new Array(n).fill(0) };
+  }
+  const totalQty = groupQuantities.reduce((a, b) => a + b, 0);
+  const heightSetup = variationSetupCost(
+    {
+      variationCost: field.heightVariationCost || 0,
+      variationCostDiscountGroup: field.heightVariationCostDiscountGroup ?? null,
+    },
+    totalQty
+  );
+  const widthSetup = variationSetupCost(
+    {
+      variationCost: field.widthVariationCost || 0,
+      variationCostDiscountGroup: field.widthVariationCostDiscountGroup ?? null,
+    },
+    totalQty
+  );
+  const heightUcs = variationUnitCosts(
+    {
+      variationUnitCost: field.heightVariationUnitCost || 0,
+      variationUnitCostDiscountGroup:
+        field.heightVariationUnitCostDiscountGroup ?? null,
+    },
+    groupQuantities
+  );
+  const widthUcs = variationUnitCosts(
+    {
+      variationUnitCost: field.widthVariationUnitCost || 0,
+      variationUnitCostDiscountGroup:
+        field.widthVariationUnitCostDiscountGroup ?? null,
+    },
+    groupQuantities
+  );
+  const areaUnit = (field.areaUnit || 'mm').toLowerCase();
+  const mmPerUnit =
+    areaUnit === 'm' ? 1000
+    : areaUnit === 'cm' ? 10
+    : areaUnit === 'in' || areaUnit === 'inch' || areaUnit === 'inches' ? 25.4
+    : areaUnit === 'ft' || areaUnit === 'foot' || areaUnit === 'feet' ? 304.8
+    : 1;
+  const heightU = parsed.heightMm / mmPerUnit;
+  const widthU = parsed.widthMm / mmPerUnit;
+  const area = heightU * widthU;
+  // onceOff/unit = rateH × rateW × height_u × width_u (in field areaUnit)
+  const setup = roundHalfEven(heightSetup * widthSetup * area, 3);
+  const unitList = heightUcs.map((hu, i) =>
+    roundHalfEven(hu * widthUcs[i] * area, 3)
+  );
+  return { setup, unitList };
+}
+
 function costFactor(
   field: PricingField,
   sel: FieldSelection | undefined,
   groupQuantities: number[]
 ): { setup: number; unitList: number[] } {
   const n = groupQuantities.length;
+  // Coerce: JSON/APIs occasionally deliver fieldType as a string.
+  if (Number(field.fieldType) === FieldType.AREA) {
+    return areaCostFactor(field, sel, groupQuantities);
+  }
   if (isEmpty(field, sel)) {
     return { setup: 0, unitList: new Array(n).fill(0) };
   }

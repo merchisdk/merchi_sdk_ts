@@ -174,6 +174,9 @@ export class VariationField extends Entity {
   @VariationField.property()
   public areaInputType?: string;
 
+  @VariationField.property({type: Number})
+  public areaStep?: number | null;
+
   @VariationField.property()
   public aspectRatioLock?: boolean;
 
