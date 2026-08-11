@@ -118,6 +118,20 @@ export interface StorefrontGoogleIntegrations {
   googleAdsQuoteConversionLabel?: string;
 }
 
+export type StorefrontV2InfrastructureMode = 'platform' | 'byo';
+
+/** Public BYO connection status (never includes encrypted tokens). */
+export interface StorefrontV2ByoStatus {
+  infrastructureMode: StorefrontV2InfrastructureMode;
+  githubAppConfigured: boolean;
+  vercelOauthConfigured: boolean;
+  githubConnected: boolean;
+  vercelConnected: boolean;
+  githubAccountLogin?: string | null;
+  githubInstallationId?: string | null;
+  vercelTeamId?: string | null;
+}
+
 export interface StorefrontV2Config {
   id?: number;
   domainId?: number;
@@ -132,6 +146,11 @@ export interface StorefrontV2Config {
   repoOwner?: string | null;
   repoName?: string | null;
   vercelProjectId?: string | null;
+  vercelTeamId?: string | null;
+  infrastructureMode?: StorefrontV2InfrastructureMode | string | null;
+  githubInstallationId?: string | null;
+  githubAccountLogin?: string | null;
+  byo?: StorefrontV2ByoStatus | null;
   lastSuccessfulCommitSha?: string | null;
   googleIntegrations?: StorefrontGoogleIntegrations | null;
   approvedStarterTemplates?: string[];
