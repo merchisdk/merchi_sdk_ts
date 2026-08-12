@@ -994,6 +994,14 @@ export class Entity {
         (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
           value = value.getTime() / 1000;
+        } else if (
+          // JSON/JSONB columns (e.g. Domain.jobAgentPolicy) are plain objects.
+          // FormData stringifies objects as "[object Object]" unless we encode.
+          value !== null &&
+          typeof value === 'object' &&
+          !(typeof Blob !== 'undefined' && value instanceof Blob)
+        ) {
+          value = JSON.stringify(value);
         }
         appendData(info.property, value);
       }
