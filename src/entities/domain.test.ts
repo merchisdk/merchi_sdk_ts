@@ -34,6 +34,26 @@ test('can create domain on server', () => {
   expect(sentToServer).toEqual(data);
 });
 
+test('serialises jobAgentPolicy JSON for form data', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 7;
+  domain.jobAgentPolicy = {
+    playbooks: { drafting: false, invoice: true },
+    outreach: { sendEmail: true },
+  };
+  const entries = Array.from((domain.toFormData() as any).entries()) as
+    Array<[string, string]>;
+  const data = Object.fromEntries(entries);
+  expect(data.jobAgentPolicy).toBe(
+    JSON.stringify({
+      playbooks: { drafting: false, invoice: true },
+      outreach: { sendEmail: true },
+    })
+  );
+  expect(data.jobAgentPolicy).not.toBe('[object Object]');
+});
+
 test('can delete domain', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
