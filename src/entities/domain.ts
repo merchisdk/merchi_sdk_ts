@@ -502,6 +502,9 @@ export class Domain extends Entity {
   public enableSmsNotifications?: boolean;
 
   @Domain.property()
+  public enableWhatsappNotifications?: boolean;
+
+  @Domain.property()
   public mailgunRecords?: any[];
 
   @Domain.property()
