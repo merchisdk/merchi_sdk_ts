@@ -28,6 +28,9 @@ export class JobComment extends Entity {
   public sendEmail?: boolean;
 
   @JobComment.property()
+  public sendWhatsapp?: boolean;
+
+  @JobComment.property()
   public openToClient?: boolean;
 
   @JobComment.property()
