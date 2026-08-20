@@ -1,4 +1,4 @@
-import { applyDiscount } from './discount.js';
+import { applyDiscount, getDiscountPercent } from './discount.js';
 import { DiscountGroup } from './types.js';
 
 const group: DiscountGroup = {
@@ -8,6 +8,20 @@ const group: DiscountGroup = {
     { lowerLimit: 500, amount: 12 },
   ],
 };
+
+test('getDiscountPercent returns configured tier amount', () => {
+  expect(getDiscountPercent(50, group)).toBe(0);
+  expect(getDiscountPercent(100, group)).toBe(5);
+  expect(getDiscountPercent(500, group)).toBe(12);
+  expect(getDiscountPercent(1000, group)).toBe(12);
+});
+
+test('getDiscountPercent with no group returns zero', () => {
+  expect(getDiscountPercent(100, null)).toBe(0);
+  expect(
+    getDiscountPercent(100, { groupRestricted: false, discounts: [] })
+  ).toBe(0);
+});
 
 test('no group returns price unchanged (rounded)', () => {
   expect(applyDiscount(10, 50, null)).toBe(10);
