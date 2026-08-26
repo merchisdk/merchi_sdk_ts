@@ -339,6 +339,12 @@ export class Company extends Entity {
   @Company.property({arrayType: 'Address'})
   public addresses?: Address[];
 
+  @Company.property({type: 'Company'})
+  public parentCompany?: Company | null;
+
+  @Company.property({arrayType: 'Company'})
+  public childCompanies?: Company[];
+
   private getCompanyId = () => {
     if (this.id === undefined || this.id === null) {
       throw new Error('id is undefined, did you forget to set it?');
