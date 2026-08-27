@@ -74,6 +74,9 @@ export class Invoice extends Entity {
   public sendEmail?: boolean | null;
 
   @Invoice.property({type: Boolean})
+  public sendWhatsapp?: boolean | null;
+
+  @Invoice.property({type: Boolean})
   public unpaid?: boolean | null;
 
   @Invoice.property()

@@ -105,6 +105,9 @@ export class Shipment extends Entity {
   @Shipment.property()
   public sendEmail?: boolean;
 
+  @Shipment.property()
+  public sendWhatsapp?: boolean;
+
   @Shipment.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
