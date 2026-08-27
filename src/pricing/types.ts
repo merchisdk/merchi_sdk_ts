@@ -107,3 +107,34 @@ export interface QuoteResult {
 export interface UnsupportedResult {
   unsupported: string;
 }
+
+export interface PriceMatrixBand {
+  /** Inclusive lower quantity used to quote this column. */
+  quantity: number;
+  /** Inclusive upper quantity, or null for an open-ended last band. */
+  upperLimit: number | null;
+  /** Buyer-facing range, e.g. "1–49" or "100+". */
+  label: string;
+}
+
+export interface PriceMatrixCell {
+  quantity: number;
+  costPerUnit: number;
+  /** Ex-tax cost ÷ quantity (variation unit costs + amortized setup). */
+  unitPrice: number;
+  cost: number;
+  taxAmount: number;
+  totalCost: number;
+}
+
+export interface PriceMatrix {
+  currency: string;
+  taxPercent: number;
+  bands: PriceMatrixBand[];
+  cells: PriceMatrixCell[];
+}
+
+export interface BuildPriceMatrixOptions {
+  /** Floor quantity for the first band (product MOQ). Defaults to 1. */
+  minQuantity?: number;
+}
