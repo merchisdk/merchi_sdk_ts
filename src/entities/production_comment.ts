@@ -33,6 +33,9 @@ export class ProductionComment extends Entity {
   @ProductionComment.property()
   public sendEmail?: boolean;
 
+  @ProductionComment.property()
+  public sendWhatsapp?: boolean;
+
   @ProductionComment.property({arrayType: "MerchiFile"})
   public files?: MerchiFile[];
 

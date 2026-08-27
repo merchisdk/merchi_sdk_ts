@@ -33,6 +33,9 @@ export class Draft extends Entity {
   public sendSms?: boolean;
 
   @Draft.property()
+  public sendWhatsapp?: boolean;
+
+  @Draft.property()
   public sendEmail?: boolean;
 
   @Draft.property({arrayType: 'DraftComment'})

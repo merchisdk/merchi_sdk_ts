@@ -38,6 +38,9 @@ export class DraftComment extends Entity {
   public sendEmail?: boolean;
 
   @DraftComment.property()
+  public sendWhatsapp?: boolean;
+
+  @DraftComment.property()
   public user?: User;
 
   @DraftComment.property()
