@@ -487,6 +487,9 @@ export class Domain extends Entity {
   public smsName?: string;
 
   @Domain.property()
+  public whatsappPhoneNumberId?: string;
+
+  @Domain.property()
   public showDomainPublicly?: boolean;
 
   @Domain.property()
