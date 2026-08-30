@@ -6,6 +6,15 @@ test('can make Discount', () => {
   expect(discount).toBeTruthy();
 });
 
+test('can set assignedUsers', () => {
+  const merchi = new Merchi();
+  const discount = new merchi.Discount();
+  const user = new merchi.User();
+  user.id = 11;
+  discount.assignedUsers = [user];
+  expect(discount.assignedUsers?.map((assigned) => assigned.id)).toEqual([11]);
+});
+
 test('discountedUnitCost', () => {
   const merchi = new Merchi();
   const discount = new merchi.Discount();
