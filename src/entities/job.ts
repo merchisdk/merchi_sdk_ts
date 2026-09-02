@@ -258,6 +258,9 @@ export class Job extends Entity {
   @Job.property({type: Company})
   public clientCompany?: Company | null;
 
+  @Job.property({arrayType: 'User'})
+  public notificationSubscribers?: User[];
+
   @Job.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;
 
