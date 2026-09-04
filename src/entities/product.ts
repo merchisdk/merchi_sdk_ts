@@ -44,6 +44,9 @@ export class Product extends Entity {
   @Product.property({type: Date})
   public updated?: Date;
 
+  @Product.property({type: Date})
+  public storefrontLastDeployed?: Date | null;
+
   @Product.property({type: 'User'})
   public createdBy?: User | null;
 
