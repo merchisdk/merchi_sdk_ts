@@ -22,6 +22,18 @@ export class Payment extends Entity {
   public paymentType?: number;
 
   @Payment.property()
+  public paymentProvider?: string;
+
+  @Payment.property()
+  public paymentMethod?: string;
+
+  @Payment.property()
+  public refundedAmount?: number;
+
+  @Payment.property({ type: String })
+  public refundStatus?: string | null;
+
+  @Payment.property()
   public note?: string;
 
   @Payment.property()
