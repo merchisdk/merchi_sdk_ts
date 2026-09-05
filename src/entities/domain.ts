@@ -290,6 +290,8 @@ export interface StorefrontV2RollbackResult {
 export interface StorefrontV2ProductPublishResult {
   action: 'deploy' | 'recache' | string;
   productName?: string | null;
+  productId?: number | null;
+  lastDeployed?: number | null;
   status?: string;
   productUrl?: string;
   deploymentId?: string;
@@ -297,6 +299,13 @@ export interface StorefrontV2ProductPublishResult {
   branchName?: string;
   message?: string;
   httpStatus?: number;
+}
+
+export interface StorefrontV2ProductStatus {
+  activated: boolean;
+  outOfSync?: boolean;
+  lastUpdated?: number | null;
+  lastDeployed?: number | null;
 }
 
 export interface StorefrontV2CategoryPublishResult {
@@ -314,6 +323,7 @@ export interface StorefrontV2CategoryPublishResult {
 export interface StorefrontV2ProductPublishPayload {
   productName?: string;
   productUrl?: string;
+  productId?: number;
   branchName?: string;
 }
 
@@ -1027,6 +1037,15 @@ export class Domain extends Entity {
       'POST',
       payload
     ) as Promise<{repositoryFileUpdate: StorefrontV2RepositoryFileUpdate}>;
+  };
+
+  public getStorefrontV2ProductStatus = (
+    productId: number
+  ): Promise<{storefrontProductStatus: StorefrontV2ProductStatus}> => {
+    return this.storefrontV2Request(
+      this.storefrontV2DomainResource(`products/${String(productId)}/status/`),
+      'GET'
+    ) as Promise<{storefrontProductStatus: StorefrontV2ProductStatus}>;
   };
 
   public publishStorefrontV2Product = (
