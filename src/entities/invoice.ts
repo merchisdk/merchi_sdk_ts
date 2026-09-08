@@ -28,6 +28,9 @@ export class Invoice extends Entity {
   @Invoice.property()
   public id?: number;
 
+  @Invoice.property()
+  public stripePaymentEngine?: string;
+
   @Invoice.property({type: Date})
   public creationDate?: Date | null;
 
