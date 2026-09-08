@@ -276,6 +276,17 @@ test('can publish storefront v2 product', () => {
   });
 });
 
+test('can get storefront v2 product status', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 42;
+  const fetch = mockFetch(true, {}, 200);
+  domain.getStorefrontV2ProductStatus(88);
+  expect(fetch.mock.calls[0][0]).toContain(
+    '/domains/42/storefront_v2/products/88/status/'
+  );
+});
+
 test('can get storefront v2 change request by id', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
