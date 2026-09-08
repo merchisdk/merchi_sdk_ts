@@ -20,6 +20,9 @@ export class Cart extends Entity {
   public id?: number;
 
   @Cart.property()
+  public stripePaymentEngine?: string;
+
+  @Cart.property()
   public creationDate?: Date;
 
   @Cart.property()

@@ -48,3 +48,10 @@ test('pass cookie tokens to query string', () => {
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
 });
+
+test('preserves server payment engine hint', () => {
+  const merchi = new Merchi();
+  const entity = new merchi.Cart();
+  entity.fromJson({ id: 1, stripePaymentEngine: 'wallet' });
+  expect(entity.toJson()).toMatchObject({ stripePaymentEngine: 'wallet' });
+});
