@@ -31,6 +31,10 @@ jobs:
       - name: Choose release version
         id: plan
         run: node .github/scripts/release-plan.mjs
+      - name: Recover tag for the published release
+        env:
+          RELEASE_VERSION: ${{ steps.plan.outputs.latest }}
+        run: node .github/scripts/release-tag.mjs
       - name: Prepare version and dependencies
         if: steps.plan.outputs.publish == 'true'
         env:
@@ -46,7 +50,7 @@ jobs:
         run: npm test -- --runInBand --coverage=false src/entities/payment.test.ts src/entities/invoice.test.ts src/entities/cart.test.ts src/entities/domain.test.ts
       - name: Validate package contents
         if: steps.plan.outputs.publish == 'true'
-        run: npm pack --dry-run --ignore-scripts
+        run: node .github/scripts/verify-package.mjs
       - name: Record release version on main
         if: steps.plan.outputs.publish == 'true'
         env:
@@ -54,7 +58,10 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add package.json package-lock.json
+          git add package.json
+          if git ls-files --error-unmatch package-lock.json >/dev/null 2>&1 || ! git check-ignore -q package-lock.json; then
+            git add package-lock.json
+          fi
           git diff --cached --quiet || git commit -m "chore: release $RELEASE_VERSION [skip ci]"
           # A concurrent merge rejects this push; never force-push main.
           git push origin HEAD:main
@@ -69,15 +76,4 @@ jobs:
         if: steps.publish.outputs.published == 'true'
         env:
           RELEASE_VERSION: ${{ steps.plan.outputs.version }}
-        run: |
-          node .github/scripts/verify-release.mjs
-          tag="v$RELEASE_VERSION"
-          if git rev-parse "$tag" >/dev/null 2>&1; then
-            if [ "$(git rev-parse "$tag^{commit}")" != "$(git rev-parse HEAD)" ]; then
-              echo "::warning::Existing $tag belongs to another commit; preserving it."
-              exit 0
-            fi
-          else
-            git tag "$tag"
-          fi
-          git push origin "$tag"
+        run: node .github/scripts/release-tag.mjs
