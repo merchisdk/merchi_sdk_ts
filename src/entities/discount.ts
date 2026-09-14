@@ -31,6 +31,9 @@ export class Discount extends Entity {
   @Discount.property({arrayType: 'User'})
   public assignedUsers?: User[];
 
+  @Discount.property({type: User})
+  public referrer?: User | null;
+
   @Discount.property({type: DiscountGroup})
   public discountGroup?: DiscountGroup | null;
 

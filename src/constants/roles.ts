@@ -8,6 +8,7 @@ export enum Role {
   MANAGER = 6,
   ACCOUNTANT = 7,
   THEME_EDITOR = 8,
+  REFERRER = 9,
 }
 
 export const DOMAIN_MANAGERS = [Role.ADMIN, Role.MANAGER];
