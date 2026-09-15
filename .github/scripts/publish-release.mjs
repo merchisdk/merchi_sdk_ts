@@ -9,13 +9,16 @@ export async function publishRelease({version, head, latest, latestHead}, io) {
   }
   const status = io.publish();
   // npm publish can succeed before a registry read sees the new version.
-  // Verify the exact version with fresh reads; never publish twice in one run.
+  // npm processing can take several minutes. Allow five minutes of retry waits
+  // plus registry request time; never publish twice in one run.
+  const verificationAttempts = 61;
+  const verificationIntervalMs = 5000;
   let actual;
-  for (let attempt = 0; attempt < 7; attempt++) {
+  for (let attempt = 0; attempt < verificationAttempts; attempt++) {
     try { actual = await io.exact(); break; }
     catch (error) {
-      if (attempt === 6) throw Error(`Could not verify ${version} after publication (exit ${status}); next run will reconcile it.`, {cause:error});
-      await io.wait(5000);
+      if (attempt === verificationAttempts - 1) throw Error(`Could not verify ${version} after publication (exit ${status}); next run will reconcile it.`, {cause:error});
+      await io.wait(verificationIntervalMs);
     }
   }
   if (actual.gitHead !== head) return {published:false, reason:'Another publisher claimed this version; preserve their release and retry next run.'};
