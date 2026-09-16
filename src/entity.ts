@@ -129,6 +129,7 @@ interface ListOptions {
   priceRange?: number[];
   productTypes?: ProductType[];
   publicOnly?: boolean;
+  isDraft?: boolean;
   q?: string;
   receiverId?: number;
   userAsReceiver?: number;
@@ -494,6 +495,9 @@ export class Entity {
       if (options.publicOnly !== undefined) {
         fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
       }
+      if (options.isDraft !== undefined) {
+        fetchOptions.query.push(['is_draft', options.isDraft.toString()]);
+      }
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',
           options.managedOnly.toString()]);
@@ -546,7 +550,7 @@ export class Entity {
           options.entityTypes.join(',')]);
       }
       if (options.priceRange !== undefined) {
-        fetchOptions.query.push(['product_range',
+        fetchOptions.query.push(['price_range',
           options.priceRange.join(',')]);
       }
       if (options.productTypes !== undefined) {

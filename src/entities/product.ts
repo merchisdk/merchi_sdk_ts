@@ -186,6 +186,9 @@ export class Product extends Entity {
   public showPublic?: boolean;
 
   @Product.property()
+  public isDraft?: boolean;
+
+  @Product.property()
   public showGroupBuyStatus?: boolean;
 
   @Product.property({type: Number})
