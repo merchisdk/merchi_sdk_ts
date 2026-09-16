@@ -550,7 +550,7 @@ export class Entity {
           options.entityTypes.join(',')]);
       }
       if (options.priceRange !== undefined) {
-        fetchOptions.query.push(['product_range',
+        fetchOptions.query.push(['price_range',
           options.priceRange.join(',')]);
       }
       if (options.productTypes !== undefined) {

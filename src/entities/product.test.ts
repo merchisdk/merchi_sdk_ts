@@ -394,7 +394,7 @@ test('can list products with options set', () => {
     ['order', 'asc'],
     ['original_of', '1'],
     ['platform_category_id', '3'],
-    ['product_range', '0,1'],
+    ['price_range', '0,1'],
     ['product_types', '0,1'],
     ['public_only', 'false'],
     ['is_draft', 'true'],
