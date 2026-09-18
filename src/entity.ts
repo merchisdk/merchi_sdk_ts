@@ -130,6 +130,7 @@ interface ListOptions {
   productTypes?: ProductType[];
   publicOnly?: boolean;
   isDraft?: boolean;
+  isTest?: boolean;
   q?: string;
   receiverId?: number;
   userAsReceiver?: number;
@@ -497,6 +498,9 @@ export class Entity {
       }
       if (options.isDraft !== undefined) {
         fetchOptions.query.push(['is_draft', options.isDraft.toString()]);
+      }
+      if (options.isTest !== undefined) {
+        fetchOptions.query.push(['is_test', options.isTest.toString()]);
       }
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',

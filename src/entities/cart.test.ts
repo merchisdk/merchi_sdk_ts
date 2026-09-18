@@ -55,3 +55,10 @@ test('preserves server payment engine hint', () => {
   entity.fromJson({ id: 1, stripePaymentEngine: 'wallet' });
   expect(entity.toJson()).toMatchObject({ stripePaymentEngine: 'wallet' });
 });
+
+test('preserves isTest', () => {
+  const merchi = new Merchi();
+  const entity = new merchi.Cart();
+  entity.fromJson({ id: 1, isTest: true });
+  expect(entity.toJson()).toMatchObject({ isTest: true });
+});
