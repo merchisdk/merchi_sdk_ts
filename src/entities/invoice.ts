@@ -82,6 +82,9 @@ export class Invoice extends Entity {
   @Invoice.property({type: Boolean})
   public unpaid?: boolean | null;
 
+  @Invoice.property({type: Boolean})
+  public isTest?: boolean | null;
+
   @Invoice.property()
   public currency?: string;
 

@@ -10,6 +10,13 @@ test('can make Job', () => {
   expect(job).toBeTruthy();
 });
 
+test('preserves isTest', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  job.fromJson({ id: 1, isTest: true });
+  expect(job.toJson()).toMatchObject({ isTest: true });
+});
+
 test('Job deadline serialised to milliseconds in form data', () => {
   const merchi = new Merchi();
   const job = new merchi.Job();

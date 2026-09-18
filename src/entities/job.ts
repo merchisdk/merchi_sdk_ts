@@ -354,6 +354,9 @@ export class Job extends Entity {
   @Job.property()
   public isNewClient?: boolean;
 
+  @Job.property()
+  public isTest?: boolean;
+
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';
     const data = this.toFormData({excludeOld: false});

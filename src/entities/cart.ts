@@ -64,6 +64,9 @@ export class Cart extends Entity {
   @Cart.property()
   public sendWhatsapp?: boolean;
 
+  @Cart.property()
+  public isTest?: boolean;
+
   @Cart.property({type: 'User'})
   public client?: User | null;
 
