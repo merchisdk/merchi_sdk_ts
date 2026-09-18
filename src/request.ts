@@ -38,6 +38,16 @@ export interface ApiErrorDetails {
   [key: string]: any;
 }
 
+function resolveApiErrorMessage(err: any): string {
+  if (err && typeof err === 'object' && typeof err.message === 'string' && err.message) {
+    return err.message;
+  }
+  if (typeof err === 'string' && err) {
+    return err;
+  }
+  return 'No error message';
+}
+
 export class ApiError extends Error {
   public statusCode?: number;
   public errorCode?: ErrorType;
@@ -52,13 +62,12 @@ export class ApiError extends Error {
   public details?: ApiErrorDetails;
   public original: any;
   public constructor(err: any) {
-    const message = JSON.stringify(err);
+    const message = resolveApiErrorMessage(err);
     /* istanbul ignore next */
     super(message);
     this.statusCode = err.statusCode;
     this.errorCode = getErrorFromCode(err.errorCode);
-    this.errorMessage = err.message ?
-      err.message : 'No error message';
+    this.errorMessage = message;
     this.details = err.details;
     this.name = 'ApiError';
     this.original = err;
