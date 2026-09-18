@@ -558,6 +558,9 @@ export class Domain extends Entity {
   @Domain.property({type: String})
   public apiSecret?: string | null;
 
+  @Domain.property({type: jsonPropertyType})
+  public apiAllowedOrigins?: string[] | null;
+
   @Domain.property({type: String})
   public webflowApiKey?: string | null;
 

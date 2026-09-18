@@ -34,6 +34,20 @@ test('can create domain on server', () => {
   expect(sentToServer).toEqual(data);
 });
 
+test('serialises apiAllowedOrigins JSON for form data', () => {
+  const merchi = new Merchi();
+  const domain = new merchi.Domain();
+  domain.id = 7;
+  domain.apiAllowedOrigins = ['https://shop.example.com', 'https://preview.example.com'];
+  const entries = Array.from((domain.toFormData() as any).entries()) as
+    Array<[string, string]>;
+  const data = Object.fromEntries(entries);
+  expect(data.apiAllowedOrigins).toBe(
+    JSON.stringify(['https://shop.example.com', 'https://preview.example.com'])
+  );
+  expect(data.apiAllowedOrigins).not.toBe('[object Object]');
+});
+
 test('serialises jobAgentPolicy JSON for form data', () => {
   const merchi = new Merchi();
   const domain = new merchi.Domain();
