@@ -17,6 +17,26 @@ test('preserves isTest', () => {
   expect(job.toJson()).toMatchObject({ isTest: true });
 });
 
+test('preserves source attribution', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  job.fromJson({
+    id: 1,
+    sourceChannel: 'google_ads',
+    utmSource: 'google',
+    utmMedium: 'cpc',
+    utmCampaign: 'wristbands',
+    sourceClickId: 'EAIa',
+  });
+  expect(job.toJson()).toMatchObject({
+    sourceChannel: 'google_ads',
+    utmSource: 'google',
+    utmMedium: 'cpc',
+    utmCampaign: 'wristbands',
+    sourceClickId: 'EAIa',
+  });
+});
+
 test('Job deadline serialised to milliseconds in form data', () => {
   const merchi = new Merchi();
   const job = new merchi.Job();

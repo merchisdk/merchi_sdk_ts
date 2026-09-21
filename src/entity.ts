@@ -131,6 +131,7 @@ interface ListOptions {
   publicOnly?: boolean;
   isDraft?: boolean;
   isTest?: boolean;
+  sourceChannel?: string;
   q?: string;
   receiverId?: number;
   userAsReceiver?: number;
@@ -501,6 +502,9 @@ export class Entity {
       }
       if (options.isTest !== undefined) {
         fetchOptions.query.push(['is_test', options.isTest.toString()]);
+      }
+      if (options.sourceChannel !== undefined) {
+        fetchOptions.query.push(['source_channel', options.sourceChannel.toString()]);
       }
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',

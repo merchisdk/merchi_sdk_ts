@@ -67,6 +67,33 @@ export class Cart extends Entity {
   @Cart.property()
   public isTest?: boolean;
 
+  @Cart.property({type: String})
+  public sourceChannel?: string | null;
+
+  @Cart.property({type: String})
+  public utmSource?: string | null;
+
+  @Cart.property({type: String})
+  public utmMedium?: string | null;
+
+  @Cart.property({type: String})
+  public utmCampaign?: string | null;
+
+  @Cart.property({type: String})
+  public utmContent?: string | null;
+
+  @Cart.property({type: String})
+  public utmTerm?: string | null;
+
+  @Cart.property({type: String})
+  public sourceClickId?: string | null;
+
+  @Cart.property({type: String})
+  public sourceLanding?: string | null;
+
+  @Cart.property({type: String})
+  public sourceReferrer?: string | null;
+
   @Cart.property({type: 'User'})
   public client?: User | null;
 
