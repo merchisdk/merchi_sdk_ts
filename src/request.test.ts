@@ -1,4 +1,4 @@
-import { apiFetch } from './request.js';
+import { apiFetch, ApiError } from './request.js';
 import { ErrorType } from './constants/errors.js';
 import { setup, mockFetch } from './test_util.js';
 
@@ -34,11 +34,32 @@ test('will get default errorCode', () => {
     {'statusCode': 404,
       'errorCode': -1,
       'message': 'just a test'}, 404);
-  apiFetch('https://api.merchi.co/', '/test').catch(e => {
+  return apiFetch('https://api.merchi.co/', '/test').catch(e => {
     expect(e.statusCode).toBe(404);
     expect(e.name).toBe('ApiError');
     expect(e.errorCode).toBe(ErrorType.UNKNOWN_ERROR);
     expect(e.errorMessage).toBe('just a test');
+    expect(e.message).toBe('just a test');
+  });
+});
+
+test('ApiError keeps plain string messages', () => {
+  const e = new ApiError('empty response');
+  expect(e.message).toBe('empty response');
+  expect(e.errorMessage).toBe('empty response');
+});
+
+test('ApiError.message is the human-readable text, not serialized JSON', () => {
+  mockFetch(false, {
+    'statusCode': 403,
+    'errorCode': ErrorType.UNKNOWN_ERROR,
+    'message': 'cannot set referrer',
+  }, 403);
+  return apiFetch('https://api.merchi.co/', '/test').catch(e => {
+    expect(e.message).toBe('cannot set referrer');
+    expect(e.errorMessage).toBe('cannot set referrer');
+    expect(e.message).not.toContain('errorCode');
+    expect(e.message).not.toContain('statusCode');
   });
 });
 
