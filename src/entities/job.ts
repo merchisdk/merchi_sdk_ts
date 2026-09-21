@@ -249,6 +249,33 @@ export class Job extends Entity {
   @Job.property()
   public clientOrigin?: string;
 
+  @Job.property({type: String})
+  public sourceChannel?: string | null;
+
+  @Job.property({type: String})
+  public utmSource?: string | null;
+
+  @Job.property({type: String})
+  public utmMedium?: string | null;
+
+  @Job.property({type: String})
+  public utmCampaign?: string | null;
+
+  @Job.property({type: String})
+  public utmContent?: string | null;
+
+  @Job.property({type: String})
+  public utmTerm?: string | null;
+
+  @Job.property({type: String})
+  public sourceClickId?: string | null;
+
+  @Job.property({type: String})
+  public sourceLanding?: string | null;
+
+  @Job.property({type: String})
+  public sourceReferrer?: string | null;
+
   @Job.property({type: User})
   public manager?: User | null;
 

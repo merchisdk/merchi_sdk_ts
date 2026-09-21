@@ -62,3 +62,19 @@ test('preserves isTest', () => {
   entity.fromJson({ id: 1, isTest: true });
   expect(entity.toJson()).toMatchObject({ isTest: true });
 });
+
+test('preserves source attribution', () => {
+  const merchi = new Merchi();
+  const entity = new merchi.Cart();
+  entity.fromJson({
+    id: 1,
+    sourceChannel: 'meta',
+    utmSource: 'facebook',
+    sourceClickId: 'IwAR',
+  });
+  expect(entity.toJson()).toMatchObject({
+    sourceChannel: 'meta',
+    utmSource: 'facebook',
+    sourceClickId: 'IwAR',
+  });
+});
