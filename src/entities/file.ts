@@ -10,6 +10,7 @@ import { JobNote } from './job_note.js';
 import { Notification } from './notification.js';
 import { Product } from './product.js';
 import { ProductionComment } from './production_comment.js';
+import { Quote } from './quote.js';
 import { Theme } from './theme.js';
 import { User } from './user.js';
 import { Variation } from './variation.js';
@@ -151,6 +152,9 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: 'ProductionComment'})
   public productionComments?: ProductionComment[];
+
+  @MerchiFile.property({arrayType: 'Quote'})
+  public quotes?: Quote[];
 
   public isImage = () => {
     if (this.mimetype === undefined) {
