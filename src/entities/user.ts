@@ -137,6 +137,9 @@ export class User extends Entity {
   public telegramUsername?: string;
 
   @User.property({type: String})
+  public wechatId?: string;
+
+  @User.property({type: String})
   public internalUseAiContext?: string;
 
   @User.property({type: String})
