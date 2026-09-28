@@ -139,6 +139,9 @@ export class User extends Entity {
   @User.property({type: String})
   public wechatId?: string;
 
+  @User.property({type: Boolean})
+  public whatsappContactEnabled?: boolean;
+
   @User.property({type: String})
   public internalUseAiContext?: string;
 
