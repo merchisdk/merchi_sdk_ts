@@ -79,6 +79,77 @@ test('hidden conditional field is not costed', () => {
   expect(r.cost).toBe(100);
 });
 
+function colourExtractField(): PricingRules['fields'][number] {
+  return {
+    id: 13, originalId: 13, position: 0, fieldType: 13, independent: true,
+    isSelectable: true, selectedBy: [],
+    variationCost: 180, variationUnitCost: 6.52,
+    variationCostDiscountGroup: null, variationUnitCostDiscountGroup: null,
+    colourVariationCost: 60, colourVariationUnitCost: 0.8,
+    colourVariationCostDiscountGroup: null,
+    colourVariationUnitCostDiscountGroup: null,
+    options: [],
+  };
+}
+
+test('colour extract with no colours or file does not add a charge', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: { unitPrice: 1, minimumPrice: null, discountGroup: null },
+    fields: [colourExtractField()],
+  };
+  const r = estimateQuote(rules, {
+    quantity: 30,
+    fieldValues: { 13: { selectedOptionIds: [], colourCount: 0, hasFiles: false } },
+  }) as QuoteResult;
+  expect(r.cost).toBe(30);
+  expect(r.totalCost).toBe(33);
+});
+
+test('colour extract adds the field fee and each selected colour', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: { unitPrice: 1, minimumPrice: null, discountGroup: null },
+    fields: [colourExtractField()],
+  };
+  const r = estimateQuote(rules, {
+    quantity: 30,
+    fieldValues: { 13: { selectedOptionIds: [1, 2, 3], colourCount: 3 } },
+  }) as QuoteResult;
+  // 30*1 + 180 + 6.52*30 + 3*60 + 3*0.80*30 = 657.6
+  expect(r.cost).toBe(657.6);
+  expect(r.taxAmount).toBe(65.76);
+  expect(r.totalCost).toBe(723.36);
+});
+
+test('colour extract counts selected option ids when colourCount is omitted', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: { unitPrice: 1, minimumPrice: null, discountGroup: null },
+    fields: [colourExtractField()],
+  };
+  const r = estimateQuote(rules, {
+    quantity: 30,
+    fieldValues: { 13: { selectedOptionIds: [9, 8] } },
+  }) as QuoteResult;
+  // 30 + 180 + 195.6 + 2*60 + 2*0.8*30 = 573.6
+  expect(r.cost).toBe(573.6);
+});
+
+test('colour extract file without colours still charges the field fee', () => {
+  const rules: PricingRules = {
+    ...base,
+    product: { unitPrice: 1, minimumPrice: null, discountGroup: null },
+    fields: [colourExtractField()],
+  };
+  const r = estimateQuote(rules, {
+    quantity: 30,
+    fieldValues: { 13: { colourCount: 0, hasFiles: true } },
+  }) as QuoteResult;
+  // 30 + 180 + 6.52*30 = 405.6
+  expect(r.cost).toBe(405.6);
+});
+
 test('area field multiplies height/width rate cards when dimensions set', () => {
   const rules: PricingRules = {
     ...base,
