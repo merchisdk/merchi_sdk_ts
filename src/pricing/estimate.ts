@@ -142,6 +142,47 @@ function areaCostFactor(
   return { setup, unitList };
 }
 
+function colourExtractCostFactor(
+  field: PricingField,
+  sel: FieldSelection | undefined,
+  groupQuantities: number[]
+): { setup: number; unitList: number[] } {
+  const n = groupQuantities.length;
+  const zeros = { setup: 0, unitList: new Array(n).fill(0) };
+  // Extracted colours are not in the static options list. Count them, then
+  // apply the field fee once and the per-colour fee once per colour.
+  const colourCount =
+    sel?.colourCount != null
+      ? sel.colourCount
+      : sel?.selectedOptionIds?.length ?? 0;
+  const active = colourCount > 0 || Boolean(sel?.hasFiles);
+  if (!active) return zeros;
+
+  const totalQty = groupQuantities.reduce((a, b) => a + b, 0);
+  let setup = variationSetupCost(field, totalQty);
+  const unitList = variationUnitCosts(field, groupQuantities);
+  if (colourCount > 0) {
+    const colourSetup = variationSetupCost(
+      {
+        variationCost: field.colourVariationCost || 0,
+        variationCostDiscountGroup: field.colourVariationCostDiscountGroup ?? null,
+      },
+      totalQty
+    );
+    const colourUnits = variationUnitCosts(
+      {
+        variationUnitCost: field.colourVariationUnitCost || 0,
+        variationUnitCostDiscountGroup:
+          field.colourVariationUnitCostDiscountGroup ?? null,
+      },
+      groupQuantities
+    );
+    setup += colourSetup * colourCount;
+    for (let i = 0; i < n; i++) unitList[i] += colourUnits[i] * colourCount;
+  }
+  return { setup, unitList };
+}
+
 function costFactor(
   field: PricingField,
   sel: FieldSelection | undefined,
@@ -151,6 +192,9 @@ function costFactor(
   // Coerce: JSON/APIs occasionally deliver fieldType as a string.
   if (Number(field.fieldType) === FieldType.AREA) {
     return areaCostFactor(field, sel, groupQuantities);
+  }
+  if (Number(field.fieldType) === FieldType.COLOUR_EXTRACT) {
+    return colourExtractCostFactor(field, sel, groupQuantities);
   }
   if (isEmpty(field, sel)) {
     return { setup: 0, unitList: new Array(n).fill(0) };

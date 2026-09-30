@@ -45,6 +45,11 @@ export interface PricingField {
   heightVariationUnitCostDiscountGroup?: DiscountGroup | null;
   widthVariationCostDiscountGroup?: DiscountGroup | null;
   widthVariationUnitCostDiscountGroup?: DiscountGroup | null;
+  /** Colour extract (fieldType 13): per selected colour, not a static option. */
+  colourVariationCost?: number;
+  colourVariationUnitCost?: number;
+  colourVariationCostDiscountGroup?: DiscountGroup | null;
+  colourVariationUnitCostDiscountGroup?: DiscountGroup | null;
   options: PricingOption[];
 }
 
@@ -82,6 +87,10 @@ export interface InventoryUnit {
 export interface FieldSelection {
   selectedOptionIds?: number[];
   value?: string | number | null;
+  /** Colour extract: number of chosen colours when ids are not in the rules. */
+  colourCount?: number;
+  /** Colour extract: an artwork file is attached, even if no colour was kept. */
+  hasFiles?: boolean;
 }
 
 export interface GroupSelection {
