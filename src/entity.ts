@@ -131,6 +131,8 @@ interface ListOptions {
   publicOnly?: boolean;
   isDraft?: boolean;
   isTest?: boolean;
+  /** true = invoice fully paid, false = invoice issued but not fully paid */
+  invoicePaid?: boolean;
   sourceChannel?: string;
   q?: string;
   receiverId?: number;
@@ -502,6 +504,9 @@ export class Entity {
       }
       if (options.isTest !== undefined) {
         fetchOptions.query.push(['is_test', options.isTest.toString()]);
+      }
+      if (options.invoicePaid !== undefined) {
+        fetchOptions.query.push(['invoice_paid', options.invoicePaid.toString()]);
       }
       if (options.sourceChannel !== undefined) {
         fetchOptions.query.push(['source_channel', options.sourceChannel.toString()]);
