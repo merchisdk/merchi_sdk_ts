@@ -285,6 +285,9 @@ export class Job extends Entity {
   @Job.property({type: String})
   public sourceReferrer?: string | null;
 
+  @Job.property({type: String})
+  public checkoutType?: string | null;
+
   @Job.property({type: User})
   public manager?: User | null;
 

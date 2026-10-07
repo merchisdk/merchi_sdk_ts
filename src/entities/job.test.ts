@@ -27,6 +27,7 @@ test('preserves source attribution', () => {
     utmMedium: 'cpc',
     utmCampaign: 'wristbands',
     sourceClickId: 'EAIa',
+    checkoutType: 'buy_now',
   });
   expect(job.toJson()).toMatchObject({
     sourceChannel: 'google_ads',
@@ -34,6 +35,7 @@ test('preserves source attribution', () => {
     utmMedium: 'cpc',
     utmCampaign: 'wristbands',
     sourceClickId: 'EAIa',
+    checkoutType: 'buy_now',
   });
 });
 
