@@ -33,6 +33,9 @@ export class Company extends Entity {
   @Company.property({type: Date})
   public archived?: Date | null;
 
+  @Company.property({type: Date})
+  public created?: Date | null;
+
   @Company.property()
   public id?: number;
 

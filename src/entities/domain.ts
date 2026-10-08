@@ -439,6 +439,9 @@ export class Domain extends Entity {
   @Domain.property({type: Date})
   public archived?: Date | null;
 
+  @Domain.property({type: Date})
+  public created?: Date | null;
+
   @Domain.property()
   public id?: number;
 
