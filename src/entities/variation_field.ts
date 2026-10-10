@@ -79,6 +79,9 @@ export class VariationField extends Entity {
   public allowDecimal?: boolean;
 
   @VariationField.property()
+  public allowAllPantones?: boolean;
+
+  @VariationField.property()
   public isHtml?: boolean;
 
   @VariationField.property()
@@ -205,6 +208,9 @@ export class VariationField extends Entity {
     if (this.fieldType === undefined) {
       throw new Error('fieldType is undefined, did you forget to embed it?');
     }
+    if (this.fieldType === FieldType.PANTONE_COLOUR_SELECT) {
+      return !this.allowAllPantones;
+    }
     const selectable = new Set([FieldType.SELECT,
       FieldType.CHECKBOX,
       FieldType.RADIO,
@@ -231,6 +237,12 @@ export class VariationField extends Entity {
       result.value = this.defaultValue;
       result.onceOffCost = 0;
       result.variationFiles = [];
+    } else if (
+      this.fieldType === FieldType.PANTONE_COLOUR_SELECT &&
+      this.allowAllPantones
+    ) {
+      result.value = this.defaultValue;
+      result.onceOffCost = this.variationCost;
     } else if (this.fieldType === FieldType.AREA) {
       result.value = this.defaultValue;
       result.onceOffCost = 0;
