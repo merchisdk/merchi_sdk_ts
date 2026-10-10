@@ -13,4 +13,5 @@ export enum FieldType {
   TURNAROUND_TIME = 12,
   COLOUR_EXTRACT = 13,
   AREA = 14,
+  PANTONE_COLOUR_SELECT = 15,
 }
