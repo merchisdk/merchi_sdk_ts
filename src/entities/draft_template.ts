@@ -78,4 +78,10 @@ export class DraftTemplate extends Entity {
 
   @DraftTemplate.property({type: String})
   public customisationMapFileId?: string | null;
+
+  @DraftTemplate.property({type: MerchiFile})
+  public printAreaMask?: MerchiFile | null;
+
+  @DraftTemplate.property({type: MerchiFile})
+  public bodyColourMask?: MerchiFile | null;
 }
