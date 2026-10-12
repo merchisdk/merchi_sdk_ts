@@ -234,6 +234,9 @@ export class Product extends Entity {
   public allowClientDraftContribution?: boolean;
 
   @Product.property()
+  public allowAdditionalDesignObjects?: boolean;
+
+  @Product.property()
   public chainedInventoryHandlingUnitPrice?: number;
 
   @Product.property()
