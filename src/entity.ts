@@ -862,10 +862,11 @@ export class Entity {
           });
           propertyInfo.currentValue = newValue;
         } else if (this.isSingleEntityProperty(propertyInfo)) {
-          // if property already have a entity as relationship, try to merge
-          // with json first, this behavior may need to be configurable in the
-          // future.
-          if (propertyInfo.currentValue) {
+          // null clears the link. An empty entity would omit the clear
+          // sentinel from toFormData, so the saved photo would stick.
+          if (value === null) {
+            propertyInfo.currentValue = null;
+          } else if (propertyInfo.currentValue) {
             propertyInfo.currentValue.fromJson(value, options);
           } else {
             const nested = new (propertyInfo.type as any)(this.merchi);
