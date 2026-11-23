@@ -41,3 +41,10 @@ test('client and invoice tokens supported by merchi', () => {
   expect(fetch.mock.calls[0][1]['query']).toEqual(correct);
   return invocation;
 });
+
+test('preserves server payment engine hint', () => {
+  const merchi = new Merchi();
+  const entity = new merchi.Invoice();
+  entity.fromJson({ id: 1, stripePaymentEngine: 'wallet' });
+  expect(entity.toJson()).toMatchObject({ stripePaymentEngine: 'wallet' });
+});

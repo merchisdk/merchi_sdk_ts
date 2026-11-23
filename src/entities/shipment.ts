@@ -12,6 +12,7 @@ import { Job } from './job.js';
 import { MerchiFile } from './file.js';
 import { User } from './user.js';
 import { ShipmentItem } from './shipment_item.js';
+import { ShipmentLog } from './shipment_log.js';
 import { ShipmentMethod } from './shipment_method.js';
 
 interface CalculateOptions {
@@ -104,6 +105,9 @@ export class Shipment extends Entity {
   @Shipment.property()
   public sendEmail?: boolean;
 
+  @Shipment.property()
+  public sendWhatsapp?: boolean;
+
   @Shipment.property({type: CountryTax})
   public taxType?: CountryTax | null;
 
@@ -160,6 +164,9 @@ export class Shipment extends Entity {
 
   @Shipment.property({arrayType: 'Reminder'})
   public reminders?: Reminder[];
+
+  @Shipment.property({ arrayType: 'ShipmentLog' })
+  public logs?: ShipmentLog[];
 
   public calculateSubTotal = (options?: CalculateOptions) => {
     const { strictEmbed = true } = options ? options : {};

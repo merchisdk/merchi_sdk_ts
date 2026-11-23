@@ -1,0 +1,104 @@
+{
+  "bundle": {
+    "currency": "AUD",
+    "fields": [
+      {
+        "fieldType": 1,
+        "id": 6,
+        "independent": true,
+        "isSelectable": false,
+        "options": [],
+        "originalId": null,
+        "position": 1,
+        "selectedBy": [],
+        "variationCost": 11.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      }
+    ],
+    "groupFields": [
+      {
+        "fieldType": 2,
+        "id": 4,
+        "independent": false,
+        "isSelectable": true,
+        "options": [
+          {
+            "default": true,
+            "id": 3,
+            "originalId": null,
+            "position": 1,
+            "selectedBy": [],
+            "variationCost": 0.0,
+            "variationCostDiscountGroup": null,
+            "variationUnitCost": 0.0,
+            "variationUnitCostDiscountGroup": null
+          },
+          {
+            "default": false,
+            "id": 4,
+            "originalId": null,
+            "position": 2,
+            "selectedBy": [],
+            "variationCost": 0.0,
+            "variationCostDiscountGroup": null,
+            "variationUnitCost": 13.0,
+            "variationUnitCostDiscountGroup": null
+          }
+        ],
+        "originalId": null,
+        "position": 1,
+        "selectedBy": [],
+        "variationCost": 0.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      },
+      {
+        "fieldType": 3,
+        "id": 5,
+        "independent": false,
+        "isSelectable": false,
+        "options": [],
+        "originalId": null,
+        "position": 2,
+        "selectedBy": [],
+        "variationCost": 0.0,
+        "variationCostDiscountGroup": null,
+        "variationUnitCost": 0.0,
+        "variationUnitCostDiscountGroup": null
+      }
+    ],
+    "hasGroups": true,
+    "product": {
+      "discountGroup": {
+        "discounts": [
+          {
+            "amount": 10.0,
+            "lowerLimit": 100.0
+          }
+        ],
+        "groupRestricted": false
+      },
+      "minimumPrice": 0.0,
+      "unitPrice": 20.0
+    },
+    "taxPercent": 10.0
+  },
+  "expected": {
+    "cost": 1800.0,
+    "costPerUnit": 18.0,
+    "groupCosts": [],
+    "taxAmount": 180.0,
+    "totalCost": 1980.0,
+    "visibleFieldIds": [
+      6
+    ]
+  },
+  "name": "quantity_break_discount",
+  "selections": {
+    "fieldValues": {},
+    "quantity": 100
+  }
+}

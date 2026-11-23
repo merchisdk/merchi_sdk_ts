@@ -1,5 +1,4 @@
 import { Company } from './company.js';
-import { Component } from './component.js';
 import { Domain } from './domain.js';
 import { Draft } from './draft.js';
 import { DraftComment } from './draft_comment.js';
@@ -7,9 +6,11 @@ import { Entity } from '../entity.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { JobComment } from './job_comment.js';
+import { JobNote } from './job_note.js';
 import { Notification } from './notification.js';
 import { Product } from './product.js';
 import { ProductionComment } from './production_comment.js';
+import { Quote } from './quote.js';
 import { Theme } from './theme.js';
 import { User } from './user.js';
 import { Variation } from './variation.js';
@@ -71,12 +72,6 @@ export class MerchiFile extends Entity {
   @MerchiFile.property()
   public downloadUrl?: string;
 
-  @MerchiFile.property({arrayType: 'Component'})
-  public components?: Component[];
-
-  @MerchiFile.property({arrayType: 'Component'})
-  public componentFeatureImages?: Component[];
-
   @MerchiFile.property({arrayType: 'DraftComment'})
   public draftComments?: DraftComment[];
 
@@ -103,6 +98,9 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: 'JobComment'})
   public jobComments?: JobComment[];
+
+  @MerchiFile.property({arrayType: 'JobNote'})
+  public jobNotes?: JobNote[];
 
   @MerchiFile.property({arrayType: 'Job'})
   public jobs?: Job[];
@@ -154,6 +152,9 @@ export class MerchiFile extends Entity {
 
   @MerchiFile.property({arrayType: 'ProductionComment'})
   public productionComments?: ProductionComment[];
+
+  @MerchiFile.property({arrayType: 'Quote'})
+  public quotes?: Quote[];
 
   public isImage = () => {
     if (this.mimetype === undefined) {

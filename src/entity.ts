@@ -48,21 +48,11 @@ interface FromJsonOptions {
 interface CreateOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
-  /**
-   * Set to true to send `FormData` (via `toFormData()`).
-   * Defaults to JSON (via `toJson()`).
-   */
-  useFormData?: boolean;
 }
 
 interface SaveOptions {
   withRights?: boolean;
   embed?: EmbedDescriptor;
-  /**
-   * Set to true to send `FormData` (via `toFormData()`).
-   * Defaults to JSON (via `toJson()`).
-   */
-  useFormData?: boolean;
 }
 
 interface DeleteOptions {
@@ -94,7 +84,7 @@ interface ListOptions {
   companyCustomerId?: number;
   companyId?: number;
   companySupplierId?: number;
-  componentId?: number;
+  conversationId?: number;
   dateFrom?: Date;
   dateTo?: Date;
   domainRoles?: Role[];
@@ -103,7 +93,6 @@ interface ListOptions {
   embed?: EmbedDescriptor;
   entityTypes?: number[];
   exclude?: number[];
-  excludeComponents?: string[];
   excludeDomains?: number[];
   excludeJobs?: number[];
   googleMerchantCenterExported?: boolean;
@@ -114,6 +103,7 @@ interface ListOptions {
   inDomain?: number;
   inDomainName?: string;
   inDomainRoles?: number[];
+  isJobManager?: boolean;
   isMaster?: boolean;
   isOrder?: boolean;
   isPrivate?: boolean;
@@ -126,29 +116,37 @@ interface ListOptions {
   masterProduct?: number;
   memberOnly?: boolean;
   merchiOnly?: boolean;
+  notificationSender?: number;
   notificationJob?: number;
   notificationRecipient?: number;
   notificationType?: NotificationType;
   offset?: number;
   orClientId?: number;
-  orClientCompanyId?: number;
+  orClientCompanyId?: number | number[];
   order?: string;
   originalOf?: number;
   platformCategoryId?: number;
   priceRange?: number[];
   productTypes?: ProductType[];
   publicOnly?: boolean;
+  isDraft?: boolean;
+  isTest?: boolean;
+  /** true = invoice fully paid, false = invoice issued but not fully paid */
+  invoicePaid?: boolean;
+  sourceChannel?: string;
   q?: string;
   receiverId?: number;
+  userAsReceiver?: number;
   relatedAssignment?: number;
-  relatedComponent?: number;
   relatedDraft?: number;
   relatedJob?: number;
   relatedJobs?: number[];
+  relatedShipment?: number;
   relatedProduct?: number;
   relatedUser?: number;
   savedByUser?: number;
   section?: NotificationSection;
+  senderCompanyId?: number;
   senderRole?: Role;
   serialiseMethod?: SerialiseMethod;
   shopifyOnly?: boolean;
@@ -157,6 +155,7 @@ interface ListOptions {
   supplierResellOnly?: boolean;
   tab?: string;
   tags?: number[];
+  trackingNumber?: string;
   tagsInternal?: number[];
   excludeTags?: number[];
   excludeTagsInternal?: number[];
@@ -164,11 +163,22 @@ interface ListOptions {
   teamOnly?: boolean;
   turnaroundTimeDays?: number;
   withRights?: boolean;
+  // Opt out of the unbounded ``SELECT count(*)`` the API runs to
+  // populate ``available``. When ``skipCount`` is true the response's
+  // ``available`` is ``null``. Use this whenever the caller only
+  // renders the visible page of rows (search modals, autocomplete,
+  // navbar dropdowns, infinite scroll, ...) and never reads
+  // ``metadata.available``. Paginated tables that show "Showing X
+  // of Y" or compute a page count must NOT set this.
+  skipCount?: boolean;
 }
 
 export interface ListMetadata {
   canCreate?: boolean;
-  available: number;
+  // ``null`` when the caller passed ``skipCount: true``: the API
+  // intentionally skipped the ``COUNT(*)`` query. JSON consumers
+  // can detect the absence rather than mistaking it for zero.
+  available: number | null;
   count: number;
   limit: number;
   offset: number;
@@ -422,6 +432,16 @@ export class Entity {
       if (options.limit !== undefined) {
         fetchOptions.query.push(['limit', options.limit.toString()]);
       }
+      if (options.skipCount !== undefined) {
+        // Snake-case is the canonical form on the server; the API
+        // also accepts ``skipCount`` via its camelCase alias, but
+        // matching the wire shape of the other ``*_only`` /
+        // ``*_filter`` flags keeps logs and traffic captures
+        // consistent.
+        fetchOptions.query.push(
+          ['skip_count', options.skipCount.toString()]
+        );
+      }
       if (options.q !== undefined) {
         fetchOptions.query.push(['q', options.q]);
       }
@@ -436,6 +456,9 @@ export class Entity {
       }
       if (options.tab !== undefined) {
         fetchOptions.query.push(['tab', options.tab]);
+      }
+      if (options.trackingNumber !== undefined) {
+        fetchOptions.query.push(['tracking_number', options.trackingNumber]);
       }
       if (options.as !== undefined) {
         fetchOptions.query.push(['as', options.as]);
@@ -465,12 +488,28 @@ export class Entity {
       if (options.asRole !== undefined) {
         fetchOptions.query.push(['as_role', options.asRole.toString()]);
       }
+      if (options.isJobManager !== undefined) {
+        fetchOptions.query.push(
+          ['is_job_manager', options.isJobManager.toString()]);
+      }
       if (options.groupBuyOnly !== undefined) {
         fetchOptions.query.push(
           ['group_buy_only', options.groupBuyOnly.toString()]);
       }
       if (options.publicOnly !== undefined) {
         fetchOptions.query.push(['public_only', options.publicOnly.toString()]);
+      }
+      if (options.isDraft !== undefined) {
+        fetchOptions.query.push(['is_draft', options.isDraft.toString()]);
+      }
+      if (options.isTest !== undefined) {
+        fetchOptions.query.push(['is_test', options.isTest.toString()]);
+      }
+      if (options.invoicePaid !== undefined) {
+        fetchOptions.query.push(['invoice_paid', options.invoicePaid.toString()]);
+      }
+      if (options.sourceChannel !== undefined) {
+        fetchOptions.query.push(['source_channel', options.sourceChannel.toString()]);
       }
       if (options.managedOnly !== undefined) {
         fetchOptions.query.push(['managed_only',
@@ -524,7 +563,7 @@ export class Entity {
           options.entityTypes.join(',')]);
       }
       if (options.priceRange !== undefined) {
-        fetchOptions.query.push(['product_range',
+        fetchOptions.query.push(['price_range',
           options.priceRange.join(',')]);
       }
       if (options.productTypes !== undefined) {
@@ -550,10 +589,6 @@ export class Entity {
         fetchOptions.query.push(['original_of',
           options.originalOf.toString()]);
       }
-      if (options.relatedComponent !== undefined) {
-        fetchOptions.query.push(['related_component',
-          options.relatedComponent.toString()]);
-      }
       if (options.relatedAssignment !== undefined) {
         fetchOptions.query.push(['related_assignment',
           options.relatedAssignment.toString()]);
@@ -567,6 +602,10 @@ export class Entity {
       }
       if (options.relatedJobs !== undefined) {
         fetchOptions.query.push(['related_jobs', options.relatedJobs.toString()]);
+      }
+      if (options.relatedShipment !== undefined) {
+        fetchOptions.query.push(['related_shipment',
+          options.relatedShipment.toString()]);
       }
       if (options.relatedProduct !== undefined) {
         fetchOptions.query.push(['related_product',
@@ -583,6 +622,10 @@ export class Entity {
       if (options.notificationRecipient !== undefined) {
         fetchOptions.query.push(['notification_recipient',
           options.notificationRecipient.toString()]);
+      }
+      if (options.notificationSender !== undefined) {
+        fetchOptions.query.push(['notification_sender',
+          options.notificationSender.toString()]);
       }
       if (options.notificationJob !== undefined) {
         fetchOptions.query.push(['notification_job',
@@ -609,8 +652,17 @@ export class Entity {
         fetchOptions.query.push(['saved_by_user',
           options.savedByUser.toString()]);
       }
+      if (options.senderCompanyId !== undefined) {
+        fetchOptions.query.push(['sender_company_id',
+          options.senderCompanyId.toString()]);
+      }
       if (options.receiverId !== undefined) {
         fetchOptions.query.push(['receiver_id', options.receiverId.toString()]);
+      }
+      if (options.userAsReceiver !== undefined) {
+        fetchOptions.query.push(
+          ['user_as_receiver', options.userAsReceiver.toString()]
+        );
       }
       if (options.companyCustomerId !== undefined) {
         fetchOptions.query.push(['company_customer_id', options.companyCustomerId.toString()]);
@@ -621,9 +673,9 @@ export class Entity {
       if (options.companySupplierId !== undefined) {
         fetchOptions.query.push(['company_supplier_id', options.companySupplierId.toString()]);
       }
-      if (options.componentId !== undefined) {
-        fetchOptions.query.push(['component_id',
-          options.componentId.toString()]);
+      if (options.conversationId !== undefined) {
+        fetchOptions.query.push(['conversation_id',
+          options.conversationId.toString()]);
       }
       if (options.groupBuyForJobId !== undefined) {
         fetchOptions.query.push(['group_buy_for_job_id',
@@ -665,10 +717,6 @@ export class Entity {
       if (options.exclude !== undefined) {
         fetchOptions.query.push(['exclude', options.exclude.join(',')]);
       }
-      if (options.excludeComponents !== undefined) {
-        fetchOptions.query.push(
-          ['exclude_components', options.excludeComponents.join(',')]);
-      }
       if (options.excludeDomains !== undefined) {
         fetchOptions.query.push(
           ['exclude_domains', options.excludeDomains.join(',')]);
@@ -684,8 +732,10 @@ export class Entity {
         fetchOptions.query.push(['or_client_id', options.orClientId.toString()]);
       }
       if (options.orClientCompanyId !== undefined) {
-        fetchOptions.query.push(
-          ['or_client_company_id', options.orClientCompanyId.toString()]);
+        const companyIds = Array.isArray(options.orClientCompanyId)
+          ? options.orClientCompanyId.join(',')
+          : options.orClientCompanyId.toString();
+        fetchOptions.query.push(['or_client_company_id', companyIds]);
       }
     }
     if (!(options && options.withRights)) {
@@ -717,9 +767,9 @@ export class Entity {
     const resourceName: string = constructor.resourceName;
     const singularName: string = constructor.singularName;
     const resource = `/${resourceName}/${String(primaryKey)}/`;
-    const useFormData = options?.useFormData === true;
-    const body = useFormData ? this.toFormData() : this.toJson();
-    const fetchOptions: RequestOptions = {method: 'PATCH', body: body};
+    const data = this.toFormData();
+    const fetchOptions: RequestOptions = {method: 'PATCH',
+      body: data};
     fetchOptions.query = [];
     if (options && options.embed) {
       fetchOptions.query.push(['embed', JSON.stringify(options.embed)]);
@@ -738,10 +788,10 @@ export class Entity {
     {resourceName = (this.constructor as typeof Entity).resourceName}
   ) => (options?: CreateOptions) => {
     const resource = `/${resourceName}/`;
+    const data = this.toFormData();
     const singularName = (this.constructor as typeof Entity).singularName;
-    const useFormData = options?.useFormData === true;
-    const body = useFormData ? this.toFormData() : this.toJson();
-    const fetchOptions: RequestOptions = {method: 'POST', body: body};
+    const fetchOptions: RequestOptions = {method: 'POST',
+      body: data};
 
     fetchOptions.query = [];
     if (options && options.embed) {
@@ -812,10 +862,11 @@ export class Entity {
           });
           propertyInfo.currentValue = newValue;
         } else if (this.isSingleEntityProperty(propertyInfo)) {
-          // if property already have a entity as relationship, try to merge
-          // with json first, this behavior may need to be configurable in the
-          // future.
-          if (propertyInfo.currentValue) {
+          // null clears the link. An empty entity would omit the clear
+          // sentinel from toFormData, so the saved photo would stick.
+          if (value === null) {
+            propertyInfo.currentValue = null;
+          } else if (propertyInfo.currentValue) {
             propertyInfo.currentValue.fromJson(value, options);
           } else {
             const nested = new (propertyInfo.type as any)(this.merchi);
@@ -961,6 +1012,14 @@ export class Entity {
         (info.property === primaryKey && value)) {
         if (info.type === Date && !!value) {
           value = value.getTime() / 1000;
+        } else if (
+          // JSON/JSONB columns (e.g. Domain.jobAgentPolicy) are plain objects.
+          // FormData stringifies objects as "[object Object]" unless we encode.
+          value !== null &&
+          typeof value === 'object' &&
+          !(typeof Blob !== 'undefined' && value instanceof Blob)
+        ) {
+          value = JSON.stringify(value);
         }
         appendData(info.property, value);
       }

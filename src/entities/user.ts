@@ -14,6 +14,7 @@ import { MerchiFile } from './file.js';
 import { Invoice } from './invoice.js';
 import { Job } from './job.js';
 import { JobComment } from './job_comment.js';
+import { JobOperationLog } from './job_operation_log.js';
 import { Notification } from './notification.js';
 import { Payment } from './payment.js';
 import { PhoneNumber } from './phone_number.js';
@@ -22,6 +23,7 @@ import { Reminder } from './reminder.js';
 import { ProductionComment } from './production_comment.js';
 import { Session } from './session.js';
 import { Shipment } from './shipment.js';
+import { ShipmentLog } from './shipment_log.js';
 import { SystemRole } from './system_role.js';
 import { Theme } from './theme.js';
 import { UserCompany } from './user_company.js';
@@ -33,6 +35,7 @@ import { Role,
   ROLES_RANK
 } from '../constants/roles.js';
 import { InternalTag } from './internal_tag.js';
+import { DomainTag } from './domain_tag.js';
 import { UserType } from '../constants/user_types.js';
 import { SystemRoles as SR } from '../constants/system_roles.js';
 
@@ -58,8 +61,14 @@ export class User extends Entity {
   @User.property()
   public registeredAsGuest?: boolean;
 
+  @User.property()
+  public isMerchiAgent?: boolean;
+
   @User.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
+
+  @User.property({arrayType: 'DomainTag'})
+  public tags?: DomainTag[];
 
   @User.property({arrayType: 'Domain'})
   public registeredUnderDomains?: Domain[];
@@ -162,6 +171,12 @@ export class User extends Entity {
 
   @User.property({ arrayType: 'JobComment' })
   public jobComments?: JobComment[];
+
+  @User.property({ arrayType: 'JobOperationLog' })
+  public jobOperationLogs?: JobOperationLog[];
+
+  @User.property({ arrayType: 'ShipmentLog' })
+  public shipmentLogs?: ShipmentLog[];
 
   @User.property({ arrayType: 'EmailAddress' })
   public _emailAddresses?: EmailAddress[];

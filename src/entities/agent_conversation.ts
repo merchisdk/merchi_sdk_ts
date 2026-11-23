@@ -23,6 +23,12 @@ export class AgentConversation extends Entity {
   public creationDate?: Date | null;
 
   @AgentConversation.property()
+  public entityType?: string | null;
+
+  @AgentConversation.property()
+  public entityId?: number | null;
+
+  @AgentConversation.property()
   public serviceProvider?: number;
 
   @AgentConversation.property()

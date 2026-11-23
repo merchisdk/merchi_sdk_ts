@@ -1,5 +1,21 @@
 import { Address } from './entities/address.js';
 import { AgentConversation } from './entities/agent_conversation.js';
+import { AgentTokenUsage } from './entities/agent_token_usage.js';
+export type {
+  AgentTokenAnalyticsSummary,
+  AgentTokenAnalyticsTimeseries,
+  AgentTokenUsageRecordPayload,
+  AgentTokenUsageRecordResponse,
+  CompanyAnalyticsResponse,
+  DomainAnalyticsResponse,
+  ProfileAnalyticsSummaryMetric,
+} from './entities/agent_token_analytics.js';
+import { AgentSkill } from './entities/agent_skill.js';
+import { AgentSkillVersion } from './entities/agent_skill_version.js';
+import { AgentSkillApproval } from './entities/agent_skill_approval.js';
+import { DomainChatSettings } from './entities/domain_chat_settings.js';
+import { SupportConversation } from './entities/support_conversation.js';
+import { SupportMessage } from './entities/support_message.js';
 import { Assignment } from './entities/assignment.js';
 import { AutomaticPaymentRelationship } from './entities/automatic_payment_relationship.js';
 import { Bank } from './entities/bank.js';
@@ -10,9 +26,8 @@ import { CartShipmentQuote } from './entities/cart_shipment_quote.js';
 import { Category } from './entities/category.js';
 import { Company } from './entities/company.js';
 import { CompanyInvitation } from './entities/company_invitation.js';
-import { Component } from './entities/component.js';
-import { ComponentTag } from './entities/component_tag.js';
-import { ComponentVersion } from './entities/component_version.js';
+import { ProductForm } from './entities/product_form.js';
+import { ProductFormVersion } from './entities/product_form_version.js';
 import { CountryTax } from './entities/country_tax.js';
 import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
@@ -34,17 +49,21 @@ import { Invoice } from './entities/invoice.js';
 import { Item } from './entities/item.js';
 import { Job } from './entities/job.js';
 import { JobComment } from './entities/job_comment.js';
+import { JobNote } from './entities/job_note.js';
+import { JobOperationLog } from './entities/job_operation_log.js';
 import { MatchingInventory } from './entities/matching_inventory.js';
-import { Menu } from './entities/menu.js';
-import { MenuItem } from './entities/menu_item.js';
 import { Merchi } from './merchi.js';
 import { MerchiFile } from './entities/file.js';
 import { Notification } from './entities/notification.js';
-import { Page } from './entities/page.js';
 import { Payment } from './entities/payment.js';
 import { PaymentDevice } from './entities/payment_device.js';
 import { PhoneNumber } from './entities/phone_number.js';
 import { Product } from './entities/product.js';
+import { ProductReview } from './entities/product_review.js';
+export type {
+  ProductReviewCreateInput,
+  ProductReviewPatchInput,
+} from './entities/product_review.js';
 import { ProductionComment } from './entities/production_comment.js';
 import { Quote } from './entities/quote.js';
 import { QuoteItem } from './entities/quote_item.js';
@@ -52,6 +71,7 @@ import { Reminder } from './entities/reminder.js';
 import { RequestOptions, apiFetch, apiFetchWithProgress } from './request.js'; // eslint-disable-next-line no-unused-vars
 import { Session } from './entities/session.js';
 import { Shipment } from './entities/shipment.js';
+import { ShipmentLog } from './entities/shipment_log.js';
 import { ShipmentItem } from './entities/shipment_item.js';
 import { ShipmentItemFulfillment } from './entities/shipment_item_fulfillment.js';
 import { ShipmentMethod } from './entities/shipment_method.js';
@@ -74,15 +94,24 @@ import { getCookie } from './cookie.js';
 import * as constants from './constants/index.js';
 import * as request from './request.js';
 import * as util from './util/index.js';
+import * as pricing from './pricing/index.js';
 import { toastNotifications } from './toasts.js';
 
 export {
   constants,
   request,
   util,
+  pricing,
   toastNotifications,
   Address,
   AgentConversation,
+  AgentTokenUsage,
+  AgentSkill,
+  AgentSkillVersion,
+  AgentSkillApproval,
+  DomainChatSettings,
+  SupportConversation,
+  SupportMessage,
   Assignment,
   AutomaticPaymentRelationship,
   Bank,
@@ -93,9 +122,8 @@ export {
   Category,
   Company,
   CompanyInvitation,
-  Component,
-  ComponentTag,
-  ComponentVersion,
+  ProductForm,
+  ProductFormVersion,
   CountryTax,
   Discount,
   DiscountGroup,
@@ -118,17 +146,17 @@ export {
   Item,
   Job,
   JobComment,
+  JobNote,
+  JobOperationLog,
   MatchingInventory,
-  Menu,
-  MenuItem,
   Merchi,
   MerchiFile,
   Notification,
-  Page,
   Payment,
   PaymentDevice,
   PhoneNumber,
   Product,
+  ProductReview,
   ProductionComment,
   Quote,
   QuoteItem,
@@ -138,6 +166,7 @@ export {
   apiFetchWithProgress,
   Session,
   Shipment,
+  ShipmentLog,
   ShipmentItem,
   ShipmentItemFulfillment,
   ShipmentMethod,

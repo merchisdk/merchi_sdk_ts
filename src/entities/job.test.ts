@@ -10,6 +10,35 @@ test('can make Job', () => {
   expect(job).toBeTruthy();
 });
 
+test('preserves isTest', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  job.fromJson({ id: 1, isTest: true });
+  expect(job.toJson()).toMatchObject({ isTest: true });
+});
+
+test('preserves source attribution', () => {
+  const merchi = new Merchi();
+  const job = new merchi.Job();
+  job.fromJson({
+    id: 1,
+    sourceChannel: 'google_ads',
+    utmSource: 'google',
+    utmMedium: 'cpc',
+    utmCampaign: 'wristbands',
+    sourceClickId: 'EAIa',
+    checkoutType: 'buy_now',
+  });
+  expect(job.toJson()).toMatchObject({
+    sourceChannel: 'google_ads',
+    utmSource: 'google',
+    utmMedium: 'cpc',
+    utmCampaign: 'wristbands',
+    sourceClickId: 'EAIa',
+    checkoutType: 'buy_now',
+  });
+});
+
 test('Job deadline serialised to milliseconds in form data', () => {
   const merchi = new Merchi();
   const job = new merchi.Job();
@@ -42,7 +71,7 @@ test('add two files to job', () => {
   f2.fromFormFile(new File([''], '2'));
   job.clientFiles = [f1, f2];
   const fetch = mockFetch(true, {'job': {}}, 200);
-  return job.save({ useFormData: true }).then(() => {
+  return job.save().then(() => {
     const data: any = Array.from(fetch.mock.calls[0][1]['body'].entries());
     expect(data[1][1]).toEqual('0');
     expect(data[2][1]).toEqual('1');

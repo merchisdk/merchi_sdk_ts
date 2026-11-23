@@ -19,6 +19,11 @@ import { User } from './user.js';
 import { UserCompany } from './user_company.js';
 import { SubscriptionPlan } from './subscription_plan.js';
 import { PaymentDevice } from './payment_device.js';
+import type {
+  AgentTokenAnalyticsTimeseries,
+  CompanyAnalyticsResponse,
+} from './agent_token_analytics.js';
+import type { RequestOptions } from '../request.js';
 
 export class Company extends Entity {
   protected static resourceName = 'companies';
@@ -27,6 +32,9 @@ export class Company extends Entity {
 
   @Company.property({type: Date})
   public archived?: Date | null;
+
+  @Company.property({type: Date})
+  public created?: Date | null;
 
   @Company.property()
   public id?: number;
@@ -87,6 +95,63 @@ export class Company extends Entity {
 
   @Company.property({type: String})
   public unltdAiApiSecretKey?: string;
+
+  @Company.property({type: String})
+  public australiaPostApiKey?: string;
+
+  @Company.property({type: String})
+  public australiaPostPassword?: string;
+
+  @Company.property({type: String})
+  public startrackApiKey?: string;
+
+  @Company.property({type: String})
+  public startrackPassword?: string;
+
+  @Company.property({type: String})
+  public dhlApiKey?: string;
+
+  @Company.property({type: String})
+  public dhlApiSecret?: string;
+
+  @Company.property()
+  public dhlTrackingSandbox?: boolean;
+
+  @Company.property()
+  public dhlTrackingExpress?: boolean;
+
+  @Company.property({type: String})
+  public fedexApiKey?: string;
+
+  @Company.property({type: String})
+  public fedexApiSecret?: string;
+
+  @Company.property({type: String})
+  public upsClientId?: string;
+
+  @Company.property({type: String})
+  public upsClientSecret?: string;
+
+  @Company.property({type: String})
+  public uspsApiKey?: string;
+
+  @Company.property({type: String})
+  public tntApiKey?: string;
+
+  @Company.property({type: String})
+  public tntApiSecret?: string;
+
+  @Company.property({type: String})
+  public aramexAccountNumber?: string;
+
+  @Company.property({type: String})
+  public aramexApiKey?: string;
+
+  @Company.property({type: String})
+  public aramexApiSecret?: string;
+
+  @Company.property({type: String})
+  public nzPostApiKey?: string;
 
   @Company.property({type: String})
   public internalUseNotes?: string;
@@ -276,4 +341,60 @@ export class Company extends Entity {
 
   @Company.property({arrayType: 'Address'})
   public addresses?: Address[];
+
+  @Company.property({type: 'Company'})
+  public parentCompany?: Company | null;
+
+  @Company.property({arrayType: 'Company'})
+  public childCompanies?: Company[];
+
+  private getCompanyId = () => {
+    if (this.id === undefined || this.id === null) {
+      throw new Error('id is undefined, did you forget to set it?');
+    }
+    return this.id;
+  };
+
+  private analyticsRequest = (
+    resource: string,
+    method: 'GET' | 'POST' = 'GET',
+    payload?: Record<string, any>,
+    queryParams?: Record<string, string | undefined>
+  ) => {
+    const query: Array<[string, string]> = [];
+    if (queryParams) {
+      Object.entries(queryParams).forEach(([key, value]) => {
+        if (value !== undefined && value !== '') {
+          query.push([key, value]);
+        }
+      });
+    }
+    const fetchOptions: RequestOptions = {
+      method: method,
+      query: query,
+    };
+    if (payload !== undefined) {
+      fetchOptions.body = JSON.stringify(payload);
+      fetchOptions.headers = {'Content-Type': 'application/json'};
+    }
+    return this.merchi.authenticatedFetch(resource, fetchOptions);
+  };
+
+  public getAnalytics = (): Promise<CompanyAnalyticsResponse> => {
+    return this.analyticsRequest(
+      `/companies/${this.getCompanyId()}/analytics/`,
+      'GET'
+    ) as Promise<CompanyAnalyticsResponse>;
+  };
+
+  public getAgentTokenAnalytics = (
+    queryParams?: Record<string, string | undefined>
+  ): Promise<AgentTokenAnalyticsTimeseries> => {
+    return this.analyticsRequest(
+      `/companies/${this.getCompanyId()}/agent_token_analytics/`,
+      'GET',
+      undefined,
+      queryParams
+    ) as Promise<AgentTokenAnalyticsTimeseries>;
+  };
 }

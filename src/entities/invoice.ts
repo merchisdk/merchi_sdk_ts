@@ -28,6 +28,9 @@ export class Invoice extends Entity {
   @Invoice.property()
   public id?: number;
 
+  @Invoice.property()
+  public stripePaymentEngine?: string;
+
   @Invoice.property({type: Date})
   public creationDate?: Date | null;
 
@@ -74,7 +77,13 @@ export class Invoice extends Entity {
   public sendEmail?: boolean | null;
 
   @Invoice.property({type: Boolean})
+  public sendWhatsapp?: boolean | null;
+
+  @Invoice.property({type: Boolean})
   public unpaid?: boolean | null;
+
+  @Invoice.property({type: Boolean})
+  public isTest?: boolean | null;
 
   @Invoice.property()
   public currency?: string;

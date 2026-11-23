@@ -2,6 +2,7 @@ import { Assignment } from './assignment.js';
 import { QuoteItem } from './quote_item.js';
 import { Shipment } from './shipment.js';
 import { Invoice } from './invoice.js';
+import { MerchiFile } from './file.js';
 import { Entity } from '../entity.js';
 import { kahanSum } from '../util/float.js';
 
@@ -31,6 +32,9 @@ export class Quote extends Entity {
 
   @Quote.property({arrayType: 'QuoteItem'})
   public quoteItems?: QuoteItem[];
+
+  @Quote.property({arrayType: 'MerchiFile'})
+  public files?: MerchiFile[];
 
   @Quote.property({arrayType: 'Assignment'})
   public assignments?: Assignment[];

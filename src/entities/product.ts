@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { CartItem } from './cart_item.js';
 import { Category } from './category.js';
 import { Company } from './company.js';
-import { Component } from './component.js';
+import { ProductForm } from './product_form.js';
 import { CountryTax } from './country_tax.js';
 import { DiscountGroup } from './discount_group.js';
 import { Domain } from './domain.js';
@@ -18,7 +18,6 @@ import { InventoryGroup } from './inventory_group.js';
 import { SupplyDomain } from './supply_domain.js';
 import { User } from './user.js';
 import { VariationField } from './variation_field.js';
-import { SeoDomainPage } from './seo_domain_page.js';
 import { ShipmentMethod } from './shipment_method.js';
 import {
   AutoAssignProductionOnAction
@@ -36,16 +35,25 @@ export class Product extends Entity {
   @Product.property()
   public id?: number;
 
-  @Component.property({type: Date})
+  @Product.property()
+  public position?: number;
+
+  @Product.property({type: Date})
   public created?: Date;
 
-  @Component.property({type: Date})
+  @Product.property({type: Date})
   public updated?: Date;
 
-  @Component.property({type: 'User'})
+  @Product.property({type: Date})
+  public storefrontLastDeployed?: Date | null;
+
+  @Product.property({type: 'User'})
   public createdBy?: User | null;
 
-  @Component.property({type: 'User'})
+  @Product.property({type: 'User'})
+  public designer?: User | null;
+
+  @Product.property({type: 'User'})
   public updatedBy?: User | null;
 
   @Product.property()
@@ -59,6 +67,12 @@ export class Product extends Entity {
 
   @Product.property()
   public minimumPrice?: number;
+
+  @Product.property()
+  public setupPrice?: number;
+
+  @Product.property()
+  public setupPerGroup?: boolean;
 
   @Product.property()
   public minimumPerGroup?: boolean;
@@ -121,9 +135,6 @@ export class Product extends Entity {
   public aiContext?: string;
 
   @Product.property({type: String})
-  public aiContextDrafting?: string;
-
-  @Product.property({type: String})
   public googleMerchantCenterId?: string;
 
   @Product.property({type: String})
@@ -175,6 +186,9 @@ export class Product extends Entity {
   public showPublic?: boolean;
 
   @Product.property()
+  public isDraft?: boolean;
+
+  @Product.property()
   public showGroupBuyStatus?: boolean;
 
   @Product.property({type: Number})
@@ -220,6 +234,9 @@ export class Product extends Entity {
   public allowClientDraftContribution?: boolean;
 
   @Product.property()
+  public allowAdditionalDesignObjects?: boolean;
+
+  @Product.property()
   public chainedInventoryHandlingUnitPrice?: number;
 
   @Product.property()
@@ -261,8 +278,8 @@ export class Product extends Entity {
   @Product.property({arrayType: 'Product'})
   public chainedInventorySellerProducts?: Product[];
 
-  @Product.property({type: Component})
-  public component?: Component | null;
+  @Product.property({type: ProductForm})
+  public productForm?: ProductForm | null;
 
   @Product.property({arrayType: 'MerchiFile'})
   public images?: MerchiFile[];
@@ -284,9 +301,6 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'InternalTag'})
   public internalTags?: InternalTag[];
-
-  @Product.property({arrayType: 'SeoDomainPage'})
-  public seoDomainPages?: SeoDomainPage[];
 
   @Product.property({type: MerchiFile})
   public featureImage?: MerchiFile | null;
@@ -311,6 +325,9 @@ export class Product extends Entity {
 
   @Product.property()
   public inventoriesOpen?: boolean;
+
+  @Product.property()
+  public clientSideCalculation?: boolean;
 
   @Product.property()
   public supplyChainDisabled?: boolean;

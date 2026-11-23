@@ -1,37 +1,76 @@
 // eslint-disable-next-line no-unused-vars
 import { ErrorType, getErrorFromCode } from './constants/errors.js';
 
-export interface RequestOptions extends Omit<RequestInit, 'body' | 'headers'> {
-  /**
-   * Extra query params appended to the request URL.
-   */
+export interface RequestOptions extends RequestInit {
   query?: string[][];
+  /** JSON-serializable object or array for an endpoint that accepts JSON. */
+  json?: object;
+}
+
+export interface ApiErrorDetails {
   /**
-   * Request headers. When sending JSON bodies, `Content-Type: application/json`
-   * will be applied if not already present.
+   * The json_name of the missing / disallowed related entity type
+   * (e.g. 'file', 'product', 'domain').
    */
-  headers?: HeadersInit;
+  relation?: string;
   /**
-   * Body must be either:
-   * - `FormData` (for multipart/form-data requests), or
-   * - a JSON-serialisable object/array (will be JSON-stringified automatically)
+   * The json_name of the parent entity the relation was being
+   * attached to (e.g. 'variation', 'job').
    */
-  body?: FormData | Record<string, unknown> | unknown[];
+  parentType?: string;
+  /**
+   * The id the client supplied for the missing / disallowed entity.
+   * May be a numeric id as a number, or a string id depending on
+   * the model.
+   */
+  id?: number | string;
+  /**
+   * The form-data index the client sent the entity under (i.e. the
+   * ``N`` in ``parent-N-id``).
+   */
+  index?: number;
+  /**
+   * The fields the client sent for the missing entity, with noisy
+   * keys (signed URLs, their expiries) stripped and long string
+   * values truncated. Useful when debugging uploads where the
+   * client knows the uploadId but the server has no matching row.
+   */
+  provided?: { [key: string]: any };
+  // Backend may add new keys over time; keep the type permissive.
+  [key: string]: any;
+}
+
+function resolveApiErrorMessage(err: any): string {
+  if (err && typeof err === 'object' && typeof err.message === 'string' && err.message) {
+    return err.message;
+  }
+  if (typeof err === 'string' && err) {
+    return err;
+  }
+  return 'No error message';
 }
 
 export class ApiError extends Error {
   public statusCode?: number;
   public errorCode?: ErrorType;
   public errorMessage: string;
+  /**
+   * Structured context the API may include alongside the error
+   * message (e.g. the missing entity id and payload echo). Present
+   * only when the backend chooses to populate it - most error
+   * responses still carry just ``statusCode``, ``errorCode`` and
+   * ``message``.
+   */
+  public details?: ApiErrorDetails;
   public original: any;
   public constructor(err: any) {
-    const message = JSON.stringify(err);
+    const message = resolveApiErrorMessage(err);
     /* istanbul ignore next */
     super(message);
     this.statusCode = err.statusCode;
     this.errorCode = getErrorFromCode(err.errorCode);
-    this.errorMessage = err.message ?
-      err.message : 'No error message';
+    this.errorMessage = message;
+    this.details = err.details;
     this.name = 'ApiError';
     this.original = err;
   }
@@ -71,54 +110,6 @@ function ensureVersionInUri(baseUrl: string): UriComponents {
   };
 }
 
-function isFormData(value: any): value is FormData {
-  // FormData exists in browsers/jsdom; guard for environments without it.
-  return typeof FormData !== 'undefined' && value instanceof FormData;
-}
-
-function toHeaders(headers: HeadersInit | undefined): Headers {
-  return new Headers(headers || undefined);
-}
-
-function stripContentType(headers: Headers) {
-  // Prevent incorrect boundary handling when using FormData.
-  headers.delete('content-type');
-}
-
-function normaliseBodyAndHeaders(options?: RequestOptions): RequestInit | undefined {
-  if (!options) return undefined;
-
-  const headers = toHeaders(options.headers);
-  const body = (options as any).body;
-
-  // Body omitted.
-  if (body === undefined || body === null) {
-    return { ...options, headers } as RequestInit;
-  }
-
-  // Multipart/form-data.
-  if (isFormData(body)) {
-    stripContentType(headers);
-    return { ...options, headers, body } as RequestInit;
-  }
-
-  // JSON: caller must pass a JSON-serialisable object/array.
-  if (typeof body !== 'object') {
-    throw new Error(
-      'RequestOptions.body must be a JSON object/array or a FormData instance.'
-    );
-  }
-
-  if (!headers.has('content-type')) {
-    headers.set('Content-Type', 'application/json');
-  }
-  if (!headers.has('accept')) {
-    headers.set('Accept', 'application/json');
-  }
-
-  return { ...options, headers, body: JSON.stringify(body) } as RequestInit;
-}
-
 export function backendFetch(baseUrl: string, resource: string, options?: RequestOptions) {
   const { baseUrl: cleanBaseUrl, version: apiVersion } = ensureVersionInUri(baseUrl);
   // Remove leading slash from resource if it exists to prevent double slashes
@@ -129,8 +120,19 @@ export function backendFetch(baseUrl: string, resource: string, options?: Reques
       url.searchParams.append(entry[0], entry[1]);
     }
   }
-  const requestInit = normaliseBodyAndHeaders(options);
-  return fetch(url.toString(), requestInit);
+  if (options?.json === undefined) {
+    return fetch(url.toString(), options);
+  }
+
+  const { json, ...init } = options;
+  if (init.body != null) {
+    throw new TypeError('Specify either json or body for a Merchi request.');
+  }
+  const headers = new Headers(init.headers);
+  if (!headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json');
+  }
+  return fetch(url.toString(), { ...init, headers, body: JSON.stringify(json) });
 }
 
 export function apiFetch(

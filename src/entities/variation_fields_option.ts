@@ -23,6 +23,9 @@ export class VariationFieldsOption extends Entity {
   public colour?: string | null;
 
   @VariationFieldsOption.property()
+  public isExtracted?: boolean;
+
+  @VariationFieldsOption.property()
   public currency?: string;
 
   @VariationFieldsOption.property()
@@ -63,6 +66,9 @@ export class VariationFieldsOption extends Entity {
 
   @VariationFieldsOption.property({type: MerchiFile})
   public linkedFile?: MerchiFile | null;
+
+  @VariationFieldsOption.property({type: MerchiFile})
+  public linkedProductImage?: MerchiFile | null;
 
   @VariationFieldsOption.property({arrayType: 'Variation'})
   public selectedByVariations?: Variation[];

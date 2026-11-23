@@ -17,3 +17,11 @@ test('payment refund', () => {
     expect(payment.amount).toEqual(10);
   });
 });
+
+
+test('wallet method and partial refund survive API serialization', () => {
+  const payment = new (new Merchi()).Payment();
+  payment.fromJson({ id: 8, amount: 20, paymentType: 1, paymentProvider: 'stripe',
+    paymentMethod: 'wechat_pay', refundedAmount: 5, refundStatus: 'pending' });
+  expect(payment.toJson()).toMatchObject({ paymentMethod: 'wechat_pay', refundedAmount: 5, refundStatus: 'pending' });
+});

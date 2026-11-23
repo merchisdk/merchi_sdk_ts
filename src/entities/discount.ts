@@ -1,5 +1,6 @@
 import { Entity } from '../entity.js';
 import { DiscountGroup } from './discount_group.js';
+import { User } from './user.js';
 
 export class Discount extends Entity {
   protected static resourceName = 'discounts';
@@ -26,6 +27,12 @@ export class Discount extends Entity {
 
   @Discount.property()
   public code?: string;
+
+  @Discount.property({arrayType: 'User'})
+  public assignedUsers?: User[];
+
+  @Discount.property({type: User})
+  public referrer?: User | null;
 
   @Discount.property({type: DiscountGroup})
   public discountGroup?: DiscountGroup | null;

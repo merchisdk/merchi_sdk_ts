@@ -13,6 +13,8 @@ import { MatchingInventory } from './matching_inventory.js';
 import { InternalTag } from './internal_tag.js';
 import { Invoice } from './invoice.js';
 import { JobComment } from './job_comment.js';
+import { JobNote } from './job_note.js';
+import { JobOperationLog } from './job_operation_log.js';
 import { Notification } from './notification.js';
 import { PhoneNumber } from './phone_number.js';
 import { Product } from './product.js';
@@ -46,11 +48,11 @@ export class Job extends Entity {
   @Job.property()
   public currency?: string;
 
-  @Job.property({type: String})
-  public notes?: string | null;
+  @Job.property({arrayType: 'JobNote'})
+  public jobNotes?: JobNote[];
 
-  @Job.property({type: String})
-  public productionNotes?: string | null;
+  @Job.property({arrayType: 'JobOperationLog'})
+  public operationLogs?: JobOperationLog[];
 
   @Job.property({type: String})
   public shopifyShopUrl?: string | null;
@@ -64,6 +66,15 @@ export class Job extends Entity {
   @Job.property({type: Number})
   public productionStatus?: number | null;
 
+  @Job.property()
+  public productionQuotingSpec?: string | null;
+
+  @Job.property()
+  public productionSpecChanged?: boolean;
+
+  @Job.property()
+  public productionQuotingReopened?: boolean;
+
   @Job.property({type: Number})
   public designStatus?: number | null;
 
@@ -74,6 +85,15 @@ export class Job extends Entity {
   public needsDrafting?: boolean;
 
   @Job.property()
+  public assignToAgent?: boolean;
+
+  @Job.property({ type: Date })
+  public agentLastRunAt?: Date | null;
+
+  @Job.property({ type: Date })
+  public agentNextCheckAt?: Date | null;
+
+  @Job.property()
   public needsGroupBuy?: boolean;
 
   @Job.property()
@@ -81,6 +101,9 @@ export class Job extends Entity {
 
   @Job.property()
   public needsShipping?: boolean;
+
+  @Job.property()
+  public sendWhatsapp?: boolean;
 
   @Job.property()
   public needsInvoicing?: boolean;
@@ -141,6 +164,12 @@ export class Job extends Entity {
 
   @Job.property()
   public updated?: Date;
+
+  @Job.property({type: Date})
+  public dateLastActioned?: Date | null;
+
+  @Job.property({type: Date})
+  public dateFirstActioned?: Date | null;
 
   @Job.property()
   public groupBuyProductionStarted?: Date;
@@ -223,6 +252,42 @@ export class Job extends Entity {
   @Job.property()
   public clientOs?: string;
 
+  @Job.property()
+  public clientIp?: string;
+
+  @Job.property()
+  public clientOrigin?: string;
+
+  @Job.property({type: String})
+  public sourceChannel?: string | null;
+
+  @Job.property({type: String})
+  public utmSource?: string | null;
+
+  @Job.property({type: String})
+  public utmMedium?: string | null;
+
+  @Job.property({type: String})
+  public utmCampaign?: string | null;
+
+  @Job.property({type: String})
+  public utmContent?: string | null;
+
+  @Job.property({type: String})
+  public utmTerm?: string | null;
+
+  @Job.property({type: String})
+  public sourceClickId?: string | null;
+
+  @Job.property({type: String})
+  public sourceLanding?: string | null;
+
+  @Job.property({type: String})
+  public sourceReferrer?: string | null;
+
+  @Job.property({type: String})
+  public checkoutType?: string | null;
+
   @Job.property({type: User})
   public manager?: User | null;
 
@@ -231,6 +296,9 @@ export class Job extends Entity {
 
   @Job.property({type: Company})
   public clientCompany?: Company | null;
+
+  @Job.property({arrayType: 'User'})
+  public notificationSubscribers?: User[];
 
   @Job.property({type: PhoneNumber})
   public clientPhone?: PhoneNumber | null;
@@ -324,6 +392,9 @@ export class Job extends Entity {
 
   @Job.property()
   public isNewClient?: boolean;
+
+  @Job.property()
+  public isTest?: boolean;
 
   public getQuote = () => {
     const resource = '/specialised-order-estimate/';

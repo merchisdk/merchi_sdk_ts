@@ -19,6 +19,15 @@ export class Category extends Entity {
   public name?: string;
 
   @Category.property()
+  public position?: number;
+
+  @Category.property({type: String})
+  public description?: string | null;
+
+  @Category.property({type: String})
+  public descriptionShort?: string | null;
+
+  @Category.property()
   public showDashboard?: boolean;
 
   @Category.property()
