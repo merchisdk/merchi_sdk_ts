@@ -52,6 +52,8 @@ import { Draft } from './entities/draft.js';
 import { DraftPreview } from './entities/draft_preview.js';
 import { DraftPreviewLayer } from './entities/draft_preview_layer.js';
 import { DraftTemplate } from './entities/draft_template.js';
+import { ProductPreviewModel } from './entities/product_preview_model.js';
+import { ProductPreviewSurface } from './entities/product_preview_surface.js';
 import { Discount } from './entities/discount.js';
 import { DiscountGroup } from './entities/discount_group.js';
 import { User } from './entities/user.js';
@@ -146,6 +148,8 @@ export class Merchi {
   public DraftPreview: typeof DraftPreview;
   public DraftPreviewLayer: typeof DraftPreviewLayer;
   public DraftTemplate: typeof DraftTemplate;
+  public ProductPreviewModel: typeof ProductPreviewModel;
+  public ProductPreviewSurface: typeof ProductPreviewSurface;
   public VariationFieldsOption: typeof VariationFieldsOption;
   public Category: typeof Category;
   public MerchiFile: typeof MerchiFile;
@@ -306,6 +310,12 @@ export class Merchi {
     this.DraftPreview = this.setupClass(DraftPreview) as typeof DraftPreview;
     this.DraftPreviewLayer = this.setupClass(DraftPreviewLayer) as typeof DraftPreviewLayer;
     this.DraftTemplate = this.setupClass(DraftTemplate) as typeof DraftTemplate;
+    this.ProductPreviewModel = this.setupClass(
+      ProductPreviewModel
+    ) as typeof ProductPreviewModel;
+    this.ProductPreviewSurface = this.setupClass(
+      ProductPreviewSurface
+    ) as typeof ProductPreviewSurface;
     this.VariationsGroup = this.setupClass(
       VariationsGroup
     ) as typeof VariationsGroup;

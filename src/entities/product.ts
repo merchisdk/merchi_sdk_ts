@@ -9,6 +9,7 @@ import { Domain } from './domain.js';
 import { DomainTag } from './domain_tag.js';
 import { DraftPreview } from './draft_preview.js';
 import { DraftTemplate } from './draft_template.js';
+import { ProductPreviewModel } from './product_preview_model.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { Reminder } from './reminder.js';
@@ -361,6 +362,9 @@ export class Product extends Entity {
 
   @Product.property({arrayType: 'DraftPreview'})
   public draftPreviews?: DraftPreview[];
+
+  @Product.property({arrayType: 'ProductPreviewModel'})
+  public previewModels?: ProductPreviewModel[];
 
   public duplicate = () => {
     /* create a clone of this product on the backend, returning it. */
