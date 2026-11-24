@@ -1,4 +1,5 @@
 import { DraftPreviewLayer } from './draft_preview_layer.js';
+import type { ProductPreviewSurface } from './product_preview_surface.js';
 import { Entity } from '../entity.js';
 import { MerchiFile } from './file.js';
 import { Job } from './job.js';
@@ -61,6 +62,9 @@ export class DraftTemplate extends Entity {
 
   @DraftTemplate.property({arrayType: 'DraftPreviewLayer'})
   public draftPreviewLayers?: DraftPreviewLayer[];
+
+  @DraftTemplate.property({arrayType: 'ProductPreviewSurface'})
+  public previewSurfaces?: ProductPreviewSurface[];
 
   // Cached template customisation map -- which regions of the template
   // image are editable (text placeholders, body colour fill, print
