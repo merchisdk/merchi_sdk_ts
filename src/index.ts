@@ -59,6 +59,8 @@ import { Payment } from './entities/payment.js';
 import { PaymentDevice } from './entities/payment_device.js';
 import { PhoneNumber } from './entities/phone_number.js';
 import { Product } from './entities/product.js';
+import { ProductPreviewModel } from './entities/product_preview_model.js';
+import { ProductPreviewSurface } from './entities/product_preview_surface.js';
 import { ProductReview } from './entities/product_review.js';
 export type {
   ProductReviewCreateInput,
@@ -156,6 +158,8 @@ export {
   PaymentDevice,
   PhoneNumber,
   Product,
+  ProductPreviewModel,
+  ProductPreviewSurface,
   ProductReview,
   ProductionComment,
   Quote,
